@@ -65,19 +65,9 @@
     });
   }
 
-  // Load the shared workspace layer after page-specific styles so the mobile
-  // navigation and member sidebar stay visually consistent across pages.
-  if (!document.querySelector('link[data-it-workspace]')) {
-    const workspaceStyle = document.createElement("link");
-    workspaceStyle.rel = "stylesheet";
-    workspaceStyle.href = "workspace.css";
-    workspaceStyle.dataset.itWorkspace = "true";
-    document.head.appendChild(workspaceStyle);
-  }
-
   const projectPages = [
     "projects.html", "new-project.html", "project-detail.html",
-    "housing-token.html", "car-token.html", "honey-token.html", "solar-token.html"
+    "housing-token.html", "car-token.html", "honey-token.html", "saffron-token.html", "solar-token.html"
   ];
   const dashboardPages = [
     "dashboard.html", "reports.html", "validation.html", "users.html",
@@ -87,7 +77,7 @@
   if (dashboardPages.includes(file) || file === "settings.html") {
     document.body.dataset.itDashboard = "true";
   }
-  const tokenPages = ["housing-token.html", "car-token.html", "honey-token.html", "solar-token.html"];
+  const tokenPages = ["housing-token.html", "car-token.html", "honey-token.html", "saffron-token.html", "solar-token.html"];
   if (tokenPages.includes(file)) document.body.dataset.itToken = "true";
   // Load the shared design layer after each page's own styles.
   if (!document.querySelector('link[data-it-design-system]')) {
