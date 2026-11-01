@@ -7,8 +7,8 @@
   document.querySelectorAll('link[href*="fonts.googleapis.com"], link[rel="preconnect"][href*="fonts.googleapis.com"]').forEach(node => node.remove());
   document.querySelectorAll('a[href]').forEach(link => {
     const href = link.getAttribute("href") || "";
-    if (/dashboard\\.html#documents(?:$|[?&])/.test(href)) link.setAttribute("href", href.replace("#documents", "#access"));
-    if (/users\\.html#roles(?:$|[?&])/.test(href)) link.setAttribute("href", href.replace("#roles", "#panel-roles"));
+    if (href.includes("dashboard.html#documents")) link.setAttribute("href", href.replace("#documents", "#access"));
+    if (href.includes("users.html#roles")) link.setAttribute("href", href.replace("#roles", "#panel-roles"));
   });
   if (file === "dashboard.html" && !document.getElementById("top")) document.body.id = "top";
 
