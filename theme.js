@@ -83,6 +83,10 @@
     "dashboard.html", "reports.html", "validation.html", "users.html",
     "profile.html", "notifications.html", "help.html"
   ];
+  document.body.dataset.itPage = file;
+  if (dashboardPages.includes(file) || file === "settings.html") {
+    document.body.dataset.itDashboard = "true";
+  }
   const activeKey =
     file === "index.html" ? "home" :
     projectPages.includes(file) ? "projects" :
