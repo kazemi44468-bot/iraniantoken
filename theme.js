@@ -25,7 +25,7 @@
     "dashboard.html", "settings.html", "reports.html", "validation.html",
     "users.html", "profile.html", "notifications.html", "help.html",
     "new-project.html", "project-detail.html", "housing-token.html",
-    "car-token.html", "honey-token.html", "solar-token.html"
+    "car-token.html", "honey-token.html", "saffron-token.html", "solar-token.html"
   ]);
 
   const nav = document.querySelector(".sidebar-nav");
