@@ -1181,6 +1181,8 @@ body {
   .calc-result-grid { grid-template-columns: 1fr; }
   .floating-car { display: none; }
 }
+
+.car-hero{position:relative;overflow:hidden}.car-hero-photo{position:absolute;left:24px;top:24px;width:300px;height:220px;object-fit:cover;border-radius:14px;z-index:1;opacity:.94}.car-hero-content,.car-hero-stats{position:relative;z-index:2}@media(max-width:900px){.car-hero-photo{position:relative;left:auto;top:auto;display:block;width:100%;height:170px;margin:0 0 18px}.car-hero-content{max-width:none}}
 </style>
 <link rel="stylesheet" href="theme.css">
 <link rel="icon" href="assets/images/logo.png" type="image/png">
@@ -1282,7 +1284,8 @@ body {
 
     <!-- ==================== HERO ==================== -->
     <section class="car-hero">
-      <div class="car-hero-grid"></div>
+      <div class="car-hero-grid">
+      <img class="car-hero-photo" src="assets/images/electric-car.jpg" alt="خودروی برقی در ایستگاه شارژ" width="1200" height="800" loading="eager"></div>
       <span class="floating-car c1"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></span>
       <span class="floating-car c2"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 16h14l-1-6H6z"/><path d="M7 10l2-4h6l2 4M7 16v2M17 16v2"/><circle cx="8" cy="16" r="1"/><circle cx="16" cy="16" r="1"/></svg></span></span>
       <span class="floating-car c3"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 16h14l-1-6H6z"/><path d="M7 10l2-4h6l2 4M7 16v2M17 16v2"/><circle cx="8" cy="16" r="1"/><circle cx="16" cy="16" r="1"/></svg></span></span>
