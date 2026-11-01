@@ -65,13 +65,30 @@
     });
   }
 
-  if (!internalPages.has(file)) return;
+  // Load the shared workspace layer after page-specific styles so the mobile
+  // navigation and member sidebar stay visually consistent across pages.
+  if (!document.querySelector('link[data-it-workspace]')) {
+    const workspaceStyle = document.createElement("link");
+    workspaceStyle.rel = "stylesheet";
+    workspaceStyle.href = "workspace.css";
+    workspaceStyle.dataset.itWorkspace = "true";
+    document.head.appendChild(workspaceStyle);
+  }
 
+  const projectPages = [
+    "projects.html", "new-project.html", "project-detail.html",
+    "housing-token.html", "car-token.html", "honey-token.html", "solar-token.html"
+  ];
+  const dashboardPages = [
+    "dashboard.html", "reports.html", "validation.html", "users.html",
+    "profile.html", "notifications.html", "help.html"
+  ];
   const activeKey =
-    file === "dashboard.html" ? "dashboard" :
+    file === "index.html" ? "home" :
+    projectPages.includes(file) ? "projects" :
+    dashboardPages.includes(file) ? "dashboard" :
     file === "settings.html" ? "settings" :
-    ["new-project.html", "project-detail.html", "housing-token.html",
-     "car-token.html", "honey-token.html", "solar-token.html"].includes(file) ? "projects" :
+    file === "auth.html" ? "auth" :
     null;
 
   const items = [
