@@ -1116,6 +1116,8 @@ body {
   .tab-btn { padding: 9px 12px; font-size: 12px; }
   .calc-result-grid { grid-template-columns: 1fr; }
 }
+
+.housing-hero{position:relative;overflow:hidden}.housing-hero-photo{position:absolute;left:24px;top:24px;width:300px;height:220px;object-fit:cover;border-radius:14px;z-index:1;opacity:.94}.housing-hero-content,.housing-hero-stats{position:relative;z-index:2}@media(max-width:900px){.housing-hero-photo{position:relative;left:auto;top:auto;display:block;width:100%;height:170px;margin:0 0 18px}.housing-hero-content{max-width:none}}
 </style>
 <link rel="stylesheet" href="theme.css">
 <link rel="icon" href="assets/images/logo.png" type="image/png">
@@ -1161,7 +1163,8 @@ body {
 
     <!-- ==================== HERO ==================== -->
     <section class="housing-hero">
-      <div class="housing-hero-grid"></div>
+      <div class="housing-hero-grid">
+      <img class="housing-hero-photo" src="assets/images/residential-building.jpg" alt="نمای ساختمان مسکونی مدرن" width="1200" height="800" loading="eager"></div>
       <div class="housing-hero-content">
         <div class="housing-badge">پروژه ویژه · توکنیزه‌سازی مسکن</div>
         <h1>
