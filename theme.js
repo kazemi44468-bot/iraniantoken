@@ -79,15 +79,6 @@
   }
   const tokenPages = ["housing-token.html", "car-token.html", "honey-token.html", "saffron-token.html", "solar-token.html"];
   if (tokenPages.includes(file)) document.body.dataset.itToken = "true";
-  // Load the shared design layer after each page's own styles.
-  if (!document.querySelector('link[data-it-design-system]')) {
-    const designStyle = document.createElement("link");
-    designStyle.rel = "stylesheet";
-    designStyle.href = "design-system.css";
-    designStyle.dataset.itDesignSystem = "true";
-    document.head.appendChild(designStyle);
-  }
-
   const activeKey =
     file === "index.html" ? "home" :
     projectPages.includes(file) ? "projects" :
