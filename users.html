@@ -1,0 +1,2619 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کاربران و نقش‌ها | ایرانیان توکن</title>
+<meta name="description" content="ایرانیان توکن؛ بستر مدیریت پروژه، دارایی دیجیتال، توکنیزه‌سازی و مشارکت در اکوسیستم ارزش.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --primary: #1a5fb4;
+  --primary-dark: #0d3b7a;
+  --primary-light: #3584e4;
+  --accent: #f5c211;
+  --accent-dark: #c79a00;
+  --dark: #0f1729;
+  --dark-2: #1a2332;
+  --gray: #64748b;
+  --gray-light: #94a3b8;
+  --bg: #f1f5f9;
+  --bg-alt: #ffffff;
+  --border: #e2e8f0;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+  --purple: #8b5cf6;
+  --pink: #ec4899;
+  --gradient: linear-gradient(135deg, #1a5fb4 0%, #3584e4 100%);
+  --gradient-gold: linear-gradient(135deg, #f5c211 0%, #ffd94a 100%);
+  --shadow-sm: 0 1px 2px rgba(15,23,41,0.05);
+  --shadow: 0 4px 12px rgba(15,23,41,0.06);
+  --shadow-lg: 0 12px 32px rgba(15,23,41,0.1);
+  --shadow-xl: 0 24px 60px rgba(15,23,41,0.15);
+  --radius: 14px;
+  --radius-lg: 20px;
+  --sidebar-w: 260px;
+  --sidebar-collapsed: 78px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Vazirmatn', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ==================== SIDEBAR ==================== */
+.sidebar {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--dark);
+  color: #fff;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border-left: 1px solid rgba(255,255,255,0.05);
+}
+.sidebar.collapsed { width: var(--sidebar-collapsed); }
+.sidebar-brand {
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  min-height: 82px;
+}
+.sidebar-logo {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(26,95,180,0.4);
+}
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .sidebar-brand-text { opacity: 0; }
+.sidebar-brand-text strong { font-size: 15px; font-weight: 800; }
+.sidebar-brand-text small { font-size: 11px; color: var(--gray-light); }
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sidebar-nav::-webkit-scrollbar { width: 4px; }
+.sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+.nav-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 16px 12px 8px;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .nav-section-title { opacity: 0; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  color: var(--gray-light);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.nav-item.active { background: var(--gradient); color: #fff; box-shadow: 0 6px 16px rgba(26,95,180,0.35); }
+.nav-item .icon { font-size: 18px; flex-shrink: 0; width: 22px; text-align: center; }
+.nav-item .label { opacity: 1; transition: opacity 0.2s; }
+.sidebar.collapsed .nav-item .label { opacity: 0; }
+.nav-item .badge {
+  margin-right: auto;
+  background: var(--accent);
+  color: var(--dark);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 50px;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .nav-item .badge { opacity: 0; }
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.user-mini {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.user-mini:hover { background: rgba(255,255,255,0.08); }
+.user-avatar {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: var(--gradient-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: var(--dark);
+  flex-shrink: 0;
+  font-size: 14px;
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  overflow: hidden;
+}
+.sidebar.collapsed .user-info { opacity: 0; }
+.user-info strong { font-size: 13px; color: #fff; }
+.user-info small { font-size: 11px; color: var(--gray-light); }
+
+/* ==================== MAIN ==================== */
+.main {
+  margin-right: var(--sidebar-w);
+  transition: margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main.expanded { margin-right: var(--sidebar-collapsed); }
+
+/* ==================== TOPBAR ==================== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.toggle-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--dark);
+  transition: all 0.2s;
+}
+.toggle-btn:hover { background: var(--bg); }
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--gray);
+}
+.breadcrumb a { color: var(--gray); text-decoration: none; }
+.breadcrumb a:hover { color: var(--primary); }
+.breadcrumb .current { color: var(--dark); font-weight: 600; }
+.topbar-actions { display: flex; align-items: center; gap: 8px; margin-right: auto; }
+.icon-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--gray);
+  transition: all 0.2s;
+  position: relative;
+}
+.icon-btn:hover { background: var(--bg); color: var(--primary); }
+.icon-btn .dot {
+  position: absolute;
+  top: 8px; left: 8px;
+  width: 8px; height: 8px;
+  background: var(--danger);
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+/* ==================== CONTENT ==================== */
+.content { padding: 28px; flex: 1; max-width: 1600px; margin: 0 auto; width: 100%; }
+
+/* ==================== BUTTONS ==================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--gradient);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(26,95,180,0.28);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(26,95,180,0.38);
+}
+.btn-outline {
+  background: #fff;
+  color: var(--dark);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover { background: var(--bg); border-color: var(--primary-light); color: var(--primary); }
+.btn-danger {
+  background: #fff;
+  color: var(--danger);
+  border: 1px solid rgba(239,68,68,0.3);
+}
+.btn-danger:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
+.btn-sm { padding: 8px 14px; font-size: 13px; }
+.btn-icon { padding: 10px; }
+
+/* ==================== PAGE HEADER ==================== */
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.page-title h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.page-title p {
+  font-size: 14px;
+  color: var(--gray);
+}
+.page-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ==================== KPI GRID ==================== */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+.kpi-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gradient);
+}
+.kpi-card.gold::before { background: var(--gradient-gold); }
+.kpi-card.green::before { background: linear-gradient(180deg, #10b981, #34d399); }
+.kpi-card.purple::before { background: linear-gradient(180deg, #8b5cf6, #a78bfa); }
+.kpi-card.info::before { background: linear-gradient(180deg, #3b82f6, #60a5fa); }
+.kpi-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: transparent; }
+.kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.kpi-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  background: rgba(26,95,180,0.08);
+  color: var(--primary);
+}
+.kpi-card.gold .kpi-icon { background: rgba(245,194,17,0.15); color: var(--accent-dark); }
+.kpi-card.green .kpi-icon { background: rgba(16,185,129,0.1); color: var(--success); }
+.kpi-card.purple .kpi-icon { background: rgba(139,92,246,0.1); color: var(--purple); }
+.kpi-card.info .kpi-icon { background: rgba(59,130,246,0.1); color: var(--info); }
+.kpi-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 50px;
+}
+.kpi-trend.up { background: rgba(16,185,129,0.12); color: var(--success); }
+.kpi-trend.down { background: rgba(239,68,68,0.12); color: var(--danger); }
+.kpi-trend.neutral { background: rgba(100,116,139,0.12); color: var(--gray); }
+.kpi-value {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.kpi-value span { font-size: 14px; font-weight: 700; color: var(--gray); margin-right: 4px; }
+.kpi-label { font-size: 12px; color: var(--gray); font-weight: 600; }
+
+/* ==================== FILTER BAR ==================== */
+.filter-bar {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: 14px;
+  align-items: end;
+  flex-wrap: wrap;
+}
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 160px;
+}
+.filter-group label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.search-input-wrap {
+  position: relative;
+  flex: 1.5;
+  min-width: 220px;
+}
+.search-input-wrap input {
+  width: 100%;
+  padding: 10px 42px 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+.search-input-wrap input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(53,132,228,0.1);
+}
+.search-input-wrap .s-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray);
+  font-size: 14px;
+}
+.filter-group select {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--dark);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-group select:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(53,132,228,0.1);
+}
+.view-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--bg);
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.view-toggle button {
+  width: 34px; height: 34px;
+  border-radius: 7px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: var(--gray);
+  transition: all 0.2s;
+}
+.view-toggle button.active { background: #fff; color: var(--primary); box-shadow: var(--shadow-sm); }
+
+/* ==================== USERS GRID ==================== */
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+.users-grid.list-view { grid-template-columns: 1fr; gap: 10px; }
+
+.user-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.user-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s;
+}
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+  border-color: transparent;
+}
+.user-card:hover::before { transform: scaleX(1); }
+
+.user-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.user-card-avatar {
+  width: 60px; height: 60px;
+  border-radius: 16px;
+  background: var(--gradient);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 22px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(26,95,180,0.25);
+  position: relative;
+}
+.user-card-avatar.gold { background: var(--gradient-gold); color: var(--dark); box-shadow: 0 8px 20px rgba(245,194,17,0.35); }
+.user-card-avatar.green { background: linear-gradient(135deg, #10b981, #34d399); box-shadow: 0 8px 20px rgba(16,185,129,0.3); }
+.user-card-avatar.purple { background: linear-gradient(135deg, #8b5cf6, #a78bfa); box-shadow: 0 8px 20px rgba(139,92,246,0.3); }
+.user-card-avatar.pink { background: linear-gradient(135deg, #ec4899, #f472b6); box-shadow: 0 8px 20px rgba(236,72,153,0.3); }
+.user-card-avatar .status-dot {
+  position: absolute;
+  bottom: -2px; left: -2px;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--success);
+  border: 3px solid #fff;
+}
+.user-card-avatar .status-dot.offline { background: var(--gray-light); }
+.user-card-avatar .status-dot.busy { background: var(--warning); }
+
+.user-card-info { flex: 1; min-width: 0; }
+.user-card-info h4 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.user-card-info .email {
+  font-size: 11px;
+  color: var(--gray);
+  font-family: monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  white-space: nowrap;
+}
+
+.user-card-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.user-card-role.owner { background: rgba(245,194,17,0.15); color: var(--accent-dark); }
+.user-card-role.admin { background: rgba(139,92,246,0.12); color: var(--purple); }
+.user-card-role.expert { background: rgba(59,130,246,0.12); color: var(--info); }
+.user-card-role.investor { background: rgba(16,185,129,0.12); color: var(--success); }
+.user-card-role.observer { background: rgba(100,116,139,0.12); color: var(--gray); }
+.user-card-role.executor { background: rgba(26,95,180,0.12); color: var(--primary); }
+.user-card-role.legal { background: rgba(239,68,68,0.1); color: var(--danger); }
+.user-card-role.financial { background: rgba(236,72,153,0.1); color: var(--pink); }
+
+.user-card-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+.user-stat {
+  text-align: center;
+}
+.user-stat .value {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.2;
+}
+.user-stat .value.blue { color: var(--primary); }
+.user-stat .value.gold { color: var(--accent-dark); }
+.user-stat .value.green { color: var(--success); }
+.user-stat .label {
+  font-size: 10px;
+  color: var(--gray);
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+.user-card-footer {
+  display: flex;
+  gap: 6px;
+}
+.user-card-footer .btn { flex: 1; justify-content: center; padding: 8px 10px; font-size: 12px; }
+
+/* List view overrides */
+.users-grid.list-view .user-card {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 16px 20px;
+}
+.users-grid.list-view .user-card-header { margin: 0; }
+.users-grid.list-view .user-card-role { margin: 0; position: absolute; top: 16px; left: 20px; }
+.users-grid.list-view .user-card-stats {
+  border: none;
+  padding: 0;
+  margin: 0;
+  gap: 30px;
+}
+.users-grid.list-view .user-card-footer { flex: 0; }
+.users-grid.list-view .user-card-footer .btn { padding: 8px 14px; }
+.users-grid.list-view .user-card::before { display: none; }
+
+/* ==================== TABS ==================== */
+.tabs-nav {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 6px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+.tabs-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.tab-btn:hover { background: var(--bg); color: var(--primary); }
+.tab-btn.active {
+  background: var(--gradient);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(26,95,180,0.28);
+}
+.tab-btn .tab-count {
+  background: rgba(255,255,255,0.25);
+  padding: 1px 8px;
+  border-radius: 50px;
+  font-size: 11px;
+}
+.tab-btn:not(.active) .tab-count {
+  background: var(--bg);
+  color: var(--gray);
+}
+
+.tab-panel { display: none; animation: fadeIn 0.4s; }
+.tab-panel.active { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== TABLE ==================== */
+.card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.card-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.card-header-left h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.card-header-left h3 .icon {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  background: rgba(26,95,180,0.08);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.card-header-left p { font-size: 12px; color: var(--gray); margin-right: 40px; }
+.card-body { padding: 24px; }
+
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+thead th {
+  text-align: right;
+  padding: 14px 16px;
+  font-weight: 700;
+  color: var(--gray);
+  font-size: 12px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--dark);
+  vertical-align: middle;
+}
+tbody tr { transition: background 0.15s; }
+tbody tr:hover { background: rgba(26,95,180,0.02); }
+tbody tr:last-child td { border-bottom: none; }
+
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.user-cell-avatar {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  background: var(--gradient);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  flex-shrink: 0;
+  position: relative;
+}
+.user-cell-avatar .status-dot {
+  position: absolute;
+  bottom: -2px; left: -2px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--success);
+  border: 2px solid #fff;
+}
+.user-cell-avatar .status-dot.offline { background: var(--gray-light); }
+.user-cell-avatar.gold { background: var(--gradient-gold); color: var(--dark); }
+.user-cell-avatar.green { background: linear-gradient(135deg, #10b981, #34d399); }
+.user-cell-avatar.purple { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+.user-cell-avatar.pink { background: linear-gradient(135deg, #ec4899, #f472b6); }
+.user-cell strong { display: block; font-weight: 700; font-size: 13px; }
+.user-cell small { font-size: 11px; color: var(--gray); font-family: monospace; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.badge.success { background: rgba(16,185,129,0.12); color: var(--success); }
+.badge.warning { background: rgba(245,158,11,0.14); color: var(--warning); }
+.badge.danger { background: rgba(239,68,68,0.12); color: var(--danger); }
+.badge.info { background: rgba(59,130,246,0.12); color: var(--info); }
+.badge.purple { background: rgba(139,92,246,0.12); color: var(--purple); }
+.badge.gold { background: rgba(245,194,17,0.15); color: var(--accent-dark); }
+.badge.pink { background: rgba(236,72,153,0.12); color: var(--pink); }
+.badge.gray { background: rgba(100,116,139,0.12); color: var(--gray); }
+.badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.action-btns {
+  display: flex;
+  gap: 6px;
+}
+.action-btn {
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--gray);
+  transition: all 0.2s;
+}
+.action-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+.action-btn.danger:hover { background: var(--danger); border-color: var(--danger); }
+
+/* ==================== ROLES SECTION ==================== */
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.role-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.role-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--gradient);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s;
+}
+.role-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.role-card:hover::before { transform: scaleX(1); }
+
+.role-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 14px;
+  background: rgba(26,95,180,0.08);
+  color: var(--primary);
+}
+.role-card.gold .role-icon { background: rgba(245,194,17,0.15); color: var(--accent-dark); }
+.role-card.green .role-icon { background: rgba(16,185,129,0.1); color: var(--success); }
+.role-card.purple .role-icon { background: rgba(139,92,246,0.1); color: var(--purple); }
+.role-card.red .role-icon { background: rgba(239,68,68,0.1); color: var(--danger); }
+.role-card.pink .role-icon { background: rgba(236,72,153,0.1); color: var(--pink); }
+.role-card.info .role-icon { background: rgba(59,130,246,0.1); color: var(--info); }
+.role-card.gray .role-icon { background: rgba(100,116,139,0.1); color: var(--gray); }
+
+.role-card h4 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+.role-card p {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.7;
+  margin-bottom: 14px;
+  min-height: 40px;
+}
+.role-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  font-weight: 700;
+}
+.role-card-footer .count {
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.role-card-footer .permissions {
+  color: var(--gray);
+}
+
+/* ==================== PERMISSION MATRIX ==================== */
+.matrix-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  min-width: 1100px;
+}
+.matrix-table th,
+.matrix-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  text-align: center;
+}
+.matrix-table th:first-child,
+.matrix-table td:first-child {
+  text-align: right;
+  background: var(--bg);
+  font-weight: 700;
+  position: sticky;
+  right: 0;
+  z-index: 2;
+  min-width: 180px;
+}
+.matrix-table thead th {
+  background: var(--dark);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  white-space: nowrap;
+}
+.matrix-table thead th:first-child {
+  background: var(--dark-2);
+  z-index: 4;
+}
+.matrix-table tbody tr:hover td {
+  background: rgba(26,95,180,0.02);
+}
+.matrix-table tbody tr:hover td:first-child {
+  background: rgba(26,95,180,0.05);
+}
+.perm-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px; height: 24px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 900;
+}
+.perm-check.yes { background: rgba(16,185,129,0.12); color: var(--success); }
+.perm-check.no { background: rgba(100,116,139,0.1); color: var(--gray-light); }
+.perm-check.limited { background: rgba(245,158,11,0.12); color: var(--warning); }
+
+/* ==================== ACTIVITY ==================== */
+.activity-list { display: flex; flex-direction: column; gap: 6px; }
+.activity-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  transition: background 0.2s;
+  align-items: center;
+}
+.activity-item:hover { background: var(--bg); }
+.activity-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.activity-icon.blue { background: rgba(59,130,246,0.12); color: var(--info); }
+.activity-icon.green { background: rgba(16,185,129,0.12); color: var(--success); }
+.activity-icon.gold { background: rgba(245,194,17,0.15); color: var(--accent-dark); }
+.activity-icon.red { background: rgba(239,68,68,0.12); color: var(--danger); }
+.activity-icon.purple { background: rgba(139,92,246,0.12); color: var(--purple); }
+.activity-body { flex: 1; min-width: 0; }
+.activity-body p {
+  font-size: 13px;
+  color: var(--dark);
+  line-height: 1.6;
+  margin-bottom: 2px;
+}
+.activity-body p strong { font-weight: 700; }
+.activity-body small { font-size: 11px; color: var(--gray); }
+.activity-time {
+  font-size: 11px;
+  color: var(--gray);
+  white-space: nowrap;
+}
+
+/* ==================== DRAWER ==================== */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,41,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.drawer-overlay.active { opacity: 1; pointer-events: auto; }
+.drawer {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: 600px;
+  max-width: 100%;
+  background: var(--bg-alt);
+  z-index: 210;
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-xl);
+}
+.drawer.open { transform: translateX(0); }
+
+.drawer-header {
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.drawer-header h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--dark);
+}
+.drawer-header small {
+  display: block;
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 3px;
+}
+.drawer-close {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--gray);
+  transition: all 0.2s;
+}
+.drawer-close:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+.drawer-body::-webkit-scrollbar { width: 6px; }
+.drawer-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 6px; }
+
+.drawer-hero {
+  background: var(--gradient);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  color: #fff;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.drawer-hero::after {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+  border-radius: 50%;
+}
+.drawer-hero-avatar {
+  width: 84px; height: 84px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 900;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+.drawer-hero-info { position: relative; z-index: 2; }
+.drawer-hero-info h2 {
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+.drawer-hero-info p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 8px;
+}
+.drawer-hero-info .badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.drawer-hero-info .badges span {
+  background: rgba(255,255,255,0.2);
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.drawer-section { margin-bottom: 24px; }
+.drawer-section-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.drawer-section-title::before {
+  content: '';
+  width: 4px; height: 16px;
+  background: var(--gradient);
+  border-radius: 4px;
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.info-item {
+  background: var(--bg);
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+.info-item .label {
+  font-size: 11px;
+  color: var(--gray);
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: block;
+}
+.info-item .value {
+  font-size: 13px;
+  color: var(--dark);
+  font-weight: 700;
+  word-break: break-word;
+}
+.info-item .value.mono { font-family: monospace; font-size: 12px; }
+.info-item .value.green { color: var(--success); }
+.info-item .value.gold { color: var(--accent-dark); }
+
+/* drawer mini stats */
+.drawer-mini-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.drawer-mini-stat {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+}
+.drawer-mini-stat .value {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1.2;
+}
+.drawer-mini-stat .label {
+  font-size: 10px;
+  color: var(--gray);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* project list in drawer */
+.mini-project-list { display: flex; flex-direction: column; gap: 8px; }
+.mini-project-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+.mini-project-item:hover { border-color: var(--primary-light); background: #fff; }
+.mini-project-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.mini-project-body { flex: 1; min-width: 0; }
+.mini-project-body strong { display: block; font-size: 12px; font-weight: 700; }
+.mini-project-body small { font-size: 10px; color: var(--gray); }
+.mini-project-role {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(26,95,180,0.1);
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.drawer-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+  background: var(--bg-alt);
+}
+.drawer-footer .btn { flex: 1; justify-content: center; }
+
+/* ==================== TOAST ==================== */
+.toast-container {
+  position: fixed;
+  top: 24px; left: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.toast {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 280px;
+  max-width: 380px;
+  border-right: 4px solid var(--success);
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast.error { border-right-color: var(--danger); }
+.toast.warning { border-right-color: var(--warning); }
+.toast.info { border-right-color: var(--info); }
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.toast-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  background: rgba(16,185,129,0.12);
+  color: var(--success);
+}
+.toast.error .toast-icon { background: rgba(239,68,68,0.12); color: var(--danger); }
+.toast.warning .toast-icon { background: rgba(245,158,11,0.14); color: var(--warning); }
+.toast.info .toast-icon { background: rgba(59,130,246,0.12); color: var(--info); }
+.toast-body strong { display: block; font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+.toast-body span { font-size: 12px; color: var(--gray); }
+
+/* ==================== OVERLAY ==================== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,41,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.overlay.active { opacity: 1; pointer-events: auto; }
+
+/* ==================== PAGINATION ==================== */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 28px;
+}
+.pagination button {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+  transition: all 0.2s;
+}
+.pagination button:hover { background: var(--bg); border-color: var(--primary-light); color: var(--primary); }
+.pagination button.active { background: var(--gradient); color: #fff; border-color: transparent; box-shadow: 0 6px 16px rgba(26,95,180,0.3); }
+.pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1100px) {
+  .users-grid.list-view .user-card-stats { gap: 20px; }
+}
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(100%); width: var(--sidebar-w) !important; }
+  .sidebar.mobile-open { transform: translateX(0); }
+  .sidebar.collapsed .sidebar-brand-text,
+  .sidebar.collapsed .nav-item .label,
+  .sidebar.collapsed .nav-section-title,
+  .sidebar.collapsed .user-info,
+  .sidebar.collapsed .nav-item .badge { opacity: 1; }
+  .main { margin-right: 0 !important; }
+  .content { padding: 20px 16px 100px; }
+  .topbar { padding: 12px 16px; }
+  .breadcrumb { display: none; }
+  .drawer { width: 100%; }
+  .users-grid.list-view .user-card { grid-template-columns: 60px 1fr; }
+  .users-grid.list-view .user-card-role { position: static; margin-top: 8px; grid-column: 1 / -1; }
+  .users-grid.list-view .user-card-stats { grid-column: 1 / -1; }
+  .users-grid.list-view .user-card-footer { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .content { padding: 16px 12px 100px; }
+  .page-title h1 { font-size: 20px; }
+  .page-actions { width: 100%; }
+  .page-actions .btn { flex: 1; justify-content: center; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .kpi-card { padding: 16px; }
+  .kpi-value { font-size: 22px; }
+  .users-grid { grid-template-columns: 1fr; }
+  .card-header, .card-body { padding-left: 16px; padding-right: 16px; }
+  .filter-bar { padding: 14px; }
+  .filter-group { min-width: 100%; }
+  .drawer-hero { flex-direction: column; text-align: center; }
+  .info-grid { grid-template-columns: 1fr; }
+  .tab-btn { padding: 9px 12px; font-size: 12px; }
+  .tab-btn .tab-count { display: none; }
+}
+@media (max-width: 420px) {
+  .kpi-grid { grid-template-columns: 1fr; }
+}
+</style>
+<link rel="stylesheet" href="theme.css">
+<link rel="icon" href="assets/images/logo.png" type="image/png">
+<link rel="shortcut icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+
+<div class="toast-container" id="toastContainer"></div>
+<div class="overlay" id="overlay"></div>
+
+<!-- ==================== SIDEBAR ==================== -->
+<aside class="sidebar" id="sidebar"><div class="sidebar-brand"><a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit"><div class="sidebar-logo"><img src="assets/images/logo.png" alt="ایرانیان توکن"></div><div class="sidebar-brand-text"><strong>ایرانیان توکن</strong><small>مرکز مدیریت و پایش</small></div></a></div><nav class="sidebar-nav" aria-label="ناوبری یکپارچه سامانه">
+<div class="nav-section-title">مرکز کار</div><a class="nav-item" href="dashboard.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="label">داشبورد</span></a>
+<div class="nav-group "><div class="nav-parent-row"><a class="nav-item" href="projects.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="label">پروژه‌ها و دارایی‌ها</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a class="" href="projects.html">فهرست پروژه‌ها</a><a class="" href="new-project.html">ثبت پروژه جدید</a><a class="" href="project-detail.html">جزئیات پروژه</a><a class="" href="car-token.html">توکن خودرو</a><a class="" href="honey-token.html">توکن کندوی عسل</a><a class="" href="housing-token.html">توکن مسکن</a><a class="" href="solar-token.html">توکن انرژی خورشیدی</a></div></div></div>
+<div class="nav-group "><div class="nav-parent-row"><a class="nav-item" href="validation.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span class="label">اسناد و اعتبارسنجی</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a href="dashboard.html#documents">مرکز اسناد</a><a class="" href="validation.html">صف اعتبارسنجی</a></div></div></div>
+<div class="nav-section-title">کنترل و گزارش</div><a class="nav-item active" href="users.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span><span class="label">کاربران و نقش‌ها</span></a><a class="nav-item" href="reports.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9m5 10V5m5 14v-7m5 7V3"/></svg></span><span class="label">گزارش‌های مدیریتی</span></a><a class="nav-item" href="dashboard.html#audit"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span><span class="label">ثبت رویدادها</span></a>
+<div class="nav-section-title">حساب و سامانه</div><div class="nav-group "><div class="nav-parent-row"><a class="nav-item" href="settings.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 15l2 1-2 3-2-1a8 8 0 0 1-2 1v2h-4v-2a8 8 0 0 1-2-1l-2 1-2-3 2-1a8 8 0 0 1 0-2l-2-1 2-3 2 1a8 8 0 0 1 2-1V6h4v2a8 8 0 0 1 2 1l2-1 2 3-2 1a8 8 0 0 1 0 2z"/></svg></span><span class="label">حساب و تنظیمات</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a class="" href="profile.html">پروفایل و حساب</a><a class="" href="settings.html">تنظیمات سامانه</a><a class="" href="notifications.html">اعلان‌ها</a><a href="auth.html">ورود و ثبت‌نام</a></div></div></div><a class="nav-item" href="help.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M9.7 9a2.4 2.4 0 1 1 4 1.8c-1 .7-1.7 1.1-1.7 2.4M12 16.5h.01"/></svg></span><span class="label">مرکز راهنما</span></a>
+<div class="nav-section-title">صفحات سامانه</div><a class="nav-item" href="index.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="label">معرفی سامانه</span></a><a class="nav-item" href="contact.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/></svg></span><span class="label">تماس با ما</span></a><a class="nav-item" href="auth.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 8l-4 4 4 4M6 12h9a4 4 0 0 1 4 4v2"/></svg></span><span class="label">ثبت نام / ورود</span></a><div class="nav-section-title">دسترسی سریع</div><a class="nav-item" href="index.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="label">بازگشت به صفحه اصلی</span></a></nav></aside>
+
+<!-- ==================== MAIN ==================== -->
+<div class="main" id="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <button class="toggle-btn" id="toggleBtn"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></button>
+    <div class="breadcrumb">
+      <a href="dashboard.html">داشبورد</a>
+      <span>›</span>
+      <span class="current">کاربران و نقش‌ها</span>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" onclick="showToast('info','خروجی','در حال آماده‌سازی فایل کاربران...')" title="خروجی"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v11M8 11l4 4 4-4M5 20h14"/></svg></span></button>
+      <button class="icon-btn" onclick="showToast('info','دعوت','پنل دعوت کاربر باز شد.')" title="دعوت کاربر"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></button>
+      <button class="icon-btn" id="notifBtn">◉<span class="dot"></span></button>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="page-title">
+        <h1>کاربران و نقش‌ها ◌</h1>
+        <p>مدیریت کاربران، نقش‌ها، مجوزها و کنترل دسترسی‌های سیستم</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-outline" onclick="showToast('info','خروجی','در حال آماده‌سازی فایل...')">
+          ⇩ خروجی Excel
+        </button>
+        <button class="btn btn-primary" onclick="showToast('success','دعوت','پنل دعوت کاربر جدید باز شد.')">
+          <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> دعوت کاربر
+        </button>
+      </div>
+    </div>
+
+    <!-- KPI CARDS -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6h14v10H8l-3 3z"/><path d="M8 10h8M8 13h5"/></svg></span></div>
+          <div class="kpi-trend up">↑ ۱۵٪</div>
+        </div>
+        <div class="kpi-value">۱,۲۴۸ <span>نفر</span></div>
+        <div class="kpi-label">کل کاربران</div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-header">
+          <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+          <div class="kpi-trend up">↑ ۸٪</div>
+        </div>
+        <div class="kpi-value">۹۸۶ <span>نفر</span></div>
+        <div class="kpi-label">کاربران فعال</div>
+      </div>
+      <div class="kpi-card gold">
+        <div class="kpi-header">
+          <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <div class="kpi-trend neutral">—</div>
+        </div>
+        <div class="kpi-value">۱۳</div>
+        <div class="kpi-label">نقش تعریف‌شده</div>
+      </div>
+      <div class="kpi-card purple">
+        <div class="kpi-header">
+          <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <div class="kpi-trend up">↑ ۲۳٪</div>
+        </div>
+        <div class="kpi-value">۴۲ <span>نفر</span></div>
+        <div class="kpi-label">کاربران این ماه</div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <nav class="tabs-nav">
+      <button class="tab-btn active" data-tab="list">
+        <span>◌</span> لیست کاربران <span class="tab-count">۱,۲۴۸</span>
+      </button>
+      <button class="tab-btn" data-tab="roles">
+        <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></span> نقش‌ها <span class="tab-count">۱۳</span>
+      </button>
+      <button class="tab-btn" data-tab="permissions">
+        <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></span> ماتریس مجوزها
+      </button>
+      <button class="tab-btn" data-tab="activity">
+        <span>⌁</span> فعالیت‌ها
+      </button>
+    </nav>
+
+    <!-- ==================== TAB: LIST ==================== -->
+    <div class="tab-panel active" id="panel-list">
+
+      <!-- FILTER BAR -->
+      <div class="filter-bar">
+        <div class="search-input-wrap">
+          <span class="s-icon">⌕</span>
+          <input type="text" placeholder="جستجوی نام، ایمیل، موبایل...">
+        </div>
+        <div class="filter-group" style="flex: 0 0 180px;">
+          <select>
+            <option>همه نقش‌ها</option>
+            <option>مدیر کل</option>
+            <option>مدیر پروژه</option>
+            <option>مالک پروژه</option>
+            <option>مجری</option>
+            <option>کارشناس</option>
+            <option>سرمایه‌گذار</option>
+            <option>مشاهده‌کننده</option>
+          </select>
+        </div>
+        <div class="filter-group" style="flex: 0 0 160px;">
+          <select>
+            <option>همه وضعیت‌ها</option>
+            <option>فعال</option>
+            <option>غیرفعال</option>
+            <option>در انتظار تأیید</option>
+          </select>
+        </div>
+        <div class="view-toggle">
+          <button class="active" data-view="grid">▦</button>
+          <button data-view="list"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></button>
+        </div>
+      </div>
+
+      <!-- USERS GRID -->
+      <div class="users-grid" id="usersGrid">
+
+        <div class="user-card" onclick="openUser(1)">
+          <div class="user-card-header">
+            <div class="user-card-avatar gold">
+              م.ا
+              <span class="status-dot"></span>
+            </div>
+            <div class="user-card-info">
+              <h4>محمد احمدی</h4>
+              <span class="email">m.ahmadi@iranianToken.ir</span>
+            </div>
+          </div>
+          <span class="user-card-role owner"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مدیر کل سیستم</span>
+          <div class="user-card-stats">
+            <div class="user-stat">
+              <div class="value blue">۲۴۸</div>
+              <div class="label">فعالیت</div>
+            </div>
+            <div class="user-stat">
+              <div class="value gold">۸</div>
+              <div class="label">پروژه</div>
+            </div>
+            <div class="user-stat">
+              <div class="value green">۱۰۰٪</div>
+              <div class="label">اعتبار</div>
+            </div>
+          </div>
+          <div class="user-card-footer">
+            <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); openUser(1)">◉ پروفایل</button>
+            <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); showToast('info','پیام','پنل ارسال پیام باز شد.')"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> پیام</button>
+          </div>
+        </div>
+
+        <div class="user-card" onclick="openUser(2)">
+          <div class="user-card-header">
+            <div class="user-card-avatar green">
+              س.ر
+              <span class="status-dot"></span>
+            </div>
+            <div class="user-card-info">
+              <h4>سارا رضایی</h4>
+              <span class="email">s.rezaei@example.com</span>
+            </div>
+          </div>
+          <span class="user-card-role executor"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مجری فنی</span>
+          <div class="user-card-stats">
+            <div class="user-stat">
+              <div class="value blue">۱۸۶</div>
+              <div class="label">فعالیت</div>
+            </div>
+            <div class="user-stat">
+              <div class="value gold">۵</div>
+              <div class="label">پروژه</div>
+            </div>
+            <div class="user-stat">
+              <div class="value green">۹۵٪</div>
+              <div class="label">اعتبار</div>
+            </div>
+          </div>
+          <div class="user-card-footer">
+            <button class="btn btn-outline btn-sm">◉ پروفایل</button>
+            <button class="btn btn-outline btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> پیام</button>
+          </div>
+        </div>
+
+        <div class="user-card" onclick="openUser(3)">
+          <div class="user-card-header">
+            <div class="user-card-avatar purple">
+              ع.ک
+              <span class="status-dot busy"></span>
+            </div>
+            <div class="user-card-info">
+              <h4>علی کریمی</h4>
+              <span class="email">a.karimi@example.com</span>
+            </div>
+          </div>
+          <span class="user-card-role expert"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> کارشناس ارزیاب</span>
+          <div class="user-card-stats">
+            <div class="user-stat">
+              <div class="value blue">۱۵۲</div>
+              <div class="label">فعالیت</div>
+            </div>
+            <div class="user-stat">
+              <div class="value gold">۶</div>
+              <div class="label">پروژه</div>
+            </div>
+            <div class="user-stat">
+              <div class="value green">۹۲٪</div>
+              <div class="label">اعتبار</div>
+            </div>
+          </div>
+          <div class="user-card-footer">
+            <button class="btn btn-outline btn-sm">◉ پروفایل</button>
+            <button class="btn btn-outline btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> پیام</button>
+          </div>
+        </div>
+
+        <div class="user-card" onclick="openUser(4)">
+          <div class="user-card-header">
+            <div class="user-card-avatar pink">
+              ر.م
+              <span class="status-dot offline"></span>
+            </div>
+            <div class="user-card-info">
+              <h4>رضا محمدی</h4>
+              <span class="email">r.mohammadi@example.com</span>
+            </div>
+          </div>
+          <span class="user-card-role legal"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مشاور حقوقی</span>
+          <div class="user-card-stats">
+            <div class="user-stat">
+              <div class="value blue">۹۸</div>
+              <div class="label">فعالیت</div>
+            </div>
+            <div class="user-stat">
+              <div class="value gold">۴</div>
+              <div class="label">پروژه</div>
+            </div>
+            <div class="user-stat">
+              <div class="value green">۸۸٪</div>
+              <div class="label">اعتبار</div>
+            </div>
+          </div>
+          <div class="user-card-footer">
+            <button class="btn btn-outline btn-sm">◉ پروفایل</button>
+            <button class="btn btn-outline btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> پیام</button>
+          </div>
+        </div>
+
+        <div class="user-card" onclick="openUser(5)">
+          <div class="user-card-header">
+            <div class="user-card-avatar">
+              ف.ح
+              <span class="status-dot"></span>
+            </div>
+            <div class="user-card-info">
+              <h4>فاطمه حسینی</h4>
+              <span class="email">f.hosseini@example.com</span>
+            </div>
+          </div>
+          <span class="user-card-role financial"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> حسابرس</span>
+          <div class="user-card-stats">
+            <div class="user-stat">
+              <div class="value blue">۷۶</div>
+              <div class="label">فعالیت</div>
+            </div>
+            <div class="user-stat">
+              <div class="value gold">۳</div>
+              <div class="label">پروژه</div>
+            </div>
+            <div class="user-stat">
+              <div class="value green">۹۰٪</div>
+              <div class="label">اعتبار</div>
+            </div>
+          </div>
+          <div class="user-card-footer">
+            <button class="btn btn-outline btn-sm">◉ پروفایل</button>
+            <button class="btn btn-outline btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> پیام</button>
+          </div>
+        </div>
+
+        <div class="user-card" onclick="openUser(6)">
+          <div class="user-card-header">
+            <div class="user-card-avatar purple">
+              ح.ص
+              <span class="status-dot"></span>
+            </div>
+            <div class="user-card-info">
+              <h4>حسین صادقی</h4>
+              <span class="email">h.sadeghi@example.com</span>
+            </div>
+          </div>
+          <span class="user-card-role investor"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> سرمایه‌گذار</span>
+          <div class="user-card-stats">
+            <div class="user-stat">
+              <div class="value blue">۶۴</div>
+              <div class="label">فعالیت</div>
+            </div>
+            <div class="user-stat">
+              <div class="value gold">۵</div>
+              <div class="label">پروژه</div>
+            </div>
+            <div class="user-stat">
+              <div class="value green">۹۸٪</div>
+              <div class="label">اعتبار</div>
+            </div>
+          </div>
+          <div class="user-card-footer">
+            <button class="btn btn-outline btn-sm">◉ پروفایل</button>
+            <button class="btn btn-outline btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> پیام</button>
+          </div>
+        </div>
+
+        <div class="user-card">
+          <div class="user-card-header">
+            <div class="user-card-avatar green">
+              ن.ط
+              <span class="status-dot"></span>
+            </div>
+            <div class="user-card-info">
+              <h4>نازنین طاهری</h4>
+              <span class="email">n.taheri@example.com</span>
+            </div>
+          </div>
+          <span class="user-card-role expert"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ناظر</span>
+          <div class="user-card-stats">
+            <div class="user-stat">
+              <div class="value blue">۵۸</div>
+              <div class="label">فعالیت</div>
+            </div>
+            <div class="user-stat">
+              <div class="value gold">۴</div>
+              <div class="label">پروژه</div>
+            </div>
+            <div class="user-stat">
+              <div class="value green">۸۵٪</div>
+              <div class="label">اعتبار</div>
+            </div>
+          </div>
+          <div class="user-card-footer">
+            <button class="btn btn-outline btn-sm">◉ پروفایل</button>
+            <button class="btn btn-outline btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> پیام</button>
+          </div>
+        </div>
+
+        <div class="user-card">
+          <div class="user-card-header">
+            <div class="user-card-avatar gold">
+              ک.ب
+              <span class="status-dot offline"></span>
+            </div>
+            <div class="user-card-info">
+              <h4>کاوه بهرامی</h4>
+              <span class="email">k.bahrami@example.com</span>
+            </div>
+          </div>
+          <span class="user-card-role owner"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مشارکت‌کننده</span>
+          <div class="user-card-stats">
+            <div class="user-stat">
+              <div class="value blue">۴۲</div>
+              <div class="label">فعالیت</div>
+            </div>
+            <div class="user-stat">
+              <div class="value gold">۲</div>
+              <div class="label">پروژه</div>
+            </div>
+            <div class="user-stat">
+              <div class="value green">۸۲٪</div>
+              <div class="label">اعتبار</div>
+            </div>
+          </div>
+          <div class="user-card-footer">
+            <button class="btn btn-outline btn-sm">◉ پروفایل</button>
+            <button class="btn btn-outline btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> پیام</button>
+          </div>
+        </div>
+
+        <div class="user-card">
+          <div class="user-card-header">
+            <div class="user-card-avatar pink">
+              م.ن
+              <span class="status-dot"></span>
+            </div>
+            <div class="user-card-info">
+              <h4>مریم نوری</h4>
+              <span class="email">m.nouri@example.com</span>
+            </div>
+          </div>
+          <span class="user-card-role observer"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مشاهده‌کننده</span>
+          <div class="user-card-stats">
+            <div class="user-stat">
+              <div class="value blue">۳۲</div>
+              <div class="label">فعالیت</div>
+            </div>
+            <div class="user-stat">
+              <div class="value gold">۳</div>
+              <div class="label">پروژه</div>
+            </div>
+            <div class="user-stat">
+              <div class="value green">۸۰٪</div>
+              <div class="label">اعتبار</div>
+            </div>
+          </div>
+          <div class="user-card-footer">
+            <button class="btn btn-outline btn-sm">◉ پروفایل</button>
+            <button class="btn btn-outline btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> پیام</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PAGINATION -->
+      <div class="pagination">
+        <button disabled>‹</button>
+        <button class="active">۱</button>
+        <button>۲</button>
+        <button>۳</button>
+        <button>...</button>
+        <button>۱۲۵</button>
+        <button>›</button>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: ROLES ==================== -->
+    <div class="tab-panel" id="panel-roles">
+      <div class="card" style="margin-bottom: 24px;">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></span> نقش‌های تعریف‌شده در سیستم</h3>
+            <p>۱۳ نقش اصلی بر اساس ساختار ایرانیان توکن</p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="showToast('info','نقش جدید','فرم ایجاد نقش جدید باز شد.')">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> نقش جدید
+          </button>
+        </div>
+      </div>
+
+      <div class="roles-grid">
+
+        <div class="role-card purple">
+          <div class="role-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <h4>مدیر کل سیستم</h4>
+          <p>دسترسی کامل به تمام بخش‌های سیستم و تمام عملیات.</p>
+          <div class="role-card-footer">
+            <span class="count">۱ کاربر</span>
+            <span class="permissions">۱۲/۱۲ مجوز</span>
+          </div>
+        </div>
+
+        <div class="role-card">
+          <div class="role-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <h4>مدیر پروژه</h4>
+          <p>مدیریت پروژه‌ها، کاربران مرتبط و گزارش‌های تحلیلی.</p>
+          <div class="role-card-footer">
+            <span class="count">۳ کاربر</span>
+            <span class="permissions">۱۰/۱۲ مجوز</span>
+          </div>
+        </div>
+
+        <div class="role-card gold">
+          <div class="role-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <h4>مالک پروژه</h4>
+          <p>مالکیت پروژه و دسترسی به تمام اطلاعات پروژه‌های خود.</p>
+          <div class="role-card-footer">
+            <span class="count">۴۸ کاربر</span>
+            <span class="permissions">۸/۱۲ مجوز</span>
+          </div>
+        </div>
+
+        <div class="role-card green">
+          <div class="role-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <h4>مجری</h4>
+          <p>اجرای پروژه و به‌روزرسانی وضعیت و اطلاعات فنی.</p>
+          <div class="role-card-footer">
+            <span class="count">۱۴۲ کاربر</span>
+            <span class="permissions">۷/۱۲ مجوز</span>
+          </div>
+        </div>
+
+        <div class="role-card info">
+          <div class="role-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <h4>کارشناس</h4>
+          <p>بررسی و ارزیابی پروژه‌ها، اسناد و مستندات فنی.</p>
+          <div class="role-card-footer">
+            <span class="count">۲۸ کاربر</span>
+            <span class="permissions">۶/۱۲ مجوز</span>
+          </div>
+        </div>
+
+        <div class="role-card pink">
+          <div class="role-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <h4>ارزیاب</h4>
+          <p>ارزیابی دارایی‌ها و ارزش‌گذاری پروژه‌ها.</p>
+          <div class="role-card-footer">
+            <span class="count">۱۲ کاربر</span>
+            <span class="permissions">۵/۱۲ مجوز</span>
+          </div>
+        </div>
+
+        <div class="role-card info">
+          <div class="role-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <h4>ناظر</h4>
+          <p>نظارت بر اجرا و عملکرد پروژه‌ها و ثبت گزارش‌ها.</p>
+          <div class="role-card-footer">
+            <span class="count">۱۸ کاربر</span>
+            <span class="permissions">۴/۱۲ مجوز</span>
+          </div>
+        </div>
+
+        <div class="role-card financial">
+          <div class="role-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <h4>حسابرس</h4>
+          <p>بررسی مالی، صورت‌های حسابداری و صحت اطلاعات مالی.</p>
+          <div class="role-card-footer">
+            <span class="count">۸ کاربر</span>
+            <span class="permissions">۵/۱۲ مجوز</span>
+          </div>
+        </div>
+
+        <div class="role-card red">
+          <div class="role-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <h4>مشاور حقوقی</h4>
+          <p>بررسی اسناد حقوقی، قراردادها و امور قانونی پروژه‌ها.</p>
+          <div class="role-card-footer">
+            <span class="count">۶ کاربر</span>
+            <span class="permissions">۵/۱۲ مجوز</span>
+          </div>
+        </div>
+
+        <div class="role-card financial">
+          <div class="role-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <h4>مشاور مالی</h4>
+          <p>تحلیل مالی و ارائه مشاوره در مورد ساختار اقتصادی.</p>
+          <div class="role-card-footer">
+            <span class="count">۱۰ کاربر</span>
+            <span class="permissions">۴/۱۲ مجوز</span>
+          </div>
+        </div>
+
+        <div class="role-card gold">
+          <div class="role-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <h4>مشارکت‌کننده</h4>
+          <p>مشارکت در پروژه‌ها و دسترسی به اطلاعات پروژه‌های مرتبط.</p>
+          <div class="role-card-footer">
+            <span class="count">۲۴۸ کاربر</span>
+            <span class="permissions">۳/۱۲ مجوز</span>
+          </div>
+        </div>
+
+        <div class="role-card purple">
+          <div class="role-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 9-7 9-7-9z"/><path d="M12 7v10M8 12h8"/></svg></span></div>
+          <h4>دارنده توکن</h4>
+          <p>دسترسی به اطلاعات توکن‌های تحت مالکیت.</p>
+          <div class="role-card-footer">
+            <span class="count">۶۸۴ کاربر</span>
+            <span class="permissions">۲/۱۲ مجوز</span>
+          </div>
+        </div>
+
+        <div class="role-card gray">
+          <div class="role-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <h4>مشاهده‌کننده</h4>
+          <p>فقط مشاهده اطلاعات عمومی پروژه‌ها بدون امکان ویرایش.</p>
+          <div class="role-card-footer">
+            <span class="count">۴۶ کاربر</span>
+            <span class="permissions">۱/۱۲ مجوز</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== TAB: PERMISSIONS ==================== -->
+    <div class="tab-panel" id="panel-permissions">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></span> ماتریس دسترسی و مجوزها</h3>
+            <p>سطح دسترسی هر نقش به عملیات مختلف سیستم</p>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span class="badge success">✓ دسترسی کامل</span>
+            <span class="badge warning">◐ محدود</span>
+            <span class="badge gray">✗ بدون دسترسی</span>
+          </div>
+        </div>
+        <div class="card-body" style="padding: 0;">
+          <div class="matrix-wrap">
+            <table class="matrix-table">
+              <thead>
+                <tr>
+                  <th>عملیات / نقش</th>
+                  <th>مدیر کل</th>
+                  <th>مدیر پروژه</th>
+                  <th>مالک پروژه</th>
+                  <th>مجری</th>
+                  <th>کارشناس</th>
+                  <th>ارزیاب</th>
+                  <th>ناظر</th>
+                  <th>حسابرس</th>
+                  <th>مشاور حقوقی</th>
+                  <th>مشاور مالی</th>
+                  <th>مشارکت‌کننده</th>
+                  <th>دارنده توکن</th>
+                  <th>مشاهده‌کننده</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>مشاهده پروژه‌ها</td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                </tr>
+                <tr>
+                  <td>ایجاد پروژه جدید</td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                </tr>
+                <tr>
+                  <td>ویرایش اطلاعات پروژه</td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                </tr>
+                <tr>
+                  <td>بارگذاری اسناد</td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                </tr>
+                <tr>
+                  <td>اعتبارسنجی اسناد</td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                </tr>
+                <tr>
+                  <td>ایجاد و مدیریت توکن</td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                </tr>
+                <tr>
+                  <td>تخصیص توکن</td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                </tr>
+                <tr>
+                  <td>مدیریت کاربران</td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                </tr>
+                <tr>
+                  <td>مشاهده گزارش‌ها</td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                </tr>
+                <tr>
+                  <td>خروجی گرفتن</td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                </tr>
+                <tr>
+                  <td>تنظیمات سیستم</td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                </tr>
+                <tr>
+                  <td>Audit Trail</td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check yes">✓</span></td>
+                  <td><span class="perm-check limited">◐</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                  <td><span class="perm-check no">✗</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: ACTIVITY ==================== -->
+    <div class="tab-panel" id="panel-activity">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9m5 10V5m5 14v-7m5 7V3"/></svg></span> فعالیت‌های کاربران</h3>
+            <p>آخرین فعالیت‌های ثبت‌شده در سیستم</p>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="showToast('info','خروجی','فایل فعالیت‌ها در حال آماده‌سازی...')">
+            ⇩ خروجی
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="activity-list">
+
+            <div class="activity-item">
+              <div class="activity-icon green"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+              <div class="activity-body">
+                <p><strong>محمد احمدی</strong> سند مالکیت پروژه دامداری را تأیید کرد</p>
+                <small>۱۰ دقیقه پیش · Audit ID: #A-2451</small>
+              </div>
+              <span class="activity-time">۱۰ دقیقه</span>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon blue"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+              <div class="activity-body">
+                <p><strong>سارا رضایی</strong> اطلاعات پایه پروژه نیروگاه را ویرایش کرد</p>
+                <small>۲۵ دقیقه پیش · Audit ID: #A-2450</small>
+              </div>
+              <span class="activity-time">۲۵ دقیقه</span>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon gold"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 9-7 9-7-9z"/><path d="M12 7v10M8 12h8"/></svg></span></div>
+              <div class="activity-body">
+                <p><strong>محمد احمدی</strong> ۲۰۰ توکن جدید به نیروگاه خورشیدی تخصیص داد</p>
+                <small>۱ ساعت پیش · Audit ID: #A-2449</small>
+              </div>
+              <span class="activity-time">۱ ساعت</span>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon purple"><span class="it-symbol" aria-hidden="true"><path d="M12 4a8 8 0 1 0 0 16z"/></span></div>
+              <div class="activity-body">
+                <p><strong>علی کریمی</strong> نظر جدیدی روی پروژه برج آرین ثبت کرد</p>
+                <small>۲ ساعت پیش · Audit ID: #A-2448</small>
+              </div>
+              <span class="activity-time">۲ ساعت</span>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon blue"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+              <div class="activity-body">
+                <p>کاربر جدید <strong>مریم نوری</strong> در سیستم ثبت‌نام کرد</p>
+                <small>۳ ساعت پیش · Audit ID: #A-2447</small>
+              </div>
+              <span class="activity-time">۳ ساعت</span>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon red"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></span></div>
+              <div class="activity-body">
+                <p><strong>نازنین طاهری</strong> درخواست گزارش بازدید میدانی را رد کرد</p>
+                <small>۴ ساعت پیش · Audit ID: #A-2446</small>
+              </div>
+              <span class="activity-time">۴ ساعت</span>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon green"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+              <div class="activity-body">
+                <p><strong>رضا محمدی</strong> قرارداد مشارکت هتل کیش را تأیید کرد</p>
+                <small>۶ ساعت پیش · Audit ID: #A-2445</small>
+              </div>
+              <span class="activity-time">۶ ساعت</span>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon gold"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+              <div class="activity-body">
+                <p><strong>محمد احمدی</strong> نقش کاربر «کاوه بهرامی» را به مشارکت‌کننده تغییر داد</p>
+                <small>دیروز · Audit ID: #A-2444</small>
+              </div>
+              <span class="activity-time">دیروز</span>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon purple"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+              <div class="activity-body">
+                <p>مجوز <strong>«اعتبارسنجی اسناد»</strong> به نقش کارشناس اضافه شد</p>
+                <small>۲ روز پیش · Audit ID: #A-2443</small>
+              </div>
+              <span class="activity-time">۲ روز</span>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon red"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+              <div class="activity-body">
+                <p>حساب کاربری <strong>«مهدی کریمی»</strong> توسط مدیر موقتاً غیرفعال شد</p>
+                <small>۳ روز پیش · Audit ID: #A-2442</small>
+              </div>
+              <span class="activity-time">۳ روز</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ==================== DRAWER: User Profile ==================== -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="drawer" id="userDrawer">
+  <div class="drawer-header">
+    <div>
+      <h3 id="drawerTitle">پروفایل کاربر</h3>
+      <small id="drawerSubtitle">اطلاعات کامل کاربر</small>
+    </div>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+
+  <div class="drawer-body">
+
+    <div class="drawer-hero">
+      <div class="drawer-hero-avatar">م.ا</div>
+      <div class="drawer-hero-info">
+        <h2 id="drawerName">محمد احمدی</h2>
+        <p id="drawerEmail">m.ahmadi@iranianToken.ir</p>
+        <div class="badges">
+          <span id="drawerRole"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مدیر کل سیستم</span>
+          <span style="background: rgba(16,185,129,0.3);">✓ فعال</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-mini-stats">
+      <div class="drawer-mini-stat">
+        <div class="value">۲۴۸</div>
+        <div class="label">فعالیت کل</div>
+      </div>
+      <div class="drawer-mini-stat">
+        <div class="value">۸</div>
+        <div class="label">پروژه</div>
+      </div>
+      <div class="drawer-mini-stat">
+        <div class="value">۱۰۰٪</div>
+        <div class="label">اعتبار</div>
+      </div>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-section-title">اطلاعات پایه</div>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">نام کامل</span>
+          <span class="value">محمد احمدی</span>
+        </div>
+        <div class="info-item">
+          <span class="label">نام کاربری</span>
+          <span class="value mono">m_ahmadi</span>
+        </div>
+        <div class="info-item">
+          <span class="label">ایمیل</span>
+          <span class="value mono">m.ahmadi@iranianToken.ir</span>
+        </div>
+        <div class="info-item">
+          <span class="label">شماره موبایل</span>
+          <span class="value mono">۰۹۱۲۳۴۵۶۷۸۹</span>
+        </div>
+        <div class="info-item">
+          <span class="label">نقش</span>
+          <span class="value gold">مدیر کل سیستم</span>
+        </div>
+        <div class="info-item">
+          <span class="label">وضعیت</span>
+          <span class="value green">فعال</span>
+        </div>
+        <div class="info-item">
+          <span class="label">تاریخ عضویت</span>
+          <span class="value">۱۴۰۲/۱۰/۱۵</span>
+        </div>
+        <div class="info-item">
+          <span class="label">آخرین ورود</span>
+          <span class="value">همین حالا</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-section-title">پروژه‌های مشارکتی</div>
+      <div class="mini-project-list">
+        <div class="mini-project-item">
+          <div class="mini-project-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <div class="mini-project-body">
+            <strong>دامداری نمونه</strong>
+            <small>IRT-1403-001</small>
+          </div>
+          <span class="mini-project-role">مالک</span>
+        </div>
+        <div class="mini-project-item">
+          <div class="mini-project-icon" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <div class="mini-project-body">
+            <strong>نیروگاه خورشیدی</strong>
+            <small>IRT-1403-004</small>
+          </div>
+          <span class="mini-project-role">مدیر</span>
+        </div>
+        <div class="mini-project-item">
+          <div class="mini-project-icon" style="background: linear-gradient(135deg, #10b981, #34d399);"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <div class="mini-project-body">
+            <strong>کشاورزی پایدار</strong>
+            <small>IRT-1403-002</small>
+          </div>
+          <span class="mini-project-role">مشارکت‌کننده</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-section-title">مجوزهای فعال</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+        <span class="badge success">✓ مشاهده پروژه‌ها</span>
+        <span class="badge success">✓ ایجاد پروژه</span>
+        <span class="badge success">✓ ویرایش پروژه</span>
+        <span class="badge success">✓ بارگذاری اسناد</span>
+        <span class="badge success">✓ اعتبارسنجی</span>
+        <span class="badge success">✓ مدیریت توکن</span>
+        <span class="badge success">✓ مدیریت کاربران</span>
+        <span class="badge success">✓ گزارش‌ها</span>
+        <span class="badge success">✓ تنظیمات</span>
+        <span class="badge success">✓ Audit Trail</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="drawer-footer">
+    <button class="btn btn-outline" onclick="showToast('info','پیام','پنل ارسال پیام باز شد.')"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ارسال پیام</button>
+    <button class="btn btn-primary" onclick="showToast('info','ویرایش','پنل ویرایش کاربر باز شد.')"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ویرایش کاربر</button>
+  </div>
+</aside>
+
+<script>
+/* ==================== SIDEBAR ==================== */
+const sidebar = document.getElementById('sidebar');
+const main = document.getElementById('main');
+const toggleBtn = document.getElementById('toggleBtn');
+const overlay = document.getElementById('overlay');
+
+toggleBtn.addEventListener('click', () => {
+  if (window.innerWidth <= 900) {
+    sidebar.classList.toggle('mobile-open');
+    overlay.classList.toggle('active');
+  } else {
+    sidebar.classList.toggle('collapsed');
+    main.classList.toggle('expanded');
+  }
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('mobile-open');
+  overlay.classList.remove('active');
+});
+
+/* ==================== TOAST ==================== */
+function showToast(type, title, message) {
+  const container = document.getElementById('toastContainer');
+  const icons = { success: '✓', error: '✗', warning: '!', info: '<span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span>' };
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `
+    <div class="toast-icon">${icons[type]}</div>
+    <div class="toast-body">
+      <strong>${title}</strong>
+      <span>${message}</span>
+    </div>
+  `;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-100%)';
+    toast.style.transition = 'all 0.3s';
+    setTimeout(() => toast.remove(), 300);
+  }, 4000);
+}
+
+/* ==================== TABS ==================== */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+/* ==================== VIEW TOGGLE ==================== */
+document.querySelectorAll('.view-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const grid = document.getElementById('usersGrid');
+    if (btn.dataset.view === 'list') {
+      grid.classList.add('list-view');
+    } else {
+      grid.classList.remove('list-view');
+    }
+  });
+});
+
+/* ==================== DRAWER ==================== */
+const userDrawer = document.getElementById('userDrawer');
+const drawerOverlay = document.getElementById('drawerOverlay');
+
+const usersData = {
+  1: { name: 'محمد احمدی', email: 'm.ahmadi@iranianToken.ir', role: '<span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مدیر کل سیستم', avatar: 'م.ا' },
+  2: { name: 'سارا رضایی', email: 's.rezaei@example.com', role: '<span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مجری فنی', avatar: 'س.ر' },
+  3: { name: 'علی کریمی', email: 'a.karimi@example.com', role: '<span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> کارشناس ارزیاب', avatar: 'ع.ک' },
+  4: { name: 'رضا محمدی', email: 'r.mohammadi@example.com', role: '<span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مشاور حقوقی', avatar: 'ر.م' },
+  5: { name: 'فاطمه حسینی', email: 'f.hosseini@example.com', role: '<span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> حسابرس', avatar: 'ف.ح' },
+  6: { name: 'حسین صادقی', email: 'h.sadeghi@example.com', role: '<span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> سرمایه‌گذار', avatar: 'ح.ص' },
+};
+
+function openUser(id) {
+  const data = usersData[id];
+  if (data) {
+    document.getElementById('drawerName').textContent = data.name;
+    document.getElementById('drawerEmail').textContent = data.email;
+    document.getElementById('drawerRole').textContent = data.role;
+    document.querySelector('.drawer-hero-avatar').textContent = data.avatar;
+  }
+  userDrawer.classList.add('open');
+  drawerOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDrawer() {
+  userDrawer.classList.remove('open');
+  drawerOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+drawerOverlay.addEventListener('click', closeDrawer);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeDrawer();
+});
+
+/* ==================== RIPPLE ==================== */
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `@keyframes ripple { to { transform: scale(4); opacity: 0; } }`;
+document.head.appendChild(rippleStyle);
+document.querySelectorAll('.btn, .tab-btn, .action-btn, .perm-check').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.cssText = `
+      position: absolute; width: ${size}px; height: ${size}px;
+      border-radius: 50%; background: rgba(255,255,255,0.4);
+      transform: scale(0); animation: ripple 0.6s linear;
+      pointer-events: none;
+      left: ${e.clientX - rect.left - size/2}px;
+      top: ${e.clientY - rect.top - size/2}px;
+    `;
+    this.style.position = 'relative';
+    this.style.overflow = 'hidden';
+    this.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  });
+});
+</script>
+
+<script src="theme.js"></script>
+</body>
+</html>

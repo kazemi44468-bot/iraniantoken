@@ -1,0 +1,2637 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>گزارش‌ها | ایرانیان توکن</title>
+<meta name="description" content="ایرانیان توکن؛ بستر مدیریت پروژه، دارایی دیجیتال، توکنیزه‌سازی و مشارکت در اکوسیستم ارزش.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --primary: #1a5fb4;
+  --primary-dark: #0d3b7a;
+  --primary-light: #3584e4;
+  --accent: #f5c211;
+  --accent-dark: #c79a00;
+  --dark: #0f1729;
+  --dark-2: #1a2332;
+  --gray: #64748b;
+  --gray-light: #94a3b8;
+  --bg: #f1f5f9;
+  --bg-alt: #ffffff;
+  --border: #e2e8f0;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+  --purple: #8b5cf6;
+  --pink: #ec4899;
+  --gradient: linear-gradient(135deg, #1a5fb4 0%, #3584e4 100%);
+  --gradient-gold: linear-gradient(135deg, #f5c211 0%, #ffd94a 100%);
+  --shadow-sm: 0 1px 2px rgba(15,23,41,0.05);
+  --shadow: 0 4px 12px rgba(15,23,41,0.06);
+  --shadow-lg: 0 12px 32px rgba(15,23,41,0.1);
+  --shadow-xl: 0 24px 60px rgba(15,23,41,0.15);
+  --radius: 14px;
+  --radius-lg: 20px;
+  --sidebar-w: 260px;
+  --sidebar-collapsed: 78px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Vazirmatn', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ==================== SIDEBAR ==================== */
+.sidebar {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--dark);
+  color: #fff;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border-left: 1px solid rgba(255,255,255,0.05);
+}
+.sidebar.collapsed { width: var(--sidebar-collapsed); }
+.sidebar-brand {
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  min-height: 82px;
+}
+.sidebar-logo {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(26,95,180,0.4);
+}
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .sidebar-brand-text { opacity: 0; }
+.sidebar-brand-text strong { font-size: 15px; font-weight: 800; }
+.sidebar-brand-text small { font-size: 11px; color: var(--gray-light); }
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sidebar-nav::-webkit-scrollbar { width: 4px; }
+.sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+.nav-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 16px 12px 8px;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .nav-section-title { opacity: 0; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  color: var(--gray-light);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.nav-item.active { background: var(--gradient); color: #fff; box-shadow: 0 6px 16px rgba(26,95,180,0.35); }
+.nav-item .icon { font-size: 18px; flex-shrink: 0; width: 22px; text-align: center; }
+.nav-item .label { opacity: 1; transition: opacity 0.2s; }
+.sidebar.collapsed .nav-item .label { opacity: 0; }
+.nav-item .badge {
+  margin-right: auto;
+  background: var(--accent);
+  color: var(--dark);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 50px;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .nav-item .badge { opacity: 0; }
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.user-mini {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.user-mini:hover { background: rgba(255,255,255,0.08); }
+.user-avatar {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: var(--gradient-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: var(--dark);
+  flex-shrink: 0;
+  font-size: 14px;
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  overflow: hidden;
+}
+.sidebar.collapsed .user-info { opacity: 0; }
+.user-info strong { font-size: 13px; color: #fff; }
+.user-info small { font-size: 11px; color: var(--gray-light); }
+
+/* ==================== MAIN ==================== */
+.main {
+  margin-right: var(--sidebar-w);
+  transition: margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main.expanded { margin-right: var(--sidebar-collapsed); }
+
+/* ==================== TOPBAR ==================== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.toggle-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--dark);
+  transition: all 0.2s;
+}
+.toggle-btn:hover { background: var(--bg); }
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--gray);
+}
+.breadcrumb a { color: var(--gray); text-decoration: none; }
+.breadcrumb a:hover { color: var(--primary); }
+.breadcrumb .current { color: var(--dark); font-weight: 600; }
+.topbar-actions { display: flex; align-items: center; gap: 8px; margin-right: auto; }
+.icon-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--gray);
+  transition: all 0.2s;
+  position: relative;
+}
+.icon-btn:hover { background: var(--bg); color: var(--primary); }
+.icon-btn .dot {
+  position: absolute;
+  top: 8px; left: 8px;
+  width: 8px; height: 8px;
+  background: var(--danger);
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+/* ==================== CONTENT ==================== */
+.content { padding: 28px; flex: 1; max-width: 1600px; margin: 0 auto; width: 100%; }
+
+/* ==================== BUTTONS ==================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--gradient);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(26,95,180,0.28);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(26,95,180,0.38);
+}
+.btn-outline {
+  background: #fff;
+  color: var(--dark);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover { background: var(--bg); border-color: var(--primary-light); color: var(--primary); }
+.btn-gold {
+  background: var(--gradient-gold);
+  color: var(--dark);
+  box-shadow: 0 8px 20px rgba(245,194,17,0.35);
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(245,194,17,0.45); }
+.btn-sm { padding: 8px 14px; font-size: 13px; }
+
+/* ==================== PAGE HEADER ==================== */
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.page-title h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.page-title p {
+  font-size: 14px;
+  color: var(--gray);
+}
+.page-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ==================== FILTER BAR ==================== */
+.filter-bar {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: 14px;
+  align-items: end;
+  flex-wrap: wrap;
+}
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 160px;
+}
+.filter-group label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.filter-group select,
+.filter-group input {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--dark);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.filter-group select:focus,
+.filter-group input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(53,132,228,0.1);
+}
+
+/* Date Range Presets */
+.date-presets {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.preset-btn {
+  padding: 8px 14px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.preset-btn:hover { border-color: var(--primary-light); color: var(--primary); }
+.preset-btn.active {
+  background: var(--gradient);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 10px rgba(26,95,180,0.25);
+}
+
+/* ==================== KPI STATS ==================== */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.kpi-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gradient);
+}
+.kpi-card.gold::before { background: var(--gradient-gold); }
+.kpi-card.green::before { background: linear-gradient(180deg, #10b981, #34d399); }
+.kpi-card.purple::before { background: linear-gradient(180deg, #8b5cf6, #a78bfa); }
+.kpi-card.info::before { background: linear-gradient(180deg, #3b82f6, #60a5fa); }
+.kpi-card.pink::before { background: linear-gradient(180deg, #ec4899, #f472b6); }
+
+.kpi-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+.kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.kpi-icon {
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  background: rgba(26,95,180,0.08);
+  color: var(--primary);
+}
+.kpi-card.gold .kpi-icon { background: rgba(245,194,17,0.15); color: var(--accent-dark); }
+.kpi-card.green .kpi-icon { background: rgba(16,185,129,0.1); color: var(--success); }
+.kpi-card.purple .kpi-icon { background: rgba(139,92,246,0.1); color: var(--purple); }
+.kpi-card.info .kpi-icon { background: rgba(59,130,246,0.1); color: var(--info); }
+.kpi-card.pink .kpi-icon { background: rgba(236,72,153,0.1); color: var(--pink); }
+
+.kpi-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 50px;
+}
+.kpi-trend.up { background: rgba(16,185,129,0.12); color: var(--success); }
+.kpi-trend.down { background: rgba(239,68,68,0.12); color: var(--danger); }
+.kpi-trend.neutral { background: rgba(100,116,139,0.12); color: var(--gray); }
+
+.kpi-value {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.kpi-value span {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gray);
+  margin-right: 4px;
+}
+.kpi-label {
+  font-size: 13px;
+  color: var(--gray);
+  font-weight: 600;
+}
+
+/* ==================== CHARTS GRID ==================== */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.charts-grid-full {
+  grid-template-columns: 1fr;
+}
+.charts-grid-half {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ==================== CARD ==================== */
+.card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s;
+}
+.card:hover { box-shadow: var(--shadow); }
+.card-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.card-header-left h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.card-header-left h3 .icon {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  background: rgba(26,95,180,0.08);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.card-header-left p {
+  font-size: 12px;
+  color: var(--gray);
+  margin-right: 40px;
+}
+.card-body { padding: 24px; }
+
+.chart-container {
+  position: relative;
+  height: 300px;
+}
+.chart-container-sm { height: 240px; }
+.chart-container-lg { height: 380px; }
+
+.chart-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--gray);
+}
+.chart-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+.chart-legend .dot {
+  width: 10px; height: 10px;
+  border-radius: 3px;
+}
+
+/* ==================== TABLE ==================== */
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+thead th {
+  text-align: right;
+  padding: 14px 16px;
+  font-weight: 700;
+  color: var(--gray);
+  font-size: 12px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--dark);
+  vertical-align: middle;
+}
+tbody tr { transition: background 0.15s; }
+tbody tr:hover { background: rgba(26,95,180,0.02); }
+tbody tr:last-child td { border-bottom: none; }
+
+.project-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.project-thumb {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.project-cell strong {
+  display: block;
+  font-weight: 700;
+  font-size: 13px;
+}
+.project-cell small {
+  font-size: 11px;
+  color: var(--gray);
+  font-family: monospace;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.badge.success { background: rgba(16,185,129,0.12); color: var(--success); }
+.badge.warning { background: rgba(245,158,11,0.14); color: var(--warning); }
+.badge.danger { background: rgba(239,68,68,0.12); color: var(--danger); }
+.badge.info { background: rgba(59,130,246,0.12); color: var(--info); }
+.badge.purple { background: rgba(139,92,246,0.12); color: var(--purple); }
+.badge.gray { background: rgba(100,116,139,0.12); color: var(--gray); }
+.badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ==================== TABLE PROGRESS ==================== */
+.table-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+}
+.progress-mini {
+  flex: 1;
+  height: 6px;
+  background: var(--bg);
+  border-radius: 50px;
+  overflow: hidden;
+}
+.progress-mini .fill {
+  height: 100%;
+  border-radius: 50px;
+  background: var(--gradient);
+  transition: width 0.6s;
+}
+.table-progress span {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray);
+  min-width: 32px;
+  text-align: left;
+}
+
+/* ==================== REPORT TEMPLATES ==================== */
+.templates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.template-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.template-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s;
+}
+.template-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+.template-card:hover::before { transform: scaleX(1); }
+
+.template-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: rgba(26,95,180,0.08);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+.template-card.gold .template-icon { background: rgba(245,194,17,0.15); color: var(--accent-dark); }
+.template-card.green .template-icon { background: rgba(16,185,129,0.1); color: var(--success); }
+.template-card.purple .template-icon { background: rgba(139,92,246,0.1); color: var(--purple); }
+.template-card.pink .template-icon { background: rgba(236,72,153,0.1); color: var(--pink); }
+.template-card.info .template-icon { background: rgba(59,130,246,0.1); color: var(--info); }
+
+.template-card h4 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.template-card p {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+.template-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--gray);
+}
+.template-footer .download-btn {
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 700;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.template-footer .download-btn:hover { color: var(--primary-dark); }
+
+/* ==================== RECENT ACTIVITY ==================== */
+.activity-list { display: flex; flex-direction: column; gap: 6px; }
+.activity-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  transition: background 0.2s;
+  align-items: center;
+}
+.activity-item:hover { background: var(--bg); }
+.activity-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.activity-icon.blue { background: rgba(59,130,246,0.12); color: var(--info); }
+.activity-icon.green { background: rgba(16,185,129,0.12); color: var(--success); }
+.activity-icon.gold { background: rgba(245,194,17,0.15); color: var(--accent-dark); }
+.activity-icon.red { background: rgba(239,68,68,0.12); color: var(--danger); }
+.activity-icon.purple { background: rgba(139,92,246,0.12); color: var(--purple); }
+.activity-body { flex: 1; min-width: 0; }
+.activity-body p {
+  font-size: 13px;
+  color: var(--dark);
+  line-height: 1.6;
+  margin-bottom: 2px;
+}
+.activity-body p strong { font-weight: 700; }
+.activity-body small {
+  font-size: 11px;
+  color: var(--gray);
+}
+.activity-value {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+/* ==================== TABS ==================== */
+.tabs-nav {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 6px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+.tabs-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.tab-btn:hover { background: var(--bg); color: var(--primary); }
+.tab-btn.active {
+  background: var(--gradient);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(26,95,180,0.28);
+}
+
+.tab-panel { display: none; animation: fadeIn 0.4s; }
+.tab-panel.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== TOAST ==================== */
+.toast-container {
+  position: fixed;
+  top: 24px; left: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.toast {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 280px;
+  max-width: 380px;
+  border-right: 4px solid var(--success);
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast.error { border-right-color: var(--danger); }
+.toast.warning { border-right-color: var(--warning); }
+.toast.info { border-right-color: var(--info); }
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.toast-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  background: rgba(16,185,129,0.12);
+  color: var(--success);
+}
+.toast.error .toast-icon { background: rgba(239,68,68,0.12); color: var(--danger); }
+.toast.warning .toast-icon { background: rgba(245,158,11,0.14); color: var(--warning); }
+.toast.info .toast-icon { background: rgba(59,130,246,0.12); color: var(--info); }
+.toast-body strong { display: block; font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+.toast-body span { font-size: 12px; color: var(--gray); }
+
+/* ==================== OVERLAY ==================== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,41,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.overlay.active { opacity: 1; pointer-events: auto; }
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1200px) {
+  .charts-grid { grid-template-columns: 1fr; }
+  .charts-grid-half { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(100%); width: var(--sidebar-w) !important; }
+  .sidebar.mobile-open { transform: translateX(0); }
+  .sidebar.collapsed .sidebar-brand-text,
+  .sidebar.collapsed .nav-item .label,
+  .sidebar.collapsed .nav-section-title,
+  .sidebar.collapsed .user-info,
+  .sidebar.collapsed .nav-item .badge { opacity: 1; }
+  .main { margin-right: 0 !important; }
+  .content { padding: 20px 16px 100px; }
+  .topbar { padding: 12px 16px; }
+  .breadcrumb { display: none; }
+  .chart-container { height: 260px; }
+  .chart-container-lg { height: 320px; }
+}
+@media (max-width: 640px) {
+  .content { padding: 16px 12px 100px; }
+  .page-title h1 { font-size: 20px; }
+  .page-actions { width: 100%; }
+  .page-actions .btn { flex: 1; justify-content: center; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .kpi-card { padding: 16px; }
+  .kpi-value { font-size: 24px; }
+  .kpi-icon { width: 38px; height: 38px; font-size: 18px; }
+  .card-header, .card-body { padding-left: 16px; padding-right: 16px; }
+  .filter-bar { padding: 14px; }
+  .filter-group { min-width: 100%; }
+  .tab-btn { padding: 9px 12px; font-size: 12px; }
+}
+@media (max-width: 420px) {
+  .kpi-grid { grid-template-columns: 1fr; }
+}
+</style>
+<link rel="stylesheet" href="theme.css">
+<link rel="icon" href="assets/images/logo.png" type="image/png">
+<link rel="shortcut icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+
+<div class="toast-container" id="toastContainer"></div>
+<div class="overlay" id="overlay"></div>
+
+<!-- ==================== SIDEBAR ==================== -->
+<aside class="sidebar" id="sidebar"><div class="sidebar-brand"><a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit"><div class="sidebar-logo"><img src="assets/images/logo.png" alt="ایرانیان توکن"></div><div class="sidebar-brand-text"><strong>ایرانیان توکن</strong><small>مرکز مدیریت و پایش</small></div></a></div><nav class="sidebar-nav" aria-label="ناوبری یکپارچه سامانه">
+<div class="nav-section-title">مرکز کار</div><a class="nav-item" href="dashboard.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="label">داشبورد</span></a>
+<div class="nav-group "><div class="nav-parent-row"><a class="nav-item" href="projects.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="label">پروژه‌ها و دارایی‌ها</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a class="" href="projects.html">فهرست پروژه‌ها</a><a class="" href="new-project.html">ثبت پروژه جدید</a><a class="" href="project-detail.html">جزئیات پروژه</a><a class="" href="car-token.html">توکن خودرو</a><a class="" href="honey-token.html">توکن کندوی عسل</a><a class="" href="housing-token.html">توکن مسکن</a><a class="" href="solar-token.html">توکن انرژی خورشیدی</a></div></div></div>
+<div class="nav-group "><div class="nav-parent-row"><a class="nav-item" href="validation.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span class="label">اسناد و اعتبارسنجی</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a href="dashboard.html#documents">مرکز اسناد</a><a class="" href="validation.html">صف اعتبارسنجی</a></div></div></div>
+<div class="nav-section-title">کنترل و گزارش</div><a class="nav-item" href="users.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span><span class="label">کاربران و نقش‌ها</span></a><a class="nav-item active" href="reports.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9m5 10V5m5 14v-7m5 7V3"/></svg></span><span class="label">گزارش‌های مدیریتی</span></a><a class="nav-item" href="dashboard.html#audit"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span><span class="label">ثبت رویدادها</span></a>
+<div class="nav-section-title">حساب و سامانه</div><div class="nav-group "><div class="nav-parent-row"><a class="nav-item" href="settings.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 15l2 1-2 3-2-1a8 8 0 0 1-2 1v2h-4v-2a8 8 0 0 1-2-1l-2 1-2-3 2-1a8 8 0 0 1 0-2l-2-1 2-3 2 1a8 8 0 0 1 2-1V6h4v2a8 8 0 0 1 2 1l2-1 2 3-2 1a8 8 0 0 1 0 2z"/></svg></span><span class="label">حساب و تنظیمات</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a class="" href="profile.html">پروفایل و حساب</a><a class="" href="settings.html">تنظیمات سامانه</a><a class="" href="notifications.html">اعلان‌ها</a><a href="auth.html">ورود و ثبت‌نام</a></div></div></div><a class="nav-item" href="help.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M9.7 9a2.4 2.4 0 1 1 4 1.8c-1 .7-1.7 1.1-1.7 2.4M12 16.5h.01"/></svg></span><span class="label">مرکز راهنما</span></a>
+<div class="nav-section-title">صفحات سامانه</div><a class="nav-item" href="index.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="label">معرفی سامانه</span></a><a class="nav-item" href="contact.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/></svg></span><span class="label">تماس با ما</span></a><a class="nav-item" href="auth.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 8l-4 4 4 4M6 12h9a4 4 0 0 1 4 4v2"/></svg></span><span class="label">ثبت نام / ورود</span></a><div class="nav-section-title">دسترسی سریع</div><a class="nav-item" href="index.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="label">بازگشت به صفحه اصلی</span></a></nav></aside>
+
+<!-- ==================== MAIN ==================== -->
+<div class="main" id="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <button class="toggle-btn" id="toggleBtn"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span></button>
+    <div class="breadcrumb">
+      <a href="dashboard.html">داشبورد</a>
+      <span>›</span>
+      <span class="current">گزارش‌ها</span>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" onclick="showToast('info','اشتراک‌گذاری','لینک گزارش کپی شد.')" title="اشتراک‌گذاری"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 13a4 4 0 0 0 6 0l2-2a4 4 0 0 0-6-6l-1 1M14 11a4 4 0 0 0-6 0l-2 2a4 4 0 0 0 6 6l1-1"/></svg></span></button>
+      <button class="icon-btn" onclick="window.print()" title="چاپ"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 9V4h10v5M7 17H5a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v7H7z"/></svg></span></button>
+      <button class="icon-btn" id="notifBtn">◉<span class="dot"></span></button>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="page-title">
+        <h1>گزارش‌ها و تحلیل‌ها ⌁</h1>
+        <p>داشبورد تحلیلی جامع از پروژه‌ها، توکن‌ها، کاربران و عملکرد سیستم</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-outline" onclick="refreshData()">
+          ↻ بروزرسانی
+        </button>
+        <button class="btn btn-outline" onclick="showToast('info','فیلتر پیشرفته','پنل فیلتر پیشرفته باز شد.')">
+          ⇅ فیلتر پیشرفته
+        </button>
+        <button class="btn btn-primary" onclick="showToast('success','خروجی','در حال آماده‌سازی گزارش PDF...')">
+          ⇩ دانلود گزارش
+        </button>
+      </div>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <div class="filter-group" style="min-width: 200px;">
+        <label>بازه زمانی</label>
+        <div class="date-presets">
+          <button class="preset-btn" data-range="7">۷ روز</button>
+          <button class="preset-btn" data-range="30">۳۰ روز</button>
+          <button class="preset-btn active" data-range="90">۳ ماه</button>
+          <button class="preset-btn" data-range="365">۱ سال</button>
+          <button class="preset-btn" data-range="all">همه</button>
+        </div>
+      </div>
+
+      <div class="filter-group" style="min-width: 180px;">
+        <label>حوزه فعالیت</label>
+        <select id="filterSector">
+          <option value="all">همه حوزه‌ها</option>
+          <option value="agriculture">کشاورزی</option>
+          <option value="livestock">دامپروری</option>
+          <option value="construction">ساختمانی</option>
+          <option value="industry">صنعتی</option>
+          <option value="technology">فناوری</option>
+          <option value="energy">انرژی</option>
+          <option value="tourism">گردشگری</option>
+        </select>
+      </div>
+
+      <div class="filter-group" style="min-width: 160px;">
+        <label>وضعیت پروژه</label>
+        <select id="filterStatus">
+          <option value="all">همه وضعیت‌ها</option>
+          <option value="active">فعال</option>
+          <option value="pending">در انتظار</option>
+          <option value="paused">متوقف</option>
+          <option value="done">تکمیل شده</option>
+        </select>
+      </div>
+
+      <div class="filter-group" style="min-width: 200px;">
+        <label>جستجو</label>
+        <input type="text" id="filterSearch" placeholder="نام پروژه، کد، مالک...">
+      </div>
+
+      <button class="btn btn-primary" onclick="applyFilters()" style="padding: 11px 22px;">
+        ✓ اعمال فیلتر
+      </button>
+    </div>
+
+    <!-- TABS -->
+    <nav class="tabs-nav">
+      <button class="tab-btn active" data-tab="overview">
+        <span>◫</span> نمای کلی
+      </button>
+      <button class="tab-btn" data-tab="projects">
+        <span>▦</span> تحلیل پروژه‌ها
+      </button>
+      <button class="tab-btn" data-tab="tokens">
+        <span>◈</span> تحلیل توکن‌ها
+      </button>
+      <button class="tab-btn" data-tab="users">
+        <span>◌</span> عملکرد کاربران
+      </button>
+      <button class="tab-btn" data-tab="validation">
+        <span>✓</span> اعتبارسنجی
+      </button>
+      <button class="tab-btn" data-tab="templates">
+        <span>▤</span> گزارش‌های آماده
+      </button>
+    </nav>
+
+    <!-- ==================== TAB: OVERVIEW ==================== -->
+    <div class="tab-panel active" id="panel-overview">
+
+      <!-- KPI Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span></div>
+            <div class="kpi-trend up">↑ ۱۲٪</div>
+          </div>
+          <div class="kpi-value">۱۲ <span>پروژه</span></div>
+          <div class="kpi-label">پروژه فعال</div>
+        </div>
+
+        <div class="kpi-card gold">
+          <div class="kpi-header">
+            <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 9-7 9-7-9z"/><path d="M12 7v10M8 12h8"/></svg></span></div>
+            <div class="kpi-trend up">↑ ۸.۵٪</div>
+          </div>
+          <div class="kpi-value">۲۸,۵۰۰ <span>توکن</span></div>
+          <div class="kpi-label">توکن صادرشده</div>
+        </div>
+
+        <div class="kpi-card green">
+          <div class="kpi-header">
+            <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg></span></div>
+            <div class="kpi-trend up">↑ ۲۳٪</div>
+          </div>
+          <div class="kpi-value">۲۴۸.۵ <span>میلیارد</span></div>
+          <div class="kpi-label">ارزش کل پروژه‌ها</div>
+        </div>
+
+        <div class="kpi-card purple">
+          <div class="kpi-header">
+            <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M8 12h8"/></svg></span></div>
+            <div class="kpi-trend up">↑ ۱۵٪</div>
+          </div>
+          <div class="kpi-value">۱,۲۴۸ <span>کاربر</span></div>
+          <div class="kpi-label">کاربر فعال</div>
+        </div>
+
+        <div class="kpi-card info">
+          <div class="kpi-header">
+            <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+            <div class="kpi-trend up">↑ ۴۲٪</div>
+          </div>
+          <div class="kpi-value">۴۷ <span>سند</span></div>
+          <div class="kpi-label">تأیید شده</div>
+        </div>
+
+        <div class="kpi-card pink">
+          <div class="kpi-header">
+            <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span></div>
+            <div class="kpi-trend down">↓ ۵٪</div>
+          </div>
+          <div class="kpi-value">۳ <span>مورد</span></div>
+          <div class="kpi-label">در انتظار اعتبارسنجی</div>
+        </div>
+      </div>
+
+      <!-- Main Charts -->
+      <div class="charts-grid">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9m5 10V5m5 14v-7m5 7V3"/></svg></span> روند کلی رشد</h3>
+              <p>پروژه‌ها، توکن‌ها و کاربران در ۶ ماه اخیر</p>
+            </div>
+            <div class="chart-legend">
+              <span><span class="dot" style="background: #1a5fb4;"></span> پروژه‌ها</span>
+              <span><span class="dot" style="background: #f5c211;"></span> توکن‌ها</span>
+              <span><span class="dot" style="background: #10b981;"></span> کاربران</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container chart-container-lg">
+              <canvas id="growthChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 9-7 9-7-9z"/><path d="M12 7v10M8 12h8"/></svg></span></span> توزیع مدل‌ها</h3>
+              <p>بر اساس نوع توکنیزه‌سازی</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container chart-container-lg">
+              <canvas id="modelDistributionChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second Row Charts -->
+      <div class="charts-grid charts-grid-half">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg></span></span> ارزش پروژه‌ها بر اساس حوزه</h3>
+              <p>ارزش کل به تفکیک صنعت (میلیارد تومان)</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="sectorValueChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span> توزیع جغرافیایی</h3>
+              <p>پروژه‌ها به تفکیک استان</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="provinceChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="card" style="margin-top: 24px;">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span> فعالیت‌های اخیر سیستم</h3>
+            <p>آخرین رویدادهای مهم در ۲۴ ساعت گذشته</p>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="showToast('info','مشاهده','صفحه Audit Trail باز شد.')">
+            مشاهده کامل
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="activity-icon green"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+              <div class="activity-body">
+                <p><strong>سند مالکیت</strong> پروژه دامداری نمونه تأیید شد</p>
+                <small>۱۰ دقیقه پیش · علی کریمی</small>
+              </div>
+              <div class="activity-value">+۱ سند</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon blue"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 9-7 9-7-9z"/><path d="M12 7v10M8 12h8"/></svg></span></div>
+              <div class="activity-body">
+                <p><strong>۲۰۰ توکن</strong> جدید به نیروگاه خورشیدی تخصیص یافت</p>
+                <small>۲۵ دقیقه پیش · محمد احمدی</small>
+              </div>
+              <div class="activity-value">+۲۰۰ توکن</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon gold"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M8 12h8"/></svg></span></div>
+              <div class="activity-body">
+                <p>کاربر جدید <strong>سارا رضایی</strong> به سیستم اضافه شد</p>
+                <small>۱ ساعت پیش · سیستم</small>
+              </div>
+              <div class="activity-value">+۱ کاربر</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon red"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></span></div>
+              <div class="activity-body">
+                <p>درخواست <strong>گزارش بازدید میدانی</strong> رد شد</p>
+                <small>۲ ساعت پیش · ناظر</small>
+              </div>
+              <div class="activity-value">رد</div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon purple"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 20 4-1 10-10a2.8 2.8 0 0 0-4-4L4 15z"/></svg></span></div>
+              <div class="activity-body">
+                <p>مدل اقتصادی <strong>برج تجاری آرین</strong> به‌روز شد</p>
+                <small>۳ ساعت پیش · سارا رضایی</small>
+              </div>
+              <div class="activity-value">بروزرسانی</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB: PROJECTS ==================== -->
+    <div class="tab-panel" id="panel-projects">
+      <div class="charts-grid">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span> پیشرفت پروژه‌ها</h3>
+              <p>مقایسه درصد پیشرفت پروژه‌های فعال</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container chart-container-lg">
+              <canvas id="projectProgressChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span> وضعیت پروژه‌ها</h3>
+              <p>توزیع بر اساس وضعیت فعلی</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container chart-container-lg">
+              <canvas id="statusChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 24px;">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span> جدول تفصیلی پروژه‌ها</h3>
+            <p>اطلاعات کامل تمام پروژه‌های فعال</p>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="exportToCSV()">
+            ⇩ خروجی CSV
+          </button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>پروژه</th>
+                <th>حوزه</th>
+                <th>مالک</th>
+                <th>ارزش (میلیارد)</th>
+                <th>توکن</th>
+                <th>پیشرفت</th>
+                <th>وضعیت</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M8 9 6 6M16 9l2-3M9 14h.01M15 14h.01"/></svg></span></div>
+                    <div>
+                      <strong>دامداری نمونه</strong>
+                      <small>IRT-1403-001</small>
+                    </div>
+                  </div>
+                </td>
+                <td>دامپروری</td>
+                <td>شرکت دام‌آوران</td>
+                <td><strong>۱۲.۵</strong></td>
+                <td>۳,۰۰۰</td>
+                <td>
+                  <div class="table-progress">
+                    <div class="progress-mini"><div class="fill" style="width: 72%;"></div></div>
+                    <span>۷۲٪</span>
+                  </div>
+                </td>
+                <td><span class="badge success">فعال</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #10b981, #34d399);"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 20c2-5 4-9 6-14M6 15c3 0 5-2 6-4M8 12c-2 0-3-2-3-4M10 9c2 0 4-2 4-4"/></svg></span></div>
+                    <div>
+                      <strong>کشاورزی پایدار</strong>
+                      <small>IRT-1403-002</small>
+                    </div>
+                  </div>
+                </td>
+                <td>کشاورزی</td>
+                <td>تعاونی سبز</td>
+                <td><strong>۸.۲</strong></td>
+                <td>۲,۵۰۰</td>
+                <td>
+                  <div class="table-progress">
+                    <div class="progress-mini"><div class="fill" style="width: 45%;"></div></div>
+                    <span>۴۵٪</span>
+                  </div>
+                </td>
+                <td><span class="badge success">فعال</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+                    <div>
+                      <strong>برج تجاری آرین</strong>
+                      <small>IRT-1403-003</small>
+                    </div>
+                  </div>
+                </td>
+                <td>ساختمانی</td>
+                <td>گروه آرین</td>
+                <td><strong>۴۵.۰</strong></td>
+                <td>۵,۰۰۰</td>
+                <td>
+                  <div class="table-progress">
+                    <div class="progress-mini"><div class="fill" style="width: 30%;"></div></div>
+                    <span>۳۰٪</span>
+                  </div>
+                </td>
+                <td><span class="badge warning">در انتظار</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m13 2-8 12h6l-1 8 8-12h-6z"/></svg></span></div>
+                    <div>
+                      <strong>نیروگاه خورشیدی</strong>
+                      <small>IRT-1403-004</small>
+                    </div>
+                  </div>
+                </td>
+                <td>انرژی</td>
+                <td>انرژی پاک</td>
+                <td><strong>۳۲.۰</strong></td>
+                <td>۵,۰۰۰</td>
+                <td>
+                  <div class="table-progress">
+                    <div class="progress-mini"><div class="fill" style="width: 88%;"></div></div>
+                    <span>۸۸٪</span>
+                  </div>
+                </td>
+                <td><span class="badge success">فعال</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #ef4444, #f87171);"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V8l6 4V8l6 4V5h4v15z"/></svg></span></div>
+                    <div>
+                      <strong>کارخانه فولاد</strong>
+                      <small>IRT-1403-005</small>
+                    </div>
+                  </div>
+                </td>
+                <td>صنعتی</td>
+                <td>فولاد پارس</td>
+                <td><strong>۸۵.۰</strong></td>
+                <td>۱۰,۰۰۰</td>
+                <td>
+                  <div class="table-progress">
+                    <div class="progress-mini"><div class="fill" style="width: 15%;"></div></div>
+                    <span>۱۵٪</span>
+                  </div>
+                </td>
+                <td><span class="badge danger">متوقف</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 20V4h14v16M8 8h2M14 8h2M8 12h2M14 12h2"/></svg></span></div>
+                    <div>
+                      <strong>هتل گردشگری کیش</strong>
+                      <small>IRT-1403-006</small>
+                    </div>
+                  </div>
+                </td>
+                <td>گردشگری</td>
+                <td>گروه کیش</td>
+                <td><strong>۵۵.۰</strong></td>
+                <td>۸,۰۰۰</td>
+                <td>
+                  <div class="table-progress">
+                    <div class="progress-mini"><div class="fill" style="width: 100%;"></div></div>
+                    <span>۱۰۰٪</span>
+                  </div>
+                </td>
+                <td><span class="badge info">تکمیل</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: TOKENS ==================== -->
+    <div class="tab-panel" id="panel-tokens">
+      <div class="charts-grid charts-grid-half">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 9-7 9-7-9z"/><path d="M12 7v10M8 12h8"/></svg></span></span> توزیع توکن‌ها</h3>
+              <p>سهم هر پروژه از کل توکن‌های صادرشده</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="tokenDistributionChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg></span></span> ارزش توکن‌ها</h3>
+              <p>ارزش هر واحد به تفکیک پروژه (میلیون تومان)</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="tokenValueChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 24px;">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9m5 10V5m5 14v-7m5 7V3"/></svg></span> روند صدور و تخصیص توکن</h3>
+            <p>تعداد توکن‌های صادرشده و تخصیص‌یافته در ۶ ماه اخیر</p>
+          </div>
+          <div class="chart-legend">
+            <span><span class="dot" style="background: #1a5fb4;"></span> صادرشده</span>
+            <span><span class="dot" style="background: #f5c211;"></span> تخصیص‌یافته</span>
+            <span><span class="dot" style="background: #10b981;"></span> در گردش</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chart-container chart-container-lg">
+            <canvas id="tokenTrendChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: USERS ==================== -->
+    <div class="tab-panel" id="panel-users">
+      <div class="charts-grid">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span> فعالیت کاربران</h3>
+              <p>تعداد فعالیت‌های ثبت‌شده در ۶ ماه اخیر</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container chart-container-lg">
+              <canvas id="userActivityChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M8 12h8"/></svg></span></span> توزیع نقش‌ها</h3>
+              <p>بر اساس نقش کاربری در سیستم</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container chart-container-lg">
+              <canvas id="userRoleChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 24px;">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0M16 11a3 3 0 0 1 5 2v7"/></svg></span></span> کاربران برتر</h3>
+            <p>فعال‌ترین کاربران بر اساس تعداد فعالیت</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>رتبه</th>
+                <th>کاربر</th>
+                <th>نقش</th>
+                <th>تعداد فعالیت</th>
+                <th>پروژه‌های مشارکتی</th>
+                <th>آخرین فعالیت</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong style="color: var(--accent-dark);"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M12 13v4M8 20h8M10 17h4"/></svg></span></strong></td>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb" style="background: var(--gradient-gold); color: var(--dark);">م.ا</div>
+                    <div>
+                      <strong>محمد احمدی</strong>
+                      <small>m.ahmadi@iranianToken.ir</small>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="badge purple">مدیر کل</span></td>
+                <td><strong>۲۴۸</strong></td>
+                <td>۸ پروژه</td>
+                <td>همین حالا</td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--gray);"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M12 13v4M8 20h8M10 17h4"/></svg></span></strong></td>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #10b981, #34d399);">س.ر</div>
+                    <div>
+                      <strong>سارا رضایی</strong>
+                      <small>s.rezaei@example.com</small>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="badge info">مجری فنی</span></td>
+                <td><strong>۱۸۶</strong></td>
+                <td>۵ پروژه</td>
+                <td>۲ ساعت پیش</td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--accent-dark);"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M12 13v4M8 20h8M10 17h4"/></svg></span></strong></td>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">ع.ک</div>
+                    <div>
+                      <strong>علی کریمی</strong>
+                      <small>a.karimi@example.com</small>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="badge warning">کارشناس ارزیاب</span></td>
+                <td><strong>۱۵۲</strong></td>
+                <td>۶ پروژه</td>
+                <td>۴ ساعت پیش</td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--gray);">۴</strong></td>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #ef4444, #f87171);">ر.م</div>
+                    <div>
+                      <strong>رضا محمدی</strong>
+                      <small>r.mohammadi@example.com</small>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="badge gray">مشاور حقوقی</span></td>
+                <td><strong>۹۸</strong></td>
+                <td>۴ پروژه</td>
+                <td>دیروز</td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--gray);">۵</strong></td>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb" style="background: var(--gradient);">ف.ح</div>
+                    <div>
+                      <strong>فاطمه حسینی</strong>
+                      <small>f.hosseini@example.com</small>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="badge info">حسابرس</span></td>
+                <td><strong>۷۶</strong></td>
+                <td>۳ پروژه</td>
+                <td>۲ روز پیش</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: VALIDATION ==================== -->
+    <div class="tab-panel" id="panel-validation">
+      <div class="kpi-grid">
+        <div class="kpi-card green">
+          <div class="kpi-header">
+            <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+            <div class="kpi-trend up">↑ ۴۲٪</div>
+          </div>
+          <div class="kpi-value">۴۷</div>
+          <div class="kpi-label">تأیید شده</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span></div>
+            <div class="kpi-trend neutral">—</div>
+          </div>
+          <div class="kpi-value">۳</div>
+          <div class="kpi-label">در انتظار</div>
+        </div>
+        <div class="kpi-card pink">
+          <div class="kpi-header">
+            <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></span></div>
+            <div class="kpi-trend down">↓ ۱۵٪</div>
+          </div>
+          <div class="kpi-value">۵</div>
+          <div class="kpi-label">رد شده</div>
+        </div>
+        <div class="kpi-card info">
+          <div class="kpi-header">
+            <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m13 2-8 12h6l-1 8 8-12h-6z"/></svg></span></div>
+            <div class="kpi-trend up">↑ ۸٪</div>
+          </div>
+          <div class="kpi-value">۳.۲ <span>روز</span></div>
+          <div class="kpi-label">میانگین زمان تأیید</div>
+        </div>
+      </div>
+
+      <div class="charts-grid charts-grid-half">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span> وضعیت اسناد</h3>
+              <p>توزیع بر اساس وضعیت تأیید</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="docStatusChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9m5 10V5m5 14v-7m5 7V3"/></svg></span> روند اعتبارسنجی</h3>
+              <p>تعداد تأیید/رد در ۶ ماه اخیر</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="validationTrendChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 24px;">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></span> آخرین اعتبارسنجی‌ها</h3>
+            <p>لیست آخرین درخواست‌های اعتبارسنجی</p>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="showToast('info','مشاهده','صفحه اعتبارسنجی باز شد.')">
+            مشاهده همه
+          </button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>پروژه</th>
+                <th>سند</th>
+                <th>کارشناس</th>
+                <th>وضعیت</th>
+                <th>تاریخ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M8 9 6 6M16 9l2-3M9 14h.01M15 14h.01"/></svg></span></div>
+                    <div><strong>دامداری نمونه</strong></div>
+                  </div>
+                </td>
+                <td>سند مالکیت زمین</td>
+                <td>علی کریمی</td>
+                <td><span class="badge success">تأیید</span></td>
+                <td>۱۰ دقیقه پیش</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m13 2-8 12h6l-1 8 8-12h-6z"/></svg></span></div>
+                    <div><strong>نیروگاه خورشیدی</strong></div>
+                  </div>
+                </td>
+                <td>گزارش فنی</td>
+                <td>سارا رضایی</td>
+                <td><span class="badge success">تأیید</span></td>
+                <td>۲ ساعت پیش</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+                    <div><strong>برج تجاری آرین</strong></div>
+                  </div>
+                </td>
+                <td>مجوز ساخت</td>
+                <td>رضا محمدی</td>
+                <td><span class="badge warning">در انتظار</span></td>
+                <td>۴ ساعت پیش</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb" style="background: linear-gradient(135deg, #ef4444, #f87171);"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V8l6 4V8l6 4V5h4v15z"/></svg></span></div>
+                    <div><strong>کارخانه فولاد</strong></div>
+                  </div>
+                </td>
+                <td>گزارش بازدید</td>
+                <td>ناظر</td>
+                <td><span class="badge danger">رد شده</span></td>
+                <td>دیروز</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="project-cell">
+                    <div class="project-thumb"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 20V4h14v16M8 8h2M14 8h2M8 12h2M14 12h2"/></svg></span></div>
+                    <div><strong>هتل گردشگری کیش</strong></div>
+                  </div>
+                </td>
+                <td>پایان کار</td>
+                <td>علی کریمی</td>
+                <td><span class="badge success">تأیید</span></td>
+                <td>۲ روز پیش</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: TEMPLATES ==================== -->
+    <div class="tab-panel" id="panel-templates">
+      <div class="card" style="margin-bottom: 24px;">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span> گزارش‌های آماده</h3>
+            <p>گزارش‌های از پیش تعریف‌شده برای دانلود سریع</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="templates-grid">
+
+            <div class="template-card">
+              <div class="template-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M10 19V5M15 19v-7M20 19V3"/></svg></span></div>
+              <h4>گزارش جامع پروژه‌ها</h4>
+              <p>لیست کامل تمام پروژه‌ها با اطلاعات پایه، ارزش، وضعیت و پیشرفت.</p>
+              <div class="template-footer">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span> PDF + Excel</span>
+                <button class="download-btn" onclick="downloadTemplate('گزارش جامع پروژه‌ها')">
+                  ⇩ دانلود
+                </button>
+              </div>
+            </div>
+
+            <div class="template-card gold">
+              <div class="template-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 9-7 9-7-9z"/><path d="M12 7v10M8 12h8"/></svg></span></div>
+              <h4>گزارش توکن‌ها</h4>
+              <p>لیست تمام توکن‌های صادرشده با تعداد، تخصیص، ارزش و دارندگان.</p>
+              <div class="template-footer">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span> PDF + Excel</span>
+                <button class="download-btn" onclick="downloadTemplate('گزارش توکن‌ها')">
+                  ⇩ دانلود
+                </button>
+              </div>
+            </div>
+
+            <div class="template-card green">
+              <div class="template-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+              <h4>گزارش اعتبارسنجی</h4>
+              <p>وضعیت تمام اسناد اعتبارسنجی‌شده با نتیجه و کارشناس مرتبط.</p>
+              <div class="template-footer">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span> PDF + Excel</span>
+                <button class="download-btn" onclick="downloadTemplate('گزارش اعتبارسنجی')">
+                  ⇩ دانلود
+                </button>
+              </div>
+            </div>
+
+            <div class="template-card purple">
+              <div class="template-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0M16 11a3 3 0 0 1 5 2v7"/></svg></span></div>
+              <h4>گزارش کاربران</h4>
+              <p>اطلاعات کامل کاربران، نقش‌ها، فعالیت‌ها و پروژه‌های مشارکتی.</p>
+              <div class="template-footer">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span> PDF + Excel</span>
+                <button class="download-btn" onclick="downloadTemplate('گزارش کاربران')">
+                  ⇩ دانلود
+                </button>
+              </div>
+            </div>
+
+            <div class="template-card info">
+              <div class="template-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg></span></div>
+              <h4>گزارش مالی</h4>
+              <p>تحلیل مالی پروژه‌ها، ارزش کل، درآمد و هزینه‌های پیش‌بینی‌شده.</p>
+              <div class="template-footer">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span> PDF + Excel</span>
+                <button class="download-btn" onclick="downloadTemplate('گزارش مالی')">
+                  ⇩ دانلود
+                </button>
+              </div>
+            </div>
+
+            <div class="template-card pink">
+              <div class="template-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span></div>
+              <h4>گزارش Audit Trail</h4>
+              <p>تمام فعالیت‌های ثبت‌شده در سیستم با جزئیات کامل تغییرات.</p>
+              <div class="template-footer">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span> PDF + Excel</span>
+                <button class="download-btn" onclick="downloadTemplate('گزارش Audit Trail')">
+                  ⇩ دانلود
+                </button>
+              </div>
+            </div>
+
+            <div class="template-card">
+              <div class="template-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M4 12h16"/></svg></span></div>
+              <h4>گزارش جغرافیایی</h4>
+              <p>پروژه‌ها به تفکیک استان و شهر با نقشه و آمار هر منطقه.</p>
+              <div class="template-footer">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span> PDF + Excel</span>
+                <button class="download-btn" onclick="downloadTemplate('گزارش جغرافیایی')">
+                  ⇩ دانلود
+                </button>
+              </div>
+            </div>
+
+            <div class="template-card gold">
+              <div class="template-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 16 5-5 4 3 7-8"/><path d="M15 6h5v5"/></svg></span></div>
+              <h4>گزارش روند و تحلیل</h4>
+              <p>تحلیل روند رشد پروژه‌ها، توکن‌ها و کاربران در طول زمان.</p>
+              <div class="template-footer">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span> PDF + Excel</span>
+                <button class="download-btn" onclick="downloadTemplate('گزارش روند و تحلیل')">
+                  ⇩ دانلود
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Report Builder -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 15l2 1-2 3-2-1a8 8 0 0 1-2 1v2h-4v-2a8 8 0 0 1-2-1l-2 1-2-3 2-1a8 8 0 0 1 0-2l-2-1 2-3 2 1a8 8 0 0 1 2-1V6h4v2a8 8 0 0 1 2 1l2-1 2 3-2 1a8 8 0 0 1 0 2z"/></svg></span> سازنده گزارش سفارشی</h3>
+            <p>گزارش خود را بر اساس نیاز خود بسازید</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div style="text-align: center; padding: 40px 20px;">
+            <div style="font-size: 56px; margin-bottom: 16px; opacity: 0.5;"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--dark); margin-bottom: 8px;">
+              گزارش سفارشی خود را بسازید
+            </h3>
+            <p style="font-size: 13px; color: var(--gray); margin-bottom: 24px; max-width: 500px; margin-inline: auto; line-height: 1.9;">
+              فیلدها، فیلترها و نمودارهای مورد نظر خود را انتخاب کنید و گزارش اختصاصی خود را بسازید.
+            </p>
+            <button class="btn btn-primary" onclick="showToast('info','سازنده گزارش','پنل ساخت گزارش سفارشی باز شد.')">
+              <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span> ساخت گزارش سفارشی
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* ==================== SIDEBAR ==================== */
+const sidebar = document.getElementById('sidebar');
+const main = document.getElementById('main');
+const toggleBtn = document.getElementById('toggleBtn');
+const overlay = document.getElementById('overlay');
+
+toggleBtn.addEventListener('click', () => {
+  if (window.innerWidth <= 900) {
+    sidebar.classList.toggle('mobile-open');
+    overlay.classList.toggle('active');
+  } else {
+    sidebar.classList.toggle('collapsed');
+    main.classList.toggle('expanded');
+  }
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('mobile-open');
+  overlay.classList.remove('active');
+});
+
+/* ==================== TOAST ==================== */
+function showToast(type, title, message) {
+  const container = document.getElementById('toastContainer');
+  const icons = { success: '✓', error: '✗', warning: '!', info: '<span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8h.01"/></svg></span>' };
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `
+    <div class="toast-icon">${icons[type]}</div>
+    <div class="toast-body">
+      <strong>${title}</strong>
+      <span>${message}</span>
+    </div>
+  `;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-100%)';
+    toast.style.transition = 'all 0.3s';
+    setTimeout(() => toast.remove(), 300);
+  }, 4000);
+}
+
+/* ==================== TABS ==================== */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+/* ==================== FILTER PRESETS ==================== */
+document.querySelectorAll('.preset-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    showToast('info', 'فیلتر اعمال شد', `بازه زمانی: ${btn.textContent}`);
+  });
+});
+
+function applyFilters() {
+  showToast('success', 'فیلترها اعمال شد', 'گزارش‌ها بر اساس فیلترهای انتخابی به‌روزرسانی شد.');
+}
+
+function refreshData() {
+  showToast('info', 'بروزرسانی', 'در حال دریافت آخرین داده‌ها...');
+  setTimeout(() => showToast('success', 'بروزرسانی شد', 'داده‌ها با موفقیت بروزرسانی شدند.'), 1200);
+}
+
+/* ==================== DOWNLOAD TEMPLATES ==================== */
+function downloadTemplate(name) {
+  showToast('info', 'دانلود گزارش', `«${name}» در حال آماده‌سازی...`);
+  setTimeout(() => {
+    showToast('success', 'آماده شد', `«${name}» برای دانلود آماده است.`);
+  }, 1500);
+}
+
+function exportToCSV() {
+  showToast('success', 'خروجی CSV', 'فایل CSV در حال دانلود...');
+}
+
+/* ==================== CHART CONFIG ==================== */
+Chart.defaults.font.family = 'Vazirmatn, sans-serif';
+Chart.defaults.color = '#64748b';
+Chart.defaults.plugins.tooltip = {
+  backgroundColor: '#0f1729',
+  padding: 12,
+  titleFont: { family: 'Vazirmatn', size: 13, weight: '700' },
+  bodyFont: { family: 'Vazirmatn', size: 12 },
+  cornerRadius: 10,
+  rtl: true,
+  textDirection: 'rtl',
+  displayColors: true,
+};
+
+const gridColor = '#e2e8f0';
+const tickFont = { family: 'Vazirmatn', size: 11 };
+
+/* ==================== CHART 1: GROWTH ==================== */
+const growthCtx = document.getElementById('growthChart').getContext('2d');
+const grad1 = growthCtx.createLinearGradient(0, 0, 0, 400);
+grad1.addColorStop(0, 'rgba(26,95,180,0.25)');
+grad1.addColorStop(1, 'rgba(26,95,180,0)');
+const grad2 = growthCtx.createLinearGradient(0, 0, 0, 400);
+grad2.addColorStop(0, 'rgba(245,194,17,0.3)');
+grad2.addColorStop(1, 'rgba(245,194,17,0)');
+const grad3 = growthCtx.createLinearGradient(0, 0, 0, 400);
+grad3.addColorStop(0, 'rgba(16,185,129,0.25)');
+grad3.addColorStop(1, 'rgba(16,185,129,0)');
+
+new Chart(growthCtx, {
+  type: 'line',
+  data: {
+    labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور'],
+    datasets: [
+      {
+        label: 'پروژه‌ها',
+        data: [3, 5, 4, 7, 9, 12],
+        borderColor: '#1a5fb4',
+        backgroundColor: grad1,
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: '#1a5fb4',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        pointHoverRadius: 8,
+      },
+      {
+        label: 'توکن‌ها',
+        data: [8000, 12500, 15000, 18000, 22000, 28500],
+        borderColor: '#f5c211',
+        backgroundColor: grad2,
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: '#f5c211',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        pointHoverRadius: 8,
+      },
+      {
+        label: 'کاربران',
+        data: [320, 480, 620, 780, 980, 1248],
+        borderColor: '#10b981',
+        backgroundColor: grad3,
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: '#10b981',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        pointHoverRadius: 8,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: tickFont } },
+      y: {
+        grid: { color: gridColor, drawBorder: false },
+        ticks: { font: tickFont },
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+/* ==================== CHART 2: MODEL DISTRIBUTION ==================== */
+new Chart(document.getElementById('modelDistributionChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['دارایی‌محور', 'درآمدی', 'مشارکتی', 'حق‌محور', 'ترکیبی'],
+    datasets: [{
+      data: [35, 25, 18, 12, 10],
+      backgroundColor: ['#1a5fb4', '#f5c211', '#10b981', '#8b5cf6', '#ec4899'],
+      borderWidth: 0,
+      spacing: 4,
+      borderRadius: 8,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '65%',
+    plugins: {
+      legend: {
+        position: 'bottom',
+        rtl: true,
+        labels: {
+          font: { family: 'Vazirmatn', size: 11 },
+          padding: 14,
+          usePointStyle: true,
+          pointStyle: 'circle',
+          boxWidth: 8,
+          boxHeight: 8,
+        }
+      }
+    }
+  }
+});
+
+/* ==================== CHART 3: SECTOR VALUE ==================== */
+new Chart(document.getElementById('sectorValueChart'), {
+  type: 'bar',
+  data: {
+    labels: ['صنعتی', 'ساختمانی', 'گردشگری', 'انرژی', 'دامپروری', 'کشاورزی'],
+    datasets: [{
+      label: 'ارزش (میلیارد تومان)',
+      data: [85, 45, 55, 32, 12.5, 8.2],
+      backgroundColor: [
+        'rgba(239,68,68,0.7)',
+        'rgba(245,158,11,0.7)',
+        'rgba(26,95,180,0.7)',
+        'rgba(139,92,246,0.7)',
+        'rgba(16,185,129,0.7)',
+        'rgba(53,132,228,0.7)',
+      ],
+      borderRadius: 8,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: tickFont } },
+      y: {
+        grid: { color: gridColor, drawBorder: false },
+        ticks: { font: tickFont, callback: v => v + 'B' },
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+/* ==================== CHART 4: PROVINCE ==================== */
+new Chart(document.getElementById('provinceChart'), {
+  type: 'polarArea',
+  data: {
+    labels: ['اصفهان', 'تهران', 'فارس', 'خراسان', 'گیلان', 'سایر'],
+    datasets: [{
+      data: [25, 22, 18, 15, 12, 8],
+      backgroundColor: [
+        'rgba(26,95,180,0.75)',
+        'rgba(245,194,17,0.75)',
+        'rgba(16,185,129,0.75)',
+        'rgba(139,92,246,0.75)',
+        'rgba(59,130,246,0.75)',
+        'rgba(100,116,139,0.6)',
+      ],
+      borderWidth: 0,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        rtl: true,
+        labels: {
+          font: { family: 'Vazirmatn', size: 11 },
+          padding: 12,
+          usePointStyle: true,
+          pointStyle: 'circle',
+          boxWidth: 8,
+          boxHeight: 8,
+        }
+      }
+    },
+    scales: {
+      r: {
+        ticks: { display: false },
+        grid: { color: gridColor }
+      }
+    }
+  }
+});
+
+/* ==================== CHART 5: PROJECT PROGRESS ==================== */
+new Chart(document.getElementById('projectProgressChart'), {
+  type: 'bar',
+  data: {
+    labels: ['نیروگاه خورشیدی', 'هتل کیش', 'دامداری', 'کشاورزی', 'برج آرین', 'فولاد'],
+    datasets: [{
+      label: 'پیشرفت',
+      data: [88, 100, 72, 45, 30, 15],
+      backgroundColor: ctx => {
+        const v = ctx.parsed?.y || ctx.raw || 0;
+        if (v >= 80) return 'rgba(16,185,129,0.8)';
+        if (v >= 50) return 'rgba(26,95,180,0.8)';
+        if (v >= 30) return 'rgba(245,158,11,0.8)';
+        return 'rgba(239,68,68,0.8)';
+      },
+      borderRadius: 10,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: { label: ctx => ` پیشرفت: ${ctx.parsed.x}٪` }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: gridColor },
+        ticks: { font: tickFont, callback: v => v + '٪' },
+        max: 100,
+        beginAtZero: true
+      },
+      y: { grid: { display: false }, ticks: { font: tickFont } }
+    }
+  }
+});
+
+/* ==================== CHART 6: STATUS ==================== */
+new Chart(document.getElementById('statusChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['فعال', 'در انتظار', 'متوقف', 'تکمیل شده'],
+    datasets: [{
+      data: [7, 3, 1, 1],
+      backgroundColor: ['#10b981', '#f59e0b', '#ef4444', '#3b82f6'],
+      borderWidth: 0,
+      spacing: 4,
+      borderRadius: 8,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '65%',
+    plugins: {
+      legend: {
+        position: 'bottom',
+        rtl: true,
+        labels: {
+          font: { family: 'Vazirmatn', size: 11 },
+          padding: 14,
+          usePointStyle: true,
+          pointStyle: 'circle',
+          boxWidth: 8,
+          boxHeight: 8,
+        }
+      }
+    }
+  }
+});
+
+/* ==================== CHART 7: TOKEN DISTRIBUTION ==================== */
+new Chart(document.getElementById('tokenDistributionChart'), {
+  type: 'pie',
+  data: {
+    labels: ['فولاد', 'هتل کیش', 'نیروگاه', 'برج آرین', 'دامداری', 'کشاورزی'],
+    datasets: [{
+      data: [10000, 8000, 5000, 5000, 3000, 2500],
+      backgroundColor: ['#ef4444', '#1a5fb4', '#8b5cf6', '#f59e0b', '#10b981', '#3584e4'],
+      borderWidth: 0,
+      spacing: 3,
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        rtl: true,
+        labels: {
+          font: { family: 'Vazirmatn', size: 11 },
+          padding: 12,
+          usePointStyle: true,
+          pointStyle: 'circle',
+          boxWidth: 8,
+          boxHeight: 8,
+        }
+      },
+      tooltip: {
+        callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed.toLocaleString()} توکن` }
+      }
+    }
+  }
+});
+
+/* ==================== CHART 8: TOKEN VALUE ==================== */
+new Chart(document.getElementById('tokenValueChart'), {
+  type: 'bar',
+  data: {
+    labels: ['برج آرین', 'فولاد', 'هتل کیش', 'نیروگاه', 'دامداری', 'کشاورزی'],
+    datasets: [{
+      label: 'ارزش هر واحد (میلیون تومان)',
+      data: [9, 8.5, 6.9, 6.4, 4.2, 3.3],
+      backgroundColor: 'rgba(245,194,17,0.8)',
+      borderRadius: 8,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y}M تومان` } }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: tickFont } },
+      y: {
+        grid: { color: gridColor, drawBorder: false },
+        ticks: { font: tickFont, callback: v => v + 'M' },
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+/* ==================== CHART 9: TOKEN TREND ==================== */
+const tokenTrendCtx = document.getElementById('tokenTrendChart').getContext('2d');
+const gradT1 = tokenTrendCtx.createLinearGradient(0, 0, 0, 400);
+gradT1.addColorStop(0, 'rgba(26,95,180,0.3)');
+gradT1.addColorStop(1, 'rgba(26,95,180,0)');
+const gradT2 = tokenTrendCtx.createLinearGradient(0, 0, 0, 400);
+gradT2.addColorStop(0, 'rgba(245,194,17,0.35)');
+gradT2.addColorStop(1, 'rgba(245,194,17,0)');
+const gradT3 = tokenTrendCtx.createLinearGradient(0, 0, 0, 400);
+gradT3.addColorStop(0, 'rgba(16,185,129,0.3)');
+gradT3.addColorStop(1, 'rgba(16,185,129,0)');
+
+new Chart(tokenTrendCtx, {
+  type: 'line',
+  data: {
+    labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور'],
+    datasets: [
+      {
+        label: 'صادرشده',
+        data: [8000, 12500, 15000, 18000, 22000, 28500],
+        borderColor: '#1a5fb4',
+        backgroundColor: gradT1,
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: '#1a5fb4',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+      },
+      {
+        label: 'تخصیص‌یافته',
+        data: [5200, 8400, 10500, 13200, 16800, 22400],
+        borderColor: '#f5c211',
+        backgroundColor: gradT2,
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: '#f5c211',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+      },
+      {
+        label: 'در گردش',
+        data: [3200, 5100, 6800, 8900, 11500, 15400],
+        borderColor: '#10b981',
+        backgroundColor: gradT3,
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: '#10b981',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: tickFont } },
+      y: {
+        grid: { color: gridColor, drawBorder: false },
+        ticks: { font: tickFont, callback: v => v.toLocaleString() },
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+/* ==================== CHART 10: USER ACTIVITY ==================== */
+new Chart(document.getElementById('userActivityChart'), {
+  type: 'line',
+  data: {
+    labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور'],
+    datasets: [{
+      label: 'فعالیت‌ها',
+      data: [820, 1140, 1380, 1650, 2100, 2480],
+      borderColor: '#8b5cf6',
+      backgroundColor: 'rgba(139,92,246,0.12)',
+      borderWidth: 3,
+      tension: 0.4,
+      fill: true,
+      pointBackgroundColor: '#8b5cf6',
+      pointBorderColor: '#fff',
+      pointBorderWidth: 3,
+      pointRadius: 6,
+      pointHoverRadius: 9,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: tickFont } },
+      y: {
+        grid: { color: gridColor, drawBorder: false },
+        ticks: { font: tickFont, callback: v => v.toLocaleString() },
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+/* ==================== CHART 11: USER ROLE ==================== */
+new Chart(document.getElementById('userRoleChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['مالک پروژه', 'مجری', 'کارشناس', 'سرمایه‌گذار', 'مشاهده‌کننده'],
+    datasets: [{
+      data: [42, 28, 18, 8, 4],
+      backgroundColor: ['#1a5fb4', '#f5c211', '#10b981', '#8b5cf6', '#64748b'],
+      borderWidth: 0,
+      spacing: 4,
+      borderRadius: 8,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '65%',
+    plugins: {
+      legend: {
+        position: 'bottom',
+        rtl: true,
+        labels: {
+          font: { family: 'Vazirmatn', size: 11 },
+          padding: 12,
+          usePointStyle: true,
+          pointStyle: 'circle',
+          boxWidth: 8,
+          boxHeight: 8,
+        }
+      },
+      tooltip: {
+        callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}٪` }
+      }
+    }
+  }
+});
+
+/* ==================== CHART 12: DOC STATUS ==================== */
+new Chart(document.getElementById('docStatusChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['تأیید شده', 'در انتظار', 'رد شده'],
+    datasets: [{
+      data: [47, 3, 5],
+      backgroundColor: ['#10b981', '#f59e0b', '#ef4444'],
+      borderWidth: 0,
+      spacing: 4,
+      borderRadius: 8,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '65%',
+    plugins: {
+      legend: {
+        position: 'bottom',
+        rtl: true,
+        labels: {
+          font: { family: 'Vazirmatn', size: 11 },
+          padding: 14,
+          usePointStyle: true,
+          pointStyle: 'circle',
+          boxWidth: 8,
+          boxHeight: 8,
+        }
+      }
+    }
+  }
+});
+
+/* ==================== CHART 13: VALIDATION TREND ==================== */
+new Chart(document.getElementById('validationTrendChart'), {
+  type: 'bar',
+  data: {
+    labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور'],
+    datasets: [
+      {
+        label: 'تأیید',
+        data: [12, 18, 22, 28, 35, 47],
+        backgroundColor: 'rgba(16,185,129,0.8)',
+        borderRadius: 8,
+        borderSkipped: false,
+      },
+      {
+        label: 'رد',
+        data: [3, 4, 2, 5, 4, 5],
+        backgroundColor: 'rgba(239,68,68,0.8)',
+        borderRadius: 8,
+        borderSkipped: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        rtl: true,
+        labels: {
+          font: { family: 'Vazirmatn', size: 11 },
+          padding: 12,
+          usePointStyle: true,
+          pointStyle: 'circle',
+          boxWidth: 8,
+          boxHeight: 8,
+        }
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: tickFont } },
+      y: {
+        grid: { color: gridColor, drawBorder: false },
+        ticks: { font: tickFont },
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+/* ==================== RIPPLE ==================== */
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `@keyframes ripple { to { transform: scale(4); opacity: 0; } }`;
+document.head.appendChild(rippleStyle);
+
+document.querySelectorAll('.btn, .tab-btn, .preset-btn').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.cssText = `
+      position: absolute; width: ${size}px; height: ${size}px;
+      border-radius: 50%; background: rgba(255,255,255,0.4);
+      transform: scale(0); animation: ripple 0.6s linear;
+      pointer-events: none;
+      left: ${e.clientX - rect.left - size/2}px;
+      top: ${e.clientY - rect.top - size/2}px;
+    `;
+    this.style.position = 'relative';
+    this.style.overflow = 'hidden';
+    this.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  });
+});
+
+/* ==================== KEYBOARD ==================== */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    sidebar.classList.remove('mobile-open');
+    overlay.classList.remove('active');
+  }
+});
+</script>
+
+<script src="theme.js"></script>
+</body>
+</html>

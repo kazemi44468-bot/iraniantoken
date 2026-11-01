@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>پروژه‌ها | ایرانیان توکن</title>
+<meta name="description" content="فهرست پروژه‌ها و پرونده‌های توکنیزه‌شده در ایرانیان توکن.">
+<link rel="icon" href="assets/images/logo.png" type="image/png">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="public.css">
+<style>
+.projects-page .public-hero h1{font-size:30px;line-height:1.65}
+.projects-page .public-hero{margin-bottom:32px}
+.projects-intro{width:min(760px,100%);margin:-16px auto 28px;text-align:center;color:var(--p-muted);font-size:11px;line-height:2}
+.project-toolbar{box-shadow:0 10px 30px rgba(10,34,56,.045)}
+@media(max-width:560px){.projects-page .public-hero h1{font-size:27px}}
+</style>
+</head>
+<body class="public-site">
+<header class="public-header" id="header">
+<nav class="public-nav">
+<a href="index.html" class="public-logo">
+<div class="public-logo-mark"><img src="assets/images/logo.png" alt="لوگوی ایرانیان توکن"></div>
+<div class="public-logo-text">ایرانیان توکن<small>زیرساخت توکنیزه‌سازی پروژه‌ها</small></div>
+</a>
+<ul class="public-links" id="navLinks">
+<li><a href="index.html">معرفی</a></li>
+<li><a class="active" href="projects.html">پروژه‌ها</a></li>
+<li><a href="dashboard.html">داشبورد</a></li>
+<li><a href="contact.html">ارتباط</a></li>
+<li><a href="auth.html">ورود / ثبت‌نام</a></li>
+</ul>
+<button class="public-menu" id="mobileToggle" type="button" aria-label="باز کردن منو" aria-expanded="false">
+<svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+</button>
+</nav>
+</header>
+
+<main class="public-main projects-page">
+<section class="public-hero">
+<div class="public-kicker">دفتر پروژه‌های ایرانیان توکن</div>
+<h1>پروژه‌ها را ببینید؛ پرونده، دارایی و مدل توکن را بررسی کنید.</h1>
+<p>هر پروژه در ایرانیان توکن یک پرونده مستقل دارد؛ از معرفی دارایی پایه و مدل اقتصادی تا وضعیت بررسی، عرضه، دارندگان و مسیر فعالیت.</p>
+</section>
+
+<p class="projects-intro">فهرست زیر نمونه‌ای از ساختار پروژه‌هاست. نمایش یک پروژه به‌تنهایی به معنای تضمین بازدهی، تأیید قانونی یا توصیه به خرید نیست؛ وضعیت و اسناد هر پروژه باید جداگانه بررسی شود.</p>
+
+<section class="project-toolbar">
+<div class="project-count"><strong id="projectCount">۰</strong><span>پروژه در فهرست</span></div>
+<div class="project-filters">
+<label>جست‌وجو<input id="projectSearch" placeholder="نام پروژه، حوزه یا نماد توکن"></label>
+<label>حوزه<select id="domainFilter"><option value="">همه حوزه‌ها</option></select></label>
+<label>وضعیت<select id="statusFilter"><option value="">همه وضعیت‌ها</option><option value="active">فعال</option><option value="pending">در حال بررسی</option><option value="paused">متوقف</option><option value="done">خاتمه‌یافته</option></select></label>
+</div>
+</section>
+
+<section id="projectGrid" class="project-grid"></section>
+<section id="emptyState" class="empty-state" hidden>
+<h2>پروژه‌ای با این مشخصات پیدا نشد.</h2>
+<p>عبارت جست‌وجو یا فیلتر انتخاب‌شده را تغییر دهید.</p>
+</section>
+</main>
+
+<footer class="public-footer">
+<div class="public-footer-orbit" aria-hidden="true"><span></span><i></i></div>
+<div class="public-footer-inner">
+<div class="public-footer-main">
+<a href="index.html" class="public-footer-brand"><div class="public-footer-brand-mark"><img src="assets/images/logo.png" alt="لوگوی ایرانیان توکن"></div><div class="public-footer-brand-text"><strong>ایرانیان توکن</strong><span>بازار و زیرساخت پروژه‌های مبتنی بر توکن</span></div></a>
+<p class="public-footer-copy">زیرساختی برای معرفی، ثبت پرونده، ساختاربندی، عرضه و مدیریت پروژه‌های مبتنی بر توکن؛ با تمرکز بر شفافیت اطلاعات و تفکیک روشن وضعیت پروژه از ارزش توکن.</p>
+</div>
+<div class="public-footer-links">
+<div><small>دسترسی</small><a href="index.html">معرفی</a><a href="projects.html">پروژه‌ها</a><a href="new-project.html">ثبت پروژه</a></div>
+<div><small>راهنما</small><a href="dashboard.html">داشبورد</a><a href="help.html">راهنمای سامانه</a><a href="contact.html">ارتباط با ما</a></div>
+</div>
+<div class="public-footer-mark">
+<span>PROJECT</span><b>01</b><em>ساختار · شفافیت · مدیریت</em>
+</div>
+</div>
+<div class="public-footer-bottom"><span>ایرانیان توکن · زیرساخت پروژه‌های مبتنی بر توکن</span><span>اطلاعات پروژه‌ها برای بررسی و تصمیم‌گیری مستقل ارائه می‌شود.</span></div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+(()=> {
+const fa=n=>String(n).replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
+const money=n=>fa(Number(n||0).toLocaleString("en-US"));
+const labels={active:"فعال",pending:"در حال بررسی",paused:"متوقف",done:"خاتمه‌یافته"};
+const data=window.ITData?.projects||[];
+const grid=document.getElementById("projectGrid"),search=document.getElementById("projectSearch"),domain=document.getElementById("domainFilter"),status=document.getElementById("statusFilter"),count=document.getElementById("projectCount"),empty=document.getElementById("emptyState");
+[...new Set(data.map(x=>x.domain).filter(Boolean))].forEach(x=>{const o=document.createElement("option");o.value=x;o.textContent=x;domain.appendChild(o)});
+function render(){
+const q=search.value.trim().toLowerCase(),d=domain.value,s=status.value;
+const list=data.filter(p=>(!q||[p.name,p.domain,p.token?.symbol,p.token?.name,p.asset?.type].join(" ").toLowerCase().includes(q))&&(!d||p.domain===d)&&(!s||p.status===s));
+count.textContent=fa(list.length);empty.hidden=list.length>0;
+grid.innerHTML=list.map(p=>`<article class="project-card">
+<div class="project-card-top"><span class="project-code">${p.code||"PROJECT"}</span><span class="project-status ${p.status}">${labels[p.status]||p.status||"نامشخص"}</span></div>
+<div class="project-token"><span class="token-mark">${(p.token?.symbol||"TK").slice(0,2)}</span><div><h2>${p.name}</h2><p>${p.domain||"—"} · ${p.model||"—"}</p></div></div>
+<p class="asset-desc">${p.asset?.description||"اطلاعات پایه پروژه در پرونده آن ارائه شده است."}</p>
+<div class="project-meta"><div><span>ارزش پروژه</span><strong>${p.value||"—"}</strong></div><div><span>عرضه توکن</span><strong>${money(p.token?.supply)}</strong></div><div><span>دارندگان</span><strong>${money(p.token?.holders)}</strong></div></div>
+<div class="progress"><span style="width:${Math.max(0,Math.min(100,Number(p.progress)||0))}%"></span></div>
+<div class="progress-label"><span>پیشرفت پروژه</span><b>${fa(p.progress||0)}٪</b></div>
+<a class="project-open" href="${p.detail||"project-detail.html"}">مشاهده پرونده پروژه <span>←</span></a>
+</article>`).join("");
+}
+[search,domain,status].forEach(x=>x.addEventListener("input",render));
+render();
+const header=document.getElementById("header"),toggle=document.getElementById("mobileToggle"),links=document.getElementById("navLinks");
+addEventListener("scroll",()=>header.classList.toggle("scrolled",scrollY>30),{passive:true});
+toggle.addEventListener("click",()=>{const open=links.classList.toggle("open");toggle.setAttribute("aria-expanded",open)});
+links.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{links.classList.remove("open");toggle.setAttribute("aria-expanded","false")}));
+})();
+</script>
+<script src="theme.js"></script>
+</body>
+</html>

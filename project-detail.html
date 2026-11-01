@@ -1,0 +1,2824 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جزئیات پروژه | ایرانیان توکن</title>
+<meta name="description" content="ایرانیان توکن؛ بستر مدیریت پروژه، دارایی دیجیتال، توکنیزه‌سازی و مشارکت در اکوسیستم ارزش.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+:root {
+  --primary: #1a5fb4;
+  --primary-dark: #0d3b7a;
+  --primary-light: #3584e4;
+  --accent: #f5c211;
+  --accent-dark: #c79a00;
+  --dark: #0f1729;
+  --dark-2: #1a2332;
+  --gray: #64748b;
+  --gray-light: #94a3b8;
+  --bg: #f1f5f9;
+  --bg-alt: #ffffff;
+  --border: #e2e8f0;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+  --purple: #8b5cf6;
+  --gradient: linear-gradient(135deg, #1a5fb4 0%, #3584e4 100%);
+  --gradient-gold: linear-gradient(135deg, #f5c211 0%, #ffd94a 100%);
+  --shadow-sm: 0 1px 2px rgba(15,23,41,0.05);
+  --shadow: 0 4px 12px rgba(15,23,41,0.06);
+  --shadow-lg: 0 12px 32px rgba(15,23,41,0.1);
+  --shadow-xl: 0 24px 60px rgba(15,23,41,0.15);
+  --radius: 14px;
+  --radius-lg: 20px;
+  --sidebar-w: 260px;
+  --sidebar-collapsed: 78px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Vazirmatn', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ==================== SIDEBAR ==================== */
+.sidebar {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--dark);
+  color: #fff;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border-left: 1px solid rgba(255,255,255,0.05);
+}
+.sidebar.collapsed { width: var(--sidebar-collapsed); }
+.sidebar-brand {
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  min-height: 82px;
+}
+.sidebar-logo {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(26,95,180,0.4);
+}
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .sidebar-brand-text { opacity: 0; }
+.sidebar-brand-text strong { font-size: 15px; font-weight: 800; }
+.sidebar-brand-text small { font-size: 11px; color: var(--gray-light); }
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sidebar-nav::-webkit-scrollbar { width: 4px; }
+.sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+.nav-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 16px 12px 8px;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .nav-section-title { opacity: 0; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  color: var(--gray-light);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.nav-item.active { background: var(--gradient); color: #fff; box-shadow: 0 6px 16px rgba(26,95,180,0.35); }
+.nav-item .icon { font-size: 18px; flex-shrink: 0; width: 22px; text-align: center; }
+.nav-item .label { opacity: 1; transition: opacity 0.2s; }
+.sidebar.collapsed .nav-item .label { opacity: 0; }
+.nav-item .badge {
+  margin-right: auto;
+  background: var(--accent);
+  color: var(--dark);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 50px;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .nav-item .badge { opacity: 0; }
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.user-mini {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.user-mini:hover { background: rgba(255,255,255,0.08); }
+.user-avatar {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: var(--gradient-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: var(--dark);
+  flex-shrink: 0;
+  font-size: 14px;
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  overflow: hidden;
+}
+.sidebar.collapsed .user-info { opacity: 0; }
+.user-info strong { font-size: 13px; color: #fff; }
+.user-info small { font-size: 11px; color: var(--gray-light); }
+
+/* ==================== MAIN ==================== */
+.main {
+  margin-right: var(--sidebar-w);
+  transition: margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main.expanded { margin-right: var(--sidebar-collapsed); }
+
+/* ==================== TOPBAR ==================== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.toggle-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--dark);
+  transition: all 0.2s;
+}
+.toggle-btn:hover { background: var(--bg); }
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--gray);
+  flex-wrap: wrap;
+}
+.breadcrumb a {
+  color: var(--gray);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.breadcrumb a:hover { color: var(--primary); }
+.breadcrumb .current { color: var(--dark); font-weight: 600; }
+.topbar-search {
+  margin-right: auto;
+  position: relative;
+  flex: 0 1 320px;
+}
+.topbar-search input {
+  width: 100%;
+  padding: 10px 42px 10px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+.topbar-search input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(53,132,228,0.1);
+}
+.topbar-search .search-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray);
+  font-size: 15px;
+}
+.topbar-actions { display: flex; align-items: center; gap: 8px; }
+.icon-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--gray);
+  transition: all 0.2s;
+  position: relative;
+}
+.icon-btn:hover { background: var(--bg); color: var(--primary); }
+.icon-btn .dot {
+  position: absolute;
+  top: 8px; left: 8px;
+  width: 8px; height: 8px;
+  background: var(--danger);
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+/* ==================== CONTENT ==================== */
+.content { padding: 28px; flex: 1; max-width: 1600px; margin: 0 auto; width: 100%; }
+
+/* ==================== BUTTONS ==================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--gradient);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(26,95,180,0.28);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(26,95,180,0.38);
+}
+.btn-outline {
+  background: #fff;
+  color: var(--dark);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover { background: var(--bg); border-color: var(--primary-light); color: var(--primary); }
+.btn-gold {
+  background: var(--gradient-gold);
+  color: var(--dark);
+  box-shadow: 0 8px 20px rgba(245,194,17,0.35);
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(245,194,17,0.45); }
+.btn-sm { padding: 8px 14px; font-size: 13px; }
+.btn-icon { padding: 10px; }
+.btn-icon-sm { padding: 7px; font-size: 13px; }
+
+/* ==================== HERO / HEADER ==================== */
+.project-hero {
+  background: linear-gradient(135deg, var(--dark) 0%, var(--primary-dark) 50%, var(--primary) 100%);
+  border-radius: var(--radius-lg);
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: 24px;
+  position: relative;
+  box-shadow: var(--shadow-xl);
+}
+.project-hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(53,132,228,0.3), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(245,194,17,0.15), transparent 50%);
+  z-index: 1;
+}
+.project-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  z-index: 1;
+}
+.project-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 32px 36px;
+  color: #fff;
+}
+.hero-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.hero-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  backdrop-filter: blur(10px);
+}
+.hero-back-btn:hover { background: rgba(255,255,255,0.2); transform: translateX(4px); }
+.hero-code-badge {
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(245,194,17,0.15);
+  color: var(--accent);
+  padding: 6px 12px;
+  border-radius: 50px;
+  border: 1px solid rgba(245,194,17,0.3);
+}
+.hero-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.hero-status-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+}
+.hero-status-badge.active { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+.hero-status-badge.pending { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
+.hero-status-badge.paused { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+.hero-status-badge.done { background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
+
+.hero-main {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: start;
+  margin-bottom: 28px;
+}
+.hero-title-block {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.hero-icon {
+  width: 80px; height: 80px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  flex-shrink: 0;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+}
+.hero-title h1 {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 900;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+.hero-title p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.9;
+  max-width: 700px;
+}
+.hero-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.hero-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 11px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  transition: all 0.2s;
+  backdrop-filter: blur(10px);
+  font-family: inherit;
+}
+.hero-action-btn:hover { background: rgba(255,255,255,0.18); transform: translateY(-2px); }
+.hero-action-btn.primary { background: var(--gradient-gold); color: var(--dark); border-color: transparent; }
+.hero-action-btn.primary:hover { box-shadow: 0 8px 20px rgba(245,194,17,0.4); }
+
+/* ==================== HERO STATS ==================== */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 6px;
+}
+.hero-stat {
+  padding: 14px 16px;
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+.hero-stat:hover { background: rgba(255,255,255,0.08); }
+.hero-stat-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hero-stat-value {
+  font-size: 20px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.2;
+}
+.hero-stat-value.gold { color: var(--accent); }
+.hero-stat-value.green { color: #6ee7b7; }
+.hero-stat-value.blue { color: #93c5fd; }
+
+/* ==================== PROGRESS OVERVIEW ==================== */
+.hero-progress {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 18px 20px;
+}
+.hero-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.hero-progress-header span { font-size: 13px; color: rgba(255,255,255,0.75); font-weight: 600; }
+.hero-progress-header strong { font-size: 20px; font-weight: 900; color: #fff; }
+.hero-progress-bar {
+  height: 10px;
+  background: rgba(0,0,0,0.25);
+  border-radius: 50px;
+  overflow: hidden;
+}
+.hero-progress-fill {
+  height: 100%;
+  background: var(--gradient-gold);
+  border-radius: 50px;
+  box-shadow: 0 0 20px rgba(245,194,17,0.5);
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==================== TABS ==================== */
+.tabs-nav {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 6px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+.tabs-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.tab-btn:hover { background: var(--bg); color: var(--primary); }
+.tab-btn.active {
+  background: var(--gradient);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(26,95,180,0.28);
+}
+.tab-btn .tab-count {
+  background: rgba(255,255,255,0.25);
+  padding: 1px 8px;
+  border-radius: 50px;
+  font-size: 11px;
+  margin-right: 2px;
+}
+.tab-btn:not(.active) .tab-count {
+  background: var(--bg);
+  color: var(--gray);
+}
+
+/* ==================== TAB PANELS ==================== */
+.tab-panel { display: none; animation: fadeIn 0.4s; }
+.tab-panel.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== GRID LAYOUT ==================== */
+.content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.content-col { display: flex; flex-direction: column; gap: 24px; }
+
+/* ==================== CARD ==================== */
+.card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.card:hover { box-shadow: var(--shadow-lg); }
+.card-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.card-header-left h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.card-header-left h3 .icon {
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  background: rgba(26,95,180,0.08);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.card-header-left p {
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 4px;
+  margin-right: 42px;
+}
+.card-body { padding: 24px; }
+
+/* ==================== INFO GRID ==================== */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+}
+.info-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  transition: all 0.2s;
+}
+.info-item:hover { border-color: var(--primary-light); background: #fff; }
+.info-item .label {
+  font-size: 11px;
+  color: var(--gray);
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.info-item .value {
+  font-size: 14px;
+  color: var(--dark);
+  font-weight: 700;
+  word-break: break-word;
+  line-height: 1.6;
+}
+.info-item .value.mono { font-family: monospace; font-size: 13px; }
+.info-item .value.gold { color: var(--accent-dark); }
+.info-item .value.green { color: var(--success); }
+.info-item .value.blue { color: var(--primary); }
+
+/* ==================== TIMELINE ==================== */
+.timeline {
+  position: relative;
+  padding-right: 30px;
+  margin: 8px 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 12px; right: 11px; bottom: 12px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--primary), var(--accent), var(--border));
+}
+.tl-item {
+  position: relative;
+  padding-bottom: 22px;
+}
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item::before {
+  content: '';
+  position: absolute;
+  top: 6px; right: -30px;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--primary);
+  z-index: 2;
+  box-shadow: 0 0 0 4px rgba(26,95,180,0.1);
+}
+.tl-item.done::before { border-color: var(--success); background: var(--success); box-shadow: 0 0 0 4px rgba(16,185,129,0.15); }
+.tl-item.done::after {
+  content: '✓';
+  position: absolute;
+  top: 6px; right: -30px;
+  width: 24px; height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  z-index: 3;
+}
+.tl-item.pending::before { border-color: var(--warning); background: #fff; }
+.tl-item.pending::after {
+  content:"";width:6px;height:6px;border-radius:50%;background:currentColor;
+  position: absolute;
+  top: 6px; right: -30px;
+  width: 24px; height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  z-index: 3;
+}
+.tl-item.current::before { border-color: var(--primary); background: var(--primary); animation: pulse 2s infinite; }
+.tl-item.current::after {
+  content: '●';
+  position: absolute;
+  top: 6px; right: -30px;
+  width: 24px; height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 8px;
+  z-index: 3;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(26,95,180,0.15); }
+  50% { box-shadow: 0 0 0 8px rgba(26,95,180,0.05); }
+}
+.tl-item h5 {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tl-item .tl-date {
+  font-size: 11px;
+  color: var(--gray);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tl-item p {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.8;
+  background: var(--bg);
+  padding: 10px 12px;
+  border-radius: 10px;
+  border-right: 3px solid var(--border);
+}
+.tl-item.done p { border-right-color: var(--success); }
+.tl-item.current p { border-right-color: var(--primary); background: rgba(26,95,180,0.04); }
+.tl-item.pending p { border-right-color: var(--warning); background: rgba(245,158,11,0.04); }
+
+/* ==================== DOCUMENTS ==================== */
+.doc-list { display: flex; flex-direction: column; gap: 10px; }
+.doc-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.doc-item:hover { border-color: var(--primary-light); background: #fff; transform: translateX(-4px); }
+.doc-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  background: rgba(26,95,180,0.08);
+  color: var(--primary);
+}
+.doc-icon.pdf { background: rgba(239,68,68,0.1); color: var(--danger); }
+.doc-icon.img { background: rgba(139,92,246,0.1); color: var(--purple); }
+.doc-icon.doc { background: rgba(59,130,246,0.1); color: var(--info); }
+.doc-icon.sheet { background: rgba(16,185,129,0.1); color: var(--success); }
+.doc-body { flex: 1; min-width: 0; }
+.doc-body strong {
+  display: block;
+  font-size: 13px;
+  color: var(--dark);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.doc-body small {
+  font-size: 11px;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.doc-body small .dot-sep { opacity: 0.4; }
+.doc-status {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.doc-status.verified { background: rgba(16,185,129,0.12); color: var(--success); }
+.doc-status.pending { background: rgba(245,158,11,0.14); color: var(--warning); }
+.doc-status.rejected { background: rgba(239,68,68,0.12); color: var(--danger); }
+.doc-action {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: var(--gray);
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.doc-action:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+/* ==================== TOKEN CARD (in side) ==================== */
+.token-summary {
+  background: linear-gradient(135deg, var(--dark) 0%, var(--primary-dark) 100%);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.token-summary::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -30%;
+  width: 250px; height: 250px;
+  background: radial-gradient(circle, rgba(245,194,17,0.2), transparent 70%);
+  border-radius: 50%;
+}
+.token-summary-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.token-coin {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--gradient-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--dark);
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(245,194,17,0.4);
+  position: relative;
+}
+.token-coin::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255,255,255,0.5);
+  animation: spin 12s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.token-summary-header h4 {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 3px;
+}
+.token-summary-header small {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  font-family: monospace;
+}
+.token-summary-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  position: relative;
+  margin-bottom: 18px;
+}
+.token-summary-stat {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 12px;
+  backdrop-filter: blur(10px);
+}
+.token-summary-stat .label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 4px;
+  display: block;
+  font-weight: 600;
+}
+.token-summary-stat .value {
+  font-size: 16px;
+  font-weight: 900;
+  color: #fff;
+}
+.token-summary-stat .value.gold { color: var(--accent); }
+.token-summary-stat .value.green { color: #6ee7b7; }
+
+.token-allocation-wrap { position: relative; margin-bottom: 16px; }
+.token-allocation-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 8px;
+}
+.token-allocation-bar {
+  height: 10px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 50px;
+  overflow: hidden;
+  display: flex;
+}
+.token-allocation-bar .seg { height: 100%; transition: width 1s; }
+
+.token-summary-actions { display: flex; gap: 8px; position: relative; }
+.token-summary-actions .btn { flex: 1; justify-content: center; padding: 10px; font-size: 12px; }
+
+/* ==================== PARTICIPANTS ==================== */
+.participants-list { display: flex; flex-direction: column; gap: 10px; }
+.participant-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+.participant-item:hover { border-color: var(--primary-light); background: #fff; }
+.participant-avatar {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  background: var(--gradient);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.participant-avatar.gold { background: var(--gradient-gold); color: var(--dark); }
+.participant-avatar.green { background: linear-gradient(135deg, #10b981, #34d399); }
+.participant-avatar.purple { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+.participant-body { flex: 1; min-width: 0; }
+.participant-body strong { display: block; font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+.participant-body small { font-size: 11px; color: var(--gray); }
+.participant-role {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: rgba(26,95,180,0.1);
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+/* ==================== MAP ==================== */
+#map-container {
+  height: 320px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+.leaflet-container { font-family: inherit; border-radius: var(--radius); }
+.leaflet-popup-content { font-family: 'Vazirmatn', sans-serif; direction: rtl; text-align: right; }
+
+/* ==================== CHART ==================== */
+.chart-container {
+  position: relative;
+  height: 280px;
+  padding: 8px 0;
+}
+
+/* ==================== STATS MINI ==================== */
+.mini-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+.mini-stat {
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.mini-stat .value {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.2;
+  margin-bottom: 3px;
+}
+.mini-stat .value.gold { color: var(--accent-dark); }
+.mini-stat .value.green { color: var(--success); }
+.mini-stat .value.blue { color: var(--primary); }
+.mini-stat .value.red { color: var(--danger); }
+.mini-stat .label {
+  font-size: 11px;
+  color: var(--gray);
+  font-weight: 600;
+}
+
+/* ==================== ACTIVITY FEED ==================== */
+.activity-list { display: flex; flex-direction: column; gap: 6px; }
+.activity-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+.activity-item:hover { background: var(--bg); }
+.activity-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.activity-icon.blue { background: rgba(59,130,246,0.12); color: var(--info); }
+.activity-icon.green { background: rgba(16,185,129,0.12); color: var(--success); }
+.activity-icon.gold { background: rgba(245,194,17,0.15); color: var(--accent-dark); }
+.activity-icon.red { background: rgba(239,68,68,0.12); color: var(--danger); }
+.activity-icon.purple { background: rgba(139,92,246,0.12); color: var(--purple); }
+.activity-body { flex: 1; min-width: 0; }
+.activity-body p {
+  font-size: 13px;
+  color: var(--dark);
+  line-height: 1.6;
+  margin-bottom: 3px;
+}
+.activity-body p strong { font-weight: 700; }
+.activity-body small {
+  font-size: 11px;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==================== PROGRESS STEPS ==================== */
+.progress-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.progress-step {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: all 0.2s;
+}
+.progress-step:hover { border-color: var(--primary-light); }
+.progress-step-num {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.progress-step.done .progress-step-num { background: var(--success); color: #fff; }
+.progress-step.current .progress-step-num { background: var(--gradient); color: #fff; box-shadow: 0 6px 16px rgba(26,95,180,0.3); }
+.progress-step.pending .progress-step-num { background: var(--bg); color: var(--gray); border: 2px solid var(--border); }
+.progress-step-body { flex: 1; min-width: 0; }
+.progress-step-body strong { display: block; font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+.progress-step-body small { font-size: 11px; color: var(--gray); }
+.progress-step-status {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+.progress-step.done .progress-step-status { background: rgba(16,185,129,0.12); color: var(--success); }
+.progress-step.current .progress-step-status { background: rgba(26,95,180,0.12); color: var(--primary); }
+.progress-step.pending .progress-step-status { background: var(--bg); color: var(--gray); }
+
+/* ==================== COMMENTS ==================== */
+.comment-list { display: flex; flex-direction: column; gap: 14px; }
+.comment-item { display: flex; gap: 12px; }
+.comment-avatar {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  background: var(--gradient);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.comment-body { flex: 1; min-width: 0; }
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.comment-header strong { font-size: 13px; font-weight: 700; color: var(--dark); }
+.comment-header small { font-size: 11px; color: var(--gray); }
+.comment-content {
+  background: var(--bg);
+  padding: 12px 14px;
+  border-radius: 12px;
+  border-top-right-radius: 4px;
+  font-size: 13px;
+  color: var(--dark);
+  line-height: 1.9;
+}
+.comment-input-wrap {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.comment-input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 13px;
+  resize: none;
+  min-height: 44px;
+  max-height: 120px;
+  transition: all 0.2s;
+}
+.comment-input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(53,132,228,0.1);
+}
+
+/* ==================== SECTION TITLE ==================== */
+.section-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title::before {
+  content: '';
+  width: 4px;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--gradient);
+}
+
+/* ==================== EMPTY ==================== */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--gray);
+}
+.empty-state .icon { font-size: 48px; margin-bottom: 12px; opacity: 0.4; }
+.empty-state p { font-size: 13px; }
+
+/* ==================== TOAST ==================== */
+.toast-container {
+  position: fixed;
+  top: 24px; left: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.toast {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 280px;
+  max-width: 380px;
+  border-right: 4px solid var(--success);
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast.error { border-right-color: var(--danger); }
+.toast.warning { border-right-color: var(--warning); }
+.toast.info { border-right-color: var(--info); }
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.toast-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  background: rgba(16,185,129,0.12);
+  color: var(--success);
+}
+.toast.error .toast-icon { background: rgba(239,68,68,0.12); color: var(--danger); }
+.toast.warning .toast-icon { background: rgba(245,158,11,0.14); color: var(--warning); }
+.toast.info .toast-icon { background: rgba(59,130,246,0.12); color: var(--info); }
+.toast-body strong { display: block; font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+.toast-body span { font-size: 12px; color: var(--gray); }
+
+/* ==================== OVERLAY ==================== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,41,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.overlay.active { opacity: 1; pointer-events: auto; }
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1200px) {
+  .content-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(100%); width: var(--sidebar-w) !important; }
+  .sidebar.mobile-open { transform: translateX(0); }
+  .sidebar.collapsed .sidebar-brand-text,
+  .sidebar.collapsed .nav-item .label,
+  .sidebar.collapsed .nav-section-title,
+  .sidebar.collapsed .user-info,
+  .sidebar.collapsed .nav-item .badge { opacity: 1; }
+  .main { margin-right: 0 !important; }
+  .content { padding: 20px 16px 100px; }
+  .topbar { padding: 12px 16px; }
+  .topbar-search { display: none; }
+  .hero-main { grid-template-columns: 1fr; }
+  .hero-actions { width: 100%; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .project-hero-content { padding: 24px 20px; }
+  .hero-title-block { flex-direction: column; align-items: flex-start; }
+  .hero-icon { width: 64px; height: 64px; font-size: 32px; }
+}
+@media (max-width: 640px) {
+  .content { padding: 16px 12px 100px; }
+  .project-hero-content { padding: 20px 16px; }
+  .hero-title h1 { font-size: 20px; }
+  .hero-stats { grid-template-columns: 1fr; }
+  .card-header, .card-body { padding-left: 16px; padding-right: 16px; }
+  .info-grid { grid-template-columns: 1fr; }
+  .tabs-nav { padding: 4px; }
+  .tab-btn { padding: 9px 12px; font-size: 12px; }
+  .tab-btn .tab-count { display: none; }
+  .breadcrumb { display: none; }
+  .mini-stats { grid-template-columns: repeat(2, 1fr); }
+  .hero-action-btn { flex: 1; justify-content: center; }
+}
+</style>
+<link rel="stylesheet" href="theme.css">
+<link rel="icon" href="assets/images/logo.png" type="image/png">
+<link rel="shortcut icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+<div class="overlay" id="overlay"></div>
+
+<!-- ==================== SIDEBAR ==================== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">
+      <div class="sidebar-logo"><img src="assets/images/logo.png" alt="ایرانیان توکن"></div>
+      <div class="sidebar-brand-text"><strong>ایرانیان توکن</strong><small>مرکز مدیریت و پایش</small></div>
+    </a>
+  </div>
+  <nav class="sidebar-nav" aria-label="ناوبری یکپارچه سامانه">
+    <div class="nav-section-title">مرکز کار</div>
+    <a class="nav-item" href="dashboard.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="label">داشبورد</span></a>
+
+    <div class="nav-group ">
+      <div class="nav-parent-row"><a class="nav-item" href="projects.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="label">پروژه‌ها و دارایی‌ها</span></a><button class="nav-expand" type="button" aria-label="نمایش زیرمنوی پروژه‌ها">⌄</button></div>
+      <div class="nav-sub"><div class="nav-sub-inner">
+        <a class="" href="projects.html">فهرست پروژه‌ها</a>
+        <a class="" href="new-project.html">ثبت پروژه جدید</a>
+        <a class="active" href="project-detail.html">جزئیات پروژه</a>
+        <a class="" href="car-token.html">توکن خودرو</a>
+        <a class="" href="honey-token.html">توکن کندوی عسل</a>
+        <a class="" href="housing-token.html">توکن مسکن</a>
+        <a class="" href="solar-token.html">توکن انرژی خورشیدی</a>
+      </div></div>
+    </div>
+
+    <div class="nav-group ">
+      <div class="nav-parent-row"><a class="nav-item" href="validation.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span class="label">اسناد و اعتبارسنجی</span></a><button class="nav-expand" type="button" aria-label="نمایش زیرمنوی اسناد و اعتبارسنجی">⌄</button></div>
+      <div class="nav-sub"><div class="nav-sub-inner">
+        <a class="" href="dashboard.html#documents">مرکز اسناد</a>
+        <a class="" href="validation.html">صف اعتبارسنجی</a>
+      </div></div>
+    </div>
+
+    <div class="nav-section-title">کنترل و گزارش</div>
+    <div class="nav-group ">
+      <div class="nav-parent-row"><a class="nav-item" href="users.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span><span class="label">کاربران و نقش‌ها</span></a><button class="nav-expand" type="button" aria-label="نمایش زیرمنوی کاربران">⌄</button></div>
+      <div class="nav-sub"><div class="nav-sub-inner">
+        <a class="" href="users.html">کاربران</a>
+        <a class="" href="users.html#roles">نقش‌ها و دسترسی‌ها</a>
+      </div></div>
+    </div>
+    <a class="nav-item" href="reports.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9m5 10V5m5 14v-7m5 7V3"/></svg></span><span class="label">گزارش‌های مدیریتی</span></a>
+    <a class="nav-item" href="dashboard.html#audit"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span><span class="label">ثبت رویدادها</span></a>
+
+    <div class="nav-section-title">حساب و سامانه</div>
+    <div class="nav-group ">
+      <div class="nav-parent-row"><a class="nav-item" href="settings.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 15l2 1-2 3-2-1a8 8 0 0 1-2 1v2h-4v-2a8 8 0 0 1-2-1l-2 1-2-3 2-1a8 8 0 0 1 0-2l-2-1 2-3 2 1a8 8 0 0 1 2-1V6h4v2a8 8 0 0 1 2 1l2-1 2 3-2 1a8 8 0 0 1 0 2z"/></svg></span><span class="label">تنظیمات</span></a><button class="nav-expand" type="button" aria-label="نمایش زیرمنوی حساب و تنظیمات">⌄</button></div>
+      <div class="nav-sub"><div class="nav-sub-inner">
+        <a class="" href="profile.html">پروفایل و حساب</a>
+        <a class="" href="settings.html">تنظیمات سامانه</a>
+        <a class="" href="notifications.html">اعلان‌ها</a>
+        <a href="auth.html">ورود و ثبت‌نام</a>
+      </div></div>
+    </div>
+    <a class="nav-item" href="help.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M9.7 9a2.4 2.4 0 1 1 4 1.8c-1 .7-1.7 1.1-1.7 2.4M12 16.5h.01"/></svg></span><span class="label">مرکز راهنما</span></a>
+
+    <div class="nav-section-title">صفحات سامانه</div>
+    <a class="nav-item" href="index.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="label">معرفی سامانه</span></a>
+    <a class="nav-item" href="contact.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/></svg></span><span class="label">تماس با ما</span></a>
+    <a class="nav-item" href="auth.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 8l-4 4 4 4M6 12h9a4 4 0 0 1 4 4v2"/></svg></span><span class="label">ثبت نام / ورود</span></a>
+    <div class="nav-section-title">دسترسی سریع</div>
+    <a class="nav-item" href="index.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="label">بازگشت به صفحه اصلی</span></a>
+  </nav>
+</aside>
+
+<!-- ==================== MAIN ==================== -->
+<div class="main" id="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <button class="toggle-btn" id="toggleBtn"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span></button>
+    <div class="breadcrumb">
+      <a href="dashboard.html">داشبورد</a>
+      <span>›</span>
+      <a href="projects.html">پروژه‌ها</a>
+      <span>›</span>
+      <span class="current">دامداری نمونه</span>
+    </div>
+
+    <div class="topbar-search">
+      <span class="search-icon">⌕</span>
+      <input type="text" placeholder="جستجو در این پروژه...">
+    </div>
+
+    <div class="topbar-actions">
+      <button class="icon-btn" title="اشتراک‌گذاری"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 13a4 4 0 0 0 6 0l2-2a4 4 0 0 0-6-6l-1 1M14 11a4 4 0 0 0-6 0l-2 2a4 4 0 0 0 6 6l1-1"/></svg></span></button>
+      <button class="icon-btn" title="چاپ"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 9V4h10v5M7 17H5a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v7H7z"/></svg></span></button>
+      <button class="icon-btn" id="notifBtn" title="اعلان‌ها">◉<span class="dot"></span></button>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- ==================== PROJECT HERO ==================== -->
+    <section class="project-hero">
+      <div class="project-hero-bg"></div>
+      <div class="project-hero-grid"></div>
+
+      <div class="project-hero-content">
+
+        <div class="hero-top-bar">
+          <a href="projects.html" class="hero-back-btn">→ بازگشت به پروژه‌ها</a>
+          <span class="hero-code-badge">IRT-1403-001</span>
+          <span class="hero-status-badge active">فعال</span>
+        </div>
+
+        <div class="hero-main">
+          <div class="hero-title-block">
+            <div class="hero-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M8 9 6 6M16 9l2-3M9 14h.01M15 14h.01"/></svg></span></div>
+            <div class="hero-title">
+              <h1>دامداری نمونه</h1>
+              <p>
+                پروژه دامپروری با ظرفیت ۵۰۰ راس دام مولد و تولید شیر و گوشت در استان اصفهان، شهرستان نجف‌آباد. این پروژه در قالب مدل «ظرفیت تولید» توکنیزه شده است.
+              </p>
+            </div>
+          </div>
+          <div class="hero-actions">
+            <button class="hero-action-btn primary" onclick="showToast('info','دانلود گزارش','گزارش کامل پروژه در حال آماده‌سازی...')">
+              <span>⇩</span> دانلود گزارش
+            </button>
+            <button class="hero-action-btn" onclick="showToast('info','ویرایش','حالت ویرایش پروژه فعال شد.')">
+              <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 20 4-1 10-10a2.8 2.8 0 0 0-4-4L4 15z"/></svg></span></span> ویرایش
+            </button>
+            <button class="hero-action-btn" onclick="showToast('info','اشتراک‌گذاری','لینک پروژه کپی شد.')">
+              <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 13a4 4 0 0 0 6 0l2-2a4 4 0 0 0-6-6l-1 1M14 11a4 4 0 0 0-6 0l-2 2a4 4 0 0 0 6 6l1-1"/></svg></span></span> اشتراک
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M10 19V5M15 19v-7M20 19V3"/></svg></span> پیشرفت پروژه</div>
+            <div class="hero-stat-value gold">۷۲٪</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg></span> ارزش‌گذاری</div>
+            <div class="hero-stat-value">۱۲.۵B</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9 10c1-2 4-2 5 0M9 14c1 2 4 2 5 0M12 7v10"/></svg></span> توکن صادرشده</div>
+            <div class="hero-stat-value green">۳,۰۰۰</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0M16 11a3 3 0 0 1 5 2v7"/></svg></span> مشارکت‌کنندگان</div>
+            <div class="hero-stat-value blue">۱۸۲</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px;">
+          <div class="hero-progress">
+            <div class="hero-progress-header">
+              <span>پیشرفت کلی پروژه</span>
+              <strong>۷۲٪</strong>
+            </div>
+            <div class="hero-progress-bar">
+              <div class="hero-progress-fill" style="width: 72%;"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== TABS ==================== -->
+    <nav class="tabs-nav">
+      <button class="tab-btn active" data-tab="overview">
+        <span>◫</span> نمای کلی
+      </button>
+      <button class="tab-btn" data-tab="documents">
+        <span>▤</span> اسناد <span class="tab-count">۱۲</span>
+      </button>
+      <button class="tab-btn" data-tab="tokens">
+        <span>◈</span> توکن‌ها <span class="tab-count">۳</span>
+      </button>
+      <button class="tab-btn" data-tab="participants">
+        <span>◌</span> مشارکت‌کنندگان <span class="tab-count">۱۸۲</span>
+      </button>
+      <button class="tab-btn" data-tab="timeline">
+        <span>◷</span> تاریخچه
+      </button>
+      <button class="tab-btn" data-tab="location">
+        <span>◎</span> موقعیت
+      </button>
+      <button class="tab-btn" data-tab="comments">
+        <span>◐</span> نظرات <span class="tab-count">۸</span>
+      </button>
+      <button class="tab-btn" data-tab="activity">
+        <span>⌁</span> فعالیت‌ها
+      </button>
+    </nav>
+
+    <!-- ==================== TAB: OVERVIEW ==================== -->
+    <div class="tab-panel active" id="panel-overview">
+
+      <div class="content-grid">
+
+        <div class="content-col">
+
+          <!-- اطلاعات پایه -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span> اطلاعات پایه پروژه</h3>
+                <p>مشخصات اصلی و جزئیات ثبت‌شده</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></span> نام پروژه</div>
+                  <div class="value">دامداری نمونه</div>
+                </div>
+                <div class="info-item">
+                  <div class="label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> کد پروژه</div>
+                  <div class="value mono">IRT-1403-001</div>
+                </div>
+                <div class="info-item">
+                  <div class="label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مالک / مجری</div>
+                  <div class="value">شرکت دام‌آوران پارس</div>
+                </div>
+                <div class="info-item">
+                  <div class="label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg></span> حوزه فعالیت</div>
+                  <div class="value">دامپروری و کشاورزی</div>
+                </div>
+                <div class="info-item">
+                  <div class="label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 10-7 10S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span> محل اجرا</div>
+                  <div class="value">اصفهان، نجف‌آباد</div>
+                </div>
+                <div class="info-item">
+                  <div class="label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 9h16"/></svg></span> تاریخ ثبت</div>
+                  <div class="value">۱۴۰۳/۰۴/۱۰</div>
+                </div>
+                <div class="info-item">
+                  <div class="label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg></span> مدل توکن</div>
+                  <div class="value blue">ظرفیت تولید</div>
+                </div>
+                <div class="info-item">
+                  <div class="label">✓ وضعیت</div>
+                  <div class="value green">فعال</div>
+                </div>
+                <div class="info-item">
+                  <div class="label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M10 19V5M15 19v-7M20 19V3"/></svg></span> ظرفیت</div>
+                  <div class="value">۵۰۰ راس دام مولد</div>
+                </div>
+                <div class="info-item">
+                  <div class="label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ارزش پایه</div>
+                  <div class="value gold">۱۲.۵ میلیارد تومان</div>
+                </div>
+                <div class="info-item">
+                  <div class="label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> زمان‌بندی</div>
+                  <div class="value">۳ سال (۱۴۰۳-۱۴۰۶)</div>
+                </div>
+                <div class="info-item">
+                  <div class="label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 16 5-5 4 3 7-8"/><path d="M15 6h5v5"/></svg></span> مرحله توسعه</div>
+                  <div class="value">اعتبارسنجی نهایی</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- مدل اقتصادی -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span> مدل اقتصادی</h3>
+                <p>ارزش، هزینه، درآمد و جریان نقدی پروژه</p>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="showToast('info','مدل اقتصادی','جزئیات کامل مدل اقتصادی در حال بارگذاری...')">
+                مشاهده کامل
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="mini-stats" style="margin-bottom: 20px;">
+                <div class="mini-stat">
+                  <div class="value gold">۱۲.۵B</div>
+                  <div class="label">ارزش پایه</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="value green">۲.۸B</div>
+                  <div class="label">درآمد سالانه</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="value blue">۱.۲B</div>
+                  <div class="label">هزینه سالانه</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="value">۱.۶B</div>
+                  <div class="label">سود خالص سالانه</div>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="economicChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- نمودار ارزش‌گذاری -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9m5 10V5m5 14v-7m5 7V3"/></svg></span> روند ارزش‌گذاری</h3>
+                <p>تغییرات ارزش پروژه در طول زمان</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart-container">
+                <canvas id="valuationChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Side Column -->
+        <div class="content-col">
+
+          <!-- مراحل پیشرفت -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span> مراحل پروژه</h3>
+                <p>پیشرفت در هر مرحله</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="progress-steps">
+
+                <div class="progress-step done">
+                  <div class="progress-step-num">✓</div>
+                  <div class="progress-step-body">
+                    <strong>شناسایی پروژه</strong>
+                    <small>۱۴۰۳/۰۴/۱۰</small>
+                  </div>
+                  <span class="progress-step-status">تکمیل</span>
+                </div>
+
+                <div class="progress-step done">
+                  <div class="progress-step-num">✓</div>
+                  <div class="progress-step-body">
+                    <strong>ارزیابی اولیه</strong>
+                    <small>۱۴۰۳/۰۴/۱۸</small>
+                  </div>
+                  <span class="progress-step-status">تکمیل</span>
+                </div>
+
+                <div class="progress-step done">
+                  <div class="progress-step-num">✓</div>
+                  <div class="progress-step-body">
+                    <strong>طراحی حقوقی و اقتصادی</strong>
+                    <small>۱۴۰۳/۰۵/۰۲</small>
+                  </div>
+                  <span class="progress-step-status">تکمیل</span>
+                </div>
+
+                <div class="progress-step done">
+                  <div class="progress-step-num">✓</div>
+                  <div class="progress-step-body">
+                    <strong>ایجاد ساختار دیجیتال</strong>
+                    <small>۱۴۰۳/۰۵/۱۵</small>
+                  </div>
+                  <span class="progress-step-status">تکمیل</span>
+                </div>
+
+                <div class="progress-step current">
+                  <div class="progress-step-num">◐</div>
+                  <div class="progress-step-body">
+                    <strong>اعتبارسنجی نهایی</strong>
+                    <small>در جریان</small>
+                  </div>
+                  <span class="progress-step-status">فعلی</span>
+                </div>
+
+                <div class="progress-step pending">
+                  <div class="progress-step-num">۶</div>
+                  <div class="progress-step-body">
+                    <strong>بهره‌برداری و پایش</strong>
+                    <small>در انتظار</small>
+                  </div>
+                  <span class="progress-step-status">در انتظار</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- خلاصه توکن -->
+          <div class="token-summary">
+            <div class="token-summary-header">
+              <div class="token-coin">◆</div>
+              <div>
+                <h4>توکن دامداری نمونه</h4>
+                <small>$DAM · IRT-1403-001</small>
+              </div>
+            </div>
+
+            <div class="token-summary-stats">
+              <div class="token-summary-stat">
+                <span class="label">کل عرضه</span>
+                <div class="value">۳,۰۰۰</div>
+              </div>
+              <div class="token-summary-stat">
+                <span class="label">در گردش</span>
+                <div class="value gold">۲,۴۵۰</div>
+              </div>
+              <div class="token-summary-stat">
+                <span class="label">ارزش هر واحد</span>
+                <div class="value green">۴.۲M</div>
+              </div>
+              <div class="token-summary-stat">
+                <span class="label">دارندگان</span>
+                <div class="value">۱۸۲</div>
+              </div>
+            </div>
+
+            <div class="token-allocation-wrap">
+              <div class="token-allocation-head">
+                <span>تخصیص داده‌شده</span>
+                <span>۸۲٪</span>
+              </div>
+              <div class="token-allocation-bar">
+                <div class="seg" style="width: 82%; background: var(--gradient-gold);"></div>
+                <div class="seg" style="width: 18%; background: rgba(255,255,255,0.15);"></div>
+              </div>
+            </div>
+
+            <div class="token-summary-actions">
+              <button class="hero-action-btn" onclick="showToast('info','تخصیص','پنل تخصیص توکن باز شد.')">
+                ◈ تخصیص
+              </button>
+              <button class="hero-action-btn primary" onclick="showToast('info','جزئیات','صفحه جزئیات توکن باز شد.')">
+                ◉ جزئیات
+              </button>
+            </div>
+          </div>
+
+          <!-- اسناد اخیر -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span> اسناد اخیر</h3>
+                <p>آخرین اسناد بارگذاری‌شده</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="doc-list">
+
+                <div class="doc-item">
+                  <div class="doc-icon pdf"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span></div>
+                  <div class="doc-body">
+                    <strong>سند مالکیت زمین</strong>
+                    <small><span>PDF</span><span class="dot-sep">·</span><span>۲.۴ MB</span></small>
+                  </div>
+                  <span class="doc-status verified">✓ تأیید</span>
+                </div>
+
+                <div class="doc-item">
+                  <div class="doc-icon img"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+                  <div class="doc-body">
+                    <strong>تصاویر پروژه</strong>
+                    <small><span>JPG</span><span class="dot-sep">·</span><span>۸.۲ MB</span></small>
+                  </div>
+                  <span class="doc-status verified">✓ تأیید</span>
+                </div>
+
+                <div class="doc-item">
+                  <div class="doc-icon sheet"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M10 19V5M15 19v-7M20 19V3"/></svg></span></div>
+                  <div class="doc-body">
+                    <strong>گزارش ارزیابی</strong>
+                    <small><span>XLSX</span><span class="dot-sep">·</span><span>۱.۸ MB</span></small>
+                  </div>
+                  <span class="doc-status pending"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span> انتظار</span>
+                </div>
+
+                <div class="doc-item">
+                  <div class="doc-icon doc"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 20 4-1 10-10a2.8 2.8 0 0 0-4-4L4 15z"/></svg></span></div>
+                  <div class="doc-body">
+                    <strong>قرارداد مشارکت</strong>
+                    <small><span>DOCX</span><span class="dot-sep">·</span><span>۹۴۰ KB</span></small>
+                  </div>
+                  <span class="doc-status verified">✓ تأیید</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB: DOCUMENTS ==================== -->
+    <div class="tab-panel" id="panel-documents">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span> همه اسناد و مدارک</h3>
+            <p>۱۲ سند بارگذاری‌شده برای این پروژه</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-outline btn-sm" onclick="showToast('info','فیلتر','پنل فیلتر اسناد باز شد.')">
+              ⇅ فیلتر
+            </button>
+            <button class="btn btn-primary btn-sm" onclick="showToast('success','بارگذاری','پنجره بارگذاری سند جدید باز شد.')">
+              <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span> سند جدید
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="doc-list">
+
+            <div class="doc-item">
+              <div class="doc-icon pdf"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span></div>
+              <div class="doc-body">
+                <strong>سند مالکیت زمین</strong>
+                <small><span>PDF · ۲.۴ MB</span><span class="dot-sep">·</span><span>۱۴۰۳/۰۵/۱۲</span><span class="dot-sep">·</span><span>بارگذاری: محمد احمدی</span></small>
+              </div>
+              <span class="doc-status verified">✓ تأیید</span>
+              <button class="doc-action">⇩</button>
+            </div>
+
+            <div class="doc-item">
+              <div class="doc-icon pdf"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span></div>
+              <div class="doc-body">
+                <strong>مجوز بهره‌برداری</strong>
+                <small><span>PDF · ۱.۱ MB</span><span class="dot-sep">·</span><span>۱۴۰۳/۰۵/۱۰</span><span class="dot-sep">·</span><span>بارگذاری: سارا رضایی</span></small>
+              </div>
+              <span class="doc-status verified">✓ تأیید</span>
+              <button class="doc-action">⇩</button>
+            </div>
+
+            <div class="doc-item">
+              <div class="doc-icon sheet"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M10 19V5M15 19v-7M20 19V3"/></svg></span></div>
+              <div class="doc-body">
+                <strong>گزارش ارزیابی دارایی</strong>
+                <small><span>XLSX · ۳.۸ MB</span><span class="dot-sep">·</span><span>۱۴۰۳/۰۴/۲۸</span><span class="dot-sep">·</span><span>بارگذاری: علی کریمی</span></small>
+              </div>
+              <span class="doc-status pending"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span> انتظار</span>
+              <button class="doc-action">⇩</button>
+            </div>
+
+            <div class="doc-item">
+              <div class="doc-icon doc"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 20 4-1 10-10a2.8 2.8 0 0 0-4-4L4 15z"/></svg></span></div>
+              <div class="doc-body">
+                <strong>قرارداد مشارکت</strong>
+                <small><span>DOCX · ۲.۱ MB</span><span class="dot-sep">·</span><span>۱۴۰۳/۰۴/۱۵</span><span class="dot-sep">·</span><span>بارگذاری: محمد احمدی</span></small>
+              </div>
+              <span class="doc-status verified">✓ تأیید</span>
+              <button class="doc-action">⇩</button>
+            </div>
+
+            <div class="doc-item">
+              <div class="doc-icon img"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+              <div class="doc-body">
+                <strong>تصاویر هوایی پروژه</strong>
+                <small><span>JPG · ۱۲ MB</span><span class="dot-sep">·</span><span>۱۴۰۳/۰۴/۱۲</span><span class="dot-sep">·</span><span>بارگذاری: تیم فنی</span></small>
+              </div>
+              <span class="doc-status verified">✓ تأیید</span>
+              <button class="doc-action">⇩</button>
+            </div>
+
+            <div class="doc-item">
+              <div class="doc-icon pdf"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span></div>
+              <div class="doc-body">
+                <strong>گزارش فنی دام‌ها</strong>
+                <small><span>PDF · ۳.۲ MB</span><span class="dot-sep">·</span><span>۱۴۰۳/۰۴/۰۸</span><span class="dot-sep">·</span><span>بارگذاری: دامپزشک</span></small>
+              </div>
+              <span class="doc-status verified">✓ تأیید</span>
+              <button class="doc-action">⇩</button>
+            </div>
+
+            <div class="doc-item">
+              <div class="doc-icon doc"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 20 4-1 10-10a2.8 2.8 0 0 0-4-4L4 15z"/></svg></span></div>
+              <div class="doc-body">
+                <strong>صورت‌های مالی ۱۴۰۲</strong>
+                <small><span>DOCX · ۱.۵ MB</span><span class="dot-sep">·</span><span>۱۴۰۳/۰۳/۲۵</span><span class="dot-sep">·</span><span>بارگذاری: حسابدار</span></small>
+              </div>
+              <span class="doc-status verified">✓ تأیید</span>
+              <button class="doc-action">⇩</button>
+            </div>
+
+            <div class="doc-item">
+              <div class="doc-icon pdf"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span></div>
+              <div class="doc-body">
+                <strong>تأییدیه کارشناس رسمی</strong>
+                <small><span>PDF · ۸۵۰ KB</span><span class="dot-sep">·</span><span>۱۴۰۳/۰۳/۲۰</span><span class="dot-sep">·</span><span>بارگذاری: کارشناس رسمی</span></small>
+              </div>
+              <span class="doc-status verified">✓ تأیید</span>
+              <button class="doc-action">⇩</button>
+            </div>
+
+            <div class="doc-item">
+              <div class="doc-icon pdf"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span></div>
+              <div class="doc-body">
+                <strong>گزارش بازدید میدانی</strong>
+                <small><span>PDF · ۱.۲ MB</span><span class="dot-sep">·</span><span>۱۴۰۳/۰۳/۱۵</span><span class="dot-sep">·</span><span>بارگذاری: ناظر</span></small>
+              </div>
+              <span class="doc-status rejected">✗ رد شده</span>
+              <button class="doc-action">⇩</button>
+            </div>
+
+            <div class="doc-item">
+              <div class="doc-icon sheet"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M10 19V5M15 19v-7M20 19V3"/></svg></span></div>
+              <div class="doc-body">
+                <strong>پیش‌بینی درآمد</strong>
+                <small><span>XLSX · ۲.۴ MB</span><span class="dot-sep">·</span><span>۱۴۰۳/۰۳/۱۰</span><span class="dot-sep">·</span><span>بارگذاری: مالی</span></small>
+              </div>
+              <span class="doc-status verified">✓ تأیید</span>
+              <button class="doc-action">⇩</button>
+            </div>
+
+            <div class="doc-item">
+              <div class="doc-icon doc"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 20 4-1 10-10a2.8 2.8 0 0 0-4-4L4 15z"/></svg></span></div>
+              <div class="doc-body">
+                <strong>اساسنامه شرکت</strong>
+                <small><span>DOCX · ۹۸۰ KB</span><span class="dot-sep">·</span><span>۱۴۰۳/۰۳/۰۵</span><span class="dot-sep">·</span><span>بارگذاری: حقوقی</span></small>
+              </div>
+              <span class="doc-status verified">✓ تأیید</span>
+              <button class="doc-action">⇩</button>
+            </div>
+
+            <div class="doc-item">
+              <div class="doc-icon pdf"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5"/></svg></span></div>
+              <div class="doc-body">
+                <strong>ارزیابی ریسک</strong>
+                <small><span>PDF · ۱.۸ MB</span><span class="dot-sep">·</span><span>۱۴۰۳/۰۳/۰۱</span><span class="dot-sep">·</span><span>بارگذاری: ریسک</span></small>
+              </div>
+              <span class="doc-status verified">✓ تأیید</span>
+              <button class="doc-action">⇩</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: TOKENS ==================== -->
+    <div class="tab-panel" id="panel-tokens">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 9-7 9-7-9z"/><path d="M12 7v10M8 12h8"/></svg></span></span> توکن‌های پروژه</h3>
+            <p>مدل‌های توکن فعال برای این پروژه</p>
+          </div>
+          <button class="btn btn-gold btn-sm" onclick="showToast('success','توکن جدید','فرم ایجاد توکن جدید باز شد.')">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span> ایجاد توکن
+          </button>
+        </div>
+        <div class="card-body">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+
+            <!-- Token 1 -->
+            <div class="card" style="margin: 0;">
+              <div class="card-body">
+                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+                  <div class="token-coin" style="width: 48px; height: 48px; font-size: 22px;">◆</div>
+                  <div>
+                    <h4 style="font-size: 14px; font-weight: 800; color: var(--dark); margin-bottom: 2px;">توکن دامداری نمونه</h4>
+                    <small style="font-size: 11px; color: var(--gray); font-family: monospace;">$DAM</small>
+                  </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 14px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 14px;">
+                  <div>
+                    <div style="font-size: 10px; color: var(--gray); font-weight: 600; margin-bottom: 3px;">کل عرضه</div>
+                    <div style="font-size: 15px; font-weight: 900;">۳,۰۰۰</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 10px; color: var(--gray); font-weight: 600; margin-bottom: 3px;">در گردش</div>
+                    <div style="font-size: 15px; font-weight: 900; color: var(--accent-dark);">۲,۴۵۰</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 10px; color: var(--gray); font-weight: 600; margin-bottom: 3px;">ارزش واحد</div>
+                    <div style="font-size: 15px; font-weight: 900; color: var(--success);">۴.۲M</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 10px; color: var(--gray); font-weight: 600; margin-bottom: 3px;">دارندگان</div>
+                    <div style="font-size: 15px; font-weight: 900; color: var(--primary);">۱۸۲</div>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn btn-outline btn-sm" style="flex: 1; justify-content: center;" onclick="showToast('info','جزئیات','صفحه جزئیات توکن باز شد.')">◉ جزئیات</button>
+                  <button class="btn btn-gold btn-sm" style="flex: 1; justify-content: center;" onclick="showToast('info','تخصیص','پنل تخصیص توکن باز شد.')">◇ تخصیص</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Token 2 -->
+            <div class="card" style="margin: 0;">
+              <div class="card-body">
+                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+                  <div class="token-coin" style="width: 48px; height: 48px; font-size: 22px; background: linear-gradient(135deg, #10b981, #34d399);">◇</div>
+                  <div>
+                    <h4 style="font-size: 14px; font-weight: 800; color: var(--dark); margin-bottom: 2px;">توکن درآمدی</h4>
+                    <small style="font-size: 11px; color: var(--gray); font-family: monospace;">$DAM-R</small>
+                  </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 14px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 14px;">
+                  <div>
+                    <div style="font-size: 10px; color: var(--gray); font-weight: 600; margin-bottom: 3px;">کل عرضه</div>
+                    <div style="font-size: 15px; font-weight: 900;">۱,۵۰۰</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 10px; color: var(--gray); font-weight: 600; margin-bottom: 3px;">در گردش</div>
+                    <div style="font-size: 15px; font-weight: 900; color: var(--accent-dark);">۹۲۰</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 10px; color: var(--gray); font-weight: 600; margin-bottom: 3px;">ارزش واحد</div>
+                    <div style="font-size: 15px; font-weight: 900; color: var(--success);">۲.۱M</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 10px; color: var(--gray); font-weight: 600; margin-bottom: 3px;">دارندگان</div>
+                    <div style="font-size: 15px; font-weight: 900; color: var(--primary);">۹۴</div>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn btn-outline btn-sm" style="flex: 1; justify-content: center;">◉ جزئیات</button>
+                  <button class="btn btn-gold btn-sm" style="flex: 1; justify-content: center;">◇ تخصیص</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Token 3 -->
+            <div class="card" style="margin: 0;">
+              <div class="card-body">
+                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+                  <div class="token-coin" style="width: 48px; height: 48px; font-size: 22px; background: linear-gradient(135deg, #8b5cf6, #a78bfa);">◈</div>
+                  <div>
+                    <h4 style="font-size: 14px; font-weight: 800; color: var(--dark); margin-bottom: 2px;">توکن مشارکتی</h4>
+                    <small style="font-size: 11px; color: var(--gray); font-family: monospace;">$DAM-P</small>
+                  </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 14px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 14px;">
+                  <div>
+                    <div style="font-size: 10px; color: var(--gray); font-weight: 600; margin-bottom: 3px;">کل عرضه</div>
+                    <div style="font-size: 15px; font-weight: 900;">۵۰۰</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 10px; color: var(--gray); font-weight: 600; margin-bottom: 3px;">در گردش</div>
+                    <div style="font-size: 15px; font-weight: 900; color: var(--accent-dark);">۴۸۰</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 10px; color: var(--gray); font-weight: 600; margin-bottom: 3px;">ارزش واحد</div>
+                    <div style="font-size: 15px; font-weight: 900; color: var(--success);">۲۵M</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 10px; color: var(--gray); font-weight: 600; margin-bottom: 3px;">دارندگان</div>
+                    <div style="font-size: 15px; font-weight: 900; color: var(--primary);">۱۲</div>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn btn-outline btn-sm" style="flex: 1; justify-content: center;">◉ جزئیات</button>
+                  <button class="btn btn-gold btn-sm" style="flex: 1; justify-content: center;">◇ تخصیص</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: PARTICIPANTS ==================== -->
+    <div class="tab-panel" id="panel-participants">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span> مشارکت‌کنندگان</h3>
+            <p>اشخاص و سازمان‌های درگیر در این پروژه</p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="showToast('info','دعوت','فرم دعوت مشارکت‌کننده جدید باز شد.')">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span> دعوت جدید
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="participants-list">
+
+            <div class="participant-item">
+              <div class="participant-avatar">م.ا</div>
+              <div class="participant-body">
+                <strong>محمد احمدی</strong>
+                <small>m.ahmadi@iranianToken.ir · ۰۹۱۲۳۴۵۶۷۸۹</small>
+              </div>
+              <span class="participant-role">مالک پروژه</span>
+            </div>
+
+            <div class="participant-item">
+              <div class="participant-avatar gold">س.ر</div>
+              <div class="participant-body">
+                <strong>سارا رضایی</strong>
+                <small>s.rezaei@example.com · ۰۹۱۲۳۴۵۶۷۸۰</small>
+              </div>
+              <span class="participant-role">مجری فنی</span>
+            </div>
+
+            <div class="participant-item">
+              <div class="participant-avatar green">ع.ک</div>
+              <div class="participant-body">
+                <strong>علی کریمی</strong>
+                <small>a.karimi@example.com · ۰۹۱۲۳۴۵۶۷۸۱</small>
+              </div>
+              <span class="participant-role">کارشناس ارزیاب</span>
+            </div>
+
+            <div class="participant-item">
+              <div class="participant-avatar purple">ر.م</div>
+              <div class="participant-body">
+                <strong>رضا محمدی</strong>
+                <small>r.mohammadi@example.com · ۰۹۱۲۳۴۵۶۷۸۲</small>
+              </div>
+              <span class="participant-role">مشاور حقوقی</span>
+            </div>
+
+            <div class="participant-item">
+              <div class="participant-avatar">ف.ح</div>
+              <div class="participant-body">
+                <strong>فاطمه حسینی</strong>
+                <small>f.hosseini@example.com · ۰۹۱۲۳۴۵۶۷۸۳</small>
+              </div>
+              <span class="participant-role">حسابرس</span>
+            </div>
+
+            <div class="participant-item">
+              <div class="participant-avatar gold">ح.ص</div>
+              <div class="participant-body">
+                <strong>حسین صادقی</strong>
+                <small>h.sadeghi@example.com · ۰۹۱۲۳۴۵۶۷۸۴</small>
+              </div>
+              <span class="participant-role">سرمایه‌گذار</span>
+            </div>
+
+            <div class="participant-item">
+              <div class="participant-avatar green">ن.ط</div>
+              <div class="participant-body">
+                <strong>نازنین طاهری</strong>
+                <small>n.taheri@example.com · ۰۹۱۲۳۴۵۶۷۸۵</small>
+              </div>
+              <span class="participant-role">ناظر</span>
+            </div>
+
+            <div class="participant-item">
+              <div class="participant-avatar purple">ک.ب</div>
+              <div class="participant-body">
+                <strong>کاوه بهرامی</strong>
+                <small>k.bahrami@example.com · ۰۹۱۲۳۴۵۶۷۸۶</small>
+              </div>
+              <span class="participant-role">مشارکت‌کننده</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: TIMELINE ==================== -->
+    <div class="tab-panel" id="panel-timeline">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span> تاریخچه کامل پروژه</h3>
+            <p>تمامی رویدادها و مراحل از ابتدا تاکنون</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="timeline">
+
+            <div class="tl-item done">
+              <h5>ثبت اولیه پروژه</h5>
+              <div class="tl-date"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 9h16"/></svg></span> ۱۴۰۳/۰۴/۱۰</div>
+              <p>پروژه دامداری نمونه با کد IRT-1403-001 در سامانه ایرانیان توکن ثبت شد.</p>
+            </div>
+
+            <div class="tl-item done">
+              <h5>ارزیابی اولیه</h5>
+              <div class="tl-date"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 9h16"/></svg></span> ۱۴۰۳/۰۴/۱۸</div>
+              <p>موضوع، مالکیت، ظرفیت و مدارک پروژه بررسی و تأیید شد. ۵۰۰ راس دام مولد تأیید شد.</p>
+            </div>
+
+            <div class="tl-item done">
+              <h5>بارگذاری اسناد مالکیت</h5>
+              <div class="tl-date"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 9h16"/></svg></span> ۱۴۰۳/۰۴/۲۵</div>
+              <p>سند مالکیت زمین، مجوز بهره‌برداری و ۴ سند دیگر بارگذاری و تأیید شد.</p>
+            </div>
+
+            <div class="tl-item done">
+              <h5>طراحی مدل حقوقی و اقتصادی</h5>
+              <div class="tl-date"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 9h16"/></svg></span> ۱۴۰۳/۰۵/۰۲</div>
+              <p>مدل اقتصادی و حقوقی پروژه طراحی و تصویب شد. ارزش پایه ۱۲.۵ میلیارد تومان تعیین شد.</p>
+            </div>
+
+            <div class="tl-item done">
+              <h5>ایجاد ساختار دیجیتال</h5>
+              <div class="tl-date"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 9h16"/></svg></span> ۱۴۰۳/۰۵/۱۵</div>
+              <p>۳,۰۰۰ توکن برای پروژه ایجاد و ثبت شد. ۱,۵۰۰ توکن درآمدی و ۵۰۰ توکن مشارکتی نیز صادر شد.</p>
+            </div>
+
+            <div class="tl-item done">
+              <h5>شروع اعتبارسنجی نهایی</h5>
+              <div class="tl-date"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 9h16"/></svg></span> ۱۴۰۳/۰۵/۲۰</div>
+              <p>فرآیند اعتبارسنجی نهایی توسط تیم کارشناسی آغاز شد. تا این لحظه ۴۷ سند تأیید شده است.</p>
+            </div>
+
+            <div class="tl-item current">
+              <h5>اعتبارسنجی نهایی</h5>
+              <div class="tl-date"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 9h16"/></svg></span> در جریان</div>
+              <p>در انتظار تأیید نهایی اسناد و ارزیابی دارایی. تخمین: ۵ روز کاری دیگر.</p>
+            </div>
+
+            <div class="tl-item pending">
+              <h5>شروع بهره‌برداری</h5>
+              <div class="tl-date"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 9h16"/></svg></span> در انتظار</div>
+              <p>پس از تأیید نهایی، پروژه وارد فاز بهره‌برداری و پایش مستمر خواهد شد.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: LOCATION ==================== -->
+    <div class="tab-panel" id="panel-location">
+      <div class="content-grid">
+        <div class="content-col">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M8 12h8"/></svg></span></span> موقعیت جغرافیایی</h3>
+                <p>نقشه محل اجرای پروژه</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="map-container"></div>
+            </div>
+          </div>
+        </div>
+        <div class="content-col">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span> جزئیات مکانی</h3>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="info-grid" style="grid-template-columns: 1fr;">
+                <div class="info-item">
+                  <div class="label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 10-7 10S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span> آدرس</div>
+                  <div class="value">استان اصفهان، شهرستان نجف‌آباد، جاده کمربندی، پلاک ۱۲۵</div>
+                </div>
+                <div class="info-item">
+                  <div class="label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M4 12h16"/></svg></span> مختصات</div>
+                  <div class="value mono">32.6306° N, 51.3667° E</div>
+                </div>
+                <div class="info-item">
+                  <div class="label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 19 14-14 2 2-14 14z"/></svg></span> مساحت کل</div>
+                  <div class="value">۲۵,۰۰۰ متر مربع</div>
+                </div>
+                <div class="info-item">
+                  <div class="label"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مساحت مفید</div>
+                  <div class="value">۱۲,۵۰۰ متر مربع</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: COMMENTS ==================== -->
+    <div class="tab-panel" id="panel-comments">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><path d="M12 4a8 8 0 1 0 0 16z"/></span></span> نظرات و پرسش‌ها</h3>
+            <p>گفتگوهای مرتبط با پروژه</p>
+          </div>
+        </div>
+        <div class="card-body">
+
+          <div class="comment-list">
+
+            <div class="comment-item">
+              <div class="comment-avatar">س.ر</div>
+              <div class="comment-body">
+                <div class="comment-header">
+                  <strong>سارا رضایی</strong>
+                  <small>۲ ساعت پیش</small>
+                </div>
+                <div class="comment-content">
+                  سلام، سند ارزیابی دارایی رو دوباره بررسی کردم. به نظر می‌رسه ارزش‌گذاری دام‌ها در گزارش ۱۵٪ بیشتر از ارزش واقعی بازار باشه. پیشنهاد می‌کنم یک ارزیاب مستقل دوباره بررسی کنه.
+                </div>
+              </div>
+            </div>
+
+            <div class="comment-item">
+              <div class="comment-avatar" style="background: var(--gradient-gold); color: var(--dark);">ع.ک</div>
+              <div class="comment-body">
+                <div class="comment-header">
+                  <strong>علی کریمی</strong>
+                  <small>۱ ساعت پیش</small>
+                </div>
+                <div class="comment-content">
+                  با سارا موافقم. گزارش ارزیابی نیاز به بازبینی داره. من با یک ارزیاب رسمی تماس گرفتم و قراره هفته آینده بازدید میدانی انجام بشه.
+                </div>
+              </div>
+            </div>
+
+            <div class="comment-item">
+              <div class="comment-avatar">م.ا</div>
+              <div class="comment-body">
+                <div class="comment-header">
+                  <strong>محمد احمدی</strong>
+                  <small>۴۵ دقیقه پیش</small>
+                </div>
+                <div class="comment-content">
+                  ممنون از توجهتون. با بازبینی موافقم. لطفاً نتیجه بازدید میدانی رو در همین بخش ثبت کنید تا در Audit Trail هم ثبت بشه.
+                </div>
+              </div>
+            </div>
+
+            <div class="comment-item">
+              <div class="comment-avatar" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">ر.م</div>
+              <div class="comment-body">
+                <div class="comment-header">
+                  <strong>رضا محمدی</strong>
+                  <small>۳۰ دقیقه پیش</small>
+                </div>
+                <div class="comment-content">
+                  از نظر حقوقی، بازبینی ارزیابی هیچ مشکلی ایجاد نمی‌کنه. اما باید قرارداد مشارکت هم متناسب با ارزش جدید به‌روزرسانی بشه.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comment-input-wrap">
+            <div class="comment-avatar" style="width: 40px; height: 40px;">م.ا</div>
+            <textarea class="comment-input" placeholder="نظر خود را بنویسید..." id="commentInput"></textarea>
+            <button class="btn btn-primary" onclick="submitComment()">◂ ارسال</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: ACTIVITY ==================== -->
+    <div class="tab-panel" id="panel-activity">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9m5 10V5m5 14v-7m5 7V3"/></svg></span> فعالیت‌های اخیر</h3>
+            <p>آخرین رویدادهای ثبت‌شده در Audit Trail</p>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="showToast('info','خروجی','گزارش فعالیت‌ها در حال آماده‌سازی...')">
+            ⇩ خروجی
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="activity-list">
+
+            <div class="activity-item">
+              <div class="activity-icon green"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+              <div class="activity-body">
+                <p><strong>سند مالکیت زمین</strong> توسط علی کریمی تأیید شد</p>
+                <small>۱۰ دقیقه پیش · Audit ID: #A-2451</small>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon blue"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 20 4-1 10-10a2.8 2.8 0 0 0-4-4L4 15z"/></svg></span></div>
+              <div class="activity-body">
+                <p>اطلاعات پایه <strong>پروژه</strong> توسط سارا رضایی ویرایش شد</p>
+                <small>۲۵ دقیقه پیش · Audit ID: #A-2450</small>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon gold"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 9-7 9-7-9z"/><path d="M12 7v10M8 12h8"/></svg></span></div>
+              <div class="activity-body">
+                <p><strong>۲۰۰ توکن</strong> جدید به پروژه تخصیص یافت</p>
+                <small>۱ ساعت پیش · Audit ID: #A-2449</small>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon purple"><span class="it-symbol" aria-hidden="true"><path d="M12 4a8 8 0 1 0 0 16z"/></span></div>
+              <div class="activity-body">
+                <p>نظر جدیدی توسط <strong>رضا محمدی</strong> ثبت شد</p>
+                <small>۳۰ دقیقه پیش · Audit ID: #A-2448</small>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon blue"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span></div>
+              <div class="activity-body">
+                <p>سند <strong>گزارش ارزیابی دارایی</strong> بارگذاری شد</p>
+                <small>۲ ساعت پیش · Audit ID: #A-2447</small>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon red"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></span></div>
+              <div class="activity-body">
+                <p>درخواست <strong>گزارش بازدید میدانی</strong> رد شد</p>
+                <small>۴ ساعت پیش · Audit ID: #A-2446</small>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon green"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+              <div class="activity-body">
+                <p><strong>قرارداد مشارکت</strong> توسط مشاور حقوقی تأیید شد</p>
+                <small>۶ ساعت پیش · Audit ID: #A-2445</small>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon gold"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 9-7 9-7-9z"/><path d="M12 7v10M8 12h8"/></svg></span></div>
+              <div class="activity-body">
+                <p>ارزش پروژه از <strong>۱۲ میلیارد</strong> به <strong>۱۲.۵ میلیارد</strong> تومان به‌روز شد</p>
+                <small>دیروز · Audit ID: #A-2444</small>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon blue"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6h14v10H8l-3 3z"/><path d="M8 10h8M8 13h5"/></svg></span></div>
+              <div class="activity-body">
+                <p>کاربر جدید <strong>کاوه بهرامی</strong> به مشارکت‌کنندگان اضافه شد</p>
+                <small>دیروز · Audit ID: #A-2443</small>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon purple"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 20 4-1 10-10a2.8 2.8 0 0 0-4-4L4 15z"/></svg></span></div>
+              <div class="activity-body">
+                <p>مدل توکن <strong>$DAM</strong> توسط محمد احمدی ویرایش شد</p>
+                <small>۲ روز پیش · Audit ID: #A-2442</small>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* ==================== SIDEBAR ==================== */
+const sidebar = document.getElementById('sidebar');
+const main = document.getElementById('main');
+const toggleBtn = document.getElementById('toggleBtn');
+const overlay = document.getElementById('overlay');
+
+toggleBtn.addEventListener('click', () => {
+  if (window.innerWidth <= 900) {
+    sidebar.classList.toggle('mobile-open');
+    overlay.classList.toggle('active');
+  } else {
+    sidebar.classList.toggle('collapsed');
+    main.classList.toggle('expanded');
+  }
+});
+
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('mobile-open');
+  overlay.classList.remove('active');
+});
+
+/* ==================== TOAST ==================== */
+function showToast(type, title, message) {
+  const container = document.getElementById('toastContainer');
+  const icons = { success: '✓', error: '✗', warning: '!', info: '<span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8h.01"/></svg></span>' };
+
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `
+    <div class="toast-icon">${icons[type]}</div>
+    <div class="toast-body">
+      <strong>${title}</strong>
+      <span>${message}</span>
+    </div>
+  `;
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-100%)';
+    toast.style.transition = 'all 0.3s';
+    setTimeout(() => toast.remove(), 300);
+  }, 4000);
+}
+
+/* ==================== TABS ==================== */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+
+    // اگر تب موقعیت بود، نقشه را رفرش کن
+    if (tab === 'location' && map) {
+      setTimeout(() => map.invalidateSize(), 200);
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+/* ==================== COMMENT ==================== */
+function submitComment() {
+  const input = document.getElementById('commentInput');
+  const text = input.value.trim();
+  if (!text) {
+    showToast('warning', 'نظر خالی', 'لطفاً متن نظر خود را وارد کنید.');
+    return;
+  }
+  showToast('success', 'ثبت شد', 'نظر شما با موفقیت ثبت شد.');
+  input.value = '';
+}
+
+/* ==================== CHARTS ==================== */
+// نمودار مدل اقتصادی
+const economicCtx = document.getElementById('economicChart').getContext('2d');
+const gradGreen = economicCtx.createLinearGradient(0, 0, 0, 280);
+gradGreen.addColorStop(0, 'rgba(16,185,129,0.25)');
+gradGreen.addColorStop(1, 'rgba(16,185,129,0)');
+const gradBlue = economicCtx.createLinearGradient(0, 0, 0, 280);
+gradBlue.addColorStop(0, 'rgba(59,130,246,0.2)');
+gradBlue.addColorStop(1, 'rgba(59,130,246,0)');
+
+new Chart(economicCtx, {
+  type: 'bar',
+  data: {
+    labels: ['سال ۱', 'سال ۲', 'سال ۳', 'سال ۴', 'سال ۵'],
+    datasets: [
+      {
+        label: 'درآمد',
+        data: [1.8, 2.4, 2.8, 3.2, 3.6],
+        backgroundColor: 'rgba(16,185,129,0.7)',
+        borderRadius: 8,
+        borderSkipped: false,
+      },
+      {
+        label: 'هزینه',
+        data: [1.5, 1.3, 1.2, 1.1, 1.0],
+        backgroundColor: 'rgba(239,68,68,0.6)',
+        borderRadius: 8,
+        borderSkipped: false,
+      },
+      {
+        label: 'سود',
+        data: [0.3, 1.1, 1.6, 2.1, 2.6],
+        backgroundColor: 'rgba(245,194,17,0.8)',
+        borderRadius: 8,
+        borderSkipped: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        rtl: true,
+        labels: {
+          font: { family: 'Vazirmatn', size: 12 },
+          color: '#64748b',
+          padding: 16,
+          usePointStyle: true,
+          pointStyle: 'circle',
+          boxWidth: 8,
+          boxHeight: 8,
+        }
+      },
+      tooltip: {
+        backgroundColor: '#0f1729',
+        padding: 12,
+        titleFont: { family: 'Vazirmatn', size: 13, weight: '700' },
+        bodyFont: { family: 'Vazirmatn', size: 12 },
+        cornerRadius: 10,
+        rtl: true,
+        textDirection: 'rtl',
+        callbacks: {
+          label: (ctx) => ` ${ctx.dataset.label}: ${ctx.parsed.y}B تومان`
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { display: false },
+        ticks: { font: { family: 'Vazirmatn', size: 11 }, color: '#64748b' }
+      },
+      y: {
+        grid: { color: '#e2e8f0', drawBorder: false },
+        ticks: {
+          font: { family: 'Vazirmatn', size: 11 },
+          color: '#64748b',
+          callback: (v) => v + 'B'
+        },
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+// نمودار ارزش‌گذاری
+const valuationCtx = document.getElementById('valuationChart').getContext('2d');
+const gradVal = valuationCtx.createLinearGradient(0, 0, 0, 280);
+gradVal.addColorStop(0, 'rgba(26,95,180,0.3)');
+gradVal.addColorStop(1, 'rgba(26,95,180,0)');
+
+new Chart(valuationCtx, {
+  type: 'line',
+  data: {
+    labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور'],
+    datasets: [{
+      label: 'ارزش (میلیارد تومان)',
+      data: [10.5, 11.2, 11.8, 12.0, 12.3, 12.5],
+      borderColor: '#1a5fb4',
+      backgroundColor: gradVal,
+      borderWidth: 3,
+      tension: 0.4,
+      fill: true,
+      pointBackgroundColor: '#1a5fb4',
+      pointBorderColor: '#fff',
+      pointBorderWidth: 3,
+      pointRadius: 6,
+      pointHoverRadius: 9,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#0f1729',
+        padding: 12,
+        titleFont: { family: 'Vazirmatn', size: 13, weight: '700' },
+        bodyFont: { family: 'Vazirmatn', size: 12 },
+        cornerRadius: 10,
+        rtl: true,
+        textDirection: 'rtl',
+        callbacks: {
+          label: (ctx) => ` ارزش: ${ctx.parsed.y}B تومان`
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { display: false },
+        ticks: { font: { family: 'Vazirmatn', size: 11 }, color: '#64748b' }
+      },
+      y: {
+        grid: { color: '#e2e8f0', drawBorder: false },
+        ticks: {
+          font: { family: 'Vazirmatn', size: 11 },
+          color: '#64748b',
+          callback: (v) => v + 'B'
+        },
+        beginAtZero: false
+      }
+    }
+  }
+});
+
+/* ==================== MAP (Leaflet) ==================== */
+let map;
+try {
+  map = L.map('map-container').setView([32.6306, 51.3667], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '<span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> OpenStreetMap',
+    maxZoom: 19,
+  }).addTo(map);
+
+  const customIcon = L.divIcon({
+    className: 'custom-marker',
+    html: '<div style="background: linear-gradient(135deg, #1a5fb4, #3584e4); width: 40px; height: 40px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: flex; align-items: center; justify-content: center; border: 3px solid #fff; box-shadow: 0 8px 20px rgba(26,95,180,0.4);"><span style="transform: rotate(45deg); color: #fff; font-size: 18px;"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M8 9 6 6M16 9l2-3M9 14h.01M15 14h.01"/></svg></span></span></div>',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40]
+  });
+
+  L.marker([32.6306, 51.3667], { icon: customIcon })
+    .addTo(map)
+    .bindPopup(`
+      <div style="text-align: right; direction: rtl; padding: 4px;">
+        <strong style="font-size: 14px; display: block; margin-bottom: 4px;"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M8 9 6 6M16 9l2-3M9 14h.01M15 14h.01"/></svg></span> دامداری نمونه</strong>
+        <span style="font-size: 12px; color: #64748b;">اصفهان، نجف‌آباد</span>
+      </div>
+    `)
+    .openPopup();
+
+  // دایره شعاع پروژه
+  L.circle([32.6306, 51.3667], {
+    color: '#1a5fb4',
+    fillColor: '#3584e4',
+    fillOpacity: 0.15,
+    radius: 500,
+    weight: 2,
+    dashArray: '8,8',
+  }).addTo(map);
+
+} catch(e) {
+  console.warn('Map failed to load:', e);
+}
+
+/* ==================== PROGRESS BAR ANIMATION ==================== */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const fill = document.querySelector('.hero-progress-fill');
+    if (fill) {
+      const width = fill.style.width;
+      fill.style.width = '0';
+      setTimeout(() => { fill.style.width = width; }, 100);
+    }
+  }, 300);
+});
+
+/* ==================== RIPPLE ==================== */
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `
+  @keyframes ripple {
+    to { transform: scale(4); opacity: 0; }
+  }
+`;
+document.head.appendChild(rippleStyle);
+
+document.querySelectorAll('.btn, .hero-action-btn, .tab-btn').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.cssText = `
+      position: absolute;
+      width: ${size}px;
+      height: ${size}px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      pointer-events: none;
+      left: ${e.clientX - rect.left - size/2}px;
+      top: ${e.clientY - rect.top - size/2}px;
+    `;
+    this.style.position = 'relative';
+    this.style.overflow = 'hidden';
+    this.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  });
+});
+
+/* ==================== KEYBOARD SHORTCUTS ==================== */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    sidebar.classList.remove('mobile-open');
+    overlay.classList.remove('active');
+  }
+});
+</script>
+
+<script src="theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,2703 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اعتبارسنجی | ایرانیان توکن</title>
+<meta name="description" content="سیستم اعتبارسنجی ایرانیان توکن؛ بررسی، تأیید و رد اسناد و مدارک پروژه‌ها.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --primary: #1a5fb4;
+  --primary-dark: #0d3b7a;
+  --primary-light: #3584e4;
+  --accent: #f5c211;
+  --accent-dark: #c79a00;
+  --dark: #0f1729;
+  --dark-2: #1a2332;
+  --gray: #64748b;
+  --gray-light: #94a3b8;
+  --bg: #f1f5f9;
+  --bg-alt: #ffffff;
+  --border: #e2e8f0;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+  --purple: #8b5cf6;
+  --pink: #ec4899;
+  --teal: #14b8a6;
+  --gradient: linear-gradient(135deg, #1a5fb4 0%, #3584e4 100%);
+  --gradient-gold: linear-gradient(135deg, #f5c211 0%, #ffd94a 100%);
+  --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  --gradient-danger: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+  --shadow-sm: 0 1px 2px rgba(15,23,41,0.05);
+  --shadow: 0 4px 12px rgba(15,23,41,0.06);
+  --shadow-lg: 0 12px 32px rgba(15,23,41,0.1);
+  --shadow-xl: 0 24px 60px rgba(15,23,41,0.15);
+  --radius: 14px;
+  --radius-lg: 20px;
+  --sidebar-w: 260px;
+  --sidebar-collapsed: 78px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Vazirmatn', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ==================== SIDEBAR ==================== */
+.sidebar {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--dark);
+  color: #fff;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border-left: 1px solid rgba(255,255,255,0.05);
+}
+.sidebar.collapsed { width: var(--sidebar-collapsed); }
+.sidebar-brand {
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  min-height: 82px;
+}
+.sidebar-logo {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(26,95,180,0.4);
+}
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .sidebar-brand-text { opacity: 0; }
+.sidebar-brand-text strong { font-size: 15px; font-weight: 800; }
+.sidebar-brand-text small { font-size: 11px; color: var(--gray-light); }
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sidebar-nav::-webkit-scrollbar { width: 4px; }
+.sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+.nav-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 16px 12px 8px;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .nav-section-title { opacity: 0; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  color: var(--gray-light);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.nav-item.active { background: var(--gradient); color: #fff; box-shadow: 0 6px 16px rgba(26,95,180,0.35); }
+.nav-item .icon { font-size: 18px; flex-shrink: 0; width: 22px; text-align: center; }
+.nav-item .label { opacity: 1; transition: opacity 0.2s; }
+.sidebar.collapsed .nav-item .label { opacity: 0; }
+.nav-item .badge {
+  margin-right: auto;
+  background: var(--accent);
+  color: var(--dark);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 50px;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .nav-item .badge { opacity: 0; }
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.user-mini {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.user-mini:hover { background: rgba(255,255,255,0.08); }
+.user-avatar {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: var(--gradient-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: var(--dark);
+  flex-shrink: 0;
+  font-size: 14px;
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  overflow: hidden;
+}
+.sidebar.collapsed .user-info { opacity: 0; }
+.user-info strong { font-size: 13px; color: #fff; }
+.user-info small { font-size: 11px; color: var(--gray-light); }
+
+/* ==================== MAIN ==================== */
+.main {
+  margin-right: var(--sidebar-w);
+  transition: margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main.expanded { margin-right: var(--sidebar-collapsed); }
+
+/* ==================== TOPBAR ==================== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.toggle-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--dark);
+  transition: all 0.2s;
+}
+.toggle-btn:hover { background: var(--bg); }
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--gray);
+}
+.breadcrumb a { color: var(--gray); text-decoration: none; }
+.breadcrumb a:hover { color: var(--primary); }
+.breadcrumb .current { color: var(--dark); font-weight: 600; }
+.topbar-search {
+  margin-right: auto;
+  position: relative;
+  flex: 0 1 320px;
+}
+.topbar-search input {
+  width: 100%;
+  padding: 10px 42px 10px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+.topbar-search input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(53,132,228,0.1);
+}
+.topbar-search .search-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray);
+  font-size: 15px;
+}
+.topbar-actions { display: flex; align-items: center; gap: 8px; }
+.icon-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--gray);
+  transition: all 0.2s;
+  position: relative;
+}
+.icon-btn:hover { background: var(--bg); color: var(--primary); }
+.icon-btn .dot {
+  position: absolute;
+  top: 8px; left: 8px;
+  width: 8px; height: 8px;
+  background: var(--danger);
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+/* ==================== CONTENT ==================== */
+.content { padding: 28px; flex: 1; max-width: 1600px; margin: 0 auto; width: 100%; }
+
+/* ==================== BUTTONS ==================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--gradient);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(26,95,180,0.28);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(26,95,180,0.38);
+}
+.btn-outline {
+  background: #fff;
+  color: var(--dark);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover { background: var(--bg); border-color: var(--primary-light); color: var(--primary); }
+.btn-success {
+  background: var(--gradient-success);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(16,185,129,0.3);
+}
+.btn-success:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(16,185,129,0.4); }
+.btn-danger {
+  background: var(--gradient-danger);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(239,68,68,0.3);
+}
+.btn-danger:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(239,68,68,0.4); }
+.btn-sm { padding: 8px 14px; font-size: 13px; }
+
+/* ==================== PAGE HEADER ==================== */
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.page-title h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.page-title p {
+  font-size: 14px;
+  color: var(--gray);
+}
+.page-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ==================== KPI ==================== */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+.kpi-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gradient);
+}
+.kpi-card.green::before { background: var(--gradient-success); }
+.kpi-card.gold::before { background: var(--gradient-gold); }
+.kpi-card.red::before { background: var(--gradient-danger); }
+.kpi-card.purple::before { background: linear-gradient(180deg, #8b5cf6, #a78bfa); }
+.kpi-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: transparent; }
+.kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.kpi-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  background: rgba(26,95,180,0.08);
+  color: var(--primary);
+}
+.kpi-card.green .kpi-icon { background: rgba(16,185,129,0.1); color: var(--success); }
+.kpi-card.gold .kpi-icon { background: rgba(245,194,17,0.15); color: var(--accent-dark); }
+.kpi-card.red .kpi-icon { background: rgba(239,68,68,0.1); color: var(--danger); }
+.kpi-card.purple .kpi-icon { background: rgba(139,92,246,0.1); color: var(--purple); }
+.kpi-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 50px;
+}
+.kpi-trend.up { background: rgba(16,185,129,0.12); color: var(--success); }
+.kpi-trend.down { background: rgba(239,68,68,0.12); color: var(--danger); }
+.kpi-trend.neutral { background: rgba(100,116,139,0.12); color: var(--gray); }
+.kpi-value {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.kpi-value span { font-size: 14px; font-weight: 700; color: var(--gray); margin-right: 4px; }
+.kpi-label { font-size: 12px; color: var(--gray); font-weight: 600; }
+
+/* ==================== TABS ==================== */
+.tabs-nav {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 6px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+.tabs-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.tab-btn:hover { background: var(--bg); color: var(--primary); }
+.tab-btn.active {
+  background: var(--gradient);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(26,95,180,0.28);
+}
+.tab-btn .tab-count {
+  background: rgba(255,255,255,0.25);
+  padding: 1px 8px;
+  border-radius: 50px;
+  font-size: 11px;
+}
+.tab-btn:not(.active) .tab-count {
+  background: var(--bg);
+  color: var(--gray);
+}
+
+.tab-panel { display: none; animation: fadeIn 0.4s; }
+.tab-panel.active { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== CARDS ==================== */
+.card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s;
+}
+.card:hover { box-shadow: var(--shadow); }
+.card-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.card-header-left h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.card-header-left h3 .icon {
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  background: rgba(26,95,180,0.08);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.card-header-left p { font-size: 12px; color: var(--gray); margin-right: 42px; }
+.card-body { padding: 24px; }
+
+/* ==================== GRID ==================== */
+.content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.content-grid-equal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.content-col { display: flex; flex-direction: column; gap: 24px; }
+
+/* ==================== FILTER BAR ==================== */
+.filter-bar {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: 14px;
+  align-items: end;
+  flex-wrap: wrap;
+}
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 160px;
+}
+.filter-group label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.filter-group select,
+.filter-group input {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--dark);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.filter-group select:focus,
+.filter-group input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(53,132,228,0.1);
+}
+
+/* ==================== VALIDATION LIST ==================== */
+.validation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.validation-item {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.validation-item::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--warning);
+}
+.validation-item.approved::before { background: var(--success); }
+.validation-item.rejected::before { background: var(--danger); }
+.validation-item.pending::before { background: var(--warning); }
+.validation-item.review::before { background: var(--info); }
+
+.validation-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+.validation-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.validation-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+  background: rgba(245,158,11,0.1);
+  color: var(--warning);
+}
+.validation-icon.approved { background: rgba(16,185,129,0.1); color: var(--success); }
+.validation-icon.rejected { background: rgba(239,68,68,0.1); color: var(--danger); }
+.validation-icon.review { background: rgba(59,130,246,0.1); color: var(--info); }
+
+.validation-info { flex: 1; min-width: 0; }
+.validation-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.validation-title .doc-type {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: rgba(26,95,180,0.1);
+  color: var(--primary);
+}
+.validation-project {
+  font-size: 12px;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.validation-project strong { color: var(--dark); font-weight: 700; }
+.validation-meta {
+  font-size: 11px;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.validation-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.validation-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.validation-status-badge::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.validation-status-badge.pending { background: rgba(245,158,11,0.12); color: var(--warning); }
+.validation-status-badge.approved { background: rgba(16,185,129,0.12); color: var(--success); }
+.validation-status-badge.rejected { background: rgba(239,68,68,0.12); color: var(--danger); }
+.validation-status-badge.review { background: rgba(59,130,246,0.12); color: var(--info); }
+
+/* پیشرفت اعتبارسنجی */
+.validation-progress {
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+.validation-steps-mini {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.mini-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 4px;
+  border-radius: 10px;
+  background: var(--bg);
+  transition: all 0.2s;
+  position: relative;
+}
+.mini-step.done { background: rgba(16,185,129,0.08); }
+.mini-step.current { background: rgba(245,158,11,0.08); }
+.mini-step-icon {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+  background: var(--border);
+  color: var(--gray);
+}
+.mini-step.done .mini-step-icon { background: var(--success); color: #fff; }
+.mini-step.current .mini-step-icon { background: var(--warning); color: #fff; }
+.mini-step-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gray);
+  text-align: center;
+}
+.mini-step.done .mini-step-label { color: var(--success); }
+.mini-step.current .mini-step-label { color: var(--warning); }
+
+.validation-footer {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.validation-assigned {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--gray);
+}
+.mini-avatar {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  background: var(--gradient);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+}
+.validation-actions { display: flex; gap: 8px; }
+
+/* ==================== DETAILS DRAWER ==================== */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,41,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.drawer-overlay.active { opacity: 1; pointer-events: auto; }
+.drawer {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: 640px;
+  max-width: 100%;
+  background: var(--bg-alt);
+  z-index: 210;
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-xl);
+}
+.drawer.open { transform: translateX(0); }
+
+.drawer-header {
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.drawer-header h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--dark);
+}
+.drawer-header small {
+  display: block;
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 3px;
+}
+.drawer-close {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--gray);
+  transition: all 0.2s;
+}
+.drawer-close:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+.drawer-body::-webkit-scrollbar { width: 6px; }
+.drawer-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 6px; }
+
+.drawer-hero {
+  background: var(--gradient);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  color: #fff;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.drawer-hero::after {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+  border-radius: 50%;
+}
+.drawer-hero h2 {
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 8px;
+  position: relative;
+}
+.drawer-hero p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.85);
+  position: relative;
+  line-height: 1.8;
+}
+.drawer-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+  position: relative;
+}
+.drawer-hero-stat {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+}
+.drawer-hero-stat .v {
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 2px;
+}
+.drawer-hero-stat .l {
+  font-size: 10px;
+  color: rgba(255,255,255,0.8);
+  font-weight: 600;
+}
+
+.drawer-section { margin-bottom: 24px; }
+.drawer-section-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.drawer-section-title::before {
+  content: '';
+  width: 4px; height: 16px;
+  background: var(--gradient);
+  border-radius: 4px;
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.info-item {
+  background: var(--bg);
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+.info-item .label {
+  font-size: 11px;
+  color: var(--gray);
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: block;
+}
+.info-item .value {
+  font-size: 13px;
+  color: var(--dark);
+  font-weight: 700;
+  word-break: break-word;
+}
+.info-item .value.mono { font-family: monospace; font-size: 12px; }
+.info-item .value.green { color: var(--success); }
+.info-item .value.gold { color: var(--accent-dark); }
+.info-item .value.red { color: var(--danger); }
+
+/* Checklist */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--bg);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.checklist-item:hover { border-color: var(--primary-light); background: #fff; }
+.checklist-item.checked { background: rgba(16,185,129,0.04); border-color: rgba(16,185,129,0.2); }
+.checklist-box {
+  width: 22px; height: 22px;
+  border-radius: 7px;
+  border: 2px solid var(--border);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.checklist-box::after {
+  content: '✓';
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.2s;
+}
+.checklist-item.checked .checklist-box {
+  background: var(--gradient-success);
+  border-color: transparent;
+}
+.checklist-item.checked .checklist-box::after {
+  opacity: 1;
+  transform: scale(1);
+}
+.checklist-body { flex: 1; min-width: 0; }
+.checklist-body strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 2px;
+}
+.checklist-body small {
+  font-size: 11px;
+  color: var(--gray);
+}
+
+/* Comments */
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.comment-item {
+  display: flex;
+  gap: 12px;
+}
+.comment-avatar {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--gradient);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.comment-body { flex: 1; min-width: 0; }
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.comment-header strong { font-size: 13px; font-weight: 700; color: var(--dark); }
+.comment-header small { font-size: 11px; color: var(--gray); }
+.comment-content {
+  background: var(--bg);
+  padding: 10px 14px;
+  border-radius: 12px;
+  border-top-right-radius: 4px;
+  font-size: 12px;
+  color: var(--dark);
+  line-height: 1.8;
+}
+.comment-input-wrap {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+.comment-input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 13px;
+  resize: none;
+  min-height: 44px;
+  transition: all 0.2s;
+}
+.comment-input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(53,132,228,0.1);
+}
+
+.drawer-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+  background: var(--bg-alt);
+}
+.drawer-footer .btn { flex: 1; justify-content: center; }
+
+/* ==================== TIMELINE ==================== */
+.timeline {
+  position: relative;
+  padding-right: 30px;
+  margin: 8px 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 12px; right: 11px; bottom: 12px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--success), var(--warning), var(--border));
+}
+.tl-item {
+  position: relative;
+  padding-bottom: 20px;
+}
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item::before {
+  content: '';
+  position: absolute;
+  top: 6px; right: -30px;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--success);
+  z-index: 2;
+}
+.tl-item.done::before { border-color: var(--success); background: var(--success); }
+.tl-item.current::before { border-color: var(--warning); background: var(--warning); animation: pulse 2s infinite; }
+.tl-item.pending::before { border-color: var(--border); }
+.tl-item.rejected::before { border-color: var(--danger); background: var(--danger); }
+
+.tl-item h5 {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+.tl-item small {
+  font-size: 11px;
+  color: var(--gray);
+  display: block;
+  margin-bottom: 6px;
+}
+.tl-item p {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.8;
+  background: var(--bg);
+  padding: 10px 12px;
+  border-radius: 10px;
+  border-right: 3px solid var(--border);
+}
+.tl-item.done p { border-right-color: var(--success); }
+.tl-item.current p { border-right-color: var(--warning); background: rgba(245,158,11,0.04); }
+.tl-item.rejected p { border-right-color: var(--danger); background: rgba(239,68,68,0.04); }
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(245,158,11,0.15); }
+  50% { box-shadow: 0 0 0 8px rgba(245,158,11,0.05); }
+}
+
+/* ==================== STATS MINI ==================== */
+.mini-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+.mini-stat {
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.mini-stat .value {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.mini-stat .value.gold { color: var(--accent-dark); }
+.mini-stat .value.green { color: var(--success); }
+.mini-stat .value.blue { color: var(--primary); }
+.mini-stat .value.red { color: var(--danger); }
+.mini-stat .label {
+  font-size: 11px;
+  color: var(--gray);
+  font-weight: 600;
+}
+
+/* ==================== CHART ==================== */
+.chart-container {
+  position: relative;
+  height: 280px;
+  padding: 8px 0;
+}
+
+/* ==================== BADGE ==================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.badge.success { background: rgba(16,185,129,0.12); color: var(--success); }
+.badge.warning { background: rgba(245,158,11,0.14); color: var(--warning); }
+.badge.danger { background: rgba(239,68,68,0.12); color: var(--danger); }
+.badge.info { background: rgba(59,130,246,0.12); color: var(--info); }
+.badge.purple { background: rgba(139,92,246,0.12); color: var(--purple); }
+.badge.gray { background: rgba(100,116,139,0.12); color: var(--gray); }
+.badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ==================== TOAST ==================== */
+.toast-container {
+  position: fixed;
+  top: 24px; left: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.toast {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 280px;
+  max-width: 380px;
+  border-right: 4px solid var(--success);
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast.error { border-right-color: var(--danger); }
+.toast.warning { border-right-color: var(--warning); }
+.toast.info { border-right-color: var(--info); }
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.toast-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  background: rgba(16,185,129,0.12);
+  color: var(--success);
+}
+.toast.error .toast-icon { background: rgba(239,68,68,0.12); color: var(--danger); }
+.toast.warning .toast-icon { background: rgba(245,158,11,0.14); color: var(--warning); }
+.toast.info .toast-icon { background: rgba(59,130,246,0.12); color: var(--info); }
+.toast-body strong { display: block; font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+.toast-body span { font-size: 12px; color: var(--gray); }
+
+/* ==================== MODAL ==================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,41,0.6);
+  backdrop-filter: blur(6px);
+  z-index: 300;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
+.modal {
+  background: var(--bg-alt);
+  border-radius: var(--radius-lg);
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--shadow-xl);
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+.modal-overlay.active .modal { transform: scale(1); }
+.modal-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.modal-icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: rgba(16,185,129,0.12);
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.modal-icon.danger { background: rgba(239,68,68,0.12); color: var(--danger); }
+.modal-header h3 {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--dark);
+}
+.modal-header p {
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 3px;
+}
+.modal-body { padding: 24px; }
+.modal-body p {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.9;
+  margin-bottom: 16px;
+}
+.modal-body textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  font-family: inherit;
+  font-size: 13px;
+  resize: vertical;
+  min-height: 100px;
+  transition: all 0.2s;
+}
+.modal-body textarea:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(53,132,228,0.1);
+}
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+/* ==================== OVERLAY ==================== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,41,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.overlay.active { opacity: 1; pointer-events: auto; }
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1200px) {
+  .content-grid, .content-grid-equal { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(100%); width: var(--sidebar-w) !important; }
+  .sidebar.mobile-open { transform: translateX(0); }
+  .sidebar.collapsed .sidebar-brand-text,
+  .sidebar.collapsed .nav-item .label,
+  .sidebar.collapsed .nav-section-title,
+  .sidebar.collapsed .user-info,
+  .sidebar.collapsed .nav-item .badge { opacity: 1; }
+  .main { margin-right: 0 !important; }
+  .content { padding: 20px 16px 100px; }
+  .topbar { padding: 12px 16px; }
+  .topbar-search { display: none; }
+  .breadcrumb { display: none; }
+  .drawer { width: 100%; }
+}
+@media (max-width: 640px) {
+  .content { padding: 16px 12px 100px; }
+  .page-title h1 { font-size: 20px; }
+  .page-actions { width: 100%; }
+  .page-actions .btn { flex: 1; justify-content: center; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .kpi-card { padding: 16px; }
+  .kpi-value { font-size: 22px; }
+  .card-header, .card-body { padding-left: 16px; padding-right: 16px; }
+  .filter-bar { padding: 14px; }
+  .filter-group { min-width: 100%; }
+  .info-grid { grid-template-columns: 1fr; }
+  .validation-steps-mini { grid-template-columns: repeat(2, 1fr); }
+  .drawer-hero-stats { grid-template-columns: 1fr; }
+  .tab-btn { padding: 9px 12px; font-size: 12px; }
+  .tab-btn .tab-count { display: none; }
+}
+@media (max-width: 420px) {
+  .kpi-grid { grid-template-columns: 1fr; }
+}
+</style>
+<link rel="stylesheet" href="theme.css">
+<link rel="icon" href="assets/images/logo.png" type="image/png">
+<link rel="shortcut icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+
+<div class="toast-container" id="toastContainer"></div>
+<div class="overlay" id="overlay"></div>
+
+<!-- ==================== SIDEBAR ==================== -->
+<aside class="sidebar" id="sidebar"><div class="sidebar-brand"><a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit"><div class="sidebar-logo"><img src="assets/images/logo.png" alt="ایرانیان توکن"></div><div class="sidebar-brand-text"><strong>ایرانیان توکن</strong><small>مرکز مدیریت و پایش</small></div></a></div><nav class="sidebar-nav" aria-label="ناوبری یکپارچه سامانه">
+<div class="nav-section-title">مرکز کار</div><a class="nav-item" href="dashboard.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="label">داشبورد</span></a>
+<div class="nav-group "><div class="nav-parent-row"><a class="nav-item" href="projects.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="label">پروژه‌ها و دارایی‌ها</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a class="" href="projects.html">فهرست پروژه‌ها</a><a class="" href="new-project.html">ثبت پروژه جدید</a><a class="" href="project-detail.html">جزئیات پروژه</a><a class="" href="car-token.html">توکن خودرو</a><a class="" href="honey-token.html">توکن کندوی عسل</a><a class="" href="housing-token.html">توکن مسکن</a><a class="" href="solar-token.html">توکن انرژی خورشیدی</a></div></div></div>
+<div class="nav-group open"><div class="nav-parent-row"><a class="nav-item active" href="validation.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span class="label">اسناد و اعتبارسنجی</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a href="dashboard.html#documents">مرکز اسناد</a><a class="active" href="validation.html">صف اعتبارسنجی</a></div></div></div>
+<div class="nav-section-title">کنترل و گزارش</div><a class="nav-item" href="users.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span><span class="label">کاربران و نقش‌ها</span></a><a class="nav-item" href="reports.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9m5 10V5m5 14v-7m5 7V3"/></svg></span><span class="label">گزارش‌های مدیریتی</span></a><a class="nav-item" href="dashboard.html#audit"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span><span class="label">ثبت رویدادها</span></a>
+<div class="nav-section-title">حساب و سامانه</div><div class="nav-group "><div class="nav-parent-row"><a class="nav-item" href="settings.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 15l2 1-2 3-2-1a8 8 0 0 1-2 1v2h-4v-2a8 8 0 0 1-2-1l-2 1-2-3 2-1a8 8 0 0 1 0-2l-2-1 2-3 2 1a8 8 0 0 1 2-1V6h4v2a8 8 0 0 1 2 1l2-1 2 3-2 1a8 8 0 0 1 0 2z"/></svg></span><span class="label">حساب و تنظیمات</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a class="" href="profile.html">پروفایل و حساب</a><a class="" href="settings.html">تنظیمات سامانه</a><a class="" href="notifications.html">اعلان‌ها</a><a href="auth.html">ورود و ثبت‌نام</a></div></div></div><a class="nav-item" href="help.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M9.7 9a2.4 2.4 0 1 1 4 1.8c-1 .7-1.7 1.1-1.7 2.4M12 16.5h.01"/></svg></span><span class="label">مرکز راهنما</span></a>
+<div class="nav-section-title">صفحات سامانه</div><a class="nav-item" href="index.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="label">معرفی سامانه</span></a><a class="nav-item" href="contact.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/></svg></span><span class="label">تماس با ما</span></a><a class="nav-item" href="auth.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 8l-4 4 4 4M6 12h9a4 4 0 0 1 4 4v2"/></svg></span><span class="label">ثبت نام / ورود</span></a><div class="nav-section-title">دسترسی سریع</div><a class="nav-item" href="index.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="label">بازگشت به صفحه اصلی</span></a></nav></aside>
+
+<!-- ==================== MAIN ==================== -->
+<div class="main" id="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <button class="toggle-btn" id="toggleBtn"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></button>
+    <div class="breadcrumb">
+      <a href="dashboard.html">داشبورد</a>
+      <span>›</span>
+      <span class="current">اعتبارسنجی</span>
+    </div>
+    <div class="topbar-search">
+      <span class="search-icon">⌕</span>
+      <input type="text" placeholder="جستجوی سند، پروژه، کارشناس...">
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" onclick="showToast('info','راهنما','راهنمای اعتبارسنجی باز شد.')" title="راهنما"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9.7 9a2.4 2.4 0 1 1 4 1.8c-1 .7-1.7 1.1-1.7 2.4M12 16.5h.01"/></svg></span></button>
+      <button class="icon-btn" onclick="window.print()" title="چاپ"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 9V4h10v5M7 17H5a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v7H7z"/></svg></span></button>
+      <button class="icon-btn" id="notifBtn">◉<span class="dot"></span></button>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="page-title">
+        <h1>سیستم اعتبارسنجی ✓</h1>
+        <p>بررسی، تأیید و رد اسناد و مدارک پروژه‌ها توسط کارشناسان</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-outline" onclick="showToast('info','خروجی','در حال آماده‌سازی گزارش اعتبارسنجی...')">
+          ⇩ خروجی Excel
+        </button>
+        <button class="btn btn-primary" onclick="showToast('success','تنظیمات','تنظیمات اعتبارسنجی باز شد.')">
+          <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> تنظیمات اعتبارسنجی
+        </button>
+      </div>
+    </div>
+
+    <!-- KPI -->
+    <div class="kpi-grid">
+      <div class="kpi-card gold">
+        <div class="kpi-header">
+          <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span></div>
+          <div class="kpi-trend up">+۳</div>
+        </div>
+        <div class="kpi-value">۵ <span>مورد</span></div>
+        <div class="kpi-label">در انتظار بررسی</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <div class="kpi-trend neutral">—</div>
+        </div>
+        <div class="kpi-value">۴ <span>مورد</span></div>
+        <div class="kpi-label">در حال بررسی</div>
+      </div>
+
+      <div class="kpi-card green">
+        <div class="kpi-header">
+          <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+          <div class="kpi-trend up">+۴۲٪</div>
+        </div>
+        <div class="kpi-value">۴۷ <span>سند</span></div>
+        <div class="kpi-label">تأیید شده</div>
+      </div>
+
+      <div class="kpi-card red">
+        <div class="kpi-header">
+          <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></span></div>
+          <div class="kpi-trend down">-۱۵٪</div>
+        </div>
+        <div class="kpi-value">۵ <span>سند</span></div>
+        <div class="kpi-label">رد شده</div>
+      </div>
+
+      <div class="kpi-card purple">
+        <div class="kpi-header">
+          <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+          <div class="kpi-trend up">+۸٪</div>
+        </div>
+        <div class="kpi-value">۳.۲ <span>روز</span></div>
+        <div class="kpi-label">میانگین زمان تأیید</div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <nav class="tabs-nav">
+      <button class="tab-btn active" data-tab="pending">
+        <span>◷</span> در انتظار بررسی <span class="tab-count">۵</span>
+      </button>
+      <button class="tab-btn" data-tab="review">
+        <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></span> در حال بررسی <span class="tab-count">۴</span>
+      </button>
+      <button class="tab-btn" data-tab="approved">
+        <span>✓</span> تأیید شده <span class="tab-count">۴۷</span>
+      </button>
+      <button class="tab-btn" data-tab="rejected">
+        <span>✗</span> رد شده <span class="tab-count">۵</span>
+      </button>
+      <button class="tab-btn" data-tab="reports">
+        <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></span> گزارش‌ها
+      </button>
+    </nav>
+
+    <!-- ==================== TAB: PENDING ==================== -->
+    <div class="tab-panel active" id="panel-pending">
+
+      <!-- Filter -->
+      <div class="filter-bar">
+        <div class="filter-group" style="flex: 1.5;">
+          <label>جستجو</label>
+          <input type="text" placeholder="نام سند، پروژه، کارشناس...">
+        </div>
+        <div class="filter-group">
+          <label>نوع سند</label>
+          <select>
+            <option>همه انواع</option>
+            <option>سند مالکیت</option>
+            <option>مجوز</option>
+            <option>گزارش ارزیابی</option>
+            <option>قرارداد</option>
+            <option>گزارش فنی</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>پروژه</label>
+          <select>
+            <option>همه پروژه‌ها</option>
+            <option>دامداری نمونه</option>
+            <option>برج تجاری آرین</option>
+            <option>نیروگاه خورشیدی</option>
+            <option>هتل کیش</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>اولویت</label>
+          <select>
+            <option>همه</option>
+            <option>فوری</option>
+            <option>معمولی</option>
+            <option>کم</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" style="padding: 11px 22px;" onclick="showToast('success','فیلتر','فیلترها اعمال شد.')">✓ اعمال</button>
+      </div>
+
+      <!-- Validation List -->
+      <div class="validation-list">
+
+        <!-- Item 1 -->
+        <div class="validation-item pending" onclick="openValidation(1)">
+          <div class="validation-header">
+            <div class="validation-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+            <div class="validation-info">
+              <div class="validation-title">
+                سند مالکیت زمین دامداری
+                <span class="doc-type">سند مالکیت</span>
+              </div>
+              <div class="validation-project">
+                <strong>دامداری نمونه</strong>
+                <span>·</span>
+                <span>IRT-1403-001</span>
+                <span>·</span>
+                <span>بارگذاری: سارا رضایی</span>
+              </div>
+              <div class="validation-meta">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۱۴۰۳/۰۹/۲۸</span>
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> PDF · ۲.۴ MB</span>
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۲ روز پیش</span>
+              </div>
+            </div>
+            <span class="validation-status-badge pending">در انتظار</span>
+          </div>
+
+          <div class="validation-progress">
+            <div class="validation-steps-mini">
+              <div class="mini-step done">
+                <div class="mini-step-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+                <div class="mini-step-label">ثبت</div>
+              </div>
+              <div class="mini-step current">
+                <div class="mini-step-icon"><span class="it-symbol" aria-hidden="true"><path d="M12 4a8 8 0 1 0 0 16z"/></span></div>
+                <div class="mini-step-label">بررسی</div>
+              </div>
+              <div class="mini-step">
+                <div class="mini-step-icon">۳</div>
+                <div class="mini-step-label">تصویب</div>
+              </div>
+              <div class="mini-step">
+                <div class="mini-step-icon">۴</div>
+                <div class="mini-step-label">تأیید نهایی</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="validation-footer">
+            <div class="validation-assigned">
+              <div class="mini-avatar">ع.ک</div>
+              <span>کارشناس: <strong style="color: var(--dark);">علی کریمی</strong></span>
+            </div>
+            <div class="validation-actions">
+              <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); showToast('info','مشاهده','پیش‌نمایش سند باز شد.')"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مشاهده</button>
+              <button class="btn btn-success btn-sm" onclick="event.stopPropagation(); openApproveModal(1)">✓ تأیید</button>
+              <button class="btn btn-danger btn-sm" onclick="event.stopPropagation(); openRejectModal(1)">✗ رد</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="validation-item pending" onclick="openValidation(2)">
+          <div class="validation-header">
+            <div class="validation-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+            <div class="validation-info">
+              <div class="validation-title">
+                مجوز بهره‌برداری نیروگاه خورشیدی
+                <span class="doc-type">مجوز</span>
+              </div>
+              <div class="validation-project">
+                <strong>نیروگاه خورشیدی یزد</strong>
+                <span>·</span>
+                <span>IRT-1403-004</span>
+                <span>·</span>
+                <span>بارگذاری: محمد احمدی</span>
+              </div>
+              <div class="validation-meta">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۱۴۰۳/۰۹/۲۷</span>
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> PDF · ۱.۱ MB</span>
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۳ روز پیش</span>
+              </div>
+            </div>
+            <span class="validation-status-badge pending">در انتظار</span>
+          </div>
+
+          <div class="validation-progress">
+            <div class="validation-steps-mini">
+              <div class="mini-step done">
+                <div class="mini-step-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+                <div class="mini-step-label">ثبت</div>
+              </div>
+              <div class="mini-step current">
+                <div class="mini-step-icon"><span class="it-symbol" aria-hidden="true"><path d="M12 4a8 8 0 1 0 0 16z"/></span></div>
+                <div class="mini-step-label">بررسی</div>
+              </div>
+              <div class="mini-step">
+                <div class="mini-step-icon">۳</div>
+                <div class="mini-step-label">تصویب</div>
+              </div>
+              <div class="mini-step">
+                <div class="mini-step-icon">۴</div>
+                <div class="mini-step-label">تأیید نهایی</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="validation-footer">
+            <div class="validation-assigned">
+              <div class="mini-avatar" style="background: linear-gradient(135deg, #10b981, #34d399);">س.ر</div>
+              <span>کارشناس: <strong style="color: var(--dark);">سارا رضایی</strong></span>
+            </div>
+            <div class="validation-actions">
+              <button class="btn btn-outline btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مشاهده</button>
+              <button class="btn btn-success btn-sm">✓ تأیید</button>
+              <button class="btn btn-danger btn-sm">✗ رد</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="validation-item pending" onclick="openValidation(3)">
+          <div class="validation-header">
+            <div class="validation-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+            <div class="validation-info">
+              <div class="validation-title">
+                گزارش ارزیابی دارایی برج آرین
+                <span class="doc-type">گزارش ارزیابی</span>
+              </div>
+              <div class="validation-project">
+                <strong>برج تجاری آرین</strong>
+                <span>·</span>
+                <span>IRT-1403-003</span>
+                <span>·</span>
+                <span>بارگذاری: علی کریمی</span>
+              </div>
+              <div class="validation-meta">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۱۴۰۳/۰۹/۲۵</span>
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> XLSX · ۳.۸ MB</span>
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۵ روز پیش</span>
+              </div>
+            </div>
+            <span class="validation-status-badge pending">در انتظار</span>
+          </div>
+
+          <div class="validation-progress">
+            <div class="validation-steps-mini">
+              <div class="mini-step done">
+                <div class="mini-step-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+                <div class="mini-step-label">ثبت</div>
+              </div>
+              <div class="mini-step current">
+                <div class="mini-step-icon"><span class="it-symbol" aria-hidden="true"><path d="M12 4a8 8 0 1 0 0 16z"/></span></div>
+                <div class="mini-step-label">بررسی</div>
+              </div>
+              <div class="mini-step">
+                <div class="mini-step-icon">۳</div>
+                <div class="mini-step-label">تصویب</div>
+              </div>
+              <div class="mini-step">
+                <div class="mini-step-icon">۴</div>
+                <div class="mini-step-label">تأیید نهایی</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="validation-footer">
+            <div class="validation-assigned">
+              <div class="mini-avatar" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">ف.ح</div>
+              <span>کارشناس: <strong style="color: var(--dark);">فاطمه حسینی</strong></span>
+            </div>
+            <div class="validation-actions">
+              <button class="btn btn-outline btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مشاهده</button>
+              <button class="btn btn-success btn-sm">✓ تأیید</button>
+              <button class="btn btn-danger btn-sm">✗ رد</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="validation-item pending" onclick="openValidation(4)">
+          <div class="validation-header">
+            <div class="validation-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+            <div class="validation-info">
+              <div class="validation-title">
+                قرارداد مشارکت هتل کیش
+                <span class="doc-type">قرارداد</span>
+              </div>
+              <div class="validation-project">
+                <strong>هتل گردشگری کیش</strong>
+                <span>·</span>
+                <span>IRT-1403-006</span>
+                <span>·</span>
+                <span>بارگذاری: رضا محمدی</span>
+              </div>
+              <div class="validation-meta">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۱۴۰۳/۰۹/۲۴</span>
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> DOCX · ۲.۱ MB</span>
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۶ روز پیش</span>
+              </div>
+            </div>
+            <span class="validation-status-badge pending">در انتظار</span>
+          </div>
+
+          <div class="validation-progress">
+            <div class="validation-steps-mini">
+              <div class="mini-step done">
+                <div class="mini-step-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+                <div class="mini-step-label">ثبت</div>
+              </div>
+              <div class="mini-step current">
+                <div class="mini-step-icon"><span class="it-symbol" aria-hidden="true"><path d="M12 4a8 8 0 1 0 0 16z"/></span></div>
+                <div class="mini-step-label">بررسی</div>
+              </div>
+              <div class="mini-step">
+                <div class="mini-step-icon">۳</div>
+                <div class="mini-step-label">تصویب</div>
+              </div>
+              <div class="mini-step">
+                <div class="mini-step-icon">۴</div>
+                <div class="mini-step-label">تأیید نهایی</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="validation-footer">
+            <div class="validation-assigned">
+              <div class="mini-avatar" style="background: linear-gradient(135deg, #ec4899, #f472b6);">م.ا</div>
+              <span>کارشناس: <strong style="color: var(--dark);">محمد احمدی</strong></span>
+            </div>
+            <div class="validation-actions">
+              <button class="btn btn-outline btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مشاهده</button>
+              <button class="btn btn-success btn-sm">✓ تأیید</button>
+              <button class="btn btn-danger btn-sm">✗ رد</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="validation-item pending" onclick="openValidation(5)">
+          <div class="validation-header">
+            <div class="validation-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+            <div class="validation-info">
+              <div class="validation-title">
+                گزارش فنی دام‌های مولد
+                <span class="doc-type">گزارش فنی</span>
+              </div>
+              <div class="validation-project">
+                <strong>دامداری نمونه</strong>
+                <span>·</span>
+                <span>IRT-1403-001</span>
+                <span>·</span>
+                <span>بارگذاری: دامپزشک رسمی</span>
+              </div>
+              <div class="validation-meta">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۱۴۰۳/۰۹/۲۳</span>
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> PDF · ۳.۲ MB</span>
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۷ روز پیش</span>
+              </div>
+            </div>
+            <span class="validation-status-badge pending">در انتظار</span>
+          </div>
+
+          <div class="validation-progress">
+            <div class="validation-steps-mini">
+              <div class="mini-step done">
+                <div class="mini-step-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+                <div class="mini-step-label">ثبت</div>
+              </div>
+              <div class="mini-step current">
+                <div class="mini-step-icon"><span class="it-symbol" aria-hidden="true"><path d="M12 4a8 8 0 1 0 0 16z"/></span></div>
+                <div class="mini-step-label">بررسی</div>
+              </div>
+              <div class="mini-step">
+                <div class="mini-step-icon">۳</div>
+                <div class="mini-step-label">تصویب</div>
+              </div>
+              <div class="mini-step">
+                <div class="mini-step-icon">۴</div>
+                <div class="mini-step-label">تأیید نهایی</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="validation-footer">
+            <div class="validation-assigned">
+              <div class="mini-avatar" style="background: linear-gradient(135deg, #10b981, #34d399);">ع.ک</div>
+              <span>کارشناس: <strong style="color: var(--dark);">علی کریمی</strong></span>
+            </div>
+            <div class="validation-actions">
+              <button class="btn btn-outline btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مشاهده</button>
+              <button class="btn btn-success btn-sm">✓ تأیید</button>
+              <button class="btn btn-danger btn-sm">✗ رد</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== TAB: REVIEW ==================== -->
+    <div class="tab-panel" id="panel-review">
+      <div class="validation-list">
+        <div class="validation-item review" onclick="openValidation(6)">
+          <div class="validation-header">
+            <div class="validation-icon review"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+            <div class="validation-info">
+              <div class="validation-title">
+                سند مالکیت نیروگاه اصفهان
+                <span class="doc-type">سند مالکیت</span>
+              </div>
+              <div class="validation-project">
+                <strong>نیروگاه اصفهان</strong>
+                <span>·</span>
+                <span>IRT-1403-009</span>
+                <span>·</span>
+                <span>در حال بررسی توسط: علی کریمی</span>
+              </div>
+              <div class="validation-meta">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۱۴۰۳/۰۹/۲۰</span>
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> PDF · ۳.۱ MB</span>
+              </div>
+            </div>
+            <span class="validation-status-badge review">در حال بررسی</span>
+          </div>
+        </div>
+
+        <div class="validation-item review" onclick="openValidation(7)">
+          <div class="validation-header">
+            <div class="validation-icon review"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+            <div class="validation-info">
+              <div class="validation-title">
+                مجوز احداث کندوستان اردبیل
+                <span class="doc-type">مجوز</span>
+              </div>
+              <div class="validation-project">
+                <strong>کندوستان ارگانیک اردبیل</strong>
+                <span>·</span>
+                <span>IRT-1403-011</span>
+                <span>·</span>
+                <span>در حال بررسی توسط: سارا رضایی</span>
+              </div>
+              <div class="validation-meta">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۱۴۰۳/۰۹/۱۹</span>
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> PDF · ۸۵۰ KB</span>
+              </div>
+            </div>
+            <span class="validation-status-badge review">در حال بررسی</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: APPROVED ==================== -->
+    <div class="tab-panel" id="panel-approved">
+      <div class="validation-list">
+        <div class="validation-item approved" onclick="showToast('info','جزئیات','اطلاعات سند تأیید شده نمایش داده شد.')">
+          <div class="validation-header">
+            <div class="validation-icon approved"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+            <div class="validation-info">
+              <div class="validation-title">
+                سند مالکیت زمین دامداری
+                <span class="doc-type">سند مالکیت</span>
+              </div>
+              <div class="validation-project">
+                <strong>دامداری نمونه</strong>
+                <span>·</span>
+                <span>IRT-1403-001</span>
+                <span>·</span>
+                <span>تأیید توسط: علی کریمی</span>
+              </div>
+              <div class="validation-meta">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۱۴۰۳/۰۹/۱۵</span>
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> تأیید در ۳ روز</span>
+              </div>
+            </div>
+            <span class="validation-status-badge approved">تأیید شده</span>
+          </div>
+        </div>
+
+        <div class="validation-item approved" onclick="showToast('info','جزئیات','اطلاعات سند تأیید شده نمایش داده شد.')">
+          <div class="validation-header">
+            <div class="validation-icon approved"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+            <div class="validation-info">
+              <div class="validation-title">
+                قرارداد مشارکت نیروگاه یزد
+                <span class="doc-type">قرارداد</span>
+              </div>
+              <div class="validation-project">
+                <strong>نیروگاه خورشیدی یزد</strong>
+                <span>·</span>
+                <span>IRT-1403-004</span>
+                <span>·</span>
+                <span>تأیید توسط: رضا محمدی</span>
+              </div>
+              <div class="validation-meta">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۱۴۰۳/۰۹/۱۲</span>
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> تأیید در ۲ روز</span>
+              </div>
+            </div>
+            <span class="validation-status-badge approved">تأیید شده</span>
+          </div>
+        </div>
+
+        <div class="validation-item approved" onclick="showToast('info','جزئیات','اطلاعات سند تأیید شده نمایش داده شد.')">
+          <div class="validation-header">
+            <div class="validation-icon approved"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+            <div class="validation-info">
+              <div class="validation-title">
+                گزارش فنی پنل‌های خورشیدی
+                <span class="doc-type">گزارش فنی</span>
+              </div>
+              <div class="validation-project">
+                <strong>نیروگاه اصفهان</strong>
+                <span>·</span>
+                <span>IRT-1403-009</span>
+                <span>·</span>
+                <span>تأیید توسط: سارا رضایی</span>
+              </div>
+              <div class="validation-meta">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۱۴۰۳/۰۹/۱۰</span>
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> تأیید در ۴ روز</span>
+              </div>
+            </div>
+            <span class="validation-status-badge approved">تأیید شده</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: REJECTED ==================== -->
+    <div class="tab-panel" id="panel-rejected">
+      <div class="validation-list">
+        <div class="validation-item rejected" onclick="showToast('info','جزئیات','اطلاعات سند رد شده نمایش داده شد.')">
+          <div class="validation-header">
+            <div class="validation-icon rejected"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></span></div>
+            <div class="validation-info">
+              <div class="validation-title">
+                گزارش بازدید میدانی
+                <span class="doc-type">گزارش فنی</span>
+              </div>
+              <div class="validation-project">
+                <strong>کارخانه فولاد</strong>
+                <span>·</span>
+                <span>IRT-1403-005</span>
+                <span>·</span>
+                <span>رد توسط: نازنین طاهری</span>
+              </div>
+              <div class="validation-meta">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۱۴۰۳/۰۹/۱۸</span>
+                <span style="color: var(--danger); font-weight: 700;">دلیل: مدارک ناقص</span>
+              </div>
+            </div>
+            <span class="validation-status-badge rejected">رد شده</span>
+          </div>
+        </div>
+
+        <div class="validation-item rejected" onclick="showToast('info','جزئیات','اطلاعات سند رد شده نمایش داده شد.')">
+          <div class="validation-header">
+            <div class="validation-icon rejected"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></span></div>
+            <div class="validation-info">
+              <div class="validation-title">
+                مجوز ساخت برج آرین
+                <span class="doc-type">مجوز</span>
+              </div>
+              <div class="validation-project">
+                <strong>برج تجاری آرین</strong>
+                <span>·</span>
+                <span>IRT-1403-003</span>
+                <span>·</span>
+                <span>رد توسط: رضا محمدی</span>
+              </div>
+              <div class="validation-meta">
+                <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ۱۴۰۳/۰۹/۱۴</span>
+                <span style="color: var(--danger); font-weight: 700;">دلیل: تاریخ انقضا گذشته</span>
+              </div>
+            </div>
+            <span class="validation-status-badge rejected">رد شده</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: REPORTS ==================== -->
+    <div class="tab-panel" id="panel-reports">
+
+      <div class="content-grid-equal">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></span> وضعیت کلی اسناد</h3>
+              <p>توزیع بر اساس وضعیت اعتبارسنجی</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="statusChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9m5 10V5m5 14v-7m5 7V3"/></svg></span> روند اعتبارسنجی</h3>
+              <p>تعداد تأیید و رد در ۶ ماه اخیر</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="trendChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-grid-equal" style="margin-top: 24px;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></span> عملکرد کارشناسان</h3>
+              <p>تعداد بررسی‌های انجام‌شده</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="mini-stats">
+              <div class="mini-stat">
+                <div class="value gold">۴۷</div>
+                <div class="label">علی کریمی</div>
+              </div>
+              <div class="mini-stat">
+                <div class="value green">۳۸</div>
+                <div class="label">سارا رضایی</div>
+              </div>
+              <div class="mini-stat">
+                <div class="value blue">۲۵</div>
+                <div class="label">فاطمه حسینی</div>
+              </div>
+              <div class="mini-stat">
+                <div class="value purple">۱۸</div>
+                <div class="label">رضا محمدی</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></span> آمار کلیدی</h3>
+              <p>شاخص‌های عملکرد سیستم</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="mini-stats">
+              <div class="mini-stat">
+                <div class="value green">۹۰.۳٪</div>
+                <div class="label">نرخ تأیید</div>
+              </div>
+              <div class="mini-stat">
+                <div class="value red">۹.۷٪</div>
+                <div class="label">نرخ رد</div>
+              </div>
+              <div class="mini-stat">
+                <div class="value gold">۳.۲ روز</div>
+                <div class="label">میانگین زمان</div>
+              </div>
+              <div class="mini-stat">
+                <div class="value blue">۱۲۸</div>
+                <div class="label">کل بررسی‌ها</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 24px;">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span> گزارش کامل اسناد</h3>
+            <p>لیست تمام اسناد اعتبارسنجی‌شده</p>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="showToast('success','خروجی','گزارش در حال دانلود است...')">
+            ⇩ دانلود Excel
+          </button>
+        </div>
+        <div class="card-body" style="padding: 0; overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px; min-width: 700px;">
+            <thead>
+              <tr style="background: var(--bg);">
+                <th style="text-align: right; padding: 14px 16px; font-weight: 700; color: var(--gray); font-size: 12px; border-bottom: 1px solid var(--border);">سند</th>
+                <th style="text-align: right; padding: 14px 16px; font-weight: 700; color: var(--gray); font-size: 12px; border-bottom: 1px solid var(--border);">پروژه</th>
+                <th style="text-align: right; padding: 14px 16px; font-weight: 700; color: var(--gray); font-size: 12px; border-bottom: 1px solid var(--border);">کارشناس</th>
+                <th style="text-align: right; padding: 14px 16px; font-weight: 700; color: var(--gray); font-size: 12px; border-bottom: 1px solid var(--border);">وضعیت</th>
+                <th style="text-align: right; padding: 14px 16px; font-weight: 700; color: var(--gray); font-size: 12px; border-bottom: 1px solid var(--border);">تاریخ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 14px 16px; font-weight: 700;">سند مالکیت زمین</td>
+                <td style="padding: 14px 16px;">دامداری نمونه</td>
+                <td style="padding: 14px 16px;">علی کریمی</td>
+                <td style="padding: 14px 16px;"><span class="badge success">تأیید</span></td>
+                <td style="padding: 14px 16px; color: var(--gray);">۱۴۰۳/۰۹/۱۵</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 14px 16px; font-weight: 700;">قرارداد مشارکت</td>
+                <td style="padding: 14px 16px;">نیروگاه یزد</td>
+                <td style="padding: 14px 16px;">رضا محمدی</td>
+                <td style="padding: 14px 16px;"><span class="badge success">تأیید</span></td>
+                <td style="padding: 14px 16px; color: var(--gray);">۱۴۰۳/۰۹/۱۲</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 14px 16px; font-weight: 700;">گزارش بازدید</td>
+                <td style="padding: 14px 16px;">کارخانه فولاد</td>
+                <td style="padding: 14px 16px;">نازنین طاهری</td>
+                <td style="padding: 14px 16px;"><span class="badge danger">رد</span></td>
+                <td style="padding: 14px 16px; color: var(--gray);">۱۴۰۳/۰۹/۱۸</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border);">
+                <td style="padding: 14px 16px; font-weight: 700;">مجوز ساخت</td>
+                <td style="padding: 14px 16px;">برج آرین</td>
+                <td style="padding: 14px 16px;">رضا محمدی</td>
+                <td style="padding: 14px 16px;"><span class="badge danger">رد</span></td>
+                <td style="padding: 14px 16px; color: var(--gray);">۱۴۰۳/۰۹/۱۴</td>
+              </tr>
+              <tr>
+                <td style="padding: 14px 16px; font-weight: 700;">گزارش فنی</td>
+                <td style="padding: 14px 16px;">نیروگاه اصفهان</td>
+                <td style="padding: 14px 16px;">سارا رضایی</td>
+                <td style="padding: 14px 16px;"><span class="badge success">تأیید</span></td>
+                <td style="padding: 14px 16px; color: var(--gray);">۱۴۰۳/۰۹/۱۰</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ==================== DRAWER: Validation Detail ==================== -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="drawer" id="validationDrawer">
+  <div class="drawer-header">
+    <div>
+      <h3 id="drawerTitle">سند مالکیت زمین دامداری</h3>
+      <small id="drawerSubtitle">IRT-1403-001 · دامداری نمونه</small>
+    </div>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+
+  <div class="drawer-body">
+
+    <div class="drawer-hero">
+      <h2>سند مالکیت زمین دامداری</h2>
+      <p>سند مالکیت شش‌دانگ زمین ۲۵,۰۰۰ متر مربع در استان اصفهان</p>
+      <div class="drawer-hero-stats">
+        <div class="drawer-hero-stat">
+          <div class="v">۲.۴ MB</div>
+          <div class="l">حجم فایل</div>
+        </div>
+        <div class="drawer-hero-stat">
+          <div class="v">۲ روز</div>
+          <div class="l">در انتظار</div>
+        </div>
+        <div class="drawer-hero-stat">
+          <div class="v">PDF</div>
+          <div class="l">فرمت</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-section-title">اطلاعات سند</div>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">نوع سند</span>
+          <span class="value">سند مالکیت</span>
+        </div>
+        <div class="info-item">
+          <span class="label">شماره سند</span>
+          <span class="value mono">۱۴۰۳/۱۲۸۵۶</span>
+        </div>
+        <div class="info-item">
+          <span class="label">بارگذاری توسط</span>
+          <span class="value">سارا رضایی</span>
+        </div>
+        <div class="info-item">
+          <span class="label">تاریخ بارگذاری</span>
+          <span class="value">۱۴۰۳/۰۹/۲۸</span>
+        </div>
+        <div class="info-item">
+          <span class="label">پروژه مرتبط</span>
+          <span class="value">دامداری نمونه</span>
+        </div>
+        <div class="info-item">
+          <span class="label">کارشناس مسئول</span>
+          <span class="value">علی کریمی</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-section-title">چک‌لیست اعتبارسنجی</div>
+      <div class="checklist">
+        <div class="checklist-item checked" onclick="toggleChecklist(this)">
+          <div class="checklist-box"></div>
+          <div class="checklist-body">
+            <strong>احراز اصالت سند</strong>
+            <small>تطبیق با سامانه ثبت اسناد</small>
+          </div>
+        </div>
+        <div class="checklist-item checked" onclick="toggleChecklist(this)">
+          <div class="checklist-box"></div>
+          <div class="checklist-body">
+            <strong>بررسی مالکیت</strong>
+            <small>تأیید مالکیت متقاضی</small>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleChecklist(this)">
+          <div class="checklist-box"></div>
+          <div class="checklist-body">
+            <strong>ارزیابی ارزش ملک</strong>
+            <small>مقایسه با قیمت‌های بازار</small>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleChecklist(this)">
+          <div class="checklist-box"></div>
+          <div class="checklist-body">
+            <strong>بازدید میدانی</strong>
+            <small>تأیید موقعیت و وضعیت ملک</small>
+          </div>
+        </div>
+        <div class="checklist-item" onclick="toggleChecklist(this)">
+          <div class="checklist-box"></div>
+          <div class="checklist-body">
+            <strong>تأیید نهایی کارشناس</strong>
+            <small>تصویب نهایی سند</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-section-title">تاریخچه بررسی</div>
+      <div class="timeline">
+        <div class="tl-item done">
+          <h5>ثبت سند</h5>
+          <small>۱۴۰۳/۰۹/۲۸ · سارا رضایی</small>
+          <p>سند مالکیت توسط سارا رضایی بارگذاری و در سیستم ثبت شد.</p>
+        </div>
+        <div class="tl-item done">
+          <h5>ارجاع به کارشناس</h5>
+          <small>۱۴۰۳/۰۹/۲۸ · سیستم</small>
+          <p>سند به کارشناس علی کریمی برای بررسی ارجاع شد.</p>
+        </div>
+        <div class="tl-item current">
+          <h5>در حال بررسی</h5>
+          <small>۱۴۰۳/۰۹/۲۸ · علی کریمی</small>
+          <p>در انتظار تکمیل چک‌لیست اعتبارسنجی.</p>
+        </div>
+        <div class="tl-item pending">
+          <h5>تصویب نهایی</h5>
+          <small>در انتظار</small>
+          <p>پس از تکمیل بررسی، تأیید نهایی انجام می‌شود.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-section-title">نظرات و یادداشت‌ها</div>
+      <div class="comment-list">
+        <div class="comment-item">
+          <div class="comment-avatar">ع.ک</div>
+          <div class="comment-body">
+            <div class="comment-header">
+              <strong>علی کریمی</strong>
+              <small>۱ ساعت پیش</small>
+            </div>
+            <div class="comment-content">
+              سند از نظر اصالت مشکلی ندارد. در حال بررسی مالکیت و تطبیق با سامانه ثبت هستم.
+            </div>
+          </div>
+        </div>
+        <div class="comment-item">
+          <div class="comment-avatar" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">ف.ح</div>
+          <div class="comment-body">
+            <div class="comment-header">
+              <strong>فاطمه حسینی</strong>
+              <small>۳۰ دقیقه پیش</small>
+            </div>
+            <div class="comment-content">
+              از نظر مالی، ارزش‌گذاری ملک منطقی به نظر می‌رسد. پیشنهاد می‌کنم بازدید میدانی هم انجام شود.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comment-input-wrap">
+        <textarea class="comment-input" placeholder="یادداشت خود را وارد کنید..." id="commentInput"></textarea>
+        <button class="btn btn-primary" onclick="submitComment()">ثبت</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="drawer-footer">
+    <button class="btn btn-outline" onclick="showToast('info','دانلود','فایل در حال دانلود است...')">
+      ⇩ دانلود سند
+    </button>
+    <button class="btn btn-danger" onclick="openRejectModal()">✗ رد سند</button>
+    <button class="btn btn-success" onclick="openApproveModal()">✓ تأیید نهایی</button>
+  </div>
+</aside>
+
+<!-- ==================== MODAL: Approve ==================== -->
+<div class="modal-overlay" id="approveModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+      <div>
+        <h3>تأیید نهایی سند</h3>
+        <p>سند پس از تأیید، معتبر خواهد بود</p>
+      </div>
+    </div>
+    <div class="modal-body">
+      <p>آیا از تأیید نهایی این سند اطمینان دارید؟ پس از تأیید، سند در پروژه ثبت شده و قابل ویرایش نخواهد بود.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-success" onclick="confirmApprove()">✓ بله، تأیید می‌کنم</button>
+      <button class="btn btn-outline" onclick="closeModal('approveModal')">انصراف</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== MODAL: Reject ==================== -->
+<div class="modal-overlay" id="rejectModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-icon danger"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></span></div>
+      <div>
+        <h3>رد سند</h3>
+        <p>دلیل رد سند را ذکر کنید</p>
+      </div>
+    </div>
+    <div class="modal-body">
+      <p>لطفاً دلیل رد سند را به‌طور شفاف بنویسید تا برای متقاضی ارسال شود.</p>
+      <textarea placeholder="مثال: مدارک ناقص است، تاریخ انقضا گذشته، تناقض در اطلاعات..." id="rejectReason"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" onclick="confirmReject()">✗ رد سند</button>
+      <button class="btn btn-outline" onclick="closeModal('rejectModal')">انصراف</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ==================== SIDEBAR ==================== */
+const sidebar = document.getElementById('sidebar');
+const main = document.getElementById('main');
+const toggleBtn = document.getElementById('toggleBtn');
+const overlay = document.getElementById('overlay');
+
+toggleBtn.addEventListener('click', () => {
+  if (window.innerWidth <= 900) {
+    sidebar.classList.toggle('mobile-open');
+    overlay.classList.toggle('active');
+  } else {
+    sidebar.classList.toggle('collapsed');
+    main.classList.toggle('expanded');
+  }
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('mobile-open');
+  overlay.classList.remove('active');
+});
+
+/* ==================== TOAST ==================== */
+function showToast(type, title, message) {
+  const container = document.getElementById('toastContainer');
+  const icons = { success: '✓', error: '✗', warning: '!', info: '<span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span>' };
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `
+    <div class="toast-icon">${icons[type]}</div>
+    <div class="toast-body">
+      <strong>${title}</strong>
+      <span>${message}</span>
+    </div>
+  `;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-100%)';
+    toast.style.transition = 'all 0.3s';
+    setTimeout(() => toast.remove(), 300);
+  }, 4000);
+}
+
+/* ==================== TABS ==================== */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+/* ==================== DRAWER ==================== */
+const drawer = document.getElementById('validationDrawer');
+const drawerOverlay = document.getElementById('drawerOverlay');
+
+const validationData = {
+  1: { title: 'سند مالکیت زمین دامداری', subtitle: 'IRT-1403-001 · دامداری نمونه' },
+  2: { title: 'مجوز بهره‌برداری نیروگاه خورشیدی', subtitle: 'IRT-1403-004 · نیروگاه خورشیدی یزد' },
+  3: { title: 'گزارش ارزیابی دارایی برج آرین', subtitle: 'IRT-1403-003 · برج تجاری آرین' },
+  4: { title: 'قرارداد مشارکت هتل کیش', subtitle: 'IRT-1403-006 · هتل گردشگری کیش' },
+  5: { title: 'گزارش فنی دام‌های مولد', subtitle: 'IRT-1403-001 · دامداری نمونه' },
+  6: { title: 'سند مالکیت نیروگاه اصفهان', subtitle: 'IRT-1403-009 · نیروگاه اصفهان' },
+  7: { title: 'مجوز احداث کندوستان اردبیل', subtitle: 'IRT-1403-011 · کندوستان ارگانیک اردبیل' },
+};
+
+function openValidation(id) {
+  const data = validationData[id];
+  if (data) {
+    document.getElementById('drawerTitle').textContent = data.title;
+    document.getElementById('drawerSubtitle').textContent = data.subtitle;
+    document.querySelector('.drawer-hero h2').textContent = '<span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> ' + data.title;
+  }
+  drawer.classList.add('open');
+  drawerOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDrawer() {
+  drawer.classList.remove('open');
+  drawerOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+drawerOverlay.addEventListener('click', closeDrawer);
+
+/* ==================== CHECKLIST ==================== */
+function toggleChecklist(el) {
+  el.classList.toggle('checked');
+}
+
+/* ==================== COMMENT ==================== */
+function submitComment() {
+  const input = document.getElementById('commentInput');
+  const text = input.value.trim();
+  if (!text) {
+    showToast('warning', 'یادداشت خالی', 'لطفاً متن یادداشت خود را وارد کنید.');
+    return;
+  }
+  showToast('success', 'ثبت شد', 'یادداشت شما ثبت شد.');
+  input.value = '';
+}
+
+/* ==================== MODALS ==================== */
+function openApproveModal(id) {
+  document.getElementById('approveModal').classList.add('active');
+}
+
+function openRejectModal(id) {
+  document.getElementById('rejectModal').classList.add('active');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+}
+
+function confirmApprove() {
+  closeModal('approveModal');
+  closeDrawer();
+  showToast('success', 'سند تأیید شد!', 'سند با موفقیت تأیید و در پروژه ثبت شد.');
+}
+
+function confirmReject() {
+  const reason = document.getElementById('rejectReason').value.trim();
+  if (!reason) {
+    showToast('warning', 'دلیل رد', 'لطفاً دلیل رد سند را وارد کنید.');
+    return;
+  }
+  closeModal('rejectModal');
+  closeDrawer();
+  showToast('error', 'سند رد شد', 'سند رد شد و دلیل آن برای متقاضی ارسال گردید.');
+  document.getElementById('rejectReason').value = '';
+}
+
+/* ==================== KEYBOARD ==================== */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeDrawer();
+    closeModal('approveModal');
+    closeModal('rejectModal');
+    sidebar.classList.remove('mobile-open');
+    overlay.classList.remove('active');
+  }
+});
+
+/* ==================== CHARTS ==================== */
+Chart.defaults.font.family = 'Vazirmatn, sans-serif';
+Chart.defaults.color = '#64748b';
+const gridColor = '#e2e8f0';
+const tickFont = { family: 'Vazirmatn', size: 11 };
+
+/* Chart 1: Status Doughnut */
+const statusCtx = document.getElementById('statusChart');
+if (statusCtx) {
+  new Chart(statusCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ['تأیید شده', 'در انتظار', 'در بررسی', 'رد شده'],
+      datasets: [{
+        data: [47, 5, 4, 5],
+        backgroundColor: ['#10b981', '#f59e0b', '#3b82f6', '#ef4444'],
+        borderWidth: 0,
+        spacing: 4,
+        borderRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '65%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          rtl: true,
+          labels: {
+            font: { family: 'Vazirmatn', size: 11 },
+            padding: 14,
+            usePointStyle: true,
+            pointStyle: 'circle',
+            boxWidth: 8,
+            boxHeight: 8,
+          }
+        },
+        tooltip: {
+          backgroundColor: '#0f1729',
+          padding: 12,
+          cornerRadius: 10,
+          rtl: true,
+          textDirection: 'rtl',
+        }
+      }
+    }
+  });
+}
+
+/* Chart 2: Trend Bar */
+const trendCtx = document.getElementById('trendChart');
+if (trendCtx) {
+  new Chart(trendCtx, {
+    type: 'bar',
+    data: {
+      labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور'],
+      datasets: [
+        {
+          label: 'تأیید',
+          data: [12, 18, 22, 28, 35, 47],
+          backgroundColor: 'rgba(16,185,129,0.8)',
+          borderRadius: 8,
+          borderSkipped: false,
+        },
+        {
+          label: 'رد',
+          data: [3, 4, 2, 5, 4, 5],
+          backgroundColor: 'rgba(239,68,68,0.8)',
+          borderRadius: 8,
+          borderSkipped: false,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          rtl: true,
+          labels: {
+            font: { family: 'Vazirmatn', size: 11 },
+            padding: 12,
+            usePointStyle: true,
+            pointStyle: 'circle',
+            boxWidth: 8,
+            boxHeight: 8,
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: tickFont } },
+        y: {
+          grid: { color: gridColor, drawBorder: false },
+          ticks: { font: tickFont },
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+/* ==================== RIPPLE ==================== */
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `@keyframes ripple { to { transform: scale(4); opacity: 0; } }`;
+document.head.appendChild(rippleStyle);
+document.querySelectorAll('.btn, .tab-btn, .validation-item').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.cssText = `
+      position: absolute; width: ${size}px; height: ${size}px;
+      border-radius: 50%; background: rgba(255,255,255,0.4);
+      transform: scale(0); animation: ripple 0.6s linear;
+      pointer-events: none;
+      left: ${e.clientX - rect.left - size/2}px;
+      top: ${e.clientY - rect.top - size/2}px;
+    `;
+    this.style.position = 'relative';
+    this.style.overflow = 'hidden';
+    this.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  });
+});
+</script>
+
+<script src="theme.js"></script>
+</body>
+</html>

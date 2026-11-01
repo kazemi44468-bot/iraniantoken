@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ورود و ثبت‌نام | ایرانیان توکن</title>
+<meta name="description" content="ورود و ایجاد حساب کاربری در فضای مدیریت ایرانیان توکن.">
+<link rel="icon" href="assets/images/logo.png" type="image/png">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="public.css">
+<style>
+.auth-page .public-hero h1{font-size:30px;line-height:1.65}
+.auth-intro h2{font-size:23px}
+@media(max-width:560px){.auth-page .public-hero h1{font-size:27px}}
+</style>
+</head>
+<body class="public-site">
+<header class="public-header" id="header">
+<nav class="public-nav">
+<a href="index.html" class="public-logo"><div class="public-logo-mark"><img src="assets/images/logo.png" alt="لوگوی ایرانیان توکن"></div><div class="public-logo-text">ایرانیان توکن<small>زیرساخت توکنیزه‌سازی پروژه‌ها</small></div></a>
+<ul class="public-links" id="navLinks">
+<li><a href="index.html">معرفی</a></li><li><a href="projects.html">پروژه‌ها</a></li><li><a href="dashboard.html">داشبورد</a></li><li><a href="contact.html">ارتباط</a></li><li><a class="active" href="auth.html">ورود / ثبت‌نام</a></li>
+</ul>
+<button class="public-menu" id="mobileToggle" type="button" aria-label="باز کردن منو" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</nav>
+</header>
+
+<main class="public-main auth-page">
+<section class="public-hero">
+<div class="public-kicker">فضای کاربری</div>
+<h1>ورود به فضای مدیریت پروژه و توکن</h1>
+<p>حساب کاربری نقطه دسترسی شما به پروژه‌ها، پرونده‌ها، اسناد، اعتبارسنجی و گزارش‌های مرتبط خواهد بود.</p>
+</section>
+
+<section class="auth-layout">
+<div class="auth-intro">
+<div class="auth-mark"><img src="assets/images/logo.png" alt="لوگوی ایرانیان توکن"></div>
+<div class="public-kicker">فضای مدیریت</div>
+<h2>یک مسیر واحد برای پیگیری پروژه.</h2>
+<p>در فضای مدیریت می‌توان وضعیت پروژه، تکمیل پرونده، اسناد، مراحل اعتبارسنجی، اطلاعات عرضه و گزارش‌های مرتبط را در یک ساختار منسجم دنبال کرد.</p>
+<div class="auth-links"><a href="projects.html">مشاهده پروژه‌ها</a><a href="contact.html">ارتباط با ما</a></div>
+</div>
+
+<section class="auth-form">
+<div class="auth-tabs"><button class="active" data-pane="login" type="button">ورود</button><button data-pane="register" type="button">ثبت‌نام</button></div>
+<div class="auth-pane active" id="login">
+<h2>ورود به سامانه</h2>
+<label>شماره تماس یا نام کاربری<input autocomplete="username"></label>
+<label>رمز عبور<input type="password" autocomplete="current-password"></label>
+<button class="public-submit" id="loginBtn" type="button">ورود به سامانه</button>
+</div>
+<div class="auth-pane" id="register">
+<h2>ایجاد حساب</h2>
+<label>نام و نام خانوادگی<input autocomplete="name"></label>
+<label>شماره تماس<input inputmode="tel" autocomplete="tel"></label>
+<label>رمز عبور<input type="password" autocomplete="new-password"></label>
+<button class="public-submit" id="registerBtn" type="button">ایجاد حساب</button>
+</div>
+<p class="auth-note">نسخه فعلی رابط نمایشی است و احراز هویت واقعی هنوز به سرویس عملیاتی متصل نشده است.</p>
+</section>
+</section>
+</main>
+
+<footer class="public-footer"><div class="public-footer-inner"><a href="index.html" class="public-footer-brand"><div class="public-footer-brand-mark"><img src="assets/images/logo.png" alt="لوگوی ایرانیان توکن"></div><div class="public-footer-brand-text"><strong>ایرانیان توکن</strong><span>زیرساخت توکنیزه‌سازی پروژه‌ها</span></div></a><p>زیرساختی برای معرفی، ثبت، ساختاربندی و مدیریت پروژه‌های مبتنی بر توکن؛ با تفکیک روشن میان اطلاعات پروژه، اعتبارسنجی و بازار.</p></div></footer>
+
+<script>
+(()=>{document.getElementById("loginBtn").addEventListener("click",()=>{sessionStorage.setItem("itMemberAuth","1");sessionStorage.setItem("itMemberRole","member");location.href="dashboard.html"});document.getElementById("registerBtn").addEventListener("click",()=>{sessionStorage.setItem("itMemberAuth","1");sessionStorage.setItem("itMemberRole","member");location.href="dashboard.html"});const tabs=document.querySelectorAll(".auth-tabs button"),panes=document.querySelectorAll(".auth-pane");tabs.forEach(tab=>tab.addEventListener("click",()=>{tabs.forEach(x=>x.classList.remove("active"));panes.forEach(x=>x.classList.remove("active"));tab.classList.add("active");document.getElementById(tab.dataset.pane).classList.add("active")}));
+const toggle=document.getElementById("mobileToggle"),links=document.getElementById("navLinks"),header=document.getElementById("header");toggle.addEventListener("click",()=>{const open=links.classList.toggle("open");toggle.setAttribute("aria-expanded",open)});links.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{links.classList.remove("open");toggle.setAttribute("aria-expanded","false")}));addEventListener("scroll",()=>header.classList.toggle("scrolled",scrollY>30),{passive:true})})();
+</script>
+<script src="theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,2102 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>توکن مسکن | ایرانیان توکن</title>
+<meta name="description" content="توکنیزه‌سازی مسکن و فروش ملک به‌صورت توکنی؛ دسترسی خرد به بازار مسکن با رعایت الزامات قانونی.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --primary: #1a5fb4;
+  --primary-dark: #0d3b7a;
+  --primary-light: #3584e4;
+  --accent: #f5c211;
+  --accent-dark: #c79a00;
+  --dark: #0f1729;
+  --dark-2: #1a2332;
+  --gray: #64748b;
+  --gray-light: #94a3b8;
+  --bg: #f1f5f9;
+  --bg-alt: #ffffff;
+  --border: #e2e8f0;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+  --purple: #8b5cf6;
+  --pink: #ec4899;
+  --teal: #14b8a6;
+  --gradient: linear-gradient(135deg, #1a5fb4 0%, #3584e4 100%);
+  --gradient-gold: linear-gradient(135deg, #f5c211 0%, #ffd94a 100%);
+  --gradient-housing: linear-gradient(135deg, #0d3b7a 0%, #1a5fb4 40%, #14b8a6 100%);
+  --shadow-sm: 0 1px 2px rgba(15,23,41,0.05);
+  --shadow: 0 4px 12px rgba(15,23,41,0.06);
+  --shadow-lg: 0 12px 32px rgba(15,23,41,0.1);
+  --shadow-xl: 0 24px 60px rgba(15,23,41,0.15);
+  --radius: 14px;
+  --radius-lg: 20px;
+  --sidebar-w: 260px;
+  --sidebar-collapsed: 78px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Vazirmatn', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ==================== SIDEBAR ==================== */
+.sidebar {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--dark);
+  color: #fff;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border-left: 1px solid rgba(255,255,255,0.05);
+}
+.sidebar.collapsed { width: var(--sidebar-collapsed); }
+.sidebar-brand {
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  min-height: 82px;
+}
+.sidebar-logo {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(26,95,180,0.4);
+}
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .sidebar-brand-text { opacity: 0; }
+.sidebar-brand-text strong { font-size: 15px; font-weight: 800; }
+.sidebar-brand-text small { font-size: 11px; color: var(--gray-light); }
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sidebar-nav::-webkit-scrollbar { width: 4px; }
+.sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+.nav-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 16px 12px 8px;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .nav-section-title { opacity: 0; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  color: var(--gray-light);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.nav-item.active { background: var(--gradient); color: #fff; box-shadow: 0 6px 16px rgba(26,95,180,0.35); }
+.nav-item .icon { font-size: 18px; flex-shrink: 0; width: 22px; text-align: center; }
+.nav-item .label { opacity: 1; transition: opacity 0.2s; }
+.sidebar.collapsed .nav-item .label { opacity: 0; }
+.nav-item .badge {
+  margin-right: auto;
+  background: var(--accent);
+  color: var(--dark);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 50px;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .nav-item .badge { opacity: 0; }
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.user-mini {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.user-mini:hover { background: rgba(255,255,255,0.08); }
+.user-avatar {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: var(--gradient-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: var(--dark);
+  flex-shrink: 0;
+  font-size: 14px;
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  overflow: hidden;
+}
+.sidebar.collapsed .user-info { opacity: 0; }
+.user-info strong { font-size: 13px; color: #fff; }
+.user-info small { font-size: 11px; color: var(--gray-light); }
+
+/* ==================== MAIN ==================== */
+.main {
+  margin-right: var(--sidebar-w);
+  transition: margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main.expanded { margin-right: var(--sidebar-collapsed); }
+
+/* ==================== TOPBAR ==================== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.toggle-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--dark);
+  transition: all 0.2s;
+}
+.toggle-btn:hover { background: var(--bg); }
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--gray);
+}
+.breadcrumb a { color: var(--gray); text-decoration: none; }
+.breadcrumb a:hover { color: var(--primary); }
+.breadcrumb .current { color: var(--dark); font-weight: 600; }
+.topbar-actions { display: flex; align-items: center; gap: 8px; margin-right: auto; }
+.icon-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--gray);
+  transition: all 0.2s;
+  position: relative;
+}
+.icon-btn:hover { background: var(--bg); color: var(--primary); }
+.icon-btn .dot {
+  position: absolute;
+  top: 8px; left: 8px;
+  width: 8px; height: 8px;
+  background: var(--danger);
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+/* ==================== CONTENT ==================== */
+.content { padding: 28px; flex: 1; max-width: 1600px; margin: 0 auto; width: 100%; }
+
+/* ==================== BUTTONS ==================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--gradient);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(26,95,180,0.28);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(26,95,180,0.38);
+}
+.btn-outline {
+  background: #fff;
+  color: var(--dark);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover { background: var(--bg); border-color: var(--primary-light); color: var(--primary); }
+.btn-gold {
+  background: var(--gradient-gold);
+  color: var(--dark);
+  box-shadow: 0 8px 20px rgba(245,194,17,0.35);
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(245,194,17,0.45); }
+.btn-teal {
+  background: linear-gradient(135deg, #0d9488, #14b8a6);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(20,184,166,0.3);
+}
+.btn-teal:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(20,184,166,0.4); }
+.btn-sm { padding: 8px 14px; font-size: 13px; }
+.btn-lg { padding: 14px 28px; font-size: 15px; font-weight: 700; }
+
+/* ==================== HERO ==================== */
+.housing-hero {
+  background: var(--gradient-housing);
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  color: #fff;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+.housing-hero::before {
+  content: '';
+  position: absolute;
+  top: -30%; right: -10%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(245,194,17,0.2), transparent 70%);
+  border-radius: 50%;
+}
+.housing-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -40%; left: -10%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(20,184,166,0.25), transparent 70%);
+  border-radius: 50%;
+}
+.housing-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+.housing-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+.housing-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(245,194,17,0.15);
+  border: 1px solid rgba(245,194,17,0.35);
+  color: var(--accent);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.housing-badge::before {
+  content:"";width:6px;height:6px;border-radius:50%;background:currentColor;
+}
+.housing-hero h1 {
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 900;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+.housing-hero h1 .gold {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.housing-hero p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.9;
+  margin-bottom: 28px;
+  max-width: 620px;
+}
+.housing-hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.housing-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  position: relative;
+  z-index: 2;
+}
+.housing-hero-stat {
+  text-align: center;
+}
+.housing-hero-stat .value {
+  font-size: 26px;
+  font-weight: 900;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+.housing-hero-stat .label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* ==================== LEGAL BANNER ==================== */
+.legal-banner {
+  background: linear-gradient(135deg, rgba(239,68,68,0.06), rgba(245,158,11,0.06));
+  border: 1.5px solid rgba(239,68,68,0.2);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.legal-banner-icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: rgba(239,68,68,0.12);
+  color: var(--danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.legal-banner-body { flex: 1; }
+.legal-banner-body h4 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.legal-banner-body p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.9;
+}
+.legal-banner-body p strong { color: var(--dark); font-weight: 700; }
+
+/* ==================== TABS ==================== */
+.tabs-nav {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 6px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+.tabs-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.tab-btn:hover { background: var(--bg); color: var(--primary); }
+.tab-btn.active {
+  background: var(--gradient);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(26,95,180,0.28);
+}
+
+.tab-panel { display: none; animation: fadeIn 0.4s; }
+.tab-panel.active { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== CARDS ==================== */
+.card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s;
+}
+.card:hover { box-shadow: var(--shadow); }
+.card-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.card-header-left h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.card-header-left h3 .icon {
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  background: rgba(26,95,180,0.08);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.card-header-left p { font-size: 12px; color: var(--gray); margin-right: 42px; }
+.card-body { padding: 24px; }
+
+/* ==================== GRID ==================== */
+.content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.content-col { display: flex; flex-direction: column; gap: 24px; }
+
+/* ==================== PROJECT CARDS ==================== */
+.housing-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+.housing-project-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+.housing-project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+  border-color: transparent;
+}
+.housing-project-cover {
+  height: 180px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  background: linear-gradient(135deg, #0d3b7a 0%, #1a5fb4 50%, #14b8a6 100%);
+}
+.housing-project-cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(245,194,17,0.1), transparent 50%);
+}
+.housing-project-status {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.housing-project-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.housing-project-status.active { color: var(--success); }
+.housing-project-status.pending { color: var(--warning); }
+.housing-project-status.construction { color: var(--info); }
+.housing-project-status.done { color: var(--purple); }
+
+.housing-project-progress-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.housing-project-progress-badge::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+.housing-project-body { padding: 20px; }
+.housing-project-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.housing-project-title .type-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(26,95,180,0.1);
+  color: var(--primary);
+  white-space: nowrap;
+}
+.housing-project-location {
+  font-size: 12px;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.housing-project-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.housing-stat-item .label {
+  font-size: 10px;
+  color: var(--gray);
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: block;
+}
+.housing-stat-item .value {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--dark);
+}
+.housing-stat-item .value.gold { color: var(--accent-dark); }
+.housing-stat-item .value.green { color: var(--success); }
+.housing-stat-item .value.teal { color: var(--teal); }
+
+.housing-project-progress {
+  margin-bottom: 14px;
+}
+.housing-project-progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.housing-project-progress-header .label { color: var(--gray); font-weight: 600; }
+.housing-project-progress-header .value { color: var(--dark); font-weight: 800; }
+.housing-progress-bar {
+  height: 8px;
+  background: var(--bg);
+  border-radius: 50px;
+  overflow: hidden;
+}
+.housing-progress-bar .fill {
+  height: 100%;
+  border-radius: 50px;
+  background: var(--gradient-housing);
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.housing-project-footer {
+  display: flex;
+  gap: 8px;
+}
+.housing-project-footer .btn { flex: 1; justify-content: center; padding: 9px; font-size: 12px; }
+
+/* ==================== PROCESS STEPS ==================== */
+.process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.process-step {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 14px;
+  transition: all 0.2s;
+  position: relative;
+}
+.process-step:hover { background: var(--bg); }
+.process-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 31px;
+  top: 52px;
+  bottom: -4px;
+  width: 2px;
+  background: var(--border);
+}
+.process-step-num {
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 13px;
+  flex-shrink: 0;
+  background: var(--gradient);
+  color: #fff;
+  z-index: 2;
+}
+.process-step-body { flex: 1; min-width: 0; }
+.process-step-body h4 {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+.process-step-body p {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+
+/* ==================== INFO LIST ==================== */
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+.info-row:hover { border-color: var(--primary-light); background: #fff; }
+.info-row-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  background: rgba(26,95,180,0.08);
+  color: var(--primary);
+}
+.info-row-icon.green { background: rgba(16,185,129,0.1); color: var(--success); }
+.info-row-icon.red { background: rgba(239,68,68,0.1); color: var(--danger); }
+.info-row-icon.gold { background: rgba(245,194,17,0.15); color: var(--accent-dark); }
+.info-row-icon.purple { background: rgba(139,92,246,0.1); color: var(--purple); }
+.info-row-icon.teal { background: rgba(20,184,166,0.1); color: var(--teal); }
+.info-row-body { flex: 1; min-width: 0; }
+.info-row-body strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 3px;
+}
+.info-row-body p {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+
+/* ==================== TOKEN CALCULATOR ==================== */
+.calculator {
+  background: linear-gradient(135deg, rgba(26,95,180,0.04), rgba(20,184,166,0.06));
+  border: 1.5px solid rgba(26,95,180,0.15);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+.calculator-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.calculator-desc {
+  font-size: 12px;
+  color: var(--gray);
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+.calc-group {
+  margin-bottom: 16px;
+}
+.calc-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.calc-group input,
+.calc-group select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 11px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--dark);
+  transition: all 0.2s;
+}
+.calc-group input:focus,
+.calc-group select:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 4px rgba(53,132,228,0.1);
+}
+.calc-result {
+  background: var(--dark);
+  border-radius: 14px;
+  padding: 20px;
+  margin-top: 20px;
+  color: #fff;
+}
+.calc-result-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+.calc-result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.calc-result-item {
+  text-align: center;
+}
+.calc-result-item .value {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1.2;
+}
+.calc-result-item .value.green { color: #6ee7b7; }
+.calc-result-item .value.teal { color: #5eead4; }
+.calc-result-item .label {
+  font-size: 11px;
+  color: var(--gray-light);
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+/* ==================== FAQ ==================== */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.faq-item {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+.faq-item.open { border-color: var(--primary-light); box-shadow: var(--shadow); }
+.faq-question {
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dark);
+  transition: background 0.2s;
+  user-select: none;
+}
+.faq-question:hover { background: var(--bg); }
+.faq-question-icon {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  background: rgba(26,95,180,0.08);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 900;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+.faq-item.open .faq-question-icon {
+  background: var(--gradient);
+  color: #fff;
+  transform: rotate(45deg);
+}
+.faq-question-text { flex: 1; }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.faq-item.open .faq-answer { max-height: 500px; }
+.faq-answer-inner {
+  padding: 0 18px 18px 58px;
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 2;
+}
+.faq-answer-inner strong { color: var(--dark); font-weight: 700; }
+.faq-answer-inner a { color: var(--primary); font-weight: 700; text-decoration: none; }
+.faq-answer-inner a:hover { text-decoration: underline; }
+
+/* ==================== BADGE ==================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.badge.success { background: rgba(16,185,129,0.12); color: var(--success); }
+.badge.warning { background: rgba(245,158,11,0.14); color: var(--warning); }
+.badge.danger { background: rgba(239,68,68,0.12); color: var(--danger); }
+.badge.info { background: rgba(59,130,246,0.12); color: var(--info); }
+.badge.purple { background: rgba(139,92,246,0.12); color: var(--purple); }
+.badge.teal { background: rgba(20,184,166,0.12); color: var(--teal); }
+.badge.gray { background: rgba(100,116,139,0.12); color: var(--gray); }
+.badge.gold { background: rgba(245,194,17,0.15); color: var(--accent-dark); }
+.badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ==================== CHART ==================== */
+.chart-container {
+  position: relative;
+  height: 280px;
+  padding: 8px 0;
+}
+
+/* ==================== MINI STATS ==================== */
+.mini-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+.mini-stat {
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.mini-stat .value {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.mini-stat .value.gold { color: var(--accent-dark); }
+.mini-stat .value.green { color: var(--success); }
+.mini-stat .value.blue { color: var(--primary); }
+.mini-stat .value.teal { color: var(--teal); }
+.mini-stat .label {
+  font-size: 11px;
+  color: var(--gray);
+  font-weight: 600;
+}
+
+/* ==================== TOAST ==================== */
+.toast-container {
+  position: fixed;
+  top: 24px; left: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.toast {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 280px;
+  max-width: 380px;
+  border-right: 4px solid var(--success);
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast.error { border-right-color: var(--danger); }
+.toast.warning { border-right-color: var(--warning); }
+.toast.info { border-right-color: var(--info); }
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.toast-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  background: rgba(16,185,129,0.12);
+  color: var(--success);
+}
+.toast.error .toast-icon { background: rgba(239,68,68,0.12); color: var(--danger); }
+.toast.warning .toast-icon { background: rgba(245,158,11,0.14); color: var(--warning); }
+.toast.info .toast-icon { background: rgba(59,130,246,0.12); color: var(--info); }
+.toast-body strong { display: block; font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+.toast-body span { font-size: 12px; color: var(--gray); }
+
+/* ==================== OVERLAY ==================== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,41,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.overlay.active { opacity: 1; pointer-events: auto; }
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1200px) {
+  .content-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(100%); width: var(--sidebar-w) !important; }
+  .sidebar.mobile-open { transform: translateX(0); }
+  .sidebar.collapsed .sidebar-brand-text,
+  .sidebar.collapsed .nav-item .label,
+  .sidebar.collapsed .nav-section-title,
+  .sidebar.collapsed .user-info,
+  .sidebar.collapsed .nav-item .badge { opacity: 1; }
+  .main { margin-right: 0 !important; }
+  .content { padding: 20px 16px 100px; }
+  .topbar { padding: 12px 16px; }
+  .topbar-search { display: none; }
+  .breadcrumb { display: none; }
+  .housing-hero { padding: 32px 24px; }
+  .legal-banner { flex-direction: column; }
+}
+@media (max-width: 640px) {
+  .content { padding: 16px 12px 100px; }
+  .housing-hero { padding: 28px 20px; }
+  .housing-hero h1 { font-size: 22px; }
+  .housing-projects-grid { grid-template-columns: 1fr; }
+  .card-header, .card-body { padding-left: 16px; padding-right: 16px; }
+  .tab-btn { padding: 9px 12px; font-size: 12px; }
+  .calc-result-grid { grid-template-columns: 1fr; }
+}
+</style>
+<link rel="stylesheet" href="theme.css">
+<link rel="icon" href="assets/images/logo.png" type="image/png">
+<link rel="shortcut icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+
+<div class="toast-container" id="toastContainer"></div>
+<div class="overlay" id="overlay"></div>
+
+<!-- ==================== SIDEBAR ==================== -->
+<aside class="sidebar" id="sidebar"><div class="sidebar-brand"><a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit"><div class="sidebar-logo"><img src="assets/images/logo.png" alt="ایرانیان توکن"></div><div class="sidebar-brand-text"><strong>ایرانیان توکن</strong><small>مرکز مدیریت و پایش</small></div></a></div><nav class="sidebar-nav" aria-label="ناوبری یکپارچه سامانه">
+<div class="nav-section-title">مرکز کار</div><a class="nav-item" href="dashboard.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="label">داشبورد</span></a>
+<div class="nav-group open"><div class="nav-parent-row"><a class="nav-item active" href="projects.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="label">پروژه‌ها و دارایی‌ها</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a class="" href="projects.html">فهرست پروژه‌ها</a><a class="" href="new-project.html">ثبت پروژه جدید</a><a class="" href="project-detail.html">جزئیات پروژه</a><a class="" href="car-token.html">توکن خودرو</a><a class="" href="honey-token.html">توکن کندوی عسل</a><a class="active" href="housing-token.html">توکن مسکن</a><a class="" href="solar-token.html">توکن انرژی خورشیدی</a></div></div></div>
+<div class="nav-group "><div class="nav-parent-row"><a class="nav-item" href="validation.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span class="label">اسناد و اعتبارسنجی</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a href="dashboard.html#documents">مرکز اسناد</a><a class="" href="validation.html">صف اعتبارسنجی</a></div></div></div>
+<div class="nav-section-title">کنترل و گزارش</div><a class="nav-item" href="users.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span><span class="label">کاربران و نقش‌ها</span></a><a class="nav-item" href="reports.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9m5 10V5m5 14v-7m5 7V3"/></svg></span><span class="label">گزارش‌های مدیریتی</span></a><a class="nav-item" href="dashboard.html#audit"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span><span class="label">ثبت رویدادها</span></a>
+<div class="nav-section-title">حساب و سامانه</div><div class="nav-group "><div class="nav-parent-row"><a class="nav-item" href="settings.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 15l2 1-2 3-2-1a8 8 0 0 1-2 1v2h-4v-2a8 8 0 0 1-2-1l-2 1-2-3 2-1a8 8 0 0 1 0-2l-2-1 2-3 2 1a8 8 0 0 1 2-1V6h4v2a8 8 0 0 1 2 1l2-1 2 3-2 1a8 8 0 0 1 0 2z"/></svg></span><span class="label">حساب و تنظیمات</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a class="" href="profile.html">پروفایل و حساب</a><a class="" href="settings.html">تنظیمات سامانه</a><a class="" href="notifications.html">اعلان‌ها</a><a href="auth.html">ورود و ثبت‌نام</a></div></div></div><a class="nav-item" href="help.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M9.7 9a2.4 2.4 0 1 1 4 1.8c-1 .7-1.7 1.1-1.7 2.4M12 16.5h.01"/></svg></span><span class="label">مرکز راهنما</span></a>
+<div class="nav-section-title">صفحات سامانه</div><a class="nav-item" href="index.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="label">معرفی سامانه</span></a><a class="nav-item" href="contact.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/></svg></span><span class="label">تماس با ما</span></a><a class="nav-item" href="auth.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 8l-4 4 4 4M6 12h9a4 4 0 0 1 4 4v2"/></svg></span><span class="label">ثبت نام / ورود</span></a><div class="nav-section-title">دسترسی سریع</div><a class="nav-item" href="index.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="label">بازگشت به صفحه اصلی</span></a></nav></aside>
+
+<!-- ==================== MAIN ==================== -->
+<div class="main" id="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <button class="toggle-btn" id="toggleBtn"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span></button>
+    <div class="breadcrumb">
+      <a href="dashboard.html">داشبورد</a>
+      <span>›</span>
+      <span class="current">توکن مسکن</span>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" onclick="showToast('info','راهنما','راهنمای توکن مسکن باز شد.')" title="راهنما"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9.7 9a2.4 2.4 0 1 1 4 1.8c-1 .7-1.7 1.1-1.7 2.4M12 16.5h.01"/></svg></span></button>
+      <button class="icon-btn" onclick="window.print()" title="چاپ"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 9V4h10v5M7 17H5a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v7H7z"/></svg></span></button>
+      <button class="icon-btn" id="notifBtn">◉<span class="dot"></span></button>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- ==================== HERO ==================== -->
+    <section class="housing-hero">
+      <div class="housing-hero-grid"></div>
+      <div class="housing-hero-content">
+        <div class="housing-badge">پروژه ویژه · توکنیزه‌سازی مسکن</div>
+        <h1>
+          مسکن را <span class="gold">توکنیزه</span> کنید؛<br>
+          سرمایه‌گذاری خرد در بزرگ‌ترین بازار ایران
+        </h1>
+        <p>
+          توکن مسکن به شما امکان می‌دهد با هر بودجه‌ای در پروژه‌های ساختمانی مشارکت کنید. هر توکن نماینده سهمی از یک دارایی ملکی واقعی است که در چارچوب قانونی و با نظارت کامل عرضه می‌شود.
+        </p>
+        <div class="housing-hero-actions">
+          <a href="#projects" class="btn btn-gold btn-lg" onclick="scrollToProjects(event)">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> مشاهده پروژه‌ها
+          </a>
+          <button class="btn btn-outline btn-lg" onclick="showToast('info','راهنما','راهنمای کامل توکن مسکن در حال بارگذاری...')" style="background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.2);">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 1 4 17.5z"/><path d="M4 17.5A2.5 2.5 0 0 1 6.5 15H20"/></svg></span> راهنمای کامل
+          </button>
+        </div>
+      </div>
+
+      <div class="housing-hero-stats">
+        <div class="housing-hero-stat">
+          <div class="value">۵</div>
+          <div class="label">پروژه فعال</div>
+        </div>
+        <div class="housing-hero-stat">
+          <div class="value">۱۲.۴K</div>
+          <div class="label">توکن در گردش</div>
+        </div>
+        <div class="housing-hero-stat">
+          <div class="value">۸۴۰</div>
+          <div class="label">سرمایه‌گذار</div>
+        </div>
+        <div class="housing-hero-stat">
+          <div class="value">۲۴۸B</div>
+          <div class="label">ارزش کل (تومان)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== LEGAL BANNER ==================== -->
+    <div class="legal-banner">
+      <div class="legal-banner-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+      <div class="legal-banner-body">
+        <h4>توجه: الزامات قانونی توکن مسکن</h4>
+        <p>
+          بر اساس <strong>قانون پیش‌فروش ساختمان (۱۳۸۹)</strong> و <strong>قانون الزام به ثبت رسمی معاملات اموال غیرمنقول (۱۴۰۱)</strong>، هرگونه قرارداد پیش‌فروش یا مشارکت در ساخت <strong>باید در دفاتر اسناد رسمی تنظیم شود</strong>[citation:2][citation:13]. توکن مسکن در ایرانیان توکن صرفاً به‌عنوان <strong>ابزار دیجیتال مدیریت حقوق قراردادی</strong> عمل می‌کند و مالکیت رسمی ملک همچنان از طریق سند رسمی منتقل می‌شود. توکن‌ها <strong>نماینده حق منفعت یا مشارکت در یک SPV</strong> هستند، نه مالکیت مستقیم عین ملک[citation:4].
+        </p>
+      </div>
+    </div>
+
+    <!-- ==================== TABS ==================== -->
+    <nav class="tabs-nav">
+      <button class="tab-btn active" data-tab="projects">
+        <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></span> پروژه‌های مسکن
+      </button>
+      <button class="tab-btn" data-tab="process">
+        <span>◫</span> فرآیند توکنیزه‌سازی
+      </button>
+      <button class="tab-btn" data-tab="calculator">
+        <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg></span></span> ماشین‌حساب سرمایه‌گذاری
+      </button>
+      <button class="tab-btn" data-tab="faq">
+        <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9.8 9a2.5 2.5 0 1 1 4.1 1.9c-1 .7-1.6 1.1-1.6 2.4"/><path d="M12 16.5h.01"/></svg></span></span> پرسش‌های متداول
+      </button>
+    </nav>
+
+    <!-- ==================== TAB: PROJECTS ==================== -->
+    <div class="tab-panel active" id="panel-projects">
+
+      <!-- Filters -->
+      <div class="card" style="margin-bottom: 20px;">
+        <div class="card-body" style="padding: 16px 20px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+          <div style="flex: 1; min-width: 220px; position: relative;">
+            <span style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--gray); font-size: 14px;">⌕</span>
+            <input type="text" placeholder="جستجوی پروژه مسکن..." style="width: 100%; padding: 10px 42px 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 13px;">
+          </div>
+          <select style="padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 13px; cursor: pointer;">
+            <option>همه شهرها</option>
+            <option>تهران</option>
+            <option>اصفهان</option>
+            <option>مشهد</option>
+            <option>شیراز</option>
+          </select>
+          <select style="padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 13px; cursor: pointer;">
+            <option>همه وضعیت‌ها</option>
+            <option>در حال ساخت</option>
+            <option>آماده بهره‌برداری</option>
+            <option>در انتظار اعتبارسنجی</option>
+          </select>
+          <button class="btn btn-primary btn-sm" onclick="showToast('success','فیلتر','فیلترها اعمال شد.')">✓ اعمال</button>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="housing-projects-grid" id="projects">
+
+        <!-- Project 1 -->
+        <div class="housing-project-card" onclick="showToast('info','جزئیات','صفحه جزئیات پروژه در حال بارگذاری...')">
+          <div class="housing-project-cover">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 20V4h10v16M15 8h4v12M8 7h4M8 11h4M8 15h4M17 12h1M17 16h1"/></svg></span>
+            <span class="housing-project-status construction">در حال ساخت</span>
+            <span class="housing-project-progress-badge">۶۵٪ پیشرفت</span>
+          </div>
+          <div class="housing-project-body">
+            <div class="housing-project-title">
+              برج مسکونی آرین
+              <span class="type-badge">مشارکت در ساخت</span>
+            </div>
+            <div class="housing-project-location">
+              <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 10-7 10S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span></span> تهران، سعادت‌آباد
+            </div>
+            <div class="housing-project-stats">
+              <div class="housing-stat-item">
+                <span class="label">ارزش پروژه</span>
+                <span class="value gold">۴۵ میلیارد</span>
+              </div>
+              <div class="housing-stat-item">
+                <span class="label">قیمت هر توکن</span>
+                <span class="value teal">۹ میلیون</span>
+              </div>
+              <div class="housing-stat-item">
+                <span class="label">توکن کل</span>
+                <span class="value">۵,۰۰۰</span>
+              </div>
+              <div class="housing-stat-item">
+                <span class="label">توکن باقی‌مانده</span>
+                <span class="value green">۱,۲۰۰</span>
+              </div>
+            </div>
+            <div class="housing-project-progress">
+              <div class="housing-project-progress-header">
+                <span class="label">پیشرفت ساخت</span>
+                <span class="value">۶۵٪</span>
+              </div>
+              <div class="housing-progress-bar">
+                <div class="fill" style="width: 65%;"></div>
+              </div>
+            </div>
+            <div class="housing-project-footer">
+              <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); showToast('info','جزئیات','صفحه جزئیات باز شد.')">◉ جزئیات</button>
+              <button class="btn btn-teal btn-sm" onclick="event.stopPropagation(); showToast('success','خرید','فرم خرید توکن باز شد.')"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h2l2 10h9l2-7H7"/><circle cx="10" cy="19" r="1"/><circle cx="17" cy="19" r="1"/></svg></span> خرید توکن</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="housing-project-card" onclick="showToast('info','جزئیات','صفحه جزئیات پروژه در حال بارگذاری...')">
+          <div class="housing-project-cover" style="background: linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #5eead4 100%);">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span>
+            <span class="housing-project-status active">فعال</span>
+            <span class="housing-project-progress-badge">۸۵٪ پیشرفت</span>
+          </div>
+          <div class="housing-project-body">
+            <div class="housing-project-title">
+              مجتمع تجاری-مسکونی پارس
+              <span class="type-badge">مشارکت در ساخت</span>
+            </div>
+            <div class="housing-project-location">
+              <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 10-7 10S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span></span> اصفهان، چهارباغ
+            </div>
+            <div class="housing-project-stats">
+              <div class="housing-stat-item">
+                <span class="label">ارزش پروژه</span>
+                <span class="value gold">۳۲ میلیارد</span>
+              </div>
+              <div class="housing-stat-item">
+                <span class="label">قیمت هر توکن</span>
+                <span class="value teal">۸ میلیون</span>
+              </div>
+              <div class="housing-stat-item">
+                <span class="label">توکن کل</span>
+                <span class="value">۴,۰۰۰</span>
+              </div>
+              <div class="housing-stat-item">
+                <span class="label">توکن باقی‌مانده</span>
+                <span class="value green">۸۰۰</span>
+              </div>
+            </div>
+            <div class="housing-project-progress">
+              <div class="housing-project-progress-header">
+                <span class="label">پیشرفت ساخت</span>
+                <span class="value">۸۵٪</span>
+              </div>
+              <div class="housing-progress-bar">
+                <div class="fill" style="width: 85%;"></div>
+              </div>
+            </div>
+            <div class="housing-project-footer">
+              <button class="btn btn-outline btn-sm">◉ جزئیات</button>
+              <button class="btn btn-teal btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h2l2 10h9l2-7H7"/><circle cx="10" cy="19" r="1"/><circle cx="17" cy="19" r="1"/></svg></span> خرید توکن</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="housing-project-card" onclick="showToast('info','جزئیات','صفحه جزئیات پروژه در حال بارگذاری...')">
+          <div class="housing-project-cover" style="background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%);">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span>
+            <span class="housing-project-status done">آماده بهره‌برداری</span>
+            <span class="housing-project-progress-badge">۱۰۰٪ پیشرفت</span>
+          </div>
+          <div class="housing-project-body">
+            <div class="housing-project-title">
+              برج باغ لوکس الهیه
+              <span class="type-badge">پیش‌فروش رسمی</span>
+            </div>
+            <div class="housing-project-location">
+              <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 10-7 10S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span></span> تهران، الهیه
+            </div>
+            <div class="housing-project-stats">
+              <div class="housing-stat-item">
+                <span class="label">ارزش پروژه</span>
+                <span class="value gold">۸۵ میلیارد</span>
+              </div>
+              <div class="housing-stat-item">
+                <span class="label">قیمت هر توکن</span>
+                <span class="value teal">۱۷ میلیون</span>
+              </div>
+              <div class="housing-stat-item">
+                <span class="label">توکن کل</span>
+                <span class="value">۵,۰۰۰</span>
+              </div>
+              <div class="housing-stat-item">
+                <span class="label">توکن باقی‌مانده</span>
+                <span class="value green">۴۵۰</span>
+              </div>
+            </div>
+            <div class="housing-project-progress">
+              <div class="housing-project-progress-header">
+                <span class="label">پیشرفت ساخت</span>
+                <span class="value">۱۰۰٪</span>
+              </div>
+              <div class="housing-progress-bar">
+                <div class="fill" style="width: 100%; background: linear-gradient(90deg, #10b981, #34d399);"></div>
+              </div>
+            </div>
+            <div class="housing-project-footer">
+              <button class="btn btn-outline btn-sm">◉ جزئیات</button>
+              <button class="btn btn-teal btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h2l2 10h9l2-7H7"/><circle cx="10" cy="19" r="1"/><circle cx="17" cy="19" r="1"/></svg></span> خرید توکن</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="housing-project-card" onclick="showToast('info','جزئیات','صفحه جزئیات پروژه در حال بارگذاری...')">
+          <div class="housing-project-cover" style="background: linear-gradient(135deg, #ea580c 0%, #f59e0b 50%, #fbbf24 100%);">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span>
+            <span class="housing-project-status pending">در انتظار اعتبارسنجی</span>
+            <span class="housing-project-progress-badge">۲۵٪ پیشرفت</span>
+          </div>
+          <div class="housing-project-body">
+            <div class="housing-project-title">
+              پروژه مسکن مهر نوین
+              <span class="type-badge">پیش‌فروش</span>
+            </div>
+            <div class="housing-project-location">
+              <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 10-7 10S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span></span> مشهد، احمدآباد
+            </div>
+            <div class="housing-project-stats">
+              <div class="housing-stat-item">
+                <span class="label">ارزش پروژه</span>
+                <span class="value gold">۲۸ میلیارد</span>
+              </div>
+              <div class="housing-stat-item">
+                <span class="label">قیمت هر توکن</span>
+                <span class="value teal">۵.۶ میلیون</span>
+              </div>
+              <div class="housing-stat-item">
+                <span class="label">توکن کل</span>
+                <span class="value">۵,۰۰۰</span>
+              </div>
+              <div class="housing-stat-item">
+                <span class="label">توکن باقی‌مانده</span>
+                <span class="value green">۴,۲۰۰</span>
+              </div>
+            </div>
+            <div class="housing-project-progress">
+              <div class="housing-project-progress-header">
+                <span class="label">پیشرفت ساخت</span>
+                <span class="value">۲۵٪</span>
+              </div>
+              <div class="housing-progress-bar">
+                <div class="fill" style="width: 25%;"></div>
+              </div>
+            </div>
+            <div class="housing-project-footer">
+              <button class="btn btn-outline btn-sm">◉ جزئیات</button>
+              <button class="btn btn-teal btn-sm" disabled style="opacity: 0.5; cursor: not-allowed;"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span> در انتظار</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="housing-project-card" onclick="showToast('info','جزئیات','صفحه جزئیات پروژه در حال بارگذاری...')">
+          <div class="housing-project-cover" style="background: linear-gradient(135deg, #be123c 0%, #ec4899 50%, #f472b6 100%);">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 11 8-7 8 7"/><path d="M6 10v10h12V10M10 20v-6h4v6"/></svg></span>
+            <span class="housing-project-status construction">در حال ساخت</span>
+            <span class="housing-project-progress-badge">۴۵٪ پیشرفت</span>
+          </div>
+          <div class="housing-project-body">
+            <div class="housing-project-title">
+              ویلاهای ساحلی کیش
+              <span class="type-badge">مشارکت در ساخت</span>
+            </div>
+            <div class="housing-project-location">
+              <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 10-7 10S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span></span> کیش، مروارید
+            </div>
+            <div class="housing-project-stats">
+              <div class="housing-stat-item">
+                <span class="label">ارزش پروژه</span>
+                <span class="value gold">۵۵ میلیارد</span>
+              </div>
+              <div class="housing-stat-item">
+                <span class="label">قیمت هر توکن</span>
+                <span class="value teal">۱۱ میلیون</span>
+              </div>
+              <div class="housing-stat-item">
+                <span class="label">توکن کل</span>
+                <span class="value">۵,۰۰۰</span>
+              </div>
+              <div class="housing-stat-item">
+                <span class="label">توکن باقی‌مانده</span>
+                <span class="value green">۲,۸۰۰</span>
+              </div>
+            </div>
+            <div class="housing-project-progress">
+              <div class="housing-project-progress-header">
+                <span class="label">پیشرفت ساخت</span>
+                <span class="value">۴۵٪</span>
+              </div>
+              <div class="housing-progress-bar">
+                <div class="fill" style="width: 45%;"></div>
+              </div>
+            </div>
+            <div class="housing-project-footer">
+              <button class="btn btn-outline btn-sm">◉ جزئیات</button>
+              <button class="btn btn-teal btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h2l2 10h9l2-7H7"/><circle cx="10" cy="19" r="1"/><circle cx="17" cy="19" r="1"/></svg></span> خرید توکن</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== TAB: PROCESS ==================== -->
+    <div class="tab-panel" id="panel-process">
+      <div class="content-grid">
+
+        <div class="content-col">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span> فرآیند توکنیزه‌سازی مسکن</h3>
+                <p>۸ مرحله از ثبت پروژه تا عرضه توکن</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="process-steps">
+
+                <div class="process-step">
+                  <div class="process-step-num">۱</div>
+                  <div class="process-step-body">
+                    <h4>ثبت پروژه و مالک</h4>
+                    <p>مالک رسمی زمین با ارائه <strong>سند رسمی مالکیت</strong> و مدارک هویتی، پروژه را در سامانه ثبت می‌کند[citation:2].</p>
+                  </div>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-step-num">۲</div>
+                  <div class="process-step-body">
+                    <h4>تشکیل SPV (شرکت پروژه)</h4>
+                    <p>یک <strong>شرکت با مسئولیت محدود</strong> مخصوص پروژه تشکیل می‌شود. مالکیت ملک به SPV منتقل و توکن‌ها نماینده سهام در این شرکت خواهند بود[citation:4].</p>
+                  </div>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-step-num">۳</div>
+                  <div class="process-step-body">
+                    <h4>ارزیابی و ارزش‌گذاری</h4>
+                    <p>ارزیاب رسمی، ارزش ملک و پروژه را تعیین می‌کند. این ارزیابی مبنای <strong>قیمت‌گذاری توکن‌ها</strong> خواهد بود[citation:1].</p>
+                  </div>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-step-num">۴</div>
+                  <div class="process-step-body">
+                    <h4>دریافت مجوزها</h4>
+                    <p>پروانه ساخت، بیمه‌نامه مسئولیت و سایر مجوزهای لازم از مراجع ذی‌صلاح دریافت می‌شود[citation:2][citation:9].</p>
+                  </div>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-step-num">۵</div>
+                  <div class="process-step-body">
+                    <h4>اعتبارسنجی چندلایه</h4>
+                    <p>اسناد مالکیت، مجوزها و مدل مالی توسط تیم کارشناسی ایرانیان توکن بررسی و تأیید می‌شود.</p>
+                  </div>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-step-num">۶</div>
+                  <div class="process-step-body">
+                    <h4>ایجاد توکن‌ها</h4>
+                    <p>بر اساس ارزش پروژه، تعداد توکن‌ها تعیین و در سیستم ثبت می‌شود. هر توکن نماینده <strong>سهم مشخصی از ارزش پروژه</strong> است[citation:1].</p>
+                  </div>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-step-num">۷</div>
+                  <div class="process-step-body">
+                    <h4>تنظیم سند رسمی</h4>
+                    <p>قرارداد مشارکت یا پیش‌فروش در <strong>دفتر اسناد رسمی</strong> تنظیم و در سامانه ثبت اسناد ثبت می‌شود[citation:2][citation:13].</p>
+                  </div>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-step-num">۸</div>
+                  <div class="process-step-body">
+                    <h4>عرضه توکن‌ها</h4>
+                    <p>توکن‌ها در پلتفرم ایرانیان توکن عرضه می‌شوند و سرمایه‌گذاران می‌توانند خریداری کنند.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-col">
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></span> چارچوب حقوقی</h3>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="info-list">
+                <div class="info-row">
+                  <div class="info-row-icon green"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+                  <div class="info-row-body">
+                    <strong>قانون پیش‌فروش ساختمان (۱۳۸۹)</strong>
+                    <p>قرارداد پیش‌فروش باید <strong>در دفاتر اسناد رسمی</strong> تنظیم شود[citation:2].</p>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <div class="info-row-icon green"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+                  <div class="info-row-body">
+                    <strong>قانون الزام به ثبت رسمی (۱۴۰۱)</strong>
+                    <p>شناسه یکتا برای هر واحد ساختمانی الزامی است[citation:13].</p>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <div class="info-row-icon gold"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+                  <div class="info-row-body">
+                    <strong>توکن ≠ سند مالکیت</strong>
+                    <p>توکن‌ها نماینده <strong>حق منفعت</strong> در SPV هستند، نه مالکیت مستقیم عین ملک[citation:4].</p>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <div class="info-row-icon red"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg></span></div>
+                  <div class="info-row-body">
+                    <strong>ممنوعیت تنظیم قرارداد در بنگاه</strong>
+                    <p>مشاوران املاک فقط مجاز به مذاکرات مقدماتی هستند[citation:2].</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M10 19V5M15 19v-7M20 19V3"/></svg></span></span> مزایا و محدودیت‌ها</h3>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="mini-stats">
+                <div class="mini-stat">
+                  <div class="value green">✓</div>
+                  <div class="label">دسترسی خرد</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="value green">✓</div>
+                  <div class="label">نقدشوندگی</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="value green">✓</div>
+                  <div class="label">شفافیت</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="value gold"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+                  <div class="label">ریسک قانونی</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="value gold"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+                  <div class="label">نقدشوندگی پایین</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="value gold"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+                  <div class="label">ابهام مالکیتی</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== TAB: CALCULATOR ==================== -->
+    <div class="tab-panel" id="panel-calculator">
+      <div class="content-grid">
+
+        <div class="content-col">
+          <div class="calculator">
+            <div class="calculator-title">
+              <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg></span> ماشین‌حساب سرمایه‌گذاری در توکن مسکن
+            </div>
+            <div class="calculator-desc">
+              با وارد کردن بودجه و انتخاب پروژه، تعداد توکن قابل خرید و بازدهی تخمینی را مشاهده کنید.
+            </div>
+
+            <div class="calc-group">
+              <label>بودجه سرمایه‌گذاری (تومان)</label>
+              <input type="number" id="calcBudget" value="50000000" oninput="calculateTokens()" placeholder="مثلاً ۵۰,۰۰۰,۰۰۰">
+            </div>
+
+            <div class="calc-group">
+              <label>انتخاب پروژه</label>
+              <select id="calcProject" onchange="calculateTokens()">
+                <option value="9000000">برج مسکونی آرین — ۹M هر توکن</option>
+                <option value="8000000">مجتمع پارس — ۸M هر توکن</option>
+                <option value="17000000">برج باغ الهیه — ۱۷M هر توکن</option>
+                <option value="5600000">مسکن مهر نوین — ۵.۶M هر توکن</option>
+                <option value="11000000">ویلاهای ساحلی کیش — ۱۱M هر توکن</option>
+              </select>
+            </div>
+
+            <div class="calc-group">
+              <label>مدت سرمایه‌گذاری</label>
+              <select id="calcDuration" onchange="calculateTokens()">
+                <option value="12">۱ سال</option>
+                <option value="24" selected>۲ سال</option>
+                <option value="36">۳ سال</option>
+                <option value="60">۵ سال</option>
+              </select>
+            </div>
+
+            <div class="calc-result">
+              <div class="calc-result-title">نتیجه محاسبه</div>
+              <div class="calc-result-grid">
+                <div class="calc-result-item">
+                  <div class="value" id="calcTokens">—</div>
+                  <div class="label">تعداد توکن قابل خرید</div>
+                </div>
+                <div class="calc-result-item">
+                  <div class="value green" id="calcOwnership">—</div>
+                  <div class="label">درصد مالکیت</div>
+                </div>
+                <div class="calc-result-item">
+                  <div class="value teal" id="calcReturn">—</div>
+                  <div class="label">ارزش تخمینی پس از دوره</div>
+                </div>
+                <div class="calc-result-item">
+                  <div class="value" id="calcProfit" style="color: var(--accent);">—</div>
+                  <div class="label">سود تخمینی</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-col">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 16 5-5 4 3 7-8"/><path d="M15 6h5v5"/></svg></span></span> روند ارزش‌گذاری</h3>
+                <p>میانگین رشد ارزش پروژه‌های مسکن</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart-container">
+                <canvas id="valuationChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M8 14a6 6 0 1 1 8 0c-1 1-1 2-1 4H9c0-2 0-3-1-4Z"/></svg></span></span> نکات مهم</h3>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="info-list">
+                <div class="info-row">
+                  <div class="info-row-icon gold"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+                  <div class="info-row-body">
+                    <strong>بازدهی تضمینی نیست</strong>
+                    <p>ارزش توکن‌ها بر اساس <strong>نوسان قیمت ملک</strong> تغییر می‌کند[citation:1].</p>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <div class="info-row-icon teal"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M10 19V5M15 19v-7M20 19V3"/></svg></span></div>
+                  <div class="info-row-body">
+                    <strong>محاسبه تخمینی</strong>
+                    <p>نتایج بر اساس میانگین رشد بازار مسکن محاسبه می‌شود.</p>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <div class="info-row-icon red"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+                  <div class="info-row-body">
+                    <strong>ریسک نقدشوندگی</strong>
+                    <p>ممکن است یافتن خریدار برای توکن‌ها زمان‌بر باشد[citation:15].</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== TAB: FAQ ==================== -->
+    <div class="tab-panel" id="panel-faq">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9.8 9a2.5 2.5 0 1 1 4.1 1.9c-1 .7-1.6 1.1-1.6 2.4"/><path d="M12 16.5h.01"/></svg></span></span> پرسش‌های متداول درباره توکن مسکن</h3>
+            <p>پاسخ به مهم‌ترین سوالات حقوقی و اقتصادی</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="faq-list">
+
+            <div class="faq-item open" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">آیا خرید توکن مسکن به معنای مالکیت قانونی ملک است؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <strong>خیر.</strong> توکن‌ها نماینده <strong>حق منفعت یا سهم در یک SPV</strong> (شرکت پروژه) هستند، نه مالکیت مستقیم عین ملک. مالکیت رسمی ملک در سند رسمی به نام SPV ثبت می‌شود و توکن‌داران از طریق شرکت، در منافع پروژه سهیم می‌شوند[citation:4]. این مدل در سطح جهانی رایج‌ترین رویکرد توکنیزه‌سازی مسکن است[citation:11][citation:16].
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">آیا توکنیزه‌سازی مسکن در ایران قانونی است؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  در حال حاضر <strong>چارچوب قانونی مشخصی برای توکنیزه‌سازی مسکن وجود ندارد</strong> و این موضوع یکی از مهم‌ترین موانع توسعه آن است[citation:4]. توکن‌ها ممکن است در مرز بین <strong>ابزار پرداخت، اوراق بهادار یا سند مالکیت دیجیتال</strong> قرار بگیرند که ابهامات حقوقی ایجاد می‌کند[citation:4][citation:10]. ایرانیان توکن با رویکرد <strong>SPV-محور</strong> و با رعایت کامل قوانین پیش‌فروش و ثبت رسمی، ریسک‌های قانونی را به حداقل می‌رساند.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">قانون پیش‌فروش ساختمان چه الزاماتی دارد؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  طبق <strong>ماده ۳ قانون پیش‌فروش ساختمان</strong>، قرارداد پیش‌فروش و هرگونه واگذاری حقوق ناشی از آن <strong>باید در دفاتر اسناد رسمی تنظیم شود</strong>[citation:2][citation:14]. مشاوران املاک فقط مجاز به مذاکرات مقدماتی هستند و تنظیم قرارداد در بنگاه، تخلف محسوب می‌شود[citation:2]. همچنین طبق <strong>قانون الزام به ثبت رسمی (۱۴۰۱)</strong>، برای هر واحد ساختمانی <strong>شناسه یکتا</strong> صادر می‌شود و نقل و انتقال تنها با استفاده از این شناسه امکان‌پذیر است[citation:13][citation:18].
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">مزایای توکنیزه‌سازی مسکن چیست؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <strong>دسترسی خرد:</strong> هر کسی با هر بودجه‌ای می‌تواند در بازار مسکن سرمایه‌گذاری کند[citation:1][citation:15].<br>
+                  <strong>نقدشوندگی:</strong> امکان خرید و فروش توکن‌ها در بازار ثانویه (در صورت وجود خریدار)[citation:5].<br>
+                  <strong>شفافیت:</strong> تمام تراکنش‌ها و مالکیت‌ها قابل ردیابی هستند[citation:5].<br>
+                  <strong>کاهش هزینه معاملات:</strong> انتقال توکن سریع‌تر و ارزان‌تر از انتقال سند ملک است[citation:5].
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">ریسک‌های توکن مسکن چیست؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <strong>ریسک قانونی:</strong> فقدان چارچوب قانونی مشخص برای توکنیزه‌سازی[citation:4].<br>
+                  <strong>ریسک نقدشوندگی:</strong> ممکن است خریداری برای توکن شما پیدا نشود[citation:15].<br>
+                  <strong>ریسک ساخت:</strong> تأخیر یا توقف پروژه ساخت[citation:1].<br>
+                  <strong>ریسک ارزش‌گذاری:</strong> قیمت‌گذاری نادرست می‌تواند منجر به سفته‌بازی شود[citation:1].<br>
+                  <strong>ابهام مالکیتی:</strong> رابطه توکن با سند رسمی باید شفاف باشد[citation:1][citation:4].
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">آیا توکن‌ها قابل انتقال به شخص دیگر هستند؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  بستگی به <strong>ساختار حقوقی هر پروژه</strong> دارد. در مدل SPV، انتقال توکن به معنای انتقال سهم در شرکت است که تابع <strong>اساسنامه شرکت</strong> و <strong>مقررات ثبت</strong> خواهد بود. در مدل پیش‌فروش رسمی، هرگونه واگذاری حقوق باید <strong>در دفتر اسناد رسمی</strong> به ثبت برسد[citation:2][citation:13]. ایرانیان توکن برای هر پروژه، <strong>شرایط انتقال</strong> را به‌طور شفاف مشخص می‌کند.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">آیا می‌توانم توکن‌هایم را پس از اتمام پروژه به پول تبدیل کنم؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  پس از اتمام پروژه و <strong>تنظیم سند رسمی انتقال</strong>، SPV می‌تواند ملک را بفروشد و <strong>عواید حاصل</strong> را بین توکن‌داران توزیع کند. یا در صورت توافق، ملک به مالکیت توکن‌داران درآید. روش دقیق <strong>خروج</strong> در <strong>قرارداد هر پروژه</strong> مشخص می‌شود. توجه داشته باشید که <strong>بازار ثانویه</strong> برای توکن‌ها ممکن است محدود باشد[citation:15].
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">نهادهای ناظر بر توکن مسکن کدامند؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  بر اساس پژوهش‌های حقوقی، توکنیزه‌سازی دارایی‌های غیرمنقول در ایران با <strong>تعدد نهادهای ناظر</strong> مواجه است: <strong>سازمان بورس و اوراق بهادار</strong>، <strong>بانک مرکزی</strong>، <strong>وزارت راه و شهرسازی</strong> و <strong>سازمان ثبت اسناد و املاک</strong>[citation:4][citation:10]. این تعدد باعث <strong>همپوشانی مسئولیت‌ها</strong> شده است[citation:4]. پیشنهاد متخصصان، ایجاد یک <strong>نهاد هماهنگ‌کننده واحد</strong> برای توکنیزه‌سازی است[citation:4].
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* ==================== SIDEBAR ==================== */
+const sidebar = document.getElementById('sidebar');
+const main = document.getElementById('main');
+const toggleBtn = document.getElementById('toggleBtn');
+const overlay = document.getElementById('overlay');
+
+toggleBtn.addEventListener('click', () => {
+  if (window.innerWidth <= 900) {
+    sidebar.classList.toggle('mobile-open');
+    overlay.classList.toggle('active');
+  } else {
+    sidebar.classList.toggle('collapsed');
+    main.classList.toggle('expanded');
+  }
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('mobile-open');
+  overlay.classList.remove('active');
+});
+
+/* ==================== TOAST ==================== */
+function showToast(type, title, message) {
+  const container = document.getElementById('toastContainer');
+  const icons = { success: '✓', error: '✗', warning: '!', info: '<span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8h.01"/></svg></span>' };
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `
+    <div class="toast-icon">${icons[type]}</div>
+    <div class="toast-body">
+      <strong>${title}</strong>
+      <span>${message}</span>
+    </div>
+  `;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-100%)';
+    toast.style.transition = 'all 0.3s';
+    setTimeout(() => toast.remove(), 300);
+  }, 4000);
+}
+
+/* ==================== TABS ==================== */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+function scrollToProjects(e) {
+  e.preventDefault();
+  document.querySelector('.tab-btn[data-tab="projects"]').click();
+}
+
+/* ==================== FAQ TOGGLE ==================== */
+function toggleFAQ(el) {
+  const wasOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+  if (!wasOpen) el.classList.add('open');
+}
+
+/* ==================== CALCULATOR ==================== */
+function toPersian(n) {
+  return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+}
+
+function formatMoney(num) {
+  if (!num) return '—';
+  return toPersian(Math.round(num).toLocaleString('en-US'));
+}
+
+function calculateTokens() {
+  const budget = parseFloat(document.getElementById('calcBudget').value) || 0;
+  const tokenPrice = parseFloat(document.getElementById('calcProject').value) || 1;
+  const duration = parseInt(document.getElementById('calcDuration').value) || 24;
+
+  const tokens = Math.floor(budget / tokenPrice);
+  const totalTokens = 5000;
+  const ownership = ((tokens / totalTokens) * 100).toFixed(2);
+
+  // فرض رشد سالانه ۲۵٪
+  const annualGrowth = 0.25;
+  const years = duration / 12;
+  const futureValue = budget * Math.pow(1 + annualGrowth, years);
+  const profit = futureValue - budget;
+
+  document.getElementById('calcTokens').textContent = toPersian(tokens.toLocaleString('en-US'));
+  document.getElementById('calcOwnership').textContent = toPersian(ownership) + '٪';
+  document.getElementById('calcReturn').textContent = formatMoney(futureValue) + ' تومان';
+  document.getElementById('calcProfit').textContent = formatMoney(profit) + ' تومان';
+}
+
+/* ==================== CHART ==================== */
+const valuationCtx = document.getElementById('valuationChart').getContext('2d');
+const gradVal = valuationCtx.createLinearGradient(0, 0, 0, 280);
+gradVal.addColorStop(0, 'rgba(26,95,180,0.3)');
+gradVal.addColorStop(1, 'rgba(26,95,180,0)');
+
+new Chart(valuationCtx, {
+  type: 'line',
+  data: {
+    labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور'],
+    datasets: [{
+      label: 'ارزش (میلیارد تومان)',
+      data: [198, 210, 224, 235, 242, 248],
+      borderColor: '#1a5fb4',
+      backgroundColor: gradVal,
+      borderWidth: 3,
+      tension: 0.4,
+      fill: true,
+      pointBackgroundColor: '#1a5fb4',
+      pointBorderColor: '#fff',
+      pointBorderWidth: 3,
+      pointRadius: 6,
+      pointHoverRadius: 9,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#0f1729',
+        padding: 12,
+        titleFont: { family: 'Vazirmatn', size: 13, weight: '700' },
+        bodyFont: { family: 'Vazirmatn', size: 12 },
+        cornerRadius: 10,
+        rtl: true,
+        textDirection: 'rtl',
+        callbacks: {
+          label: (ctx) => ` ارزش: ${ctx.parsed.y}B تومان`
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { display: false },
+        ticks: { font: { family: 'Vazirmatn', size: 11 }, color: '#64748b' }
+      },
+      y: {
+        grid: { color: '#e2e8f0', drawBorder: false },
+        ticks: {
+          font: { family: 'Vazirmatn', size: 11 },
+          color: '#64748b',
+          callback: (v) => v + 'B'
+        },
+        beginAtZero: false
+      }
+    }
+  }
+});
+
+/* ==================== INIT ==================== */
+calculateTokens();
+
+/* ==================== RIPPLE ==================== */
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `@keyframes ripple { to { transform: scale(4); opacity: 0; } }`;
+document.head.appendChild(rippleStyle);
+document.querySelectorAll('.btn, .tab-btn, .housing-project-card').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.cssText = `
+      position: absolute; width: ${size}px; height: ${size}px;
+      border-radius: 50%; background: rgba(255,255,255,0.4);
+      transform: scale(0); animation: ripple 0.6s linear;
+      pointer-events: none;
+      left: ${e.clientX - rect.left - size/2}px;
+      top: ${e.clientY - rect.top - size/2}px;
+    `;
+    this.style.position = 'relative';
+    this.style.overflow = 'hidden';
+    this.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  });
+});
+</script>
+
+<script src="theme.js"></script>
+</body>
+</html>
