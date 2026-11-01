@@ -1976,7 +1976,7 @@ body:has(.sidebar) .it-symbol svg{
 .public-wrap{width:min(1180px,100%);margin:auto}
 .public-hero{width:min(820px,100%);margin:0 auto 52px;text-align:center}
 .public-kicker{display:inline-flex;align-items:center;padding:7px 15px;border:1px solid rgba(23,103,200,.16);border-radius:999px;background:rgba(23,103,200,.055);color:var(--it-blue);font-size:11px;font-weight:900;letter-spacing:.2px}
-.public-hero h1{margin:18px 0 12px;font-size:clamp(28px,4vw,44px);line-height:1.35;color:var(--it-navy);font-weight:900;letter-spacing:-.8px}
+.public-hero h1{margin:18px 0 12px;font-size:clamp(28px,4vw,30px);line-height:1.35;color:var(--it-navy);font-weight:900;letter-spacing:-.8px}
 .public-hero p{margin:auto;max-width:700px;color:var(--it-muted);font-size:14px;line-height:2.15}
 .contact-layout,.auth-layout{width:min(1120px,100%);margin:auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;align-items:stretch}
 .contact-side{display:grid;gap:14px}
