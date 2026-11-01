@@ -3,247 +3,2555 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>توکن زعفران قائنات | ایرانیان توکن</title>
-<meta name="description" content="سپیدنامه پیشنهادی تأمین مالی کشت زعفران در قائنات؛ ساختار توکن، تعهد تحویل محصول، قیمت‌گذاری، بازخرید، ریسک‌ها و اسناد لازم.">
-<link rel="stylesheet" href="theme.css">
+<title>توکن کندوی عسل | ایرانیان توکن</title>
+<meta name="description" content="سرمایه‌گذاری در کندوی عسل با توکنیزه‌سازی؛ دسترسی خرد به صنعت زنبورداری و تولید عسل طبیعی.">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-:root{--saf-accent:#8b7957;--saf-green:#688477;--saf-ink:#304454;--saf-muted:#74828d;--saf-line:#e4e9ed;--saf-bg:#f5f7f8;--saf-soft:#eef3f1}
-body{background:var(--saf-bg);color:var(--saf-ink)}
-.saffron-page{width:min(1440px,100%);margin:0 auto;padding:26px 30px 70px}
-.saf-hero{position:relative;overflow:hidden;background:linear-gradient(115deg,#fff 0%,#f5f7f4 100%);border:1px solid #e1e8e3;border-radius:20px;padding:30px 34px;box-shadow:0 8px 26px rgba(35,55,48,.045)}
-.saf-hero:before{content:"";position:absolute;inset:0 0 0 auto;width:5px;background:linear-gradient(180deg,#8b7957,#688477)}
-.saf-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 11px;border:1px solid #e5e9e5;border-radius:30px;background:#fff;color:#748477;font-size:12px;font-weight:700}
-.saf-eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:#8b9b7d}
-.saf-hero h1{font-size:28px;line-height:1.5;color:#304454;margin:14px 0 8px;font-weight:800}
-.saf-hero p{max-width:920px;color:#6d7d87;font-size:15px;line-height:2;margin:0}
-.saf-hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.saf-hero-meta span{font-size:12px;color:#687a84;background:#fff;border:1px solid #e5eaed;border-radius:8px;padding:6px 10px}
-.saf-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0 22px}
-.saf-metric{background:#fff;border:1px solid var(--saf-line);border-radius:13px;padding:15px 17px;min-width:0}
-.saf-metric .label{font-size:12px;color:#788791;display:block;margin-bottom:5px}
-.saf-metric strong{font-size:22px;color:#435f56;font-weight:800;display:block;line-height:1.6}
-.saf-metric small{font-size:11px;color:#8a969e}
-.saf-nav{position:sticky;top:72px;z-index:20;display:flex;gap:7px;overflow-x:auto;padding:10px;margin:0 0 20px;background:rgba(255,255,255,.96);border:1px solid var(--saf-line);border-radius:13px;box-shadow:0 4px 14px rgba(30,48,64,.035);scrollbar-width:thin}
-.saf-nav a{flex:0 0 auto;text-decoration:none;color:#657680;background:#f7f9f9;border:1px solid #edf0f1;border-radius:8px;padding:7px 11px;font-size:12px;white-space:nowrap;transition:.2s}
-.saf-nav a:hover,.saf-nav a:focus{color:#405f53;background:#edf3f0;border-color:#dce7e1;outline:none}
-.saf-section{scroll-margin-top:145px;background:#fff;border:1px solid var(--saf-line);border-radius:15px;padding:23px 25px;margin:0 0 15px;box-shadow:0 4px 16px rgba(30,48,64,.025)}
-.saf-section-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:15px}
-.saf-num{width:31px;height:31px;flex:0 0 31px;border-radius:9px;display:grid;place-items:center;background:#edf3f0;color:#557364;font-size:13px;font-weight:800}
-.saf-section h2{font-size:20px;color:#354d5b;margin:0 0 4px;font-weight:800}
-.saf-section .lead{font-size:13px;color:#82909a;margin:0}
-.saf-section p{font-size:14px;line-height:2.05;color:#586a76;margin:9px 0}
-.saf-section h3{font-size:16px;color:#496456;margin:18px 0 8px}
-.saf-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:13px 0}
-.saf-note{padding:13px 15px;border:1px solid #e6ece8;background:#f8faf9;border-radius:11px}
-.saf-note strong{display:block;color:#526d60;font-size:13px;margin-bottom:4px}
-.saf-note span{display:block;color:#71808a;font-size:12px;line-height:1.9}
-.saf-callout{padding:13px 16px;margin:13px 0;border-right:3px solid #8b9b7d;border-radius:9px;background:#f3f6f3;color:#5c6e67;font-size:13px;line-height:2}
-.saf-warning{border-right-color:#b49b6c;background:#faf8f2;color:#776b53}
-.saf-table-wrap{overflow-x:auto;margin:13px 0;border:1px solid #e7ecef;border-radius:11px}
-.saf-table{width:100%;border-collapse:collapse;min-width:570px;font-size:12px}
-.saf-table th{background:#f3f6f5;color:#536b60;font-weight:800}
-.saf-table th,.saf-table td{padding:10px 12px;text-align:right;border-bottom:1px solid #edf0f1;vertical-align:top;line-height:1.8}
-.saf-table td{color:#596b76}
-.saf-table tr:last-child td{border-bottom:0}
-.saf-list{padding:0 20px 0 0;margin:8px 0;color:#586a76}
-.saf-list li{font-size:13px;line-height:2;margin:5px 0;padding-right:3px}
-.saf-list li::marker{color:#8b9b7d}
-.saf-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:13px 0}
-.saf-step{padding:12px;border:1px solid #e7ece8;border-radius:10px;background:#fbfcfb}
-.saf-step b{display:block;color:#526d60;font-size:13px;margin-bottom:4px}
-.saf-step span{font-size:11px;color:#7a8991;line-height:1.8}
-.saf-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:16px 4px 0;color:#87939a;font-size:11px}
-.saf-footer a{color:#607e70;text-decoration:none}
-@media(max-width:1050px){.saffron-page{padding:20px 18px 55px}.saf-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.saf-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:640px){.saffron-page{padding:13px 12px 80px}.saf-hero{padding:22px 19px}.saf-hero h1{font-size:24px}.saf-hero p{font-size:13px}.saf-metric{padding:12px}.saf-metric strong{font-size:19px}.saf-section{padding:18px 15px}.saf-section h2{font-size:18px}.saf-section p{font-size:13px}.saf-grid{grid-template-columns:1fr}.saf-steps{grid-template-columns:1fr 1fr}.saf-nav{top:62px}}
-@media print{body{background:#fff!important}.sidebar,.topbar,.overlay,.it-bottom-nav,.saf-nav{display:none!important}.main{margin:0!important}.saffron-page{width:100%;padding:0}.saf-hero,.saf-section,.saf-metric{box-shadow:none;break-inside:avoid}.saf-section{margin-bottom:9px}.saf-table-wrap{overflow:visible}}
+:root {
+  --primary: #1a5fb4;
+  --primary-dark: #0d3b7a;
+  --primary-light: #3584e4;
+  --accent: #f5c211;
+  --accent-dark: #c79a00;
+  --honey: #f5a623;
+  --honey-dark: #b8791a;
+  --honey-light: #ffd166;
+  --dark: #0f1729;
+  --dark-2: #1a2332;
+  --gray: #64748b;
+  --gray-light: #94a3b8;
+  --bg: #f1f5f9;
+  --bg-alt: #ffffff;
+  --border: #e2e8f0;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+  --purple: #8b5cf6;
+  --pink: #ec4899;
+  --teal: #14b8a6;
+  --gradient: linear-gradient(135deg, #1a5fb4 0%, #3584e4 100%);
+  --gradient-gold: linear-gradient(135deg, #f5c211 0%, #ffd94a 100%);
+  --gradient-honey: linear-gradient(135deg, #f5a623 0%, #ffd166 50%, #fff3b0 100%);
+  --shadow-sm: 0 1px 2px rgba(15,23,41,0.05);
+  --shadow: 0 4px 12px rgba(15,23,41,0.06);
+  --shadow-lg: 0 12px 32px rgba(15,23,41,0.1);
+  --shadow-xl: 0 24px 60px rgba(15,23,41,0.15);
+  --radius: 14px;
+  --radius-lg: 20px;
+  --sidebar-w: 260px;
+  --sidebar-collapsed: 78px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Vazirmatn', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ==================== SIDEBAR ==================== */
+.sidebar {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--dark);
+  color: #fff;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  border-left: 1px solid rgba(255,255,255,0.05);
+}
+.sidebar.collapsed { width: var(--sidebar-collapsed); }
+.sidebar-brand {
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  min-height: 82px;
+}
+.sidebar-logo {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(26,95,180,0.4);
+}
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .sidebar-brand-text { opacity: 0; }
+.sidebar-brand-text strong { font-size: 15px; font-weight: 800; }
+.sidebar-brand-text small { font-size: 11px; color: var(--gray-light); }
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sidebar-nav::-webkit-scrollbar { width: 4px; }
+.sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+.nav-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 16px 12px 8px;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .nav-section-title { opacity: 0; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  color: var(--gray-light);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.nav-item.active { background: var(--gradient); color: #fff; box-shadow: 0 6px 16px rgba(26,95,180,0.35); }
+.nav-item .icon { font-size: 18px; flex-shrink: 0; width: 22px; text-align: center; }
+.nav-item .label { opacity: 1; transition: opacity 0.2s; }
+.sidebar.collapsed .nav-item .label { opacity: 0; }
+.nav-item .badge {
+  margin-right: auto;
+  background: var(--accent);
+  color: var(--dark);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 50px;
+  transition: opacity 0.2s;
+}
+.sidebar.collapsed .nav-item .badge { opacity: 0; }
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.user-mini {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.user-mini:hover { background: rgba(255,255,255,0.08); }
+.user-avatar {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: var(--gradient-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: var(--dark);
+  flex-shrink: 0;
+  font-size: 14px;
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  overflow: hidden;
+}
+.sidebar.collapsed .user-info { opacity: 0; }
+.user-info strong { font-size: 13px; color: #fff; }
+.user-info small { font-size: 11px; color: var(--gray-light); }
+
+/* ==================== MAIN ==================== */
+.main {
+  margin-right: var(--sidebar-w);
+  transition: margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main.expanded { margin-right: var(--sidebar-collapsed); }
+
+/* ==================== TOPBAR ==================== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.toggle-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--dark);
+  transition: all 0.2s;
+}
+.toggle-btn:hover { background: var(--bg); }
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--gray);
+}
+.breadcrumb a { color: var(--gray); text-decoration: none; }
+.breadcrumb a:hover { color: var(--primary); }
+.breadcrumb .current { color: var(--dark); font-weight: 600; }
+.topbar-actions { display: flex; align-items: center; gap: 8px; margin-right: auto; }
+.icon-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--gray);
+  transition: all 0.2s;
+  position: relative;
+}
+.icon-btn:hover { background: var(--bg); color: var(--primary); }
+.icon-btn .dot {
+  position: absolute;
+  top: 8px; left: 8px;
+  width: 8px; height: 8px;
+  background: var(--danger);
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+/* ==================== CONTENT ==================== */
+.content { padding: 28px; flex: 1; max-width: 1600px; margin: 0 auto; width: 100%; }
+
+/* ==================== BUTTONS ==================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--gradient);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(26,95,180,0.28);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(26,95,180,0.38);
+}
+.btn-outline {
+  background: #fff;
+  color: var(--dark);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover { background: var(--bg); border-color: var(--primary-light); color: var(--primary); }
+.btn-honey {
+  background: var(--gradient-honey);
+  color: #4a2c00;
+  box-shadow: 0 8px 20px rgba(245,166,35,0.35);
+  font-weight: 800;
+}
+.btn-honey:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(245,166,35,0.5); }
+.btn-sm { padding: 8px 14px; font-size: 13px; }
+.btn-lg { padding: 14px 28px; font-size: 15px; font-weight: 700; }
+
+/* ==================== HERO ==================== */
+.honey-hero {
+  background: linear-gradient(135deg, #4a2c00 0%, #b8791a 40%, #f5a623 100%);
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  color: #fff;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+.honey-hero::before {
+  content: '';
+  position: absolute;
+  top: -30%; right: -10%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255,209,102,0.3), transparent 70%);
+  border-radius: 50%;
+}
+.honey-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -40%; left: -10%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255,243,176,0.2), transparent 70%);
+  border-radius: 50%;
+}
+.honey-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+.honey-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+.honey-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+}
+.honey-badge::before { content:"";width:6px;height:6px;border-radius:50%;background:currentColor; }
+.honey-hero h1 {
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 900;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+  color: #fff;
+}
+.honey-hero h1 .gold {
+  color: #fff3b0;
+  text-shadow: 0 0 20px rgba(255,209,102,0.5);
+}
+.honey-hero p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.9;
+  margin-bottom: 28px;
+  max-width: 620px;
+}
+.honey-hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.honey-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  position: relative;
+  z-index: 2;
+}
+.honey-hero-stat { text-align: center; }
+.honey-hero-stat .value {
+  font-size: 26px;
+  font-weight: 900;
+  color: #fff3b0;
+  line-height: 1.2;
+  text-shadow: 0 0 15px rgba(255,209,102,0.4);
+}
+.honey-hero-stat .label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Floating bees */
+.floating-bee {
+  position: absolute;
+  font-size: 32px;
+  opacity: 0.3;
+  animation: floatBee 8s ease-in-out infinite;
+  z-index: 1;
+}
+.floating-bee.b1 { top: 20%; left: 15%; animation-delay: 0s; }
+.floating-bee.b2 { top: 60%; left: 25%; animation-delay: 2s; font-size: 24px; }
+.floating-bee.b3 { top: 35%; right: 12%; animation-delay: 4s; font-size: 28px; }
+@keyframes floatBee {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  25% { transform: translate(30px, -20px) rotate(10deg); }
+  50% { transform: translate(-20px, -40px) rotate(-10deg); }
+  75% { transform: translate(20px, -20px) rotate(5deg); }
+}
+
+/* ==================== TABS ==================== */
+.tabs-nav {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 6px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+.tabs-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.tab-btn:hover { background: var(--bg); color: var(--honey-dark); }
+.tab-btn.active {
+  background: var(--gradient-honey);
+  color: #4a2c00;
+  box-shadow: 0 6px 16px rgba(245,166,35,0.3);
+}
+
+.tab-panel { display: none; animation: fadeIn 0.4s; }
+.tab-panel.active { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== CARDS ==================== */
+.card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s;
+}
+.card:hover { box-shadow: var(--shadow); }
+.card-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.card-header-left h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.card-header-left h3 .icon {
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  background: rgba(245,166,35,0.12);
+  color: var(--honey-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.card-header-left p { font-size: 12px; color: var(--gray); margin-right: 42px; }
+.card-body { padding: 24px; }
+
+/* ==================== GRID ==================== */
+.content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.content-grid-equal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.content-col { display: flex; flex-direction: column; gap: 24px; }
+
+/* ==================== HIVE CARDS ==================== */
+.hives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.hive-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+.hive-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+  border-color: transparent;
+}
+.hive-card-cover {
+  height: 160px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 72px;
+  background: var(--gradient-honey);
+}
+.hive-card-cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.2), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.15), transparent 40%);
+}
+.hive-card-status {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hive-card-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.hive-card-status.active { color: var(--success); }
+.hive-card-status.pending { color: var(--warning); }
+.hive-card-status.harvest { color: var(--honey-dark); }
+
+.hive-card-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  background: rgba(74,44,0,0.75);
+  backdrop-filter: blur(10px);
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff3b0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hive-card-body { padding: 20px; }
+.hive-card-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.hive-card-title .type-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(245,166,35,0.15);
+  color: var(--honey-dark);
+  white-space: nowrap;
+}
+.hive-card-location {
+  font-size: 12px;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.hive-card-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.hive-stat-item .label {
+  font-size: 10px;
+  color: var(--gray);
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: block;
+}
+.hive-stat-item .value {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--dark);
+}
+.hive-stat-item .value.honey { color: var(--honey-dark); }
+.hive-stat-item .value.green { color: var(--success); }
+.hive-stat-item .value.teal { color: var(--teal); }
+
+.hive-card-footer {
+  display: flex;
+  gap: 8px;
+}
+.hive-card-footer .btn { flex: 1; justify-content: center; padding: 9px; font-size: 12px; }
+
+/* ==================== KPI ==================== */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+.kpi-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gradient-honey);
+}
+.kpi-card.green::before { background: linear-gradient(180deg, #10b981, #34d399); }
+.kpi-card.blue::before { background: var(--gradient); }
+.kpi-card.purple::before { background: linear-gradient(180deg, #8b5cf6, #a78bfa); }
+.kpi-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: transparent; }
+.kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.kpi-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  background: rgba(245,166,35,0.12);
+  color: var(--honey-dark);
+}
+.kpi-card.green .kpi-icon { background: rgba(16,185,129,0.1); color: var(--success); }
+.kpi-card.blue .kpi-icon { background: rgba(26,95,180,0.08); color: var(--primary); }
+.kpi-card.purple .kpi-icon { background: rgba(139,92,246,0.1); color: var(--purple); }
+.kpi-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 50px;
+}
+.kpi-trend.up { background: rgba(16,185,129,0.12); color: var(--success); }
+.kpi-trend.down { background: rgba(239,68,68,0.12); color: var(--danger); }
+.kpi-trend.neutral { background: rgba(100,116,139,0.12); color: var(--gray); }
+.kpi-value {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.kpi-value span { font-size: 13px; font-weight: 700; color: var(--gray); margin-right: 4px; }
+.kpi-label { font-size: 12px; color: var(--gray); font-weight: 600; }
+
+/* ==================== PROCESS STEPS ==================== */
+.process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.process-step {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 14px;
+  transition: all 0.2s;
+  position: relative;
+}
+.process-step:hover { background: var(--bg); }
+.process-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 31px;
+  top: 52px;
+  bottom: -4px;
+  width: 2px;
+  background: var(--border);
+}
+.process-step-num {
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 13px;
+  flex-shrink: 0;
+  background: var(--gradient-honey);
+  color: #4a2c00;
+  z-index: 2;
+}
+.process-step-body { flex: 1; min-width: 0; }
+.process-step-body h4 {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+.process-step-body p {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+
+/* ==================== INFO LIST ==================== */
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+.info-row:hover { border-color: var(--honey); background: #fff; }
+.info-row-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  background: rgba(245,166,35,0.12);
+  color: var(--honey-dark);
+}
+.info-row-icon.green { background: rgba(16,185,129,0.1); color: var(--success); }
+.info-row-icon.red { background: rgba(239,68,68,0.1); color: var(--danger); }
+.info-row-icon.blue { background: rgba(26,95,180,0.08); color: var(--primary); }
+.info-row-icon.purple { background: rgba(139,92,246,0.1); color: var(--purple); }
+.info-row-icon.teal { background: rgba(20,184,166,0.1); color: var(--teal); }
+.info-row-body { flex: 1; min-width: 0; }
+.info-row-body strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 3px;
+}
+.info-row-body p {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+
+/* ==================== CALCULATOR ==================== */
+.calculator {
+  background: linear-gradient(135deg, rgba(245,166,35,0.08), rgba(255,209,102,0.06));
+  border: 1.5px solid rgba(245,166,35,0.25);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+.calculator-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.calculator-desc {
+  font-size: 12px;
+  color: var(--gray);
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+.calc-group {
+  margin-bottom: 16px;
+}
+.calc-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.calc-group input,
+.calc-group select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 11px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--dark);
+  transition: all 0.2s;
+}
+.calc-group input:focus,
+.calc-group select:focus {
+  outline: none;
+  border-color: var(--honey);
+  box-shadow: 0 0 0 4px rgba(245,166,35,0.15);
+}
+.calc-result {
+  background: linear-gradient(135deg, #4a2c00, #b8791a);
+  border-radius: 14px;
+  padding: 20px;
+  margin-top: 20px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.calc-result::before {
+  content:"";width:6px;height:6px;border-radius:50%;background:currentColor;
+  position: absolute;
+  top: -20px; left: -20px;
+  font-size: 120px;
+  opacity: 0.08;
+  transform: rotate(-15deg);
+}
+.calc-result-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  position: relative;
+}
+.calc-result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  position: relative;
+}
+.calc-result-item { text-align: center; }
+.calc-result-item .value {
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff3b0;
+  line-height: 1.2;
+}
+.calc-result-item .value.green { color: #86efac; }
+.calc-result-item .value.white { color: #fff; }
+.calc-result-item .label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.75);
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+/* ==================== HIVE BOXES (visual) ==================== */
+.hive-boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 12px;
+}
+.hive-box {
+  aspect-ratio: 1;
+  background: var(--gradient-honey);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+.hive-box::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(255,255,255,0.4);
+  border-radius: 10px;
+}
+.hive-box:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(245,166,35,0.4); }
+.hive-box.owned { border-color: var(--success); background: linear-gradient(135deg, #10b981, #34d399); }
+.hive-box.owned::after {
+  content: '✓';
+  position: absolute;
+  top: 4px; right: 4px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 900;
+}
+.hive-box .num {
+  font-size: 11px;
+  font-weight: 800;
+  color: rgba(74,44,0,0.7);
+  margin-top: 2px;
+}
+.hive-box.owned .num { color: rgba(255,255,255,0.9); }
+
+/* ==================== BADGE ==================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.badge.success { background: rgba(16,185,129,0.12); color: var(--success); }
+.badge.warning { background: rgba(245,158,11,0.14); color: var(--warning); }
+.badge.danger { background: rgba(239,68,68,0.12); color: var(--danger); }
+.badge.info { background: rgba(59,130,246,0.12); color: var(--info); }
+.badge.purple { background: rgba(139,92,246,0.12); color: var(--purple); }
+.badge.teal { background: rgba(20,184,166,0.12); color: var(--teal); }
+.badge.honey { background: rgba(245,166,35,0.15); color: var(--honey-dark); }
+.badge.gray { background: rgba(100,116,139,0.12); color: var(--gray); }
+.badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ==================== CHART ==================== */
+.chart-container {
+  position: relative;
+  height: 280px;
+  padding: 8px 0;
+}
+
+/* ==================== MINI STATS ==================== */
+.mini-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+.mini-stat {
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.mini-stat .value {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--dark);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.mini-stat .value.honey { color: var(--honey-dark); }
+.mini-stat .value.green { color: var(--success); }
+.mini-stat .value.blue { color: var(--primary); }
+.mini-stat .value.teal { color: var(--teal); }
+.mini-stat .label {
+  font-size: 11px;
+  color: var(--gray);
+  font-weight: 600;
+}
+
+/* ==================== HARVEST TIMELINE ==================== */
+.harvest-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.harvest-season {
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  text-align: center;
+  position: relative;
+  transition: all 0.2s;
+}
+.harvest-season:hover { border-color: var(--honey); background: #fff; }
+.harvest-season .season-icon { font-size: 28px; margin-bottom: 6px; }
+.harvest-season .season-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+.harvest-season .season-yield {
+  font-size: 11px;
+  color: var(--honey-dark);
+  font-weight: 800;
+}
+.harvest-season .season-status {
+  position: absolute;
+  top: 8px; left: 8px;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 50px;
+}
+.harvest-season .season-status.done { background: rgba(16,185,129,0.15); color: var(--success); }
+.harvest-season .season-status.current { background: rgba(245,166,35,0.2); color: var(--honey-dark); }
+.harvest-season .season-status.upcoming { background: rgba(100,116,139,0.12); color: var(--gray); }
+
+/* ==================== TOAST ==================== */
+.toast-container {
+  position: fixed;
+  top: 24px; left: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.toast {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 280px;
+  max-width: 380px;
+  border-right: 4px solid var(--success);
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast.error { border-right-color: var(--danger); }
+.toast.warning { border-right-color: var(--warning); }
+.toast.info { border-right-color: var(--info); }
+.toast.honey { border-right-color: var(--honey); }
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.toast-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  background: rgba(16,185,129,0.12);
+  color: var(--success);
+}
+.toast.error .toast-icon { background: rgba(239,68,68,0.12); color: var(--danger); }
+.toast.warning .toast-icon { background: rgba(245,158,11,0.14); color: var(--warning); }
+.toast.info .toast-icon { background: rgba(59,130,246,0.12); color: var(--info); }
+.toast.honey .toast-icon { background: rgba(245,166,35,0.15); color: var(--honey-dark); }
+.toast-body strong { display: block; font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+.toast-body span { font-size: 12px; color: var(--gray); }
+
+/* ==================== OVERLAY ==================== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,41,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.overlay.active { opacity: 1; pointer-events: auto; }
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1200px) {
+  .content-grid, .content-grid-equal { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(100%); width: var(--sidebar-w) !important; }
+  .sidebar.mobile-open { transform: translateX(0); }
+  .sidebar.collapsed .sidebar-brand-text,
+  .sidebar.collapsed .nav-item .label,
+  .sidebar.collapsed .nav-section-title,
+  .sidebar.collapsed .user-info,
+  .sidebar.collapsed .nav-item .badge { opacity: 1; }
+  .main { margin-right: 0 !important; }
+  .content { padding: 20px 16px 100px; }
+  .topbar { padding: 12px 16px; }
+  .breadcrumb { display: none; }
+  .honey-hero { padding: 32px 24px; }
+  .harvest-timeline { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .content { padding: 16px 12px 100px; }
+  .honey-hero { padding: 28px 20px; }
+  .honey-hero h1 { font-size: 22px; }
+  .hives-grid { grid-template-columns: 1fr; }
+  .card-header, .card-body { padding-left: 16px; padding-right: 16px; }
+  .tab-btn { padding: 9px 12px; font-size: 12px; }
+  .calc-result-grid { grid-template-columns: 1fr; }
+  .floating-bee { display: none; }
+}
 </style>
+<link rel="stylesheet" href="theme.css">
+<link rel="icon" href="assets/images/logo.png" type="image/png">
+<link rel="shortcut icon" href="assets/images/logo.png" type="image/png">
 </head>
 <body>
+
+<div class="toast-container" id="toastContainer"></div>
 <div class="overlay" id="overlay"></div>
+
+<!-- ==================== SIDEBAR ==================== -->
 <aside class="sidebar" id="sidebar"><div class="sidebar-brand"><a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit"><div class="sidebar-logo"><img src="assets/images/logo.png" alt="ایرانیان توکن"></div><div class="sidebar-brand-text"><strong>ایرانیان توکن</strong><small>مرکز مدیریت و پایش</small></div></a></div><nav class="sidebar-nav" aria-label="ناوبری یکپارچه سامانه">
 <div class="nav-section-title">مرکز کار</div><a class="nav-item" href="dashboard.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="label">داشبورد</span></a>
-<div class="nav-group open"><div class="nav-parent-row"><a class="nav-item active" href="projects.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="label">پروژه‌ها و دارایی‌ها</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a class="" href="projects.html">فهرست پروژه‌ها</a><a class="" href="new-project.html">ثبت پروژه جدید</a><a class="" href="project-detail.html">جزئیات پروژه</a><a class="" href="car-token.html">توکن خودرو</a><a class="active" href="honey-token.html" aria-current="page">توکن زعفران</a><a class="" href="housing-token.html">توکن مسکن</a><a class="" href="solar-token.html">توکن انرژی خورشیدی</a></div></div></div>
-<div class="nav-group "><div class="nav-parent-row"><a class="nav-item" href="validation.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span class="label">اسناد و اعتبارسنجی</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a href="dashboard.html#access">مرکز اسناد</a><a class="" href="validation.html">صف اعتبارسنجی</a></div></div></div>
+<div class="nav-group open"><div class="nav-parent-row"><a class="nav-item active" href="projects.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span><span class="label">پروژه‌ها و دارایی‌ها</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a class="" href="projects.html">فهرست پروژه‌ها</a><a class="" href="new-project.html">ثبت پروژه جدید</a><a class="" href="project-detail.html">جزئیات پروژه</a><a class="" href="car-token.html">توکن خودرو</a><a class="active" href="honey-token.html">توکن کندوی عسل</a><a class="" href="housing-token.html">توکن مسکن</a><a class="" href="solar-token.html">توکن انرژی خورشیدی</a></div></div></div>
+<div class="nav-group "><div class="nav-parent-row"><a class="nav-item" href="validation.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span class="label">اسناد و اعتبارسنجی</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a href="dashboard.html#documents">مرکز اسناد</a><a class="" href="validation.html">صف اعتبارسنجی</a></div></div></div>
 <div class="nav-section-title">کنترل و گزارش</div><a class="nav-item" href="users.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span><span class="label">کاربران و نقش‌ها</span></a><a class="nav-item" href="reports.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9m5 10V5m5 14v-7m5 7V3"/></svg></span><span class="label">گزارش‌های مدیریتی</span></a><a class="nav-item" href="dashboard.html#audit"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span><span class="label">ثبت رویدادها</span></a>
 <div class="nav-section-title">حساب و سامانه</div><div class="nav-group "><div class="nav-parent-row"><a class="nav-item" href="settings.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 15l2 1-2 3-2-1a8 8 0 0 1-2 1v2h-4v-2a8 8 0 0 1-2-1l-2 1-2-3 2-1a8 8 0 0 1 0-2l-2-1 2-3 2 1a8 8 0 0 1 2-1V6h4v2a8 8 0 0 1 2 1l2-1 2 3-2 1a8 8 0 0 1 0 2z"/></svg></span><span class="label">حساب و تنظیمات</span></a><button class="nav-expand" type="button">⌄</button></div><div class="nav-sub"><div class="nav-sub-inner"><a class="" href="profile.html">پروفایل و حساب</a><a class="" href="settings.html">تنظیمات سامانه</a><a class="" href="notifications.html">اعلان‌ها</a><a href="auth.html">ورود و ثبت‌نام</a></div></div></div><a class="nav-item" href="help.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M9.7 9a2.4 2.4 0 1 1 4 1.8c-1 .7-1.7 1.1-1.7 2.4M12 16.5h.01"/></svg></span><span class="label">مرکز راهنما</span></a>
 <div class="nav-section-title">صفحات سامانه</div><a class="nav-item" href="index.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="label">معرفی سامانه</span></a><a class="nav-item" href="contact.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/></svg></span><span class="label">تماس با ما</span></a><a class="nav-item" href="auth.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 8l-4 4 4 4M6 12h9a4 4 0 0 1 4 4v2"/></svg></span><span class="label">ثبت نام / ورود</span></a><div class="nav-section-title">دسترسی سریع</div><a class="nav-item" href="index.html"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="label">بازگشت به صفحه اصلی</span></a></nav></aside>
+
+<!-- ==================== MAIN ==================== -->
 <div class="main" id="main">
-<header class="topbar">
-<button class="toggle-btn" id="toggleBtn" type="button" aria-label="باز و بسته کردن منو"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span></button>
-<div class="breadcrumb"><a href="dashboard.html">داشبورد</a><span>›</span><a href="projects.html">پروژه‌ها</a><span>›</span><span class="current">توکن زعفران قائنات</span></div>
-<div class="topbar-actions">
-<button class="icon-btn" type="button" onclick="window.print()" aria-label="چاپ صفحه" title="چاپ"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 9V4h10v5M7 17H5a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v7H7z"/></svg></span></button>
-<a class="icon-btn" href="help.html" aria-label="راهنما" title="راهنما">؟</a>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <button class="toggle-btn" id="toggleBtn"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></span></button>
+    <div class="breadcrumb">
+      <a href="dashboard.html">داشبورد</a>
+      <span>›</span>
+      <a href="projects.html">پروژه‌ها</a>
+      <span>›</span>
+      <span class="current">توکن کندوی عسل</span>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" onclick="showToast('info','راهنما','راهنمای توکن کندو باز شد.')" title="راهنما"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9.7 9a2.4 2.4 0 1 1 4 1.8c-1 .7-1.7 1.1-1.7 2.4M12 16.5h.01"/></svg></span></button>
+      <button class="icon-btn" onclick="window.print()" title="چاپ"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 9V4h10v5M7 17H5a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v7H7z"/></svg></span></button>
+      <button class="icon-btn" id="notifBtn">◉<span class="dot"></span></button>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- ==================== HERO ==================== -->
+    <section class="honey-hero">
+      <div class="honey-hero-grid"></div>
+      <span class="floating-bee b1"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></span>
+      <span class="floating-bee b2"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></span>
+      <span class="floating-bee b3"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></span>
+
+      <div class="honey-hero-content">
+        <div class="honey-badge">پروژه ویژه · سرمایه‌گذاری در زنبورداری</div>
+        <h1>
+          با هر بودجه‌ای، صاحب<br>
+          <span class="gold">کندوی عسل</span> خودتان شوید
+        </h1>
+        <p>
+          توکن کندوی عسل به شما امکان می‌دهد با سرمایه‌گذاری خرد در صنعت زنبورداری، از تولید عسل طبیعی، ژل رویال، بره موم و موم زنبور عسل بهره‌مند شوید. هر توکن نماینده سهمی از یک یا چند کندوی فعال است که تولید آن به‌صورت مستمر پایش و گزارش می‌شود.
+        </p>
+        <div class="honey-hero-actions">
+          <a href="#hives" class="btn btn-honey btn-lg" onclick="scrollToHives(event)">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span> مشاهده کندوها
+          </a>
+          <button class="btn btn-outline btn-lg" onclick="showToast('info','راهنما','راهنمای کامل در حال بارگذاری...')" style="background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3);">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 1 4 17.5z"/><path d="M4 17.5A2.5 2.5 0 0 1 6.5 15H20"/></svg></span> راهنمای کامل
+          </button>
+        </div>
+      </div>
+
+      <div class="honey-hero-stats">
+        <div class="honey-hero-stat">
+          <div class="value">۶</div>
+          <div class="label">پروژه فعال</div>
+        </div>
+        <div class="honey-hero-stat">
+          <div class="value">۸.۴K</div>
+          <div class="label">کندوی توکنیزه‌شده</div>
+        </div>
+        <div class="honey-hero-stat">
+          <div class="value">۲,۱۴۰</div>
+          <div class="label">سرمایه‌گذار</div>
+        </div>
+        <div class="honey-hero-stat">
+          <div class="value">۴۸B</div>
+          <div class="label">ارزش کل (تومان)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== KPI ==================== -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></div>
+          <div class="kpi-trend up">↑ ۲۸٪</div>
+        </div>
+        <div class="kpi-value">۱۸.۴ <span>تن</span></div>
+        <div class="kpi-label">تولید عسل سالانه</div>
+      </div>
+
+      <div class="kpi-card green">
+        <div class="kpi-header">
+          <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 16 5-5 4 3 7-8"/><path d="M15 6h5v5"/></svg></span></div>
+          <div class="kpi-trend up">↑ ۳۵٪</div>
+        </div>
+        <div class="kpi-value">۴.۲ <span>میلیارد</span></div>
+        <div class="kpi-label">درآمد سالانه تخمینی</div>
+      </div>
+
+      <div class="kpi-card blue">
+        <div class="kpi-header">
+          <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></div>
+          <div class="kpi-trend up">↑ ۱۲٪</div>
+        </div>
+        <div class="kpi-value">۸,۴۰۰</div>
+        <div class="kpi-label">کندوی فعال</div>
+      </div>
+
+      <div class="kpi-card purple">
+        <div class="kpi-header">
+          <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M10 19V5M15 19v-7M20 19V3"/></svg></span></div>
+          <div class="kpi-trend up">↑ ۲۲٪</div>
+        </div>
+        <div class="kpi-value">۳۲.۵ <span>درصد</span></div>
+        <div class="kpi-label">بازدهی میانگین سالانه</div>
+      </div>
+    </div>
+
+    <!-- ==================== TABS ==================== -->
+    <nav class="tabs-nav">
+      <button class="tab-btn active" data-tab="hives">
+        <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></span> کندوهای فعال
+      </button>
+      <button class="tab-btn" data-tab="my-hives">
+        <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></span> کندوهای من
+      </button>
+      <button class="tab-btn" data-tab="calculator">
+        <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg></span></span> ماشین‌حساب سود
+      </button>
+      <button class="tab-btn" data-tab="harvest">
+        <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 9h16M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01"/></svg></span></span> تقویم برداشت
+      </button>
+      <button class="tab-btn" data-tab="process">
+        <span>◫</span> فرآیند توکنیزه‌سازی
+      </button>
+      <button class="tab-btn" data-tab="faq">
+        <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9.8 9a2.5 2.5 0 1 1 4.1 1.9c-1 .7-1.6 1.1-1.6 2.4"/><path d="M12 16.5h.01"/></svg></span></span> پرسش‌های متداول
+      </button>
+    </nav>
+
+    <!-- ==================== TAB: HIVES ==================== -->
+    <div class="tab-panel active" id="panel-hives">
+
+      <!-- Filters -->
+      <div class="card" style="margin-bottom: 20px;">
+        <div class="card-body" style="padding: 16px 20px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+          <div style="flex: 1; min-width: 220px; position: relative;">
+            <span style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--gray); font-size: 14px;">⌕</span>
+            <input type="text" placeholder="جستجوی پروژه کندو..." style="width: 100%; padding: 10px 42px 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 13px;">
+          </div>
+          <select style="padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 13px; cursor: pointer;">
+            <option>همه استان‌ها</option>
+            <option>آذربایجان غربی</option>
+            <option>اردبیل</option>
+            <option>البرز</option>
+            <option>اصفهان</option>
+            <option>مازندران</option>
+          </select>
+          <select style="padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); font-family: inherit; font-size: 13px; cursor: pointer;">
+            <option>همه انواع عسل</option>
+            <option>عسل چهل گیاه</option>
+            <option>عسل آویشن</option>
+            <option>عسل گون</option>
+            <option>عسل کنار</option>
+          </select>
+          <button class="btn btn-honey btn-sm" onclick="showToast('honey','فیلتر','فیلترها اعمال شد.')">✓ اعمال</button>
+        </div>
+      </div>
+
+      <!-- Hives Grid -->
+      <div class="hives-grid" id="hives">
+
+        <!-- Hive 1 -->
+        <div class="hive-card" onclick="showToast('honey','جزئیات','صفحه جزئیات پروژه کندو باز شد.')">
+          <div class="hive-card-cover">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span>
+            <span class="hive-card-status active">فعال</span>
+            <span class="hive-card-badge"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4C10 4 4 9 4 16c0 3 2 4 4 4 7 0 12-6 12-16Z"/><path d="M4 20c3-4 7-7 12-9"/></svg></span> طبیعی</span>
+          </div>
+          <div class="hive-card-body">
+            <div class="hive-card-title">
+              کندوستان آویشن ارومیه
+              <span class="type-badge">عسل آویشن</span>
+            </div>
+            <div class="hive-card-location">
+              <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 10-7 10S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span></span> آذربایجان غربی، ارومیه
+            </div>
+            <div class="hive-card-stats">
+              <div class="hive-stat-item">
+                <span class="label">ارزش پروژه</span>
+                <span class="value honey">۴.۵ میلیارد</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">قیمت هر توکن</span>
+                <span class="value teal">۱.۵ میلیون</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">تعداد کندو</span>
+                <span class="value">۸۰۰</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">توکن باقی‌مانده</span>
+                <span class="value green">۴۲۰</span>
+              </div>
+            </div>
+            <div class="hive-card-footer">
+              <button class="btn btn-outline btn-sm" onclick="event.stopPropagation(); showToast('honey','جزئیات','اطلاعات کندو نمایش داده شد.')">◉ جزئیات</button>
+              <button class="btn btn-honey btn-sm" onclick="event.stopPropagation(); showToast('honey','خرید','فرم خرید توکن باز شد.')"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span> خرید توکن</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hive 2 -->
+        <div class="hive-card" onclick="showToast('honey','جزئیات','صفحه جزئیات پروژه کندو باز شد.')">
+          <div class="hive-card-cover" style="background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #86efac 100%);">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span>
+            <span class="hive-card-status active">فعال</span>
+            <span class="hive-card-badge"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4C10 4 4 9 4 16c0 3 2 4 4 4 7 0 12-6 12-16Z"/><path d="M4 20c3-4 7-7 12-9"/></svg></span> چهل گیاه</span>
+          </div>
+          <div class="hive-card-body">
+            <div class="hive-card-title">
+              زنبورستان البرز
+              <span class="type-badge">عسل چهل گیاه</span>
+            </div>
+            <div class="hive-card-location">
+              <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 10-7 10S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span></span> البرز، طالقان
+            </div>
+            <div class="hive-card-stats">
+              <div class="hive-stat-item">
+                <span class="label">ارزش پروژه</span>
+                <span class="value honey">۶.۲ میلیارد</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">قیمت هر توکن</span>
+                <span class="value teal">۲ میلیون</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">تعداد کندو</span>
+                <span class="value">۱,۲۰۰</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">توکن باقی‌مانده</span>
+                <span class="value green">۱,۸۵۰</span>
+              </div>
+            </div>
+            <div class="hive-card-footer">
+              <button class="btn btn-outline btn-sm">◉ جزئیات</button>
+              <button class="btn btn-honey btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span> خرید توکن</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hive 3 -->
+        <div class="hive-card" onclick="showToast('honey','جزئیات','صفحه جزئیات پروژه کندو باز شد.')">
+          <div class="hive-card-cover" style="background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a78bfa 100%);">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span>
+            <span class="hive-card-status active">فعال</span>
+            <span class="hive-card-badge"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> عسل گون</span>
+          </div>
+          <div class="hive-card-body">
+            <div class="hive-card-title">
+              کندوستان گون خوانسار
+              <span class="type-badge">عسل گون</span>
+            </div>
+            <div class="hive-card-location">
+              <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 10-7 10S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span></span> اصفهان، خوانسار
+            </div>
+            <div class="hive-card-stats">
+              <div class="hive-stat-item">
+                <span class="label">ارزش پروژه</span>
+                <span class="value honey">۸.۵ میلیارد</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">قیمت هر توکن</span>
+                <span class="value teal">۲.۸ میلیون</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">تعداد کندو</span>
+                <span class="value">۱,۵۰۰</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">توکن باقی‌مانده</span>
+                <span class="value green">۹۲۰</span>
+              </div>
+            </div>
+            <div class="hive-card-footer">
+              <button class="btn btn-outline btn-sm">◉ جزئیات</button>
+              <button class="btn btn-honey btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span> خرید توکن</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hive 4 -->
+        <div class="hive-card" onclick="showToast('honey','جزئیات','صفحه جزئیات پروژه کندو باز شد.')">
+          <div class="hive-card-cover" style="background: linear-gradient(135deg, #dc2626 0%, #f87171 50%, #fca5a5 100%);">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span>
+            <span class="hive-card-status active">فعال</span>
+            <span class="hive-card-badge"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> عسل کنار</span>
+          </div>
+          <div class="hive-card-body">
+            <div class="hive-card-title">
+              زنبورستان کنار بوشهر
+              <span class="type-badge">عسل کنار</span>
+            </div>
+            <div class="hive-card-location">
+              <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 10-7 10S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span></span> بوشهر، دشتستان
+            </div>
+            <div class="hive-card-stats">
+              <div class="hive-stat-item">
+                <span class="label">ارزش پروژه</span>
+                <span class="value honey">۳.۸ میلیارد</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">قیمت هر توکن</span>
+                <span class="value teal">۱.۲ میلیون</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">تعداد کندو</span>
+                <span class="value">۹۰۰</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">توکن باقی‌مانده</span>
+                <span class="value green">۲۱۰</span>
+              </div>
+            </div>
+            <div class="hive-card-footer">
+              <button class="btn btn-outline btn-sm">◉ جزئیات</button>
+              <button class="btn btn-honey btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span> خرید توکن</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hive 5 -->
+        <div class="hive-card" onclick="showToast('honey','جزئیات','صفحه جزئیات پروژه کندو باز شد.')">
+          <div class="hive-card-cover" style="background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #67e8f9 100%);">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span>
+            <span class="hive-card-status harvest">فصل برداشت</span>
+            <span class="hive-card-badge"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> عسل کوهی</span>
+          </div>
+          <div class="hive-card-body">
+            <div class="hive-card-title">
+              زنبورستان کوهی مازندران
+              <span class="type-badge">عسل کوهی</span>
+            </div>
+            <div class="hive-card-location">
+              <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 10-7 10S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span></span> مازندران، هزارجریب
+            </div>
+            <div class="hive-card-stats">
+              <div class="hive-stat-item">
+                <span class="label">ارزش پروژه</span>
+                <span class="value honey">۷.۲ میلیارد</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">قیمت هر توکن</span>
+                <span class="value teal">۲.۴ میلیون</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">تعداد کندو</span>
+                <span class="value">۱,۴۰۰</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">توکن باقی‌مانده</span>
+                <span class="value green">۱,۱۰۰</span>
+              </div>
+            </div>
+            <div class="hive-card-footer">
+              <button class="btn btn-outline btn-sm">◉ جزئیات</button>
+              <button class="btn btn-honey btn-sm"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span> خرید توکن</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hive 6 -->
+        <div class="hive-card" onclick="showToast('honey','جزئیات','صفحه جزئیات پروژه کندو باز شد.')">
+          <div class="hive-card-cover" style="background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #fde68a 100%);">
+            <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span>
+            <span class="hive-card-status pending">در انتظار اعتبارسنجی</span>
+            <span class="hive-card-badge"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span> عسل ارگانیک</span>
+          </div>
+          <div class="hive-card-body">
+            <div class="hive-card-title">
+              کندوستان ارگانیک اردبیل
+              <span class="type-badge">ارگانیک</span>
+            </div>
+            <div class="hive-card-location">
+              <span><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 10-7 10S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></svg></span></span> اردبیل، سرعین
+            </div>
+            <div class="hive-card-stats">
+              <div class="hive-stat-item">
+                <span class="label">ارزش پروژه</span>
+                <span class="value honey">۵.۵ میلیارد</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">قیمت هر توکن</span>
+                <span class="value teal">۱.۸ میلیون</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">تعداد کندو</span>
+                <span class="value">۱,۰۰۰</span>
+              </div>
+              <div class="hive-stat-item">
+                <span class="label">توکن باقی‌مانده</span>
+                <span class="value green">۳,۰۰۰</span>
+              </div>
+            </div>
+            <div class="hive-card-footer">
+              <button class="btn btn-outline btn-sm">◉ جزئیات</button>
+              <button class="btn btn-honey btn-sm" disabled style="opacity: 0.5; cursor: not-allowed;"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span> در انتظار</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== TAB: MY HIVES ==================== -->
+    <div class="tab-panel" id="panel-my-hives">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></div>
+            <div class="kpi-trend up">+۵</div>
+          </div>
+          <div class="kpi-value">۱۲ <span>کندو</span></div>
+          <div class="kpi-label">کندوهای تحت مالکیت</div>
+        </div>
+        <div class="kpi-card green">
+          <div class="kpi-header">
+            <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M7 9h.01M17 15h.01"/></svg></span></div>
+            <div class="kpi-trend up">+۲۸٪</div>
+          </div>
+          <div class="kpi-value">۴۵ <span>میلیون</span></div>
+          <div class="kpi-label">ارزش کل سرمایه‌گذاری</div>
+        </div>
+        <div class="kpi-card blue">
+          <div class="kpi-header">
+            <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></div>
+            <div class="kpi-trend up">+۱۲٪</div>
+          </div>
+          <div class="kpi-value">۲۴۰ <span>کیلو</span></div>
+          <div class="kpi-label">سهم عسل امسال</div>
+        </div>
+        <div class="kpi-card purple">
+          <div class="kpi-header">
+            <div class="kpi-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 16 5-5 4 3 7-8"/><path d="M15 6h5v5"/></svg></span></div>
+            <div class="kpi-trend up">+۱۸٪</div>
+          </div>
+          <div class="kpi-value">۳۶ <span>میلیون</span></div>
+          <div class="kpi-label">سود تخمینی</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></span> کندوهای من</h3>
+            <p>نمای بصری از کندوهای تحت مالکیت شما — هر خانه یک کندو</p>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span class="badge honey"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span> مالکیت‌شده</span>
+            <span class="badge gray">◯ موجود</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="hive-boxes" id="hiveBoxes">
+            <!-- از JS پر می‌شود -->
+          </div>
+          <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; gap: 16px; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+            <div style="font-size: 13px; color: var(--gray);">
+              <strong style="color: var(--dark);">۱۲ کندو</strong> از <strong style="color: var(--dark);">۳۰ کندو</strong> موجود را در اختیار دارید
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-outline btn-sm" onclick="showToast('honey','خروجی','گزارش کندوها در حال آماده‌سازی...')">⇩ خروجی</button>
+              <button class="btn btn-honey btn-sm" onclick="showToast('honey','خرید','برای خرید کندوهای بیشتر به تب «کندوهای فعال» بروید.')"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span> خرید کندو</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- My hive stats -->
+      <div class="content-grid-equal" style="margin-top: 24px;">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M10 19V5M15 19v-7M20 19V3"/></svg></span></span> عملکرد کندوهای من</h3>
+              <p>مقایسه تولید ۶ ماه اخیر</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="myHivesChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M7 9h.01M17 15h.01"/></svg></span></span> سود و درآمد</h3>
+              <p>سهم شما از فروش محصولات</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="mini-stats">
+              <div class="mini-stat">
+                <div class="value honey">۲۴۰</div>
+                <div class="label">کیلو عسل</div>
+              </div>
+              <div class="mini-stat">
+                <div class="value green">۱۸</div>
+                <div class="label">میلیون تومان</div>
+              </div>
+              <div class="mini-stat">
+                <div class="value blue">۱۲</div>
+                <div class="label">کیلو ژل رویال</div>
+              </div>
+              <div class="mini-stat">
+                <div class="value teal">۶</div>
+                <div class="label">کیلو بره موم</div>
+              </div>
+            </div>
+            <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
+              <div class="info-row" style="background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.2);">
+                <div class="info-row-icon green"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M7 9h.01M17 15h.01"/></svg></span></div>
+                <div class="info-row-body">
+                  <strong>قابل برداشت: ۱۸ میلیون تومان</strong>
+                  <p>سود شما از فروش محصولات فصل گذشته</p>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="showToast('success','برداشت','درخواست برداشت ثبت شد.')">برداشت</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: CALCULATOR ==================== -->
+    <div class="tab-panel" id="panel-calculator">
+      <div class="content-grid">
+
+        <div class="content-col">
+          <div class="calculator">
+            <div class="calculator-title">
+              <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg></span> ماشین‌حساب سود سرمایه‌گذاری در کندو
+            </div>
+            <div class="calculator-desc">
+              با وارد کردن بودجه و انتخاب پروژه، تعداد توکن قابل خرید، تعداد کندو و بازدهی تخمینی را مشاهده کنید.
+            </div>
+
+            <div class="calc-group">
+              <label>بودجه سرمایه‌گذاری (تومان)</label>
+              <input type="number" id="calcBudget" value="30000000" oninput="calculateHoneyTokens()" placeholder="مثلاً ۳۰,۰۰۰,۰۰۰">
+            </div>
+
+            <div class="calc-group">
+              <label>انتخاب پروژه کندو</label>
+              <select id="calcHive" onchange="calculateHoneyTokens()">
+                <option value="1500000" data-hives="800" data-yield="18">کندوستان آویشن ارومیه — ۱.۵M هر توکن</option>
+                <option value="2000000" data-hives="1200" data-yield="22">زنبورستان البرز — ۲M هر توکن</option>
+                <option value="2800000" data-hives="1500" data-yield="28">کندوستان گون خوانسار — ۲.۸M هر توکن</option>
+                <option value="1200000" data-hives="900" data-yield="15">زنبورستان کنار بوشهر — ۱.۲M هر توکن</option>
+                <option value="2400000" data-hives="1400" data-yield="26">زنبورستان کوهی مازندران — ۲.۴M هر توکن</option>
+                <option value="1800000" data-hives="1000" data-yield="20">کندوستان ارگانیک اردبیل — ۱.۸M هر توکن</option>
+              </select>
+            </div>
+
+            <div class="calc-group">
+              <label>مدت سرمایه‌گذاری</label>
+              <select id="calcDuration" onchange="calculateHoneyTokens()">
+                <option value="12">۱ سال</option>
+                <option value="24" selected>۲ سال</option>
+                <option value="36">۳ سال</option>
+                <option value="60">۵ سال</option>
+              </select>
+            </div>
+
+            <div class="calc-result">
+              <div class="calc-result-title">نتیجه محاسبه</div>
+              <div class="calc-result-grid">
+                <div class="calc-result-item">
+                  <div class="value" id="calcTokens">—</div>
+                  <div class="label">تعداد توکن</div>
+                </div>
+                <div class="calc-result-item">
+                  <div class="value green" id="calcHiveShare">—</div>
+                  <div class="label">کندوی معادل</div>
+                </div>
+                <div class="calc-result-item">
+                  <div class="value white" id="calcHoney">—</div>
+                  <div class="label">تولید عسل سالانه</div>
+                </div>
+                <div class="calc-result-item">
+                  <div class="value green" id="calcProfit">—</div>
+                  <div class="label">سود تخمینی نهایی</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-col">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 16 5-5 4 3 7-8"/><path d="M15 6h5v5"/></svg></span></span> روند بازدهی سرمایه‌گذاری</h3>
+                <p>میانگین بازدهی ۵ سال اخیر</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart-container">
+                <canvas id="returnChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M8 14a6 6 0 1 1 8 0c-1 1-1 2-1 4H9c0-2 0-3-1-4Z"/></svg></span></span> نکات مهم سرمایه‌گذاری</h3>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="info-list">
+                <div class="info-row">
+                  <div class="info-row-icon honey"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></div>
+                  <div class="info-row-body">
+                    <strong>بازدهی از فروش محصولات</strong>
+                    <p>سود شما از فروش عسل، ژل رویال، بره موم و موم تأمین می‌شود.</p>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <div class="info-row-icon green"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+                  <div class="info-row-body">
+                    <strong>پایش مستمر کندوها</strong>
+                    <p>هر کندو توسط کارشناسان پایش و گزارش تولید آن ثبت می‌شود.</p>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <div class="info-row-icon gold"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+                  <div class="info-row-body">
+                    <strong>ریسک‌های طبیعی</strong>
+                    <p>خشکسالی، بیماری زنبور و شرایط جوی می‌تواند بر تولید اثر بگذارد.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== TAB: HARVEST ==================== -->
+    <div class="tab-panel" id="panel-harvest">
+      <div class="card" style="margin-bottom: 24px;">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 9h16M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01"/></svg></span></span> تقویم برداشت عسل</h3>
+            <p>فصل‌های برداشت محصولات زنبور عسل در طول سال</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="harvest-timeline">
+            <div class="harvest-season">
+              <span class="season-status upcoming">آینده</span>
+              <div class="season-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4C10 4 4 9 4 16c0 3 2 4 4 4 7 0 12-6 12-16Z"/><path d="M4 20c3-4 7-7 12-9"/></svg></span></div>
+              <div class="season-name">بهار</div>
+              <div class="season-yield">برداشت چهل گیاه</div>
+            </div>
+            <div class="harvest-season">
+              <span class="season-status current">فعلی</span>
+              <div class="season-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+              <div class="season-name">تابستان</div>
+              <div class="season-yield">برداشت آویشن و گون</div>
+            </div>
+            <div class="harvest-season">
+              <span class="season-status upcoming">آینده</span>
+              <div class="season-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4C10 4 4 9 4 16c0 3 2 4 4 4 7 0 12-6 12-16Z"/><path d="M4 20c3-4 7-7 12-9"/></svg></span></div>
+              <div class="season-name">پاییز</div>
+              <div class="season-yield">برداشت کنار</div>
+            </div>
+            <div class="harvest-season">
+              <span class="season-status upcoming">آینده</span>
+              <div class="season-icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+              <div class="season-name">زمستان</div>
+              <div class="season-yield">استراحت کندوها</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-grid-equal">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></span> تاریخچه برداشت</h3>
+              <p>آخرین برداشت‌های ثبت‌شده</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="info-list">
+              <div class="info-row">
+                <div class="info-row-icon green"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+                <div class="info-row-body">
+                  <strong>برداشت تابستان ۱۴۰۳</strong>
+                  <p>مقدار: ۱۸.۴ تن عسل آویشن و گون — فروش انجام شد</p>
+                </div>
+                <span class="badge success">تکمیل</span>
+              </div>
+              <div class="info-row">
+                <div class="info-row-icon green"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span></div>
+                <div class="info-row-body">
+                  <strong>برداشت بهار ۱۴۰۳</strong>
+                  <p>مقدار: ۱۲.۸ تن عسل چهل گیاه — فروش انجام شد</p>
+                </div>
+                <span class="badge success">تکمیل</span>
+              </div>
+              <div class="info-row">
+                <div class="info-row-icon honey"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></div>
+                <div class="info-row-body">
+                  <strong>برداشت پاییز ۱۴۰۲</strong>
+                  <p>مقدار: ۹.۲ تن عسل کنار — فروش انجام شد</p>
+                </div>
+                <span class="badge success">تکمیل</span>
+              </div>
+              <div class="info-row">
+                <div class="info-row-icon gold"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></span></div>
+                <div class="info-row-body">
+                  <strong>برداشت پاییز ۱۴۰۳</strong>
+                  <p>پیش‌بینی: ۱۱ تن عسل کنار — در انتظار فصل</p>
+                </div>
+                <span class="badge warning">در انتظار</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M7 9h.01M17 15h.01"/></svg></span></span> سهم من از برداشت</h3>
+              <p>مقدار سهم شما از هر برداشت</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="mini-stats">
+              <div class="mini-stat">
+                <div class="value honey">۲۴۰</div>
+                <div class="label">کیلو عسل امسال</div>
+              </div>
+              <div class="mini-stat">
+                <div class="value green">۱۸</div>
+                <div class="label">میلیون درآمد</div>
+              </div>
+              <div class="mini-stat">
+                <div class="value blue">۱۲</div>
+                <div class="label">کیلو ژل رویال</div>
+              </div>
+              <div class="mini-stat">
+                <div class="value purple">۶</div>
+                <div class="label">کیلو بره موم</div>
+              </div>
+            </div>
+            <div style="margin-top: 20px;">
+              <div class="chart-container" style="height: 200px;">
+                <canvas id="myShareChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: PROCESS ==================== -->
+    <div class="tab-panel" id="panel-process">
+      <div class="content-grid">
+        <div class="content-col">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span> فرآیند توکنیزه‌سازی کندوی عسل</h3>
+                <p>۸ مرحله از ثبت زنبورستان تا عرضه توکن</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="process-steps">
+
+                <div class="process-step">
+                  <div class="process-step-num">۱</div>
+                  <div class="process-step-body">
+                    <h4>ثبت زنبورستان</h4>
+                    <p>زنبوردار با ارائه <strong>پروانه بهره‌برداری زنبورداری</strong>، مدارک زمین و اطلاعات کندوها، پروژه را ثبت می‌کند.</p>
+                  </div>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-step-num">۲</div>
+                  <div class="process-step-body">
+                    <h4>ارزیابی کندوها</h4>
+                    <p>کارشناسان تعداد، سلامت و ظرفیت تولید کندوها را ارزیابی می‌کنند. عسل تولیدی از نظر کیفیت آزمایش می‌شود.</p>
+                  </div>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-step-num">۳</div>
+                  <div class="process-step-body">
+                    <h4>تعیین ارزش و تعداد توکن</h4>
+                    <p>ارزش زنبورستان بر اساس تعداد کندو، تولید سالانه و کیفیت محصولات تعیین می‌شود. تعداد توکن‌ها مشخص می‌گردد.</p>
+                  </div>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-step-num">۴</div>
+                  <div class="process-step-body">
+                    <h4>اعتبارسنجی اسناد</h4>
+                    <p>مدارک مالکیت، مجوزها و گزارش‌های فنی توسط تیم کارشناسی بررسی و تأیید می‌شود.</p>
+                  </div>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-step-num">۵</div>
+                  <div class="process-step-body">
+                    <h4>تنظیم قرارداد حقوقی</h4>
+                    <p>قرارداد بین زنبوردار و توکن‌داران تنظیم می‌شود. سهم هر طرف از تولید و فروش مشخص می‌گردد.</p>
+                  </div>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-step-num">۶</div>
+                  <div class="process-step-body">
+                    <h4>ایجاد توکن‌ها</h4>
+                    <p>توکن‌ها بر بستر امن ایجاد و در سیستم ایرانیان توکن ثبت می‌شوند. هر توکن نماینده سهم مشخصی از زنبورستان است.</p>
+                  </div>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-step-num">۷</div>
+                  <div class="process-step-body">
+                    <h4>عرضه توکن‌ها</h4>
+                    <p>توکن‌ها در پلتفرم عرضه می‌شوند و سرمایه‌گذاران می‌توانند در این پروژه سهم بگیرند.</p>
+                  </div>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-step-num">۸</div>
+                  <div class="process-step-body">
+                    <h4>پایش و توزیع سود</h4>
+                    <p>تولید هر کندو پایش می‌شود و سهم توکن‌داران از فروش محصولات به‌صورت دوره‌ای توزیع می‌گردد.</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-col">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></span> محصولات کندو</h3>
+                <p>درآمد توکن‌داران از این محصولات تأمین می‌شود</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="info-list">
+                <div class="info-row">
+                  <div class="info-row-icon honey"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></div>
+                  <div class="info-row-body">
+                    <strong>عسل طبیعی</strong>
+                    <p>محصول اصلی کندو؛ سهم ۷۰٪ از درآمد</p>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <div class="info-row-icon purple"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 7 3 3 5-6 5 6 3-3-2 10H6z"/><path d="M7 20h10"/></svg></span></div>
+                  <div class="info-row-body">
+                    <strong>ژل رویال</strong>
+                    <p>محصول لوکس با ارزش بالا؛ سهم ۱۵٪</p>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <div class="info-row-icon green"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4C10 4 4 9 4 16c0 3 2 4 4 4 7 0 12-6 12-16Z"/><path d="M4 20c3-4 7-7 12-9"/></svg></span></div>
+                  <div class="info-row-body">
+                    <strong>بره موم</strong>
+                    <p>دارای خواص دارویی؛ سهم ۸٪</p>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <div class="info-row-icon blue"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+                  <div class="info-row-body">
+                    <strong>موم زنبور عسل</strong>
+                    <p>کاربرد صنعتی و آرایشی؛ سهم ۵٪</p>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <div class="info-row-icon teal"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span></div>
+                  <div class="info-row-body">
+                    <strong>زهر زنبور و گرده</strong>
+                    <p>محصولات جانبی؛ سهم ۲٪</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-left">
+                <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9M10 19V5M15 19v-7M20 19V3"/></svg></span></span> مزایا و ریسک‌ها</h3>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="mini-stats">
+                <div class="mini-stat">
+                  <div class="value green">✓</div>
+                  <div class="label">سرمایه کم</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="value green">✓</div>
+                  <div class="label">بازدهی بالا</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="value green">✓</div>
+                  <div class="label">شفافیت</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="value gold"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+                  <div class="label">ریسک جوی</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="value gold"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+                  <div class="label">بیماری زنبور</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="value gold"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 5v7l4 2"/></svg></span></div>
+                  <div class="label">نوسان قیمت</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: FAQ ==================== -->
+    <div class="tab-panel" id="panel-faq">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h3><span class="icon"><span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9.8 9a2.5 2.5 0 1 1 4.1 1.9c-1 .7-1.6 1.1-1.6 2.4"/><path d="M12 16.5h.01"/></svg></span></span> پرسش‌های متداول درباره توکن کندوی عسل</h3>
+            <p>پاسخ به مهم‌ترین سوالات حقوقی، فنی و اقتصادی</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="faq-list" id="faqList">
+
+            <div class="faq-item open" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">توکن کندوی عسل دقیقاً نماینده چیست؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  هر توکن نماینده <strong>سهم مشخصی از یک کندو یا مجموعه‌ای از کندوها</strong> در یک زنبورستان مشخص است. این سهم شامل <strong>حق دریافت بخشی از محصولات تولیدی</strong> (عسل، ژل رویال، بره موم و ...) و <strong>حق دریافت سهم از درآمد فروش</strong> آنها می‌شود. توکن <strong>مالکیت فیزیکی زنبور یا کندو</strong> را منتقل نمی‌کند، بلکه حق بهره‌مندی از منافع آن را به دارنده می‌دهد.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">بازدهی سرمایه‌گذاری چقدر است؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  بازدهی بستگی به <strong>نوع عسل، منطقه جغرافیایی، شرایط جوی و مدیریت زنبورستان</strong> دارد. به‌طور میانگین در پروژه‌های فعال ایرانیان توکن، بازدهی سالانه بین <strong>۲۰٪ تا ۳۵٪</strong> بوده است. این بازدهی از فروش عسل و محصولات جانبی تأمین می‌شود. توجه کنید که <strong>بازدهی تضمین‌شده نیست</strong> و به عملکرد واقعی کندوها بستگی دارد.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">چطور سودم را دریافت می‌کنم؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <strong>دو روش دریافت سود وجود دارد:</strong><br>
+                  <strong>۱) دریافت محصول فیزیکی:</strong> می‌توانید سهم عسل خود را به‌صورت فیزیکی دریافت کنید (با هماهنگی ارسال).<br>
+                  <strong>۲) دریافت معادل نقدی:</strong> سهم شما از فروش محصولات به‌صورت تومان به کیف پول ایرانیان توکن واریز می‌شود که می‌توانید به حساب بانکی خود منتقل کنید.<br>
+                  توزیع سود <strong>پس از هر فصل برداشت</strong> انجام می‌شود.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">آیا کندوها را می‌توانم ببینم؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  بله. برای هر پروژه، <strong>گزارش‌های تصویری و ویدیویی</strong> به‌صورت دوره‌ای منتشر می‌شود. همچنین در صورت تمایل می‌توانید <strong>بازدید حضوری</strong> از زنبورستان داشته باشید (با هماهنگی قبلی). موقعیت دقیق کندوها در نقشه هر پروژه مشخص است.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">ریسک‌های سرمایه‌گذاری چیست؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <strong>ریسک طبیعی:</strong> خشکسالی، سرمازدگی، سیل و آفات می‌تواند تولید را کاهش دهد.<br>
+                  <strong>ریسک بیماری زنبور:</strong> بیماری‌هایی مثل واروا می‌تواند به کندوها آسیب بزند.<br>
+                  <strong>ریسک بازار:</strong> نوسان قیمت عسل و کاهش تقاضا.<br>
+                  <strong>ریسک مدیریتی:</strong> عملکرد ضعیف زنبوردار.<br>
+                  <strong>ریسک نقدشوندگی:</strong> ممکن است فروش توکن‌ها در بازار ثانویه زمان‌بر باشد.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">حداقل سرمایه‌گذاری چقدر است؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  حداقل سرمایه‌گذاری معادل <strong>قیمت یک توکن</strong> است که بسته به پروژه بین <strong>۱.۲ تا ۲.۸ میلیون تومان</strong> متغیر است. این یعنی با کمتر از ۳ میلیون تومان می‌توانید در صنعت زنبورداری سرمایه‌گذاری کنید و از بازدهی آن بهره‌مند شوید.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">آیا می‌توانم توکن‌هایم را بفروشم؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  بله، در <strong>بازار ثانویه ایرانیان توکن</strong> می‌توانید توکن‌های خود را به سایر کاربران بفروشید. قیمت فروش بر اساس <strong>عرضه و تقاضا</strong> و <strong>ارزش روز زنبورستان</strong> تعیین می‌شود. توجه داشته باشید که نقدشوندگی ممکن است در مقایسه با بازارهای بزرگ‌تر کمتر باشد.
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFAQ(this)">
+              <div class="faq-question">
+                <span class="faq-question-icon">+</span>
+                <span class="faq-question-text">آیا این سرمایه‌گذاری قانونی است؟</span>
+              </div>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  توکنیزه‌سازی زنبورستان در ایران در <strong>چارچوب قراردادهای مشارکت مدنی</strong> انجام می‌شود. رابطه حقوقی بین زنبوردار و توکن‌داران در <strong>قرارداد مشارکت</strong> به‌طور شفاف تنظیم می‌شود. با این حال، <strong>چارچوب قانونی مشخصی برای توکنیزه‌سازی محصولات کشاورزی</strong> وجود ندارد و این موضوع نیازمند احتیاط و مشاوره حقوقی است. ایرانیان توکن تمام قراردادها را با نظارت حقوقی تنظیم می‌کند.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
 </div>
-</header>
-<main class="saffron-page" id="top">
-<section class="saf-hero" aria-labelledby="saf-title">
-<span class="saf-eyebrow">سپیدنامه پیشنهادی · دارایی کشاورزی</span>
-<h1 id="saf-title">توکن زعفران قائنات</h1>
-<p>ساختار پیشنهادی تأمین مالی کشت زعفران و ایجاد پیوند روشن میان مشارکت مالی و دریافت محصول واقعی؛ با تعریف حق قراردادی دارنده توکن، تعهدات ناشر و مجری، شیوه کنترل عملیات و سازوکار تحویل محصول.</p>
-<div class="saf-hero-meta"><span>محل کشت: قائنات، خراسان جنوبی</span><span>دوره پیشنهادی: ۵ سال</span><span>ناشر پیشنهادی: شرکت شهر بهشت</span><span>وضعیت: نسخه پیشنهادی برای بررسی</span></div>
-</section>
-<div class="saf-metrics" aria-label="شاخص‌های اصلی مرحله نخست">
-<div class="saf-metric"><span class="label">تعداد توکن مرحله اول</span><strong>۷۵ عدد</strong><small>سقف عرضه اولیه</small></div>
-<div class="saf-metric"><span class="label">مبلغ پایه هر توکن</span><strong>۱۵ میلیون تومان</strong><small>مبنای پیشنهادی تأمین مالی</small></div>
-<div class="saf-metric"><span class="label">پیاز متناظر کل مرحله</span><strong>۳٬۷۵۰ کیلوگرم</strong><small>۵۰ کیلوگرم برای هر توکن</small></div>
-<div class="saf-metric"><span class="label">مبلغ اسمی مرحله اول</span><strong>۱٫۱۲۵ میلیارد تومان</strong><small>پیش از هزینه‌های عرضه و سایر کسورات</small></div>
-</div>
-<nav class="saf-nav" aria-label="فهرست بخش‌های سپیدنامه">
-<a href="#overview">خلاصه طرح</a><a href="#cultivation">محل و شیوه کشت</a><a href="#delivery">تولید و تحویل</a><a href="#structure">ساختار توکن</a><a href="#pricing">قیمت‌گذاری</a><a href="#buyback">بازخرید</a><a href="#rights">حقوق دارنده</a><a href="#roles">مسئولیت‌ها</a><a href="#risks">ریسک‌ها</a><a href="#documents">اسناد لازم</a><a href="#status">وضعیت نسخه</a>
-</nav>
 
-<section class="saf-section" id="overview">
-<div class="saf-section-head"><span class="saf-num">۱</span><div><h2>خلاصه طرح و مبنای قراردادی</h2><p class="lead">ارتباط مشارکت مالی با پیاز زعفران و دریافت محصول واقعی</p></div></div>
-<p>هدف طرح، تأمین مالی کشت زعفران و ایجاد پیوند روشن میان مشارکت مالی و دریافت محصول واقعی است. برای محاسبه و تعریف تعهدات هر توکن، مقدار <b>۵۰ کیلوگرم پیاز زعفران</b> به‌عنوان مبنای قراردادی در نظر گرفته شده است. این مقدار به‌خودی‌خود به‌معنای انتقال مالکیت عینی پیاز یا زمین به دارنده نیست.</p>
-<p>مبلغ پایه هر توکن <b>۱۵٬۰۰۰٬۰۰۰ تومان</b> است که برای تهیه پیاز زعفران و هزینه‌های نگهداری و اجرای مرتبط با آن منظور می‌شود. تعداد توکن‌های مرحله نخست <b>۷۵ عدد</b> تعیین شده است.</p>
-<div class="saf-grid"><div class="saf-note"><strong>حجم متناظر مرحله اول</strong><span>۳٬۷۵۰ کیلوگرم پیاز زعفران، بر مبنای ۵۰ کیلوگرم برای هر یک از ۷۵ توکن.</span></div><div class="saf-note"><strong>مبلغ کل اسمی مرحله اول</strong><span>۱٬۱۲۵٬۰۰۰٬۰۰۰ تومان، پیش از کسر هزینه‌های عرضه، مالیات، کارمزد یا سایر هزینه‌های قراردادی.</span></div></div>
-<div class="saf-callout saf-warning">این ارقام مفروضات اولیه سپیدنامه‌اند. مبلغ ۱۵ میلیون تومان و نسبت ۵۰ کیلوگرم باید با فاکتور خرید، هزینه‌های واقعی، محل نگهداری و اسناد تحویل پیاز تطبیق داده شوند. توکن به‌تنهایی مالکیت زمین یا سهام شرکت را ایجاد نمی‌کند؛ نوع حق دارنده باید در قرارداد نهایی تصریح شود.</div>
-</section>
-
-<section class="saf-section" id="cultivation">
-<div class="saf-section-head"><span class="saf-num">۲</span><div><h2>محل و شیوه کشت</h2><p class="lead">قائنات، استان خراسان جنوبی</p></div></div>
-<p>پیازهای زعفران موضوع طرح در زمین‌های مرغوب منطقه <b>قائنات، استان خراسان جنوبی</b> کشت و نگهداری می‌شوند. عملیات کشت، داشت، برداشت و نگهداری بر عهده کشاورز یا مجری معرفی‌شده در قرارداد خواهد بود.</p>
-<p>مجری متعهد خواهد شد محصول تحویلی را مطابق معیار کیفیت ممتاز مندرج در قرارداد تولید و آماده تحویل کند. برای قابل سنجش‌شدن این تعهد، معیارهای کیفیت، روش نمونه‌برداری، مرجع آزمایش یا ارزیابی، حدود مجاز رطوبت و ناخالصی، نوع بسته‌بندی و روش رسیدگی به محصول مردود باید در قرارداد مشخص شود.</p>
-<div class="saf-grid"><div class="saf-note"><strong>اسناد محل کشت</strong><span>نشانی و مختصات زمین، مستندات مالکیت یا حق بهره‌برداری، مساحت، نقشه قطعات و مدت دسترسی مجری.</span></div><div class="saf-note"><strong>کنترل عملیات</strong><span>ثبت میزان پیاز تحویلی و کاشته‌شده، تاریخ عملیات، گزارش دوره‌ای مزرعه، نهاده‌ها، برداشت و موجودی محصول.</span></div></div>
-</section>
-
-<section class="saf-section" id="delivery">
-<div class="saf-section-head"><span class="saf-num">۳</span><div><h2>روند تولید و تعهد تحویل محصول</h2><p class="lead">دوره پنج‌ساله و تعهد پیشنهادی سالانه</p></div></div>
-<p>میزان برداشت زعفران در سال‌های مختلف ثابت نیست. در سال نخست معمولاً برداشت کمتر است و در سال‌های بعد امکان افزایش وجود دارد؛ با گذشت زمان و با توجه به شرایط مزرعه، از حدود سال ششم ممکن است روند برداشت کاهش یابد. به همین دلیل، دوره قراردادی این طرح <b>پنج سال</b> در نظر گرفته شده است.</p>
-<p>تعهد پیشنهادی ناشر و مجری در برابر دارنده هر توکن، تحویل سالانه <b>دو مثقال زعفران، معادل تقریبی ۹٫۲ گرم</b> در هر سال از دوره قرارداد است. این مقدار به‌عنوان تعهد قراردادی مستقل از نوسان برداشت تعریف می‌شود؛ بنابراین قرارداد باید منبع تأمین کسری احتمالی محصول، ذخیره احتیاطی، خرید از بازار در صورت کمبود و مسئولیت عدم تحویل را مشخص کند.</p>
-<div class="saf-steps"><div class="saf-step"><b>کشت و نگهداری</b><span>ثبت پیاز، زمین، نهاده‌ها و عملیات مزرعه</span></div><div class="saf-step"><b>برداشت و ارزیابی کیفیت</b><span>نمونه‌برداری و سنجش کیفیت مطابق قرارداد</span></div><div class="saf-step"><b>تخصیص سهم دارندگان</b><span>محاسبه سهم و ثبت سوابق تخصیص</span></div><div class="saf-step"><b>بسته‌بندی و تحویل</b><span>تحویل مستند در موعدهای قراردادی</span></div></div>
-<p>زمان‌بندی پیشنهادی توزیع در دو بازه انجام می‌شود: مرحله اول در <b>بهمن/اسفند</b> و مرحله دوم در <b>مرداد/شهریور</b>. سهم وزنی هر مرحله، سال زراعی مربوط، مهلت اعلام نشانی و شیوه تحویل باید در قرارداد تعیین شود.</p>
-<div class="saf-callout">در مقیاس کل مرحله اول، تعهد سالانه معادل تقریبی <b>۶۹۰ گرم زعفران</b> برای ۷۵ توکن خواهد بود؛ این عدد بر مبنای ۹٫۲ گرم برای هر توکن محاسبه شده است.</div>
-</section>
-
-<section class="saf-section" id="structure">
-<div class="saf-section-head"><span class="saf-num">۴</span><div><h2>ساختار توکن و سرمایه مرحله اول</h2><p class="lead">شاخص‌های مبنای عرضه پیشنهادی</p></div></div>
-<div class="saf-table-wrap"><table class="saf-table"><thead><tr><th>شاخص</th><th>مقدار پیشنهادی</th><th>توضیح</th></tr></thead><tbody>
-<tr><td>تعداد توکن مرحله اول</td><td>۷۵ عدد</td><td>سقف عرضه اولیه این مرحله</td></tr>
-<tr><td>مبلغ پایه هر توکن</td><td>۱۵٬۰۰۰٬۰۰۰ تومان</td><td>برای تهیه پیاز و هزینه‌های نگهداری/اجرایی تعریف‌شده</td></tr>
-<tr><td>مجموع مبلغ مرحله اول</td><td>۱٬۱۲۵٬۰۰۰٬۰۰۰ تومان</td><td>۷۵ × ۱۵ میلیون تومان</td></tr>
-<tr><td>پیاز متناظر با هر توکن</td><td>۵۰ کیلوگرم</td><td>نحوه تخصیص و اثبات آن باید مستند شود</td></tr>
-<tr><td>مجموع پیاز متناظر مرحله اول</td><td>۳٬۷۵۰ کیلوگرم</td><td>۷۵ × ۵۰ کیلوگرم</td></tr>
-<tr><td>دوره قرارداد</td><td>۵ سال</td><td>مبدأ محاسبه و تاریخ پایان در قرارداد</td></tr>
-<tr><td>تحویل سالانه هر توکن</td><td>۲ مثقال ≈ ۹٫۲ گرم</td><td>در دو نوبت توزیع سالانه</td></tr>
-</tbody></table></div>
-<div class="saf-callout saf-warning">ماهیت توکن در این نسخه «حق قراردادی دریافت محصول و حقوق تبعی مندرج در قرارداد» فرض شده است؛ این تعریف صرفاً مبنای تدوین است و تا زمان نظر حقوقی و امضای قرارداد، ماهیت قطعی یا مالکیت عینی محسوب نمی‌شود.</div>
-</section>
-
-<section class="saf-section" id="pricing">
-<div class="saf-section-head"><span class="saf-num">۵</span><div><h2>قیمت‌گذاری زعفران</h2><p class="lead">قیمت مرجع پایه و افزایش مرکب سالانه ۲۳ درصد</p></div></div>
-<p>قیمت مبنای پیشنهادی زعفران در این سپیدنامه <b>۳۰۰٬۰۰۰ تومان به‌ازای هر گرم</b> است. در مدل پیشنهادی، نرخ مرجع قیمت‌گذاری در هر سال نسبت به سال قبل ۲۳ درصد افزایش می‌یابد. این افزایش باید در قرارداد از قیمت واقعی بازار، قیمت خرید جایگزین و ارزش محصول تحویلی تفکیک شود.</p>
-<div class="saf-table-wrap"><table class="saf-table"><thead><tr><th>سال قراردادی</th><th>قیمت مرجع هر گرم با رشد مرکب ۲۳٪</th><th>ارزش مرجع ۹٫۲ گرم</th></tr></thead><tbody>
-<tr><td>سال پایه</td><td>۳۰۰٬۰۰۰ تومان</td><td>۲٬۷۶۰٬۰۰۰ تومان</td></tr>
-<tr><td>سال اول پس از پایه</td><td>۳۶۹٬۰۰۰ تومان</td><td>۳٬۳۹۴٬۸۰۰ تومان</td></tr>
-<tr><td>سال دوم</td><td>۴۵۳٬۸۷۰ تومان</td><td>۴٬۱۷۵٬۶۰۴ تومان</td></tr>
-<tr><td>سال سوم</td><td>۵۵۸٬۲۶۰ تومان</td><td>۵٬۱۳۵٬۹۹۲ تومان</td></tr>
-<tr><td>سال چهارم</td><td>۶۸۶٬۶۶۰ تومان</td><td>۶٬۳۱۷٬۲۷۲ تومان</td></tr>
-</tbody></table></div>
-<div class="saf-callout saf-warning">جدول صرفاً محاسبه ریاضی افزایش مرکب ۲۳ درصدی بر مبنای نرخ پایه است؛ قیمت قطعی بازار، ارزش تضمین‌شده محصول یا سود سرمایه‌گذاری نیست. قرارداد باید روشن کند این نرخ فقط شاخص محاسباتی است یا در تعهد پرداخت/تسویه نیز اثر دارد.</div>
-</section>
-
-<section class="saf-section" id="buyback">
-<div class="saf-section-head"><span class="saf-num">۶</span><div><h2>بازخرید و تسویه اصل سرمایه</h2><p class="lead">سازوکار پیشنهادی درخواست بازخرید در پایان هر سال</p></div></div>
-<p>در پایان هر سال، دارنده می‌تواند مطابق سازوکار قراردادی درخواست بازخرید اصل سرمایه را ارائه کند. مبنای پیشنهادی، افزایش سالانه ۲۳ درصدی مبلغ پایه است؛ اما این موضوع تا تعیین دقیق تعهدکننده، منبع وجه، مهلت پرداخت و شرایط درخواست، یک امکان پیشنهادی است و نباید به‌عنوان تضمین قطعی بازده یا نقدشوندگی معرفی شود.</p>
-<div class="saf-table-wrap"><table class="saf-table"><thead><tr><th>پایان دوره</th><th>مبلغ نمونه به‌ازای هر توکن با رشد مرکب ۲۳٪</th><th>مجموع نمونه برای ۷۵ توکن</th></tr></thead><tbody>
-<tr><td>پایان سال اول</td><td>۱۸٬۴۵۰٬۰۰۰ تومان</td><td>۱٬۳۸۳٬۷۵۰٬۰۰۰ تومان</td></tr>
-<tr><td>پایان سال دوم</td><td>۲۲٬۶۹۳٬۵۰۰ تومان</td><td>۱٬۷۰۲٬۰۱۲٬۵۰۰ تومان</td></tr>
-<tr><td>پایان سال سوم</td><td>۲۷٬۹۱۳٬۰۰۵ تومان</td><td>۲٬۰۹۳٬۴۷۵٬۳۷۵ تومان</td></tr>
-<tr><td>پایان سال چهارم</td><td>۳۴٬۳۳۲٬۹۹۶ تومان</td><td>۲٬۵۷۴٬۹۷۴٬۷۱۱ تومان</td></tr>
-<tr><td>پایان سال پنجم</td><td>۴۲٬۲۲۹٬۵۸۵ تومان</td><td>۳٬۱۶۷٬۲۱۸٬۸۹۵ تومان</td></tr>
-</tbody></table></div>
-<p>محاسبه فوق با فرض افزایش مرکب سالانه از مبلغ پایه ۱۵ میلیون تومان انجام شده است: مبلغ بازخرید = مبلغ پایه × (۱٫۲۳ به توان تعداد سال). اگر مقصود افزایش ساده باشد، جدول و متن قرارداد باید اصلاح شود.</p>
-<div class="saf-callout saf-warning">تعهد بازخرید با افزایش ۲۳ درصدی، تعهد مالی بااهمیتی برای ناشر ایجاد می‌کند. پیش از درج آن در تبلیغات یا پذیرش وجوه، باید توانگری ناشر، جریان نقدی، ذخیره بازخرید، اولویت پرداخت، سقف درخواست‌ها، امکان تعویق و پیامد عدم پرداخت بررسی و نظر حقوقی/مالی اخذ شود.</div>
-</section>
-
-<section class="saf-section" id="rights">
-<div class="saf-section-head"><span class="saf-num">۷</span><div><h2>حقوق دارنده توکن و محدودیت‌ها</h2><p class="lead">حقوقی که باید به‌صورت صریح در اسناد نهایی ثبت شوند</p></div></div>
-<ul class="saf-list">
-<li>حق دریافت سالانه دو مثقال زعفران مطابق مشخصات کیفی و زمان‌بندی قرارداد، در صورت نهایی‌شدن و امضای تعهد.</li>
-<li>حق مشاهده اطلاعات طرح، گزارش کشت و برداشت، گزارش موجودی و سوابق تحویل در حدود دسترسی تعریف‌شده.</li>
-<li>حق ثبت درخواست بازخرید در پایان هر سال، مطابق شرایط و ظرفیت اجرایی تصریح‌شده در قرارداد.</li>
-<li>حق دریافت رسید رسمی برای پرداخت، تخصیص توکن و هر نوبت تحویل محصول.</li>
-<li>امکان انتقال توکن فقط در صورتی که ناشر، سازوکار ثبت انتقال و الزامات قانونی آن را در اسناد نهایی پیش‌بینی و مجاز اعلام کرده باشد.</li>
-</ul>
-<div class="saf-callout saf-warning">این توکن بیانگر یک حق قراردادی است؛ نه مالکیت عینی زمین یا پیاز، نه سهام شرکت، نه سپرده بانکی و نه ابزار دارای بازار ثانویه قطعی. حقوق دارنده فقط همان حقوق صریح و قابل اجرای مندرج در اسناد نهایی است.</div>
-</section>
-
-<section class="saf-section" id="roles">
-<div class="saf-section-head"><span class="saf-num">۸</span><div><h2>ناشر، مجری و تقسیم مسئولیت</h2><p class="lead">تفکیک نقش‌های قراردادی و عملیاتی</p></div></div>
-<div class="saf-grid">
-<div class="saf-note"><strong>ناشر: شرکت شهر بهشت</strong><span>مسئولیت انتشار، ارائه اطلاعات صحیح، انعقاد قرارداد با دارندگان، ثبت تخصیص توکن و ایفای تعهداتی که در اسناد نهایی بر عهده ناشر قرار می‌گیرد.</span></div>
-<div class="saf-note"><strong>توکن‌ساز</strong><span>ارائه خدمات طراحی ساختار، مشاوره، توسعه سامانه و پشتیبانی فنی/عملیاتی طبق قرارداد مستقل؛ توکن‌ساز به‌صرف طراحی سامانه، ناشر یا ضامن تعهدات طرح محسوب نمی‌شود.</span></div>
-<div class="saf-note"><strong>کشاورز یا مجری کشت</strong><span>کشت و نگهداری، گزارش عملیات، برداشت، رعایت استاندارد کیفیت و تحویل محصول به ناشر یا متولی تعیین‌شده طبق قرارداد.</span></div>
-<div class="saf-note"><strong>ناظر/امین پیشنهادی</strong><span>کنترل مستندات پیاز، زمین، عملیات، موجودی محصول و تطبیق تعهدات؛ هویت، استقلال، اختیار و هزینه ناظر باید مشخص شود.</span></div>
-</div>
-</section>
-
-<section class="saf-section" id="risks">
-<div class="saf-section-head"><span class="saf-num">۹</span><div><h2>ریسک‌ها و ملاحظات</h2><p class="lead">ریسک‌های تولید، بازار، حقوقی و اجرایی</p></div></div>
-<div class="saf-grid">
-<div class="saf-note"><strong>ریسک تولید</strong><span>آب‌وهوا، آفات، بیماری، کیفیت پیاز، وضعیت زمین و افت برداشت؛ نیازمند برنامه جایگزین و ذخیره محصول.</span></div>
-<div class="saf-note"><strong>ریسک کیفیت</strong><span>اختلاف در درجه، عیار، رطوبت، ناخالصی، بسته‌بندی و شرایط نگهداری؛ نیازمند معیار سنجش و آزمایشگاه/کارشناس مرجع.</span></div>
-<div class="saf-note"><strong>ریسک ناشر و بازخرید</strong><span>کمبود نقدینگی، عدم کفایت ذخایر، تأخیر در پرداخت یا ناتوانی در اجرای درخواست بازخرید.</span></div>
-<div class="saf-note"><strong>ریسک حقوقی و مقرراتی</strong><span>ابهام در ماهیت توکن، مالکیت پیاز/محصول، مجوز عرضه، انتقال، مالیات و حقوق مصرف‌کننده.</span></div>
-<div class="saf-note"><strong>ریسک بازار</strong><span>نوسان قیمت زعفران، تفاوت نرخ مرجع با قیمت معامله و نبود بازار ثانویه یا خریدار.</span></div>
-<div class="saf-note"><strong>ریسک عملیاتی و فناوری</strong><span>خطای ثبت، دسترسی غیرمجاز، از دست رفتن داده، اختلال سامانه و اختلاف بین دفتر ثبت و اسناد فیزیکی.</span></div>
-</div>
-</section>
-
-<section class="saf-section" id="documents">
-<div class="saf-section-head"><span class="saf-num">۱۰</span><div><h2>اسناد و اطلاعات لازم پیش از عرضه</h2><p class="lead">مدارک پایه برای تکمیل و راستی‌آزمایی طرح</p></div></div>
-<ul class="saf-list">
-<li>مدارک ثبتی و اختیار امضای شرکت شهر بهشت و احراز مسئولیت آن به‌عنوان ناشر.</li>
-<li>قرارداد ناشر با کشاورز/مجری کشت، مشخصات زمین و مستندات مالکیت یا حق بهره‌برداری.</li>
-<li>فاکتور خرید پیاز، وزن‌کشی و صورت‌جلسه تحویل، کیفیت و محل نگهداری؛ همراه با کنترل مستقل.</li>
-<li>بودجه تفصیلی مصرف ۱۵ میلیون تومان هر توکن و تفکیک هزینه پیاز، کاشت، نگهداری، مدیریت، بیمه و ذخیره.</li>
-<li>قرارداد دارنده توکن، تعریف دقیق حق، دوره، مبدأ محاسبه، تحویل، کیفیت، انتقال، بازخرید، فسخ و حل اختلاف.</li>
-<li>روش تأمین کسری محصول، بیمه یا ذخیره احتیاطی، ضمانت اجرا و مسئولیت تأخیر/عدم تحویل.</li>
-<li>مدل مالی جریان نقدی پنج‌ساله و آزمون توانگری تعهد بازخرید ۲۳ درصدی.</li>
-<li>نظر حقوقی و تعیین مجوزهای لازم پیش از هرگونه فراخوان عمومی یا دریافت وجه.</li>
-</ul>
-</section>
-
-<section class="saf-section" id="status">
-<div class="saf-section-head"><span class="saf-num">۱۱</span><div><h2>جمع‌بندی و وضعیت نسخه</h2><p class="lead">نسخه پیشنهادی معرفی و مبنای تدوین سپیدنامه نهایی</p></div></div>
-<p>طرح توکن زعفران، نمونه‌ای کالامحور برای استفاده از زیرساخت توکن‌ساز است. مبنای اولیه آن ۷۵ توکن، مبلغ ۱۵ میلیون تومان برای هر توکن، مبنای قراردادی متناظر با ۵۰ کیلوگرم پیاز، دوره پنج‌ساله و تعهد پیشنهادی تحویل سالانه دو مثقال زعفران است. ناشر پیشنهادی شرکت شهر بهشت خواهد بود.</p>
-<p>این صفحه نسخه پیشنهادی معرفی و مبنای تدوین سپیدنامه نهایی است؛ حق دارنده در این ساختار، حق قراردادی دریافت محصول و حقوق تبعی تصریح‌شده در قرارداد است، نه مالکیت عینی بر پیاز یا زمین. اطلاعات مربوط به ناشر، زمین، مجری، دارایی پایه، کیفیت، مجوزها، روش ثبت حقوق و منابع بازخرید باید مستند و تأیید شوند.</p>
-<div class="saf-callout saf-warning">پیش از عرضه عمومی یا دریافت وجوه، تکمیل اسناد، راستی‌آزمایی دارایی پایه، تعیین دقیق تعهدات طرفین و اخذ نظر حقوقی و مالی ضروری است. ارقام رشد قیمت و بازخرید در این سپیدنامه، محاسبات و مفروضات پیشنهادی‌اند و تضمین سود یا نقدشوندگی نیستند.</div>
-</section>
-<footer class="saf-footer"><span>ایرانیان توکن · صفحه معرفی طرح زعفران قائنات</span><a href="#top">بازگشت به ابتدای صفحه ↑</a></footer>
-</main>
-</div>
-<script src="theme.js"></script>
 <script>
-(() => {
- const sidebar=document.getElementById("sidebar");
- const main=document.getElementById("main");
- const overlay=document.getElementById("overlay");
- const toggle=document.getElementById("toggleBtn");
- if(toggle&&sidebar&&main&&overlay){
-  toggle.addEventListener("click",()=>{
-   if(window.matchMedia("(max-width: 900px)").matches){
-    sidebar.classList.toggle("mobile-open");
-    overlay.classList.toggle("active");
-   }else{
-    sidebar.classList.toggle("collapsed");
-    main.classList.toggle("expanded");
-   }
+/* ==================== SIDEBAR ==================== */
+const sidebar = document.getElementById('sidebar');
+const main = document.getElementById('main');
+const toggleBtn = document.getElementById('toggleBtn');
+const overlay = document.getElementById('overlay');
+
+toggleBtn.addEventListener('click', () => {
+  if (window.innerWidth <= 900) {
+    sidebar.classList.toggle('mobile-open');
+    overlay.classList.toggle('active');
+  } else {
+    sidebar.classList.toggle('collapsed');
+    main.classList.toggle('expanded');
+  }
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('mobile-open');
+  overlay.classList.remove('active');
+});
+
+/* ==================== TOAST ==================== */
+function showToast(type, title, message) {
+  const container = document.getElementById('toastContainer');
+  const icons = { success: '✓', error: '✗', warning: '!', info: '<span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8h.01"/></svg></span>', honey: '<span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span>' };
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `
+    <div class="toast-icon">${icons[type] || icons.info}</div>
+    <div class="toast-body">
+      <strong>${title}</strong>
+      <span>${message}</span>
+    </div>
+  `;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-100%)';
+    toast.style.transition = 'all 0.3s';
+    setTimeout(() => toast.remove(), 300);
+  }, 4000);
+}
+
+/* ==================== TABS ==================== */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-  overlay.addEventListener("click",()=>{
-   sidebar.classList.remove("mobile-open");
-   overlay.classList.remove("active");
+});
+
+function scrollToHives(e) {
+  e.preventDefault();
+  document.querySelector('.tab-btn[data-tab="hives"]').click();
+}
+
+/* ==================== FAQ ==================== */
+function toggleFAQ(el) {
+  const wasOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+  if (!wasOpen) el.classList.add('open');
+}
+
+/* ==================== CALCULATOR ==================== */
+function toPersian(n) {
+  return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+}
+
+function formatMoney(num) {
+  if (!num) return '—';
+  return toPersian(Math.round(num).toLocaleString('en-US'));
+}
+
+function calculateHoneyTokens() {
+  const budget = parseFloat(document.getElementById('calcBudget').value) || 0;
+  const select = document.getElementById('calcHive');
+  const option = select.options[select.selectedIndex];
+  const tokenPrice = parseFloat(option.value) || 1;
+  const totalHives = parseInt(option.dataset.hives) || 800;
+  const yieldPerHive = parseFloat(option.dataset.yield) || 18;
+  const duration = parseInt(document.getElementById('calcDuration').value) || 24;
+
+  const tokens = Math.floor(budget / tokenPrice);
+  const totalTokens = Math.floor(totalHives * (tokenPrice / 5000)); // تخمین
+  const hiveShare = (tokens * totalHives / Math.max(totalTokens, 1)).toFixed(1);
+  const honeyPerYear = (hiveShare * yieldPerHive).toFixed(0);
+
+  // محاسبه سود: فرض قیمت عسل ۴۰۰ هزار تومان هر کیلو و رشد ۲۵٪
+  const honeyPricePerKg = 400000;
+  const annualIncome = honeyPerYear * honeyPricePerKg;
+  const years = duration / 12;
+  const totalIncome = annualIncome * years;
+  const profit = totalIncome - budget;
+
+  document.getElementById('calcTokens').textContent = toPersian(tokens.toLocaleString('en-US'));
+  document.getElementById('calcHiveShare').textContent = toPersian(hiveShare) + ' کندو';
+  document.getElementById('calcHoney').textContent = toPersian(honeyPerYear) + ' کیلو';
+  document.getElementById('calcProfit').textContent = formatMoney(profit) + ' تومان';
+}
+
+/* ==================== HIVE BOXES (My Hives) ==================== */
+function renderHiveBoxes() {
+  const container = document.getElementById('hiveBoxes');
+  if (!container) return;
+  let html = '';
+  const owned = [1, 3, 5, 6, 8, 10, 12, 15, 18, 22, 25, 28]; // ۱۲ کندو
+  for (let i = 1; i <= 30; i++) {
+    const isOwned = owned.includes(i);
+    html += `
+      <div class="hive-box ${isOwned ? 'owned' : ''}" onclick="showToast('${isOwned ? 'honey' : 'info'}','کندو #${toPersian(i)}','${isOwned ? 'شما مالک این کندو هستید.' : 'این کندو موجود است و می‌توانید خریداری کنید.'}')">
+        <span class="it-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 4v10l-7 4-7-4V7z"/><path d="m8 9 4-2 4 2v6l-4 2-4-2z"/></svg></span>
+        <span class="num">#${toPersian(i)}</span>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
+}
+
+/* ==================== CHARTS ==================== */
+Chart.defaults.font.family = 'Vazirmatn, sans-serif';
+Chart.defaults.color = '#64748b';
+
+const gridColor = '#e2e8f0';
+const tickFont = { family: 'Vazirmatn', size: 11 };
+
+/* Chart 1: My Hives Performance */
+const myHivesCtx = document.getElementById('myHivesChart');
+if (myHivesCtx) {
+  const grad = myHivesCtx.getContext('2d').createLinearGradient(0, 0, 0, 280);
+  grad.addColorStop(0, 'rgba(245,166,35,0.3)');
+  grad.addColorStop(1, 'rgba(245,166,35,0)');
+  new Chart(myHivesCtx, {
+    type: 'bar',
+    data: {
+      labels: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور'],
+      datasets: [{
+        label: 'تولید (کیلو)',
+        data: [18, 32, 48, 56, 62, 70],
+        backgroundColor: grad,
+        borderColor: '#f5a623',
+        borderWidth: 2,
+        borderRadius: 8,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#4a2c00',
+          padding: 12,
+          cornerRadius: 10,
+          rtl: true,
+          textDirection: 'rtl',
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: tickFont } },
+        y: { grid: { color: gridColor, drawBorder: false }, ticks: { font: tickFont }, beginAtZero: true }
+      }
+    }
   });
- }
- document.querySelectorAll('.saf-nav a[href^="#"]').forEach(a=>a.addEventListener("click",()=>{
-  const id=a.getAttribute("href").slice(1);
-  const target=document.getElementById(id);
-  if(target){document.querySelectorAll(".saf-nav a").forEach(x=>x.removeAttribute("aria-current"));a.setAttribute("aria-current","location");}
- }));
-})();
+}
+
+/* Chart 2: Return Chart */
+const returnCtx = document.getElementById('returnChart');
+if (returnCtx) {
+  const grad = returnCtx.getContext('2d').createLinearGradient(0, 0, 0, 280);
+  grad.addColorStop(0, 'rgba(245,166,35,0.35)');
+  grad.addColorStop(1, 'rgba(245,166,35,0)');
+  new Chart(returnCtx, {
+    type: 'line',
+    data: {
+      labels: ['۱۳۹۸', '۱۳۹۹', '۱۴۰۰', '۱۴۰۱', '۱۴۰۲', '۱۴۰۳'],
+      datasets: [{
+        label: 'بازدهی (درصد)',
+        data: [18, 22, 28, 24, 32, 35],
+        borderColor: '#f5a623',
+        backgroundColor: grad,
+        borderWidth: 3,
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: '#f5a623',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 3,
+        pointRadius: 6,
+        pointHoverRadius: 9,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#4a2c00',
+          padding: 12,
+          cornerRadius: 10,
+          rtl: true,
+          textDirection: 'rtl',
+          callbacks: { label: (ctx) => ` بازدهی: ${ctx.parsed.y}٪` }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: tickFont } },
+        y: {
+          grid: { color: gridColor, drawBorder: false },
+          ticks: { font: tickFont, callback: v => v + '٪' },
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+/* Chart 3: My Share Chart */
+const myShareCtx = document.getElementById('myShareChart');
+if (myShareCtx) {
+  new Chart(myShareCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ['عسل', 'ژل رویال', 'بره موم', 'موم و سایر'],
+      datasets: [{
+        data: [72, 15, 8, 5],
+        backgroundColor: ['#f5a623', '#8b5cf6', '#10b981', '#3b82f6'],
+        borderWidth: 0,
+        spacing: 4,
+        borderRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '65%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          rtl: true,
+          labels: {
+            font: { family: 'Vazirmatn', size: 11 },
+            padding: 12,
+            usePointStyle: true,
+            pointStyle: 'circle',
+            boxWidth: 8,
+            boxHeight: 8,
+          }
+        },
+        tooltip: {
+          backgroundColor: '#4a2c00',
+          padding: 12,
+          cornerRadius: 10,
+          rtl: true,
+          textDirection: 'rtl',
+          callbacks: { label: (ctx) => ` ${ctx.label}: ${ctx.parsed}٪` }
+        }
+      }
+    }
+  });
+}
+
+/* ==================== INIT ==================== */
+renderHiveBoxes();
+calculateHoneyTokens();
+
+/* ==================== RIPPLE ==================== */
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `@keyframes ripple { to { transform: scale(4); opacity: 0; } }`;
+document.head.appendChild(rippleStyle);
+document.querySelectorAll('.btn, .tab-btn, .hive-card, .hive-box').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    const ripple = document.createElement('span');
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.cssText = `
+      position: absolute; width: ${size}px; height: ${size}px;
+      border-radius: 50%; background: rgba(255,255,255,0.4);
+      transform: scale(0); animation: ripple 0.6s linear;
+      pointer-events: none;
+      left: ${e.clientX - rect.left - size/2}px;
+      top: ${e.clientY - rect.top - size/2}px;
+    `;
+    this.style.position = 'relative';
+    this.style.overflow = 'hidden';
+    this.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  });
+});
+
+/* ==================== KEYBOARD ==================== */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    sidebar.classList.remove('mobile-open');
+    overlay.classList.remove('active');
+  }
+});
 </script>
+
+<script src="theme.js"></script>
 </body>
 </html>
