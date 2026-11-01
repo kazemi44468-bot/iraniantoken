@@ -2,6 +2,25 @@
   "use strict";
 
   const file = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+
+  // Keep Persian typography local and correct legacy in-page destinations.
+  document.querySelectorAll('link[href*="fonts.googleapis.com"], link[rel="preconnect"][href*="fonts.googleapis.com"]').forEach(node => node.remove());
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute("href") || "";
+    if (/dashboard\\.html#documents(?:$|[?&])/.test(href)) link.setAttribute("href", href.replace("#documents", "#access"));
+    if (/users\\.html#roles(?:$|[?&])/.test(href)) link.setAttribute("href", href.replace("#roles", "#panel-roles"));
+  });
+  if (file === "dashboard.html" && !document.getElementById("top")) document.body.id = "top";
+
+  const activateHashPanel = () => {
+    let id = decodeURIComponent(location.hash.slice(1));
+    if (file === "users.html" && id === "roles") id = "panel-roles";
+    if (!id.startsWith("panel-")) return;
+    const key = id.slice(6);
+    const tab = document.querySelector('.tab-btn[data-tab="' + key + '"]');
+    if (tab && !tab.classList.contains("active")) tab.click();
+  };
+  if (location.hash) requestAnimationFrame(activateHashPanel);
   const internalPages = new Set([
     "dashboard.html", "settings.html", "reports.html", "validation.html",
     "users.html", "profile.html", "notifications.html", "help.html",
