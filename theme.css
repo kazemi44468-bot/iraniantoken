@@ -1,4 +1,4 @@
-@font-face{font-family:IRToken;src:url("../assets/fonts/Vazirmatn.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:IRToken;src:url("assets/fonts/Vazirmatn-Regular.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
 :root{--it-blue:#1767c8;--it-blue2:#42a5f5;--it-navy:#061a31;--it-navy2:#0b3156;--it-gold:#d8ad38;--it-cyan:#4dd8e8;--it-bg:#f3f7fb;--it-card:rgba(255,255,255,.9);--it-line:#dbe7f1;--it-text:#10253c;--it-muted:#71859a;--it-shadow:0 20px 60px rgba(7,37,65,.1)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
