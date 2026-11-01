@@ -1303,8 +1303,11 @@ body:has(.sidebar) .sidebar::after{display:none!important;content:none!important
 <link rel="stylesheet" href="theme.css">
 <link rel="icon" href="assets/images/logo.png" type="image/png">
 <link rel="shortcut icon" href="assets/images/logo.png" type="image/png">
+<link rel="stylesheet" href="workspace.css" data-it-workspace="true">
+<link rel="stylesheet" href="design-system.css" data-it-design-system="true">
 </head>
 <body>
+<script data-it-early-page>(()=>{const f=location.pathname.split("/").pop().toLowerCase();document.body.dataset.itPage=f;const d=["dashboard.html","reports.html","validation.html","users.html","profile.html","notifications.html","help.html","settings.html","new-project.html","project-detail.html"];const t=["housing-token.html","car-token.html","honey-token.html","saffron-token.html","solar-token.html"];if(d.includes(f))document.body.dataset.itDashboard="true";if(t.includes(f))document.body.dataset.itToken="true";})();</script>
 
 <!-- Toast Container -->
 <div class="toast-container" id="toastContainer"></div>
