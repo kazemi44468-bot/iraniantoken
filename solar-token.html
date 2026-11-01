@@ -1267,6 +1267,8 @@ body {
   .calc-result-grid { grid-template-columns: 1fr; }
   .sun-rays { display: none; }
 }
+
+.solar-hero{position:relative;overflow:hidden}.solar-hero-photo{position:absolute;left:24px;top:24px;width:300px;height:220px;object-fit:cover;border-radius:14px;z-index:1;opacity:.94}.solar-hero-content,.solar-hero-stats{position:relative;z-index:2}@media(max-width:900px){.solar-hero-photo{position:relative;left:auto;top:auto;display:block;width:100%;height:170px;margin:0 0 18px}.solar-hero-content{max-width:none}}
 </style>
 <link rel="stylesheet" href="theme.css">
 <link rel="icon" href="assets/images/logo.png" type="image/png">
@@ -1314,7 +1316,8 @@ body {
 
     <!-- ==================== HERO ==================== -->
     <section class="solar-hero">
-      <div class="solar-hero-grid"></div>
+      <div class="solar-hero-grid">
+      <img class="solar-hero-photo" src="assets/images/solar-farm.jpg" alt="ردیف پنل‌های خورشیدی در یک نیروگاه" width="1200" height="800" loading="eager"></div>
       <div class="sun-rays"></div>
 
       <div class="solar-hero-content">
