@@ -119,4 +119,5 @@ toggle.addEventListener("click",()=>{links.classList.toggle("open");toggle.setAt
 links.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>links.classList.remove("open")));
 document.addEventListener("click",e=>{if(!e.target.closest(".public-nav"))links.classList.remove("open")});
 </script>
+<script src="theme.js"></script>
 </body></html>
